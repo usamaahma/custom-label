@@ -1,0 +1,168 @@
+.carousel-main {
+  margin: 1rem;
+}
+
+.carousel-col {
+  margin-bottom: 20px;
+}
+
+.carousel-card {
+  border: none;
+  overflow: hidden;
+  position: relative;
+}
+
+.carousel-slide {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
+}
+
+.carousel-image:hover {
+  transform: scale(1.05);
+}
+
+.image-container::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.image-container:hover::after {
+  opacity: 1;
+}
+
+.carousel-title-1 {
+  position: absolute;
+  top: 0;
+  /* Position at the top */
+  left: 50%;
+  /* Center horizontally */
+  transform: translateX(-50%);
+  /* Centering */
+  width: 100%;
+  /* Take full width of the image */
+  text-align: center;
+  /* Center text */
+  color: white;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 5px 0;
+  font-size: 1rem;
+  z-index: 1;
+  /* Ensure it's above the image */
+}
+
+.customclothing-button1 {
+  margin-top: 4rem;
+  margin-left: 10px;
+  background-color: rgb(3, 28, 29);
+  color: white;
+  border: none;
+  transition: background-color 0.3s;
+  border-radius: 2px;
+  font-weight: bold;
+  font-size: 25px;
+  width: 350px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.customclothing-button1:hover {
+  background-color: white;
+  color: rgb(18, 19, 19);
+  border: 1px solid rgb(3, 28, 29);
+}
+
+.ant-carousel .slick-next::after {
+  display: none;
+}
+
+.ant-carousel .slick-prev::after {
+  display: none;
+
+}
+
+.ant-carousel .slick-prev,
+.ant-carousel .slick-next {
+  width: 50px;
+  /* Set arrow width */
+  height: 50px;
+  /* Set arrow height */
+  background-color: rgba(0, 0, 0, 0.8);
+  /* Arrow background color */
+  border-radius: 50%;
+  /* Make them circular */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  /* Ensure arrows are on top */
+  padding: 10px;
+  /* Padding around arrows */
+}
+
+.ant-carousel .slick-prev:before,
+.ant-carousel .slick-next:before {
+  color: white;
+  /* Arrow icon color */
+  font-size: 20px;
+  /* Arrow icon size */
+}
+
+.ant-carousel .slick-prev {
+  left: 10px;
+  /* Position left arrow */
+}
+
+.ant-carousel .slick-next {
+  right: 10px;
+  /* Position right arrow */
+}
+
+/* Responsive styles */
+@media (max-width: 1440px) {
+  .carousel-title-1 {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 1200px) {
+  .carousel-title-1 {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 992px) {
+  .carousel-title-1 {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 576px) {
+  .carousel-title-1 {
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-title-1 {
+    font-size: 8px;
+  }
+}
+
+@media (max-width: 375px) {
+  .customclothing-button1 {
+    font-size: 20px;
+    width: 250px;
+  }
+}

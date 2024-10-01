@@ -1,0 +1,67 @@
+.feature-product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; /* Center the cards */
+}
+
+.feature-heading {
+  text-align: center !important;
+  font-size: 4rem;
+  font-weight: bold;
+}
+
+.image-container {
+  position: relative; /* Create a positioning context for the overlay */
+}
+
+.image-container img {
+  width: 100%; /* Make the image responsive */
+  height: auto; /* Maintain aspect ratio */
+}
+
+.overlay {
+  position: absolute;
+  top: 5%; /* Adjust vertical positioning as needed */
+  left: 0; /* Start from the left edge */
+  width: 100%; /* Full width */
+  text-align: center; /* Center the text */
+  color: white; /* Text color */
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  padding: 10px 0; /* Vertical padding */
+  border-radius: 5px; /* Rounded corners */
+}
+
+.bottom-text {
+  text-align: center;
+  padding: 10px 0; /* Padding for the bottom text */
+  font-weight: bold;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .feature-heading {
+    font-size: 2.5rem; /* Adjust heading size */
+  }
+
+  .feature-product-container {
+    justify-content: center; /* Center the cards */
+  }
+
+  .card-featureproduct {
+    width: 90%; /* Make cards wider on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .feature-heading {
+    font-size: 2rem; /* Smaller heading for very small screens */
+  }
+
+  .card-featureproduct {
+    width: 100%; /* Full width on very small screens */
+  }
+
+  .bottom-text {
+    font-size: 0.9rem; /* Smaller font for bottom text */
+  }
+}

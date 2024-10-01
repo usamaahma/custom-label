@@ -1,0 +1,111 @@
+.footer {
+  background-color: #4e4d4d; /* Dark gray background */
+  padding: 20px 0;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between; /* Align columns in a single row */
+  max-width: 1200px; /* Max width for the footer */
+  margin: 0 auto;
+  padding: 0 20px;
+  gap: 20px; /* Add gap between columns */
+  flex-wrap: wrap; /* Allow columns to wrap if necessary */
+}
+
+.footer-column {
+  flex: 1; /* Allow columns to take equal width */
+  min-width: 240px; /* Minimum width for responsiveness */
+  margin: 10px; /* Margin for spacing */
+  text-align: center; /* Center-align text within columns */
+  color: white; /* Change text color to white */
+}
+
+.footer-column h3 {
+  margin: 15px 0 10px; /* Add margin above and below heading */
+  font-size: 1.2em;
+  font-weight: bold; /* Bold headings */
+}
+
+.footer-column ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.footer-column ul li {
+  margin: 5px 0;
+}
+
+.footer-input {
+  width: calc(100% - 10px);
+  padding: 8px;
+  margin-top: 10px;
+}
+
+.btn-signup {
+  padding: 8px 15px;
+  margin-top: 10px;
+  background-color: #050505;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+}
+.btn-signup:hover{
+  background-color: #fcfcfc;
+  color: #070707;
+  border-color: #070707;
+}
+
+.footer-image {
+  display: flex;
+  justify-content: center; /* Center-align images */
+  flex-direction: column; /* Stack images vertically */
+  align-items: center; /* Center images horizontally */
+}
+
+.visaimg {
+  width: 20rem;
+  margin: 5px 0; /* Add margin for spacing */
+}
+
+.highimg {
+  width: 15rem;
+  margin: 5px 0; /* Add margin for spacing */
+}
+
+/* New styles for the bottom text and line */
+.footer-bottom {
+  text-align: center;
+  color: white; /* Change text color to white */
+  margin-top: 20px; /* Add some margin on top */
+}
+
+.footer-line {
+  border: none;
+  border-top: 1px solid white; /* White line */
+  margin: 10px 0; /* Spacing above and below the line */
+}
+
+/* Responsive adjustments */
+/* Responsive adjustments */
+@media (max-width: 1204px) {
+  .footer-container {
+    justify-content: center; /* Center columns on smaller screens */
+  }
+}
+
+@media (max-width: 1024px) {
+  .footer-input {
+    width:   17rem; /* Decrease the width */
+    padding: 6px; /* Adjust padding for a smaller input */
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column; /* Stack columns vertically on small screens */
+    align-items: center; /* Center-align all columns */
+  }
+}
+

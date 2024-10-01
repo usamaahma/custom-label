@@ -1,0 +1,17 @@
+/* LastTable.css */
+
+.ant-table th, .ant-table td {
+    text-align: left; /* Centering text for better appearance */
+}
+
+@media (min-width: 768px) {
+    .ant-table th:nth-child(1), .ant-table td:nth-child(1) {
+        width: 200px; /* Width for Quantity column */
+    }
+    .ant-table th:nth-child(2), .ant-table td:nth-child(2) {
+        width: 200px; /* Width for Unit Price column */
+    }
+    .ant-table th:nth-child(3), .ant-table td:nth-child(3) {
+        width: 200px; /* Width for Total column */
+    }
+}

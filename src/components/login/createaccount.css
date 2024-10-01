@@ -1,0 +1,110 @@
+
+.create-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background-color: #f9f9f9;
+    padding: 20px;
+}
+
+.create-form-container {
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 400px; /* Responsive max width */
+}
+
+.create-title {
+    font-size: 2rem;
+    margin-bottom: 20px;
+    color: #333;
+    text-align: center;
+    font-weight: bold;
+}
+
+.create-form {
+    display: flex;
+    flex-direction: column;
+}
+
+.create-input {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s;
+}
+
+.create-input:focus {
+    border-color: #050505;
+    outline: none;
+}
+
+.create-button {
+    padding: 10px 20px;
+    background-color: #070707;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    width: 100%;
+    cursor: pointer;
+    margin-bottom: 4rem;
+    margin-top: 1rem;
+    font-weight: bold;
+    align-items: center;
+}
+
+.create-button:hover {
+    background-color: #fcfcfc;
+    color: #070707;
+    border-color: #070707;
+}
+
+.captcha-container {
+    display: flex;
+    align-items: center;
+    margin: 10px 0;
+}
+
+.captcha-checkbox {
+    margin-right: 5px;
+}
+.error-message {
+    color: red;
+    margin: 10px 0;
+    font-size: 0.9rem;
+    text-align: center;
+}
+
+.signup-prompt {
+     
+    text-align: center;
+}
+.SIGN-UP-TEXT{
+     color: #050505;
+     text-align: center;
+     font-weight: bold;
+}
+.SIGN-UP-TEXT:hover{
+    text-decoration: underline;
+}
+
+
+@media (max-width: 500px) {
+    .create-title {
+        font-size: 1.5rem;
+    }
+    
+    .create-input {
+        font-size: 0.9rem;
+    }
+    
+    .create-button {
+        font-size: 0.9rem;
+    }
+}

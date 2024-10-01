@@ -1,0 +1,135 @@
+.samplepack-container {
+    padding: 20px;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .col-image img {
+    max-width: 100%;
+    height: 34rem;  
+  }
+  
+  .col-text {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(244,244,244);
+    width: 100%;
+    align-items: center;
+  }
+  
+  .get {
+    font-size: 2rem;
+    font-weight: bold;
+    border: 5px dashed black;
+    padding: 20px;
+    margin: 10px 0;
+    text-align: center;
+    margin-top: 5rem;
+  }
+  
+  .explore {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  
+  .sample {
+    font-size: 1.3rem;
+    text-align: center;
+  }
+  
+  .btn-sample {
+    padding: 10px 20px;
+    background-color: #070707;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    width: 14rem;
+    cursor: pointer;
+    margin-bottom: 4rem;
+    font-weight: bold;
+  }
+  
+  .btn-sample:hover {
+    background-color: #fcfcfc;
+    color: #070707;
+    border-color: #070707;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 1024px) {
+    .get {
+      font-size: 1.3rem; /* Decrease font size for medium screens */
+    }
+  
+    .explore, .sample {
+      font-size: 1rem; /* Decrease font size for medium screens */
+    }
+  
+    .btn-sample {
+      width: 12rem; /* Decrease button width for medium screens */
+    }
+  
+    .col-image img {
+      height: 30rem; /* Decrease image height for medium screens */
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .samplepack-container {
+      padding: 10px; /* Adjust padding for smaller screens */
+    }
+  
+    .get {
+      font-size: 1rem; /* Further decrease font size for smaller screens */
+      margin-top: -1%;
+      margin-top: 22%;
+    }
+  
+    .explore, .sample {
+      font-size: 0.7rem; /* Further decrease font size for smaller screens */
+    }
+  
+    .btn-sample {
+      width: 9rem; /* Further decrease button width for smaller screens */
+       /* Adjust padding for smaller buttons */
+      font-size: 0.6rem;
+       
+    }
+  
+    .col-image img {
+      height: 21rem; /* Further decrease image height for smaller screens */
+    }
+  
+    .col-text{
+        height: 21rem;
+         
+    }
+  }
+  
+  @media (max-width: 425px) {
+    .get {
+      font-size: 0.9rem; /* Further decrease for extra small screens */
+    }
+  
+    .explore, .sample {
+      font-size: 0.7rem; /* Further decrease for extra small screens */
+    }
+  
+    .btn-sample {
+      width: 9rem; /* Further decrease button width for extra small screens */
+      padding: 6px 12px; /* Adjust padding for smaller buttons */
+      font-size: 0.6rem;
+       
+    }
+  
+    .col-image img {
+      height: 19rem; /* Further decrease image height for extra small screens */
+    }
+    .col-text{
+        height: 19rem;
+         
+    }
+   
+  }
+  

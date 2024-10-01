@@ -1,0 +1,217 @@
+/* Center-align the form-wrapper and add some padding */
+.customform-wrapper {
+    position: relative; /* Make the wrapper position relative for the pseudo-element */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.customform-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url('../../public/images/formbackground.jpg') no-repeat center center/cover; /* Change this to your actual image path */
+    opacity: 0.6; /* Adjust opacity here (0 to 1) */
+    z-index: 1;  
+}
+
+.customform-container {
+    position: relative; /* Position the form container relative to stack above the background */
+    width: 45rem;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.8); /* Slight transparency for contrast */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    margin: 1rem auto;
+    z-index: 2; /* Ensure the form is above the background */
+}
+
+/* Remaining styles... */
+
+
+/* Heading styling */
+.customform-heading {
+    text-align: center;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    color: #333;
+    text-transform: uppercase;
+}
+
+/* Label styling */
+.customform-label {
+    color: #333;
+    font-weight: bold;
+}
+
+/* General input styling */
+.customform-select,
+.customform-input,
+.customform-textarea,
+.customform-input-number {
+    border-radius: 8px;
+    color: #333;
+    background-color: #f4f4f4;
+    border: 1px solid #ccc;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.customform-select:hover {
+    border: none !important;
+}
+
+:where(.css-dev-only-do-not-override-14qglws).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer):hover .ant-select-selector {
+    border-color: black !important;
+    box-shadow: none !important;
+}
+
+:where(.css-dev-only-do-not-override-14qglws).ant-select-outlined:not(.ant-select-disabled):not(.ant-select-customize-input):not(.ant-pagination-size-changer) .ant-select-selector {
+    border-color: rgb(204,204,204)!important;
+    box-shadow: none !important;
+}
+
+/* Height adjustments */
+.customform-input,
+.customform-textarea,
+.customform-input-number {
+    height: 40px;
+}
+
+/* Specific adjustments for textarea */
+.customform-textarea {
+    min-height: 120px;
+}
+
+/* Placeholder color adjustments */
+.customform-textarea::placeholder,
+.customform-input::placeholder,
+.customform-input-number::placeholder {
+    color: #888;
+}
+.customform-textarea{
+    border-color: rgb(204,204,204) !important;
+    box-shadow: none !important;
+}
+.customform-textarea:hover{
+    border-color: #000 !important;
+}
+.customform-input-number{
+    border-color: rgb(204,204,204) !important;
+    box-shadow: none !important;
+}
+.customform-input-number:hover{
+    border-color: #000 !important;
+}
+
+.customform-input{
+    border-color: rgb(204,204,204) !important;
+    box-shadow: none !important;
+}
+.customform-input:hover{
+    border-color: #000 !important;
+}
+
+/* Submit button styling */
+.customform-submit-button {
+    border: 1px solid #000;
+    background-color: #000 !important;
+    color: #fff;
+    font-weight: 600;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    height: 40px;
+    
+    margin-top: 1.2rem;
+     
+}
+
+/* Submit button hover effect */
+.customform-submit-button:hover {
+    background-color: #333 !important;
+     
+}
+
+/* Footer styling */
+.customform-h6-form {
+    text-align: center;
+    color: #333;
+    margin: 2rem;
+}
+
+/* Phone link styling */
+.customform-call-link {
+    color: #0a0a0a;
+    text-decoration: none;
+}
+
+/* Phone link hover effect */
+.customform-call-link:hover {
+    text-decoration: underline;
+}
+
+/* Grid layout for form fields */
+.customform-item-row {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.ant-form-item {
+    margin-bottom: 0rem !important;
+}
+
+.customform-item-row .ant-form-item {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Additional styles for the new elements */
+.customform-quote-text {
+    text-align: left; /* Align text to the left */
+    color: #333; /* Darker text for better readability */
+    margin-top: 20px; /* Space above the text */
+    font-weight: bold;
+}
+
+/* Image styling */
+.customform-upload-image {
+    width: 25%; /* Make the image responsive */
+    display: block; /* Block display for spacing */
+    margin: 20px auto; /* Center the image */
+}
+
+.customform-upload {
+    text-align: center;
+    font-weight: bold;
+}
+
+.customform-uploadbutton {
+    font-weight: bold;
+    color: #555454;
+    border: 2px solid transparent; /* Add initial transparent border */
+    border-radius: 5px; /* Set your desired border radius */
+    transition: border-color 0.3s; /* Smooth transition */
+}
+
+.customform-uploadbutton:hover {
+    color: #000 !important;
+    border-color: #000 !important;  
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .customform-item-row {
+        flex-direction: column; /* Stack fields vertically */
+        gap: 8px; /* Reduced gap */
+    }
+
+    .customform-upload-image {
+        max-width: 100%; /* Full width on smaller screens */
+    }
+}

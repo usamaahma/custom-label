@@ -1,0 +1,45 @@
+.center-google {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    /* Ensures text inside elements is centered */
+     /* Ensures it takes the full height of the screen */
+}
+
+.google-img {
+    width: 20rem;
+    margin-top: 3rem;
+}
+
+.rate-button {
+    margin-top: 2rem;
+    background-color: #007AB7 !important;
+    color: white;
+    font-size: medium;
+    font-weight: 700;
+    border-radius: 0%;
+    padding: 1.3rem;
+}
+
+.cards-reviewing {
+    display: flex;
+    /* Cards stacked vertically */
+    justify-content: center;
+    align-items: center;
+    /* Centering cards horizontally */
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+}
+.review-name{
+    font-size: large;
+    font-weight: 700;
+}
+.review-date{
+    color: #858CA6;
+    font-size: large;
+}
+.review-review{
+    font-size: large;
+    text-align: left;
+}

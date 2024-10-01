@@ -1,0 +1,106 @@
+/* firstnav.css */
+
+.firstnavbar-navbar {
+  padding: 10px 20px;
+  background-color: rgb(236, 238, 242);
+}
+
+.firstnavbar-logo {
+  width: 11rem;
+}
+
+.firstnavbar-container {
+  display: flex;
+  align-items: center;
+}
+
+.firstnavbar-brand {
+  margin-right: auto; /* Push the centered text to the center */
+}
+
+.firstnavbar-nav {
+  display: flex;
+  align-items: center; /* Vertically center items */
+  font-weight: bold;
+}
+
+.firstnavbar-link {
+  margin-left: 5px; /* Gap between links */
+}
+
+.firstnavbar-center {
+  margin-left: 5px;
+  background-color: rgb(3, 28, 29);
+  border-radius: 6px;
+  font-weight: lighter;
+}
+
+.code-text {
+  font-weight: bold;
+  color: aliceblue;
+}
+
+.code-off {
+  font-weight: lighter;
+  color: aliceblue;
+}
+.button-show{
+  display: none;
+}
+.mainnav-quote-button {
+  margin-left: 20px; 
+  background-color: rgb(3, 28, 29);
+  color: white; /* Text color */
+  border: none; /* Remove border */
+  transition: background-color 0.3s; /* Smooth transition */
+  font-weight: bold;
+   
+}
+
+.mainnav-quote-button:hover {
+  background-color: white; /* Change background to white on hover */
+  color: rgb(3, 28, 29); /* Change text color on hover */
+  border: 1px solid rgb(3, 28, 29); /* Add border on hover */
+}
+
+.mainnav-image {
+  margin-left: 15px; /* Space between button and image */
+  width: 8rem;
+}
+@media (max-width: 768px) {
+  .button-show{
+    display: flex;
+    justify-content: center;
+  }
+  .firstnavbar-logo {
+    display: none; /* Hide the logo on smaller screens */
+  }
+.firstnavbar-brand{
+  display: none; /* Hide login/register and icons on smaller screens */
+
+}
+  .firstnavbar-link {
+    display: none; /* Hide login/register and icons on smaller screens */
+  }
+  .firstnavbar-center {
+    display: none; /* Hide the centered code on larger screens */
+  }
+}
+/* Media Queries for responsive design */
+@media (max-width: 991px) {
+  .firstnavbar-nav {
+    display: flex;
+    align-items: center; /* Vertically center items */
+  }
+  .code-off {
+    font-size: small;
+    margin-left: 10px;
+  }
+
+  .code-text {
+    font-size: small;
+    margin-right: 10px;
+  }
+}
+
+

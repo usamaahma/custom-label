@@ -1,0 +1,79 @@
+.txtmain {
+    text-align: center; /* Center align text and images */
+  }
+  
+  .how {
+    font-weight: bold;
+    font-size: 2rem;
+    text-align: center;
+  }
+  
+  .at {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    text-align: center;
+  }
+  
+  .image-row {
+    display: flex; /* Use flexbox for horizontal alignment */
+    justify-content: center; /* Center the images */
+    margin-top: 20px; /* Space above the images */
+   }
+  
+  .image-item {
+    margin: 0 20px; /* Space between image items */
+    flex: 1 1 150px; /* Flex grow/shrink with a base width */
+  }
+  
+  .step-image {
+    width: 150px; /* Set width for the images */
+    height: auto; /* Maintain aspect ratio */
+  }
+  
+  .step-image1 {
+    width: 100px;
+    margin-top: 2rem;
+  }
+  
+  .image-text {
+    margin-top: 10px; /* Space above the text */
+    font-size: 1rem; /* Font size for the text */
+    color: #333; /* Text color */
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Media queries for responsiveness */
+  @media (min-width: 1024px) {
+    .how {
+      font-size: 2.5rem; /* Larger font size on wider screens */
+    }
+  
+    .at {
+      font-size: 1.2rem; /* Increase font size for instructions */
+    } 
+    .image-text {
+      font-size: 1.2rem; /* Larger text size for images */
+    }
+  
+    .image-row {
+      margin-top: 40px; /* More space above images */
+    }
+  }
+  @media (max-width: 950px) {
+
+  .step-image {
+    width: 50px; /* Set width for the images */
+   }
+  
+  .step-image1 {
+    width: 30px;
+   }
+  .image-text {
+    margin-top: 10px; /* Space above the text */
+    font-size: 0.7rem; /* Font size for the text */
+    color: #333; /* Text color */
+    text-align: center;
+    font-weight: bold;
+  }
+}

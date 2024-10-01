@@ -1,0 +1,38 @@
+.image-viewcart {
+  width: 10rem;
+  height: auto;
+  margin-top: 3rem;
+}
+.custom-viewedit {
+  font-size: larger;
+  font-weight: 700;
+  color: #037cb8;
+}
+.summary-viewedit {
+  font-size: 2rem;
+}
+.estimated-view {
+  width: 50%;
+}
+.sub-viewed {
+  display: flex;
+  justify-content: space-between;
+}
+.order-viewed {
+  display: flex;
+  justify-content: space-between;
+  font-weight: bold;
+}
+.Button-viewed {
+  display: block; /* Make the button a block element */
+  align-items: center !important;
+  margin: 0 auto; /* Center it horizontally */
+  text-align: center; /* Center the text inside the button */
+  background-color: #037cb8 !important;
+  color: white;
+  font-size: large;
+  font-weight: bold;
+  border-radius: 0%;
+  width: 15rem;
+  padding-bottom: 1rem !important;
+ }
