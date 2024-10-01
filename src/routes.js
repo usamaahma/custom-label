@@ -12,7 +12,8 @@ import Contactus from './components/contact/contactus';
 import Getaquote1 from './components/getaquote';
 import Expressclothing from './pages/expressclothing';
 import Checkoutbelow1 from './components/checkout/checkoutbelow';
- 
+import CustomWovenPage from './pages/customwovenpage.js';
+
 
 const AppRoutes = () => {
     return (
@@ -31,6 +32,7 @@ const AppRoutes = () => {
                     <Route path="/get-quote" element={< Getaquote1 />} />
                     <Route path='/express-clothing' element={<Expressclothing />} />
                     <Route path="/checkout" element={< Checkoutbelow1 />} />
+                    <Route path="/customwoven" element={<CustomWovenPage />} />
                 </Routes>
                 <Footer1 />
             </>

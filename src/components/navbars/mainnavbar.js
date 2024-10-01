@@ -79,7 +79,7 @@ const Mainnavbar = () => {
                 Express Clothing Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-woven"
+                as={Link} to="/customwoven"
                 className="nav-dropdown-item"
               >
                 Custom Woven Labels

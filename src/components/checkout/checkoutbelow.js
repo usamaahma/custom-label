@@ -287,10 +287,6 @@ function CheckoutBelow1() {
         </Col>
       </Row>
       <Vieweditcart />
-      <div>
-      <Button onClick={() => setVisible(true)}>Open Cart</Button>
-      <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
-    </div>
     </div>
   );
 }
