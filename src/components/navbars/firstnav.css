@@ -26,8 +26,11 @@
 
 .firstnavbar-link {
   margin-left: 5px; /* Gap between links */
+   
 }
-
+.cart-strong{
+  color: rgb(82,83,84);
+}
 .firstnavbar-center {
   margin-left: 5px;
   background-color: rgb(3, 28, 29);

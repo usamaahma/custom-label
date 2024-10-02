@@ -12,6 +12,9 @@ import Contactus from './components/contact/contactus';
 import Getaquote1 from './components/getaquote';
 import Expressclothing from './pages/expressclothing';
 import Checkoutbelow1 from './components/checkout/checkoutbelow';
+import Vieweditcart from './components/checkout/vieweditcart';
+import Hang1 from './components/hantagsection/hang';
+import Simplehangtagspage from './pages/simplehangtagspage';
  
 
 const AppRoutes = () => {
@@ -31,6 +34,10 @@ const AppRoutes = () => {
                     <Route path="/get-quote" element={< Getaquote1 />} />
                     <Route path='/express-clothing' element={<Expressclothing />} />
                     <Route path="/checkout" element={< Checkoutbelow1 />} />
+                    <Route path="/view and edit cart" element={< Vieweditcart />} />
+                    <Route path="/custom-hangtags" element={< Hang1 />} />
+                    <Route path="/simple-hangtags" element={< Simplehangtagspage />} />
+
                 </Routes>
                 <Footer1 />
             </>

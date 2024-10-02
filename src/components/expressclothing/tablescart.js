@@ -1,9 +1,8 @@
 
 import React from 'react';
 import { Button, Card, Col, Row, Upload, message } from 'antd';
-import { InboxOutlined } from '@ant-design/icons';
-import "./tablescart.css"
-import LastTable from './lasttable';
+ import "./tablescart.css"
+import LastTable1 from './lasttable';
 
 const { Dragger } = Upload;
 const props = {
@@ -148,7 +147,7 @@ function CenteredColumns() {
                             />
                         </div>
                         <div className='divs-tableexpress'>
-                            <LastTable />
+                            <LastTable1 />
                         </div>
 
 
