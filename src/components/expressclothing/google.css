@@ -4,7 +4,7 @@
     align-items: center;
     text-align: center;
     /* Ensures text inside elements is centered */
-     /* Ensures it takes the full height of the screen */
+    /* Ensures it takes the full height of the screen */
 }
 
 .google-img {
@@ -31,15 +31,24 @@
     margin-top: 2rem;
     margin-bottom: 4rem;
 }
-.review-name{
+
+.review-name {
     font-size: large;
     font-weight: 700;
 }
-.review-date{
+
+.review-date {
     color: #858CA6;
     font-size: large;
 }
-.review-review{
+
+.review-review {
     font-size: large;
     text-align: left;
+}
+@media only screen and (max-width: 950px) {
+    .cards-reviewing {
+        display: flex;
+       flex-direction: column;
+    }
 }

@@ -1,8 +1,8 @@
 
 import React from 'react';
 import { Button, Card, Col, Row, Upload, message } from 'antd';
- import "./tablescart.css"
-import LastTable1 from './lasttable';
+import "../expressclothing/tablescart.css"
+import LastTable from '../expressclothing/lasttable';
 
 const { Dragger } = Upload;
 const props = {
@@ -24,27 +24,53 @@ const props = {
         console.log('Dropped files', e.dataTransfer.files);
     },
 };
+const firstcardData = [
+    {
+        image: '../images/straight.png',
+        title: 'Straight Cut (Flat)',
+
+    },
+    {
+        image: '../images/straight.png',
+        title: 'Centre Fold',
+
+    },
+    {
+        image: '../images/straight.png',
+        title: 'Loop Fold',
+
+    },
+    {
+        image: '../images/straight.png',
+        title: 'End Fold',
+
+    },
+    {
+        image: '../images/straight.png',
+        title: 'Mitre Fold',
+
+    },
+    {
+        image: '../images/straight.png',
+        title: 'Manhatten Fold',
+
+    }, {
+        image: '../images/straight.png',
+        title: 'Book Cover Fold',
+
+    }
+    // Add more cards as needed
+];
 const cardData = [
-    { id: 1, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 2, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 3, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 4, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 5, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 6, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 7, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 8, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 9, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 10, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 11, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 12, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 13, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 14, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 15, imgSrc: '../images/straight.png', title: '0.75 x 1' },
-    { id: 16, imgSrc: '../images/straight.png', title: '0.75 x 1' },
+    { id: 1, imgSrc: '../images/straight.png', title: '1 x 2.5' },
+    { id: 2, imgSrc: '../images/straight.png', title: '1.25 x 3' },
+    { id: 3, imgSrc: '../images/straight.png', title: '1.5 x 3.5' },
+    { id: 4, imgSrc: '../images/straight.png', title: 'Custom' },
+
 ];
 
 
-function CenteredColumns() {
+function Woventable() {
     return (
         <div className='table-express'>
             <Row className="centered-row-table">
@@ -58,18 +84,28 @@ function CenteredColumns() {
 
                     </Dragger>
                     <div>
-                        <div className='divs-tableexpress'>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Straight Cut <br />(Flat)</p>
-                            </Card>
+                        <div className="divs-tableexpress">
+                            <Row  >
+                                {firstcardData.map((card, index) => (
+                                    <Col
+                                        xs={24} // Full width on extra small devices
+                                        sm={12} // 2 cards per row on small devices
+                                        md={8}  // 3 cards per row on medium devices
+                                        lg={6}  // 4 cards per row on large devices
+                                        xl={6}  // 4 cards per row on extra large devices
+                                        key={index}
+                                    >
+                                        <Card
+                                            bordered={false}
+                                            className="image-card-express"
+                                            style={{ width: 150 }}
+                                        >
+                                            <img alt={card.title} src={card.image} className="image-card-express" />
+                                            <p>{card.title}</p>
+                                        </Card>
+                                    </Col>
+                                ))}
+                            </Row>
                         </div>
                         <div className='divs-tableexpress'>
                             <div className="card-grid">
@@ -108,8 +144,6 @@ function CenteredColumns() {
                                 <img alt='abc' src='../images/straight.png' className='image-card-express' />
                                 <p>Straight Cut <br />(Flat)</p>
                             </Card>
-                        </div>
-                        <div className='divs-tableexpress'>
                             <Card
                                 bordered={false}
                                 style={{
@@ -123,6 +157,100 @@ function CenteredColumns() {
                             </Card>
                         </div>
                         <div className='divs-tableexpress'>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Straight Cut <br />(Flat)</p>
+                            </Card>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Straight Cut <br />(Flat)</p>
+                            </Card>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Straight Cut <br />(Flat)</p>
+                            </Card>
+                        </div>
+                        <div className='divs-tableexpress'>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Straight Cut <br />(Flat)</p>
+                            </Card>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Straight Cut <br />(Flat)</p>
+                            </Card>
+                        </div>
+                        <div className='divs-tableexpress'>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Straight Cut <br />(Flat)</p>
+                            </Card>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Straight Cut <br />(Flat)</p>
+                            </Card>
+                        </div>
+                        <div className='divs-tableexpress'>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Straight Cut <br />(Flat)</p>
+                            </Card>
                             <Card
                                 bordered={false}
                                 style={{
@@ -147,10 +275,8 @@ function CenteredColumns() {
                             />
                         </div>
                         <div className='divs-tableexpress'>
-                            <LastTable1 />
+                            <LastTable />
                         </div>
-
-
                     </div>
                 </Col>
 
@@ -160,7 +286,7 @@ function CenteredColumns() {
                         {/* Your sticky content goes here */}
                         <div className='sticky-first'><p>Your Instant Quote</p></div>
                         <div className='sticky-blue-1'>
-                            <p className='marg-bot'>Express Clothing Labels</p>
+                            <p className='marg-bot'>Custom Woven Labels</p>
                             <div className='sticky-blue-inside'>
                                 <p>Artwork File:</p>
                                 <p>No Artwork Uploaded</p>
@@ -171,7 +297,7 @@ function CenteredColumns() {
                                 <p>Size:
                                 </p>
                                 <p>
-                                    0.75" / 1" (19.05mm x 25.40mm)</p>
+                                    2" / 0.625" (50.80mm x 15.88mm)</p>
                             </div>
                         </div>
                         <div className='sticky-blue'>
@@ -182,11 +308,27 @@ function CenteredColumns() {
                             </div>
                         </div> <div className='sticky-blue'>
                             <div className='sticky-blue-inside'>
-                                <p>Versions:
+                                <p>Backing Options:
                                 </p>
-                                <p>None</p>
+                                <p>None(Sew-On)</p>
                             </div>
                         </div> <div className='sticky-blue'>
+                            <div className='sticky-blue-inside'>
+                                <p>Metallic Thread:
+                                </p>
+                                <p>None (Regular Thread)
+                                </p>
+                            </div>
+                        </div>
+                        <div className='sticky-blue'>
+                            <div className='sticky-blue-inside'>
+                                <p>Versions:
+                                </p>
+                                <p>None
+                                </p>
+                            </div>
+                        </div>
+                        <div className='sticky-blue'>
                             <div className='sticky-blue-inside'>
                                 <p>Proof Options:
                                 </p>
@@ -198,7 +340,7 @@ function CenteredColumns() {
                             <div className='sticky-blue-inside'>
                                 <p>Turnaround Options:
                                 </p>
-                                <p>RUSH: 3 Business Days
+                                <p>Standard: 15 Business Days
                                 </p>
                             </div>
                         </div>
@@ -239,4 +381,4 @@ function CenteredColumns() {
     );
 }
 
-export default CenteredColumns;
+export default Woventable;

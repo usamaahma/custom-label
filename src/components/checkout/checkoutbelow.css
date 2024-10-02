@@ -15,7 +15,7 @@
 .check-below {
   background-color: black;
   width: 30%;
-  
+  margin-bottom: 1.2rem;
   margin-left: 0; /* Align to the left */
   margin-right: auto; /* Keep the right margin auto to push it left */
 }

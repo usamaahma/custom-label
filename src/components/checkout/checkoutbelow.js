@@ -2,9 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Form, Input, Button, Radio, Card, Select } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import "./checkoutbelow.css";
-import IconMessage from "./iconmessage"; // Assuming this is your icon component
-import Vieweditcart from "./vieweditcart";
-import Cartmodal1 from "./cartmodal";
+import IconMessage from "./iconmessage";  
 
 const { Option } = Select;
 
@@ -28,7 +26,7 @@ function CheckoutBelow1() {
     setDropdownVisible1(!dropdownVisible1);
   };
 
-  const [visible, setVisible] = useState(false);
+   
   return (
     <div className="checkout-container">
       <div className="check-below">
@@ -286,11 +284,7 @@ function CheckoutBelow1() {
           </div>
         </Col>
       </Row>
-      <Vieweditcart />
-      <div>
-      <Button onClick={() => setVisible(true)}>Open Cart</Button>
-      <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
-    </div>
+      
     </div>
   );
 }
