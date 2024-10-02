@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef,useState} from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Navbar, Nav, Container, Button, NavDropdown } from "react-bootstrap";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./mainnavbar.css";
+import Cartmodal1 from "../checkout/cartmodal";
 
 const Mainnavbar = () => {
   const navigate = useNavigate(); // Hook to navigate
@@ -29,6 +30,7 @@ const Mainnavbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, []);
+  const [visible, setVisible] = useState(false);
   return (
     <Navbar className="mainnav-navbar" bg="light" expand="lg">
       <Container className="mainnav-container">
@@ -54,10 +56,21 @@ const Mainnavbar = () => {
               <FaUserCircle />
             </div>
           </Link>
-          <Link to="/checkout" className="changenavbar-link">
+          <Link   className="changenavbar-link">
+          <button
+              onClick={() => setVisible(true)}
+              style={{
+                background: "none",
+                border: "none",
+                padding: 0,
+                cursor: "pointer",
+              }} // Remove default styles
+            >
             <div>
               <FaShoppingCart />
             </div>
+            </button>
+            <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
           </Link>
         </div>
 
@@ -143,10 +156,10 @@ const Mainnavbar = () => {
               title={<span className="mainnav-link">HANGTAGS</span>}
               id="clothing-dropdown"
             >
-              <NavDropdown.Item href="#all" className="nav-dropdown-item">
+              <NavDropdown.Item as={Link} to="/custom-hangtags" className="nav-dropdown-item">
                 All Hang Tags
               </NavDropdown.Item>
-              <NavDropdown.Item href="#express" className="nav-dropdown-item">
+              <NavDropdown.Item as={Link} to="/simple-hangtags" className="nav-dropdown-item">
                 Simple Hang Tags
               </NavDropdown.Item>
               <NavDropdown.Item

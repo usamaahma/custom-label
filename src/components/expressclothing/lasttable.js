@@ -1,6 +1,6 @@
 import React from 'react';
 import { Table, Button } from 'antd';
-import "./lasttable.css"
+import "./lasttable.css";
 
 const columns = [
     {
@@ -70,6 +70,15 @@ const data = [
     },
 ];
 
-const LastTable = () => <Table columns={columns} dataSource={data} />;
+const LastTable1 = () => (
+    <div>
+    {/* <div className="size-txt">
+            <h2 className="simpletable-heading">Quantity</h2>
+        </div> */}
+    <div>
+        <Table columns={columns} dataSource={data} />
+    </div>
+    </div>
+);
 
-export default LastTable;
+export default LastTable1;
