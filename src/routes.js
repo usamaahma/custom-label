@@ -16,6 +16,7 @@ import CustomWovenPage from './pages/customwovenpage.js';
 import Vieweditcart from './components/checkout/vieweditcart';
 import Hang1 from './components/hantagsection/hang';
 import Simplehangtagspage from './pages/simplehangtagspage';
+import Fancyhangtagspage from './pages/fancyhangtagspage.js';
  
 
 const AppRoutes = () => {
@@ -39,6 +40,7 @@ const AppRoutes = () => {
                     <Route path="/view and edit cart" element={< Vieweditcart />} />
                     <Route path="/custom-hangtags" element={< Hang1 />} />
                     <Route path="/simple-hangtags" element={< Simplehangtagspage />} />
+                    <Route path="/fancy-hangtags" element={< Fancyhangtagspage />} />
 
                 </Routes>
                 <Footer1 />

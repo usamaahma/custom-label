@@ -1,0 +1,78 @@
+.fancyform-main{
+margin-left: 4rem;
+}
+.input-container-fancy {
+    display: flex; /* Flex container */
+    align-items: center; /* Center items vertically */
+  }
+.custom-input-form .custom-input-fancy {
+    width: 29rem; /* Set a specific width for the input */
+    margin-bottom: 1rem;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+  }
+  
+  .custom-input-form .custom-input-fancy:hover {
+    background-color: #e6f7ff; /* Light blue shade on hover */
+    border-color: #0d0d0e; /* Optional: change border color on hover */
+  }
+  
+  .custom-input-form .custom-input-fancy:focus {
+    background-color: #e6f7ff; /* Keep blue shade on focus */
+    border-color: #7e8081; /* Change border color when focused */
+    box-shadow: 0 0 5px rgba(175, 176, 177, 0.5); /* Subtle shadow for focus effect */
+  }
+  .txt-fancy-bold{
+    font-weight: bold;
+  }
+  .fancy-heading-txt{
+        margin-bottom: 2rem !important;
+        text-align: left;
+        font-size: 2rem;
+        font-weight: bold;
+  }
+  .btn-fancy{
+    padding: 10px 20px;
+    background-color: #070707;
+    color: white;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    width: 100%;
+    max-width: 465px; /* Max width for the button */
+    cursor: pointer;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    align-items: center;
+  }
+  .btn-fancy:hover{
+    background-color: #fcfcfc;
+    color: #070707;
+    border-color: #070707;
+  }
+  .txt-fancy-endline{
+    font-size: 1rem;
+    font-weight: bold;
+     
+  }
+  @media (max-width: 1024px) {
+    .fancyform-main{
+       margin-left: 2.5rem;
+    }
+  
+  }
+  @media (max-width: 768px) {
+    .input-container-fancy {
+      flex-direction: column; /* Stack inputs vertically */
+      align-items: flex-start; /* Align items to the start */
+    }
+  
+    .custom-input-form .custom-input-fancy {
+      width: 100%; /* Make inputs take full width */
+    }
+  
+    .fancyform-main {
+      margin-left: 0; /* Remove left margin for smaller screens */
+      padding: 0 1rem; /* Optional: add some padding */
+    }
+  }
+  
+  

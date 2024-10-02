@@ -163,7 +163,7 @@ const Mainnavbar = () => {
                 Simple Hang Tags
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-woven"
+                as={Link} to="/fancy-hangtags"
                 className="nav-dropdown-item"
               >
                 Fancy Hang Tags
