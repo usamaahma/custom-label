@@ -163,13 +163,13 @@ const Mainnavbar = () => {
                 Simple Hang Tags
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-woven"
+                as={Link} to="/fancy-hangtags"
                 className="nav-dropdown-item"
               >
                 Fancy Hang Tags
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link href="#about" className="mainnav-link">
+            <Nav.Link as={Link} to="/about-us" className="mainnav-link">
               About
             </Nav.Link>
             <Nav.Link as={Link} to="/contact-us" className="mainnav-link">

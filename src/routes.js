@@ -18,6 +18,8 @@ import Hang1 from './components/hantagsection/hang';
 import Simplehangtagspage from './pages/simplehangtagspage';
 import Wovenlabelpage from './pages/wovenlabel.js';
  import Satinwovenpage from './pages/satinwovenpage.js';
+import Fancyhangtagspage from './pages/fancyhangtagspage.js';
+import Aboutpage from './pages/aboutpage.js';
  
 
 const AppRoutes = () => {
@@ -43,6 +45,8 @@ const AppRoutes = () => {
                     <Route path="/simple-hangtags" element={< Simplehangtagspage />} />
                     <Route path="/woven-text-label" element={< Wovenlabelpage />} />
                     <Route path="/satin-woven" element={< Satinwovenpage />} />
+                    <Route path="/fancy-hangtags" element={< Fancyhangtagspage />} />
+                    <Route path="/about-us" element={< Aboutpage />} />
 
                 </Routes>
                 <Footer1 />
