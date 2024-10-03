@@ -1,0 +1,52 @@
+.aboutstory-container {
+    display: flex; /* Use flexbox for layout */
+    flex-wrap: wrap; /* Allow wrapping for smaller screens */
+    padding: 20px; /* Add some padding */
+    gap: 20px; /* Space between columns */
+  }
+  
+  .aboutstory-image,
+  .aboutstory-text {
+    flex: 1; /* Allow both columns to take available space */
+    min-width: 300px; /* Minimum width to prevent too narrow columns */
+  }
+  
+  .aboutstory-image img {
+    max-width: 80%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional: add rounded corners */
+  }
+  
+  .aboutstory-text {
+    display: flex;
+    flex-direction: column; /* Stack text vertically */
+    justify-content: center; /* Center the text vertically */
+  }
+  
+  .aboutstory-title {
+    font-size: 2rem; /* Title size */
+    margin-bottom: 1rem; /* Space below title */
+  }
+  
+  .aboutstory-description {
+    font-size: 1.2rem; /* Description text size */
+    line-height: 1.5; /* Space between lines */
+    width:70%
+  }
+  .aboutstory-description1 {
+    font-size: 1.2rem; /* Description text size */
+    line-height: 1.5; /* Space between lines */
+    width:90%
+  }
+  
+  @media (max-width: 768px) {
+    .aboutstory-container {
+      flex-direction: column; /* Stack columns on smaller screens */
+      align-items: center; /* Center items */
+    }
+  
+    .aboutstory-image {
+      margin-bottom: 20px; /* Add space between image and text when stacked */
+    }
+  }
+  

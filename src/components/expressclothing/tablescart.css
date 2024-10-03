@@ -55,6 +55,56 @@
     padding: 2rem;
 }
 
+.card-grid-input {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.full-width-input {
+    width: 100% !important;
+    padding: 8px;
+    box-sizing: border-box;
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+.font-selector {
+    width: 100% !important;
+    height: 2rem;
+    box-sizing: border-box;
+    text-align: left;
+}
+
+.progress-bar-container {
+    margin-top: 3rem;
+    border: solid 0.5px #436886;
+    width: 100%;
+    padding: 1rem;
+    background-color: #F2F4F8;
+    border-radius: 8px;
+}
+
+.custom-slider-wrapper {
+    margin-bottom: 1rem;
+}
+
+.custom-slider {
+    width: 100%;
+}
+
+.custom-progress-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.custom-progress-bar {
+    width: 100%;
+}
+
+
 .card-container {
     display: flex;
     justify-content: center;
@@ -174,11 +224,25 @@ p {
     font-size: 3rem;
 }
 
+.dynamic-label-text {
+    width: 15rem;
+    height: 10rem;
+    text-align: center;
+    padding: 3rem;
+    border: solid white .2rem;
+    margin: 0 auto;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1200px) {
     .card-grid {
         grid-template-columns: repeat(3, 1fr);
         /* 3 cards per row on medium screens */
+    }
+
+    .centered-row-table-label {
+        display: grid !important;
+        margin-left: 10rem;
     }
 }
 
@@ -188,7 +252,17 @@ p {
         grid-template-columns: 1fr;
         /* 1 card per row on extra small screens */
     }
+    .centered-row-table-label {
+        margin-left: 0rem;
+    }
 }
+@media (min-width: 700px) and (max-width: 900px) {
+    .centered-row-table-label {
+        margin-left: 5rem;
+    }
+
+}
+
 
 @media (min-width: 768px) and (max-width: 900px) {
 
@@ -217,6 +291,8 @@ p {
     .right-column {
         width: 100%;
     }
+
+    
 }
 
 /* Responsive adjustments for screens smaller than 425px */
@@ -241,6 +317,20 @@ p {
         /* Make the sticky div static for smaller screens */
         margin-top: 1rem;
         /* Add some margin above the sticky content */
+    }
+
+    .full-width-input {
+        width: 100% !important;
+        /* Full width of the parent container */
+        padding: 8px;
+        /* Small padding inside the input */
+        box-sizing: border-box;
+        /* Ensures padding doesn't overflow */
+        font-size: 1rem;
+        border-radius: 4px;
+        /* Optional: rounded corners */
+        border: 1px solid #ccc;
+        /* Optional: border for input */
     }
 
     .divs-tableexpress {

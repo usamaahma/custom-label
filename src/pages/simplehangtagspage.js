@@ -1,13 +1,14 @@
 import React from 'react'
 import Simplehanghero1 from '../components/hantagsection/simplehanghero';
 import Simpletable1 from '../components/hantagsection/simpletable';
+import GoogleReviews from '../components/expressclothing/googlereviews';
 
 function Simplehangtagspage() {
   return (
     <div>
-      <Simplehanghero1/>
-      <Simpletable1/>
-       
+      <Simplehanghero1 />
+      <Simpletable1 />
+      <GoogleReviews />
     </div>
   )
 }

@@ -6,7 +6,7 @@ const Hang1 = () => {
     // Your data array
     const cardsData = [
         { id: 1, image: '../../images/simplehang.jpg', text: 'Simple Hang Tags', link: '/simple-hangtags' },
-        { id: 2, image: '../../images/fancyhang.jpg', text: 'Fancy Hang Tags', link: '/fancy-hang-tags' },
+        { id: 2, image: '../../images/fancyhang.jpg', text: 'Fancy Hang Tags', link: '/fancy-hangtags' },
     ];
 
     return (
