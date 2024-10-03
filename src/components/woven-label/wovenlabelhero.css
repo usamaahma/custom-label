@@ -1,0 +1,155 @@
+.centered-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin-top: 4rem;
+    padding: 0 1rem; /* Add horizontal padding for better appearance */
+}
+
+.centered-row {
+    width: 100%;
+    display: flex;
+ }
+
+.text-column {
+    text-align: left;
+}
+
+.img-fluid {
+    width: 100%; /* Make the image responsive */
+    height: auto; /* Maintain aspect ratio */
+}
+
+.expresstext-clothing {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.largetext-express {
+    font-size: 1.1rem;
+}
+
+.image-post {
+    width: 10rem; /* Fixed width for post image */
+}
+
+.list-express {
+    font-size: large;
+    font-weight: 600;
+}
+
+.hero-firstdiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* Use flex-start for alignment */
+    margin-top: 1rem; /* Add margin for separation */
+}
+
+.second-firstdiv {
+    border: solid 2px #436886;
+    padding: 1rem;
+    width: 60%; /* Set to 100% for responsive behavior */
+    max-width: 400px; /* Optional: set a max-width for better appearance */
+    border-radius: 2rem;
+}
+
+.order-list {
+    list-style-type: decimal;
+    width: 90%;
+    font-size: 1.3rem;
+}
+
+.our-productexpress {
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+/* expresshero.css */
+.centered-container {
+    padding: 2rem;
+}
+
+.main-image-container {
+    text-align: center; /* Center the main image */
+    margin-bottom: 1rem; /* Add space below the main image */
+}
+
+.main-image {
+    max-width: 100%; /* Responsive main image */
+    height: auto; /* Maintain aspect ratio */
+}
+.main-image:hover {
+    transform: scale(1.1); /* Enlarge the image on hover */
+}
+
+.thumbnail-carousel {
+    display: flex;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    padding: 1rem 0; /* Add vertical padding */
+}
+
+.thumbnail-image {
+    width: 80px; /* Width of thumbnails */
+    height: 80px; /* Height of thumbnails */
+    margin-right: 10px; /* Space between thumbnails */
+    cursor: pointer; /* Indicate that thumbnails are clickable */
+    transition: transform 0.2s; /* Smooth scale effect */
+}
+
+.thumbnail-image:hover {
+    transform: scale(1.1); /* Scale up on hover */
+}
+
+
+@media (max-width: 1024px) {
+    .hero-firstdiv {
+        flex-direction: column; /* Stack items vertically on smaller screens */
+        align-items: center; /* Center items horizontally */
+        text-align: center; /* Center text for all child elements */
+    }
+
+    .second-firstdiv {
+        width: auto; /* Reset width for small screens */
+    }
+}
+
+/* Media Query for Smaller Screens */
+@media (max-width: 768px) {
+   
+
+    .centered-row {
+        flex-wrap: wrap; /* Allow wrapping on smaller screens */
+    }
+
+    .text-column,
+    .image-column {
+        width: 100%; /* Full width on small screens */
+        margin-bottom: 2rem; /* Space between columns */
+        text-align: center; /* Center align the content */
+    }
+
+    .image-post {
+        width: 100%; /* Ensure the image takes full width */
+        height: auto; /* Maintain aspect ratio */
+        margin: 0 auto; /* Center align the image */
+    }
+
+    .list-express,
+    .order-list {
+        padding-left: 15px; /* Adjust padding for lists on smaller screens */
+    }
+
+    .largetext-express {
+        font-size: 0.9rem; /* Smaller font size for text on small screens */
+    }
+
+    .our-productexpress {
+        font-size: 1rem; /* Smaller font size for product process title */
+    }
+}
+
+@media (max-width: 425px) {
+    .second-firstdiv {
+        width: auto; /* Reset width for very small screens */
+    }
+}

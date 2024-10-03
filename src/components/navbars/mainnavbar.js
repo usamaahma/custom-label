@@ -98,13 +98,13 @@ const Mainnavbar = () => {
                 Custom Woven Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#woven-text"
+                as={Link} to="/woven-text-label"
                 className="nav-dropdown-item"
               >
                 Woven Text Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-satin"
+                as={Link} to="/satin-woven"
                 className="nav-dropdown-item"
               >
                 Custom Satin Woven Labels
