@@ -1,0 +1,63 @@
+@keyframes gradientAnimation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.about-hero {
+  display: flex; /* Use flexbox for layout */
+  justify-content: space-between; /* Space out columns */
+  align-items: center; /* Center items vertically */
+  padding: 20px; /* Add padding around the container */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  background: linear-gradient(270deg, #007ab7, #444343);
+  background-size: 400% 400%; /* Allow the background to animate */
+  animation: gradientAnimation 15s ease infinite; /* Apply animation */
+  border-radius: 0px; /* Optional: Add rounded corners */
+  padding: 5rem;
+}
+
+.about-content {
+  flex: 1; /* Allow this column to take available space */
+  color: white; /* Change text color to white for better visibility */
+}
+
+.about-heading {
+  font-size: 3rem; /* Adjust heading size */
+  margin-bottom: 1rem; /* Space below the heading */
+  text-align: left;
+}
+
+.about-text {
+  font-size: 1.2rem; /* Adjust text size */
+  line-height: 1.5; /* Space between lines */
+}
+
+.about-image {
+  flex: 1; /* Allow this column to take available space */
+  display: flex; /* Center the image */
+  justify-content: center; /* Center horizontally */
+}
+
+.about-image img {
+  max-width: 80%; /* Make the image responsive */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+  .about-hero {
+    flex-direction: column; /* Stack columns on smaller screens */
+    align-items: flex-start; /* Align items to the start */
+  }
+
+  .about-image {
+    margin-top: 20px; /* Add space between text and image when stacked */
+  }
+}
