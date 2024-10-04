@@ -101,6 +101,11 @@ function Create() {
           <Link className="SIGN-UP-TEXT" to="/login">Sign In</Link>
         </p>
       </div>
+      <style>{`
+        .grecaptcha-badge {
+          visibility: hidden;
+        }
+      `}</style>
     </div>
   );
 }

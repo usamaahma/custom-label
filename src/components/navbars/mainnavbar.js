@@ -146,7 +146,7 @@ const Mainnavbar = () => {
                 Custom TPU Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-heat-transfer"
+                as={Link} to="/custom-heat-labels"
                 className="nav-dropdown-item"
               >
                 Custom Heat Transfer Labels

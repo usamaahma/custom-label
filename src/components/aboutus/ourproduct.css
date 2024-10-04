@@ -1,5 +1,4 @@
 .product-card-container {
-    max-width: 95%; /* Ensures the container is aligned */
     margin: 0 auto; /* Centers the container */
     padding: 20px;
     background-color: rgb(25,39,51);

@@ -6,7 +6,9 @@
     flex-wrap: wrap;
     width: 100%;
 }
-
+.slider{
+    width: 20rem !important;
+}
 .left-column,
 .right-column {
     display: grid;

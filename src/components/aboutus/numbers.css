@@ -71,6 +71,11 @@
         transform: scale(1);
     }
 }
+@media (max-width: 1070px) {
+    .stat-card{
+        width: auto;
+    }
+}
 
 /* Responsive styling */
 @media (max-width: 768px) {
