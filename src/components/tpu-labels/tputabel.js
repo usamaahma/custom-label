@@ -161,12 +161,12 @@ function Tputabel1() {
                           width: "8rem",
                           height: "9rem",
                           background: "#FAFAFA",
-                          margin: "1rem", // Optional: Add margin for spacing between cards
+                          margin: "1rem",
                         }}
                       >
                         <img
                           alt={`Card ${card.id}`}
-                          src={card.imgSrc} // Use actual image paths here
+                          src={card.imgSrc}  
                           className="simpletable-image-card-express"
                         />
                         <p>{card.title}</p> {/* Update description accordingly */}

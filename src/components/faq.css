@@ -1,0 +1,97 @@
+/* FAQ Section Styling */
+#faq {
+    padding: 40px 20px;
+    background-color: #f9f9f9;
+}
+
+/* Header styling */
+.faq-header {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.faq-heading {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+/* FAQ Columns Styling */
+.faq-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+
+
+/* Questions Column Styling */
+.faq-questions-col {
+    flex: 2;
+}
+
+/* FAQ Item Styling */
+.faq-item {
+    margin-bottom: 20px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.faq-question {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+.faq-toggle-icon {
+    font-size: 1.2rem;
+    color: #4d4e4e; /* Change color for the toggle icon */
+}
+
+/* FAQ Answer Styling */
+.faq-answer {
+    font-size: 1rem;
+    color: #666;
+}
+/* Heading Column Styling */
+.faq-heading-col {
+    flex: 1;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #444;
+    text-align: left;
+    margin-top: 2rem;
+}
+.faq-heading-col1 {
+    flex: 1;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #444;
+    text-align: left;
+}
+.frequently{
+    flex: 1;
+    font-size: 2rem;
+    font-weight: bold;
+    color: #444;
+}
+.span{
+color: rgb(0,122,179);
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    .faq-columns {
+        flex-direction: column;
+    }
+    .faq-heading-col, .faq-questions-col {
+        flex: none;
+        margin-bottom: 20px;
+    }
+}
