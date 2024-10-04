@@ -1,0 +1,49 @@
+.privacy-policy-container {
+   width: 93%;
+    margin: 0 auto; /* Centers the container */
+    padding: 20px; /* Adds padding inside the container */
+    font-family: Arial, sans-serif; /* Sets a readable font */
+    line-height: 1.6; /* Increases line spacing for readability */
+  }
+  
+  .policy-heading {
+    font-size: 2.5rem; /* Increases font size for the main heading */
+    font-weight: bold; /* Makes the main heading bold */
+    text-align: left;  
+    margin-bottom: 20px; /* Adds space below the main heading */
+  }
+  
+  .policy-subheading {
+    font-size: 1.8rem; /* Increases font size for subheadings */
+    font-weight: bold; /* Makes subheadings bold */
+    margin-top: 20px; /* Adds space above subheadings */
+    margin-bottom: 10px; /* Adds space below subheadings */
+  }
+  
+  ul {
+    margin-left: 20px; /* Adds margin to the left of the list */
+  }
+  
+  li {
+    margin-bottom: 10px; /* Adds space between list items */
+  }
+  
+  p {
+    margin: 15px 0; /* Adds vertical spacing for paragraphs */
+    text-align: justify; /* Justifies the text for a cleaner look */
+  }
+  
+  @media (max-width: 768px) {
+    .privacy-policy-container {
+      padding: 10px; /* Reduces padding on smaller screens */
+    }
+  
+    .policy-heading {
+      font-size: 2rem; /* Adjusts heading size on smaller screens */
+    }
+  
+    .policy-subheading {
+      font-size: 1.5rem; /* Adjusts subheading size on smaller screens */
+    }
+  }
+  

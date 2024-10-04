@@ -29,7 +29,7 @@ function Footer1() {
             </li>
             <li className="cl-label">
               <Link to="/custom-cotton-label">Custom Cotton Labels</Link>
-            </li >
+            </li>
             <li className="cl-label">
               <Link to="/satin-woven">Custom Satin Woven Labels</Link>
             </li>
@@ -53,41 +53,58 @@ function Footer1() {
         <div className="footer-column">
           <h3>Hang Tags</h3>
           <ul className="hangtag-main">
-          <li className="hang">
-                <Link to="/custom-hangtags">All Hang Tags</Link>
+            <li className="hang">
+              <Link to="/custom-hangtags">All Hang Tags</Link>
             </li>
             <li className="hang">
-                <Link to="/simple-hangtags">Simple Hang Tags</Link>
+              <Link to="/simple-hangtags">Simple Hang Tags</Link>
             </li>
             <li className="hang">
-                <Link to="/fancy-hangtags">Fancy Hang Tags</Link>
+              <Link to="/fancy-hangtags">Fancy Hang Tags</Link>
             </li>
-        </ul>
+          </ul>
           <h3>Resources</h3>
           <ul className="hangtag-main">
             <li className="hang">
-                <Link to="/faqs">FAQ</Link>
+              <Link to="/faqs">FAQ</Link>
             </li>
             <li className="hang">
-                <Link to="/about-us">About Us</Link>
+              <Link to="/about-us">About Us</Link>
             </li>
             <li className="hang">
-                <Link to="/contact-us">Contact Us</Link>
+              <Link to="/contact-us">Contact Us</Link>
             </li>
-        </ul>
+          </ul>
         </div>
 
         <div className="footer-column">
           <h3>My Account</h3>
           <p>Dashboard</p>
           <p>1-844-868-3926</p>
-          <p>Privacy Policy</p>
+          <p>
+            <Link
+              to="/privacy-policy"
+              style={{ textDecoration: "none", color: "inherit" }}
+            >
+              Privacy Policy
+            </Link>
+          </p>
 
           <h3>Contact Us</h3>
           <p>Monday-Friday</p>
           <p>9AM-5:30PM EST</p>
-          <a href="tel:1-844-868-3926" className="contact-link">1-844-868-3926</a>
-          <p>For inquiries, email us at: <a className="contact-link" href="mailto:sales@customwovenlabels.com">sales@customwovenlabels.com</a></p>
+          <a href="tel:1-844-868-3926" className="contact-link">
+            1-844-868-3926
+          </a>
+          <p>
+            For inquiries, email us at:{" "}
+            <a
+              className="contact-link"
+              href="mailto:sales@customwovenlabels.com"
+            >
+              sales@customwovenlabels.com
+            </a>
+          </p>
           <p>1760 Glasco Turnpike</p>
           <p>Woodstock NY 12498</p>
         </div>

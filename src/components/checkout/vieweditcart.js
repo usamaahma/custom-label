@@ -4,7 +4,7 @@ import { Button } from "antd";
 
 function Vieweditcart() {
   const [quantity, setQuantity] = useState(1);
-  const price = 46.50; // Example price
+  const price = 46.5; // Example price
   const subtotal = (price * quantity).toFixed(2); // Calculate subtotal
 
   // Handle quantity change
@@ -40,14 +40,30 @@ function Vieweditcart() {
             height: "200px",
           }}
         >
-          <p><strong>Style:</strong> 5 x Loop Fold</p>
-          <p><strong>Size:</strong> 5 x 2 x 0.625</p>
-          <p><strong>Backing Options:</strong> 5 x None (Sew-On)</p>
-          <p><strong>Metallic Thread:</strong> 5 x None (Regular Thread)</p>
-          <p><strong>Size Symbols or Color Versions?:</strong> 5 x None</p>
-          <p><strong>Proof Options:</strong> Digital Proof Only</p>
-          <p><strong>Turnaround Options:</strong> 5 x Standard 15 Business Days</p>
-          <p><strong>Quantity:</strong> 5 x 5</p>
+          <p>
+            <strong>Style:</strong> 5 x Loop Fold
+          </p>
+          <p>
+            <strong>Size:</strong> 5 x 2 x 0.625
+          </p>
+          <p>
+            <strong>Backing Options:</strong> 5 x None (Sew-On)
+          </p>
+          <p>
+            <strong>Metallic Thread:</strong> 5 x None (Regular Thread)
+          </p>
+          <p>
+            <strong>Size Symbols or Color Versions?:</strong> 5 x None
+          </p>
+          <p>
+            <strong>Proof Options:</strong> Digital Proof Only
+          </p>
+          <p>
+            <strong>Turnaround Options:</strong> 5 x Standard 15 Business Days
+          </p>
+          <p>
+            <strong>Quantity:</strong> 5 x 5
+          </p>
         </div>
       </div>
 
@@ -87,9 +103,13 @@ function Vieweditcart() {
           <p>Order Total</p>
           <p>${subtotal}</p>
         </div>
-        <Button className="Button-viewed">
+        <div class="button1-container">
+          <button class="Button1-viewed">Go to Checkout</button>
+        </div>
+
+        {/* <Button className="Button-viewed">
           <p className="place-button-viewcart">Go to Checkout</p>
-        </Button>
+        </Button> */}
       </div>
     </div>
   );
