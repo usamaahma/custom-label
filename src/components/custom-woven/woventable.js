@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Button, Card, Col, Row, Upload, message } from 'antd';
 import "../expressclothing/tablescart.css"
@@ -85,7 +84,7 @@ function Woventable() {
                     </Dragger>
                     <div>
                         <div className="divs-tableexpress">
-                            <Row  >
+                            <Row className='row-small-screens'>
                                 {firstcardData.map((card, index) => (
                                     <Col
                                         xs={24} // Full width on extra small devices

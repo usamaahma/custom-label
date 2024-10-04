@@ -83,7 +83,7 @@ function Satintable() {
                     </Dragger>
                     <div>
                         <div className="divs-tableexpress">
-                            <Row  >
+                            <Row className='row-small-screens'>
                                 {firstcardData.map((card, index) => (
                                     <Col
                                         xs={24} // Full width on extra small devices

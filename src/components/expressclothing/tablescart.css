@@ -31,7 +31,7 @@
 
 .table-express {
     display: grid;
-    justify-content: center;
+    justify-content: center;                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
 }
 
 .image-card-express {
@@ -267,7 +267,7 @@ p {
 
 
 @media (min-width: 768px) and (max-width: 900px) {
-
+   
     .sticky-first,
     .sticky-blue,
     .sticky-blue-1,
@@ -277,7 +277,12 @@ p {
 
 }
 
-@media (max-width: 768px) {
+@media (max-width: 850px) {
+    .row-small-screens{
+        display: grid;
+        justify-content: center !important;
+        align-items: center !important;
+    }
     .centered-row {
         display: grid;
         justify-content: center;

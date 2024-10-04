@@ -1,24 +1,35 @@
 import React, { useState } from 'react';
 import { Modal, Button, Input, Divider } from 'antd';
-import {  EditOutlined, DeleteOutlined } from '@ant-design/icons';
-import { Link } from "react-router-dom";
+import { EditOutlined, DeleteOutlined } from '@ant-design/icons';
+import { Link, useNavigate } from 'react-router-dom'; // Import useNavigate
 import './cartmodal.css';
- 
 
 function Cartmodal1({ visible, onClose }) {
   const [quantity, setQuantity] = useState(1);
-  
+  const navigate = useNavigate(); // Initialize useNavigate
+
   // Sample cart items
   const cartItems = [
     {
       id: 1,
       name: "Custom woven labels",
-      image: "../../images/straight.png", 
+      image: "../../images/straight.png",
       price: 20,
     },
   ];
 
   const subtotal = cartItems.reduce((total, item) => total + item.price * quantity, 0);
+
+  // Handler for navigating and closing modal
+  const handleCheckout = () => {
+    onClose(); // Close modal
+    navigate("/checkout"); // Navigate to checkout page
+  };
+
+  const handleViewAndEditCart = () => {
+    onClose(); // Close modal
+    navigate("/view and edit cart"); // Navigate to view and edit cart page
+  };
 
   return (
     <Modal
@@ -52,19 +63,14 @@ function Cartmodal1({ visible, onClose }) {
         <Divider />
         <div className="cart-summary">
           <h3>Cart Subtotal: ${subtotal.toFixed(2)}</h3>
-          <Link to="/checkout" >
-          <Button type="primary" block className='btn-cart' style={{ marginBottom: '1rem' }}>
+          <Button type="primary" block className='btn-cart' onClick={handleCheckout} style={{ marginBottom: '1rem' }}>
             Checkout
           </Button>
-        </Link>
-          
         </div>
         <Divider />
-        <Link to="/view and edit cart" >
-        <Button type="primary" block  className='btn-cart'  style={{ marginBottom: '0' }}>
-            View and Edit Cart
-          </Button>
-          </Link>
+        <Button type="primary" block className='btn-cart' onClick={handleViewAndEditCart} style={{ marginBottom: '0' }}>
+          View and Edit Cart
+        </Button>
       </div>
     </Modal>
   );
