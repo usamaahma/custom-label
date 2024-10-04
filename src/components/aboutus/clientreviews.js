@@ -49,7 +49,7 @@ const Car = () => {
 
   return (
     <div className="customerdiv">
-      <h1 className="customers">From our customers</h1>
+      <h2 className="customers">What Our Customers Say</h2>
       <p className="customer">Client highlighting our services and successful results.</p>
       <div className="carousel-wrapper">
         <div className="carousel-container1">

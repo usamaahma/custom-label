@@ -230,7 +230,6 @@ function Wovenlabeldesc() {
                                 <p>0.75" / 1" (19.05mm x 25.40mm)</p>
                             </div>
                         </div>
-
                         <div className='sticky-blue'>
                             <div className='sticky-blue-inside'>
                                 <p>Turnaround Options:</p>
@@ -244,7 +243,6 @@ function Wovenlabeldesc() {
                                 <p>$540.00</p>
                             </div>
                         </div>
-
                         <div className='sticky-blue'>
                             <div style={{ display: "flex", justifyContent: "center" }}>
                                 <Button className='button-tablecart'>

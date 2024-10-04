@@ -6,11 +6,6 @@
 .alice-carousel__dots {
   display: none !important; /* Forcefully hide the dots */
 }
-
-
-
-
-
 .carousel-wrapper {
   position: relative; /* Make wrapper relative for absolute buttons */
   padding: 20px; /* Add some padding to avoid arrow overlap */
@@ -22,7 +17,7 @@
 
 .customerdiv {
   text-align: center;
-  margin-top: 0.4rem;
+  margin-top: 2.5rem;
   /* Adjust margin as needed */
 }
 
@@ -68,9 +63,7 @@
   /* Add padding to ensure spacing around the card */
 }
 
-.ant-card .ant-card-body {
-  padding: 0;
-}
+ 
 
 /* Center card content */
 .carousel-card {

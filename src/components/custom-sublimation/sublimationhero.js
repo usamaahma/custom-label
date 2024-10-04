@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../expressclothing/expresshero.css";
 import { Col, Row } from 'antd';
 
-function Wovenhero() {
+function Sublimationhero() {
     // State to hold the currently selected image
     const [selectedImage, setSelectedImage] = useState('../images/martin.png');
 
@@ -18,29 +18,33 @@ function Wovenhero() {
         <div className="centered-container">
             <Row className="centered-row" gutter={[16, 16]}>
                 <Col xs={24} sm={16} md={12} className="text-column">
-                    <p className='expresstext-clothing'>Custom Woven Labels</p>
+                    <p className='expresstext-clothing'>Custom Sublimation Labels</p>
                     <p className='largetext-express'>
-                        Not all woven labels are created equal. Our custom woven labels for clothing utilize the highest quality materials and the largest thread color inventory. This means you'll receive "high definition" 50 denier thread and the most accurate color match of your artwork file. All woven clothing labels include any fold style and up to 8 thread colors. Iron-on woven labels are also available.                    </p>
+                        Custom sublimation labels utilize a dye-sublimation print to translate designs with complex color blends or photographic details onto your clothing labels. The results are impressive and allow us to produce clothing label designs not possible with traditional woven labels. Sublimation labels use our soft woven label material.                    </p>
                     <p className='largetext-express'>
-                        Upload artwork and select your options below. Our team will help finalize your custom woven label design and send you a digital proof for approval within 1 business day. You'll be able to approve your proof or make changes if necessary before full production. A team expert will be assigned to your order in case you have any questions.
-                    </p>
+                        Any special instructions not included in your artwork file can be included in the comment section below. You will receive a digital proof for final approval within 1 business day of placing your order. An expert staff member will be assigned to your order in case you have any questions.                    </p>
 
                     <div className='hero-firstdiv'>
                         <div>
                             <ul className='list-express'>
-                                <li>Up to 8 thread colors</li>
-                                <li>Sew-on or iron-on woven labels</li>
-                                <li>Add size versions</li>
-                                <li>Gold or silver metallic thread</li>
-                                <li>Free sample photo option</li>
-                                <li>Graphic artwork assistance</li>
-                                <li>Fast turnaround & delivery</li>
+                                <li>Unlimited colors
+                                </li>
+                                <li>Any fold style
+                                </li>
+                                <li>Size versions available (s, m, l, xl)
+                                </li>
+                                <li>Sew-on, Iron-on or Peel & Stick
+                                </li>
+                                <li>Graphic artwork assistance
+                                </li>
+                                <li>Fast turnaround time & delivery
+                                </li>
                             </ul>
                             <img className='image-post' alt='post' src='../images/post.png' />
                         </div>
                         <div className='second-firstdiv'>
-                        <p className='our-productexpress'> Our Order Process</p>
-                        <ol className='order-list'>
+                            <p className='our-productexpress'> Our Order Process</p>
+                            <ol className='order-list'>
                                 <li>Get your Digital Proof within 1 business day. Approve or reject your proof from your customer account.</li>
                                 <li>If selected, get your Sample Photo within 5 business days of approving your digital proof.</li>
                                 <li>After your approvals are complete, view your Ship Date in your customer account.</li>
@@ -70,4 +74,4 @@ function Wovenhero() {
     );
 }
 
-export default Wovenhero;
+export default Sublimationhero;

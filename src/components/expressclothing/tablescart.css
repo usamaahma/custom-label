@@ -109,13 +109,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
-}
+ }
 
 .image-card-express {
     width: 6rem;
     height: auto;
     margin-bottom: 0.5rem;
-}
+ }
 
 .card-grid p {
     text-align: center;

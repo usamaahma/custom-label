@@ -41,8 +41,8 @@ function Wovenlabelhero() {
                             <img className='image-post' alt='post' src='../images/post.png' />
                         </div>
                         <div className='second-firstdiv'>
-                            <p className='our-productexpress'>Our Product Process</p>
-                            <ol className='order-list'>
+                        <p className='our-productexpress'> Our Order Process</p>
+                        <ol className='order-list'>
                                 <li>Create your label and approve before adding to cart.</li>
                                 <li>Complete our fast checkout.</li>
                                 <li>See your Ship Date and track your order progress from your customer account.</li>

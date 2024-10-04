@@ -36,8 +36,8 @@ function Simplehanghero1() {
                             <img className='simplehero-image-post' alt='post' src='../images/post.png' />
                         </div>
                         <div className='simplehero-second-firstdiv'>
-                            <p className='simplehero-our-productexpress'>Our Product Process</p>
-                            <ol className='simplehero-order-list'>
+                        <p className='our-productexpress'> Our Order Process</p>
+                        <ol className='simplehero-order-list'>
                                 <li>Get your Digital Proof within 1 business day. Approve or reject your proof from your customer account.</li>
                                 <li>After your approvals are complete, view your Ship Date in your customer account.</li>
                             </ol>
