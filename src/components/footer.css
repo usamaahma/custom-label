@@ -170,9 +170,7 @@
   justify-content: left !important;
   align-items: flex-start !important;
 }
-
 }
-
 @media (max-width: 680px) {
   .visaimg {
     width: 17rem;

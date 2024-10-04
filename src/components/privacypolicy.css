@@ -23,16 +23,14 @@
   ul {
     margin-left: 20px; /* Adds margin to the left of the list */
   }
-  
+
   li {
     margin-bottom: 10px; /* Adds space between list items */
   }
   
   p {
     margin: 15px 0; /* Adds vertical spacing for paragraphs */
-    text-align: justify; /* Justifies the text for a cleaner look */
-  }
-  
+   }
   @media (max-width: 768px) {
     .privacy-policy-container {
       padding: 10px; /* Reduces padding on smaller screens */
