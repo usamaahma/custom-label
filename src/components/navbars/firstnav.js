@@ -48,7 +48,7 @@ const Firstnavbar = () => {
           <Nav.Link as={Link} to="/login" className="firstnavbar-link">
             Login/Register <FaUserCircle />
           </Nav.Link>
-          <Nav.Link className="firstnavbar-link">
+          <Nav.Link  className="firstnavbar-link">
             <button
               onClick={() => setVisible(true)}
               style={{
@@ -56,9 +56,9 @@ const Firstnavbar = () => {
                 border: "none",
                 padding: 0,
                 cursor: "pointer",
-              }} // Remove default styles
+              }} 
             >
-              <strong className="cart-strong">Cart</strong> <FaShoppingCart />
+              <strong className="cart-strong">Cart</strong> <FaShoppingCart style={{ color: 'rgb(82,83,84)' }} />
             </button>
             <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
           </Nav.Link>

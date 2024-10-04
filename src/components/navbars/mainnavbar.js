@@ -53,7 +53,7 @@ const Mainnavbar = () => {
         <div className="changenavbar-nav ml-auto">
           <Link to="/login" className="changenavbar-link">
             <div>
-              <FaUserCircle />
+            <FaUserCircle style={{ color: 'black' }} />
             </div>
           </Link>
           <Link className="changenavbar-link">
