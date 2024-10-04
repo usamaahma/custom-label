@@ -1,4 +1,4 @@
-import React, { useEffect, useRef,useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Navbar, Nav, Container, Button, NavDropdown } from "react-bootstrap";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
@@ -56,8 +56,8 @@ const Mainnavbar = () => {
               <FaUserCircle />
             </div>
           </Link>
-          <Link   className="changenavbar-link">
-          <button
+          <Link className="changenavbar-link">
+            <button
               onClick={() => setVisible(true)}
               style={{
                 background: "none",
@@ -66,9 +66,9 @@ const Mainnavbar = () => {
                 cursor: "pointer",
               }} // Remove default styles
             >
-            <div>
-              <FaShoppingCart />
-            </div>
+              <div>
+                <FaShoppingCart />
+              </div>
             </button>
             <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
           </Link>
@@ -110,31 +110,31 @@ const Mainnavbar = () => {
                 Custom Satin Woven Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-care"
+                as={Link} to="/custom-care-label"
                 className="nav-dropdown-item"
               >
                 Custom Care Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#screen-printed"
+                as={Link} to="/screen-printed-label"
                 className="nav-dropdown-item"
               >
                 Screen Printed Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-cotton"
+                as={Link} to="/custom-cotton-label"
                 className="nav-dropdown-item"
               >
                 Custom Cotton Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-sublimation"
+                as={Link} to="/custom-sublimation-label"
                 className="nav-dropdown-item"
               >
                 Custom Sublimation Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-tyvek"
+                as={Link} to="/custom-tyvek-label"
                 className="nav-dropdown-item"
               >
                 Custom Tyvek Labels

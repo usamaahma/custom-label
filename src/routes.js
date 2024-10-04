@@ -20,6 +20,11 @@ import Wovenlabelpage from './pages/wovenlabel.js';
  import Satinwovenpage from './pages/satinwovenpage.js';
 import Fancyhangtagspage from './pages/fancyhangtagspage.js';
 import Aboutpage from './pages/aboutpage.js';
+import CustomCareLabelPage from './pages/customcarelabelpage.js';
+import Screenprintedlabels from './pages/screensprintedlabels.js';
+import Customcottonpage from './pages/customcottonpage.js';
+import Customsublimationpage from './pages/customsublimationpage.js';
+import Customtyvekpage from './pages/customtyvekpage.js';
  
 
 const AppRoutes = () => {
@@ -47,7 +52,13 @@ const AppRoutes = () => {
                     <Route path="/satin-woven" element={< Satinwovenpage />} />
                     <Route path="/fancy-hangtags" element={< Fancyhangtagspage />} />
                     <Route path="/about-us" element={< Aboutpage />} />
+                    <Route path="/custom-care-label" element={< CustomCareLabelPage />} />
+                    <Route path="/screen-printed-label" element={< Screenprintedlabels />} />
+                    <Route path="/custom-cotton-label" element={< Customcottonpage />} />
+                    <Route path="/custom-sublimation-label" element={< Customsublimationpage />} />
+                    <Route path="/custom-tyvek-label" element={< Customtyvekpage />} />
 
+                    
                 </Routes>
                 <Footer1 />
             </>

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import "../expressclothing/expresshero.css";
 import { Col, Row } from 'antd';
 
-function Wovenhero() {
+function Screenprintedhero() {
     // State to hold the currently selected image
     const [selectedImage, setSelectedImage] = useState('../images/martin.png');
 
@@ -18,22 +18,25 @@ function Wovenhero() {
         <div className="centered-container">
             <Row className="centered-row" gutter={[16, 16]}>
                 <Col xs={24} sm={16} md={12} className="text-column">
-                    <p className='expresstext-clothing'>Custom Woven Labels</p>
-                    <p className='largetext-express'>
-                        Not all woven labels are created equal. Our custom woven labels for clothing utilize the highest quality materials and the largest thread color inventory. This means you'll receive "high definition" 50 denier thread and the most accurate color match of your artwork file. All woven clothing labels include any fold style and up to 8 thread colors. Iron-on woven labels are also available.                    </p>
-                    <p className='largetext-express'>
-                        Upload artwork and select your options below. Our team will help finalize your custom woven label design and send you a digital proof for approval within 1 business day. You'll be able to approve your proof or make changes if necessary before full production. A team expert will be assigned to your order in case you have any questions.
+                    <p className='expresstext-clothing'>Screen Printed Labels
                     </p>
-
+                    <p className='largetext-express'>
+                        Screen printed clothing labels are ideal when you require an exact translation of your design onto a soft fabric clothing label, without compromise. While woven labels are limited by thread thickness and loom adjustments, printed labels use the same material yet avoid these limitations and reproduce logos or text to exact scale. Your printed clothing label artwork file may include any background color and up to 4 print colors, 5 colors total.</p>
+                    <p className='largetext-express'>
+                        Upload artwork and select your options below. Our team will help finalize your printed clothing label design and send you a digital proof for approval within 1 business day. You'll be able to approve your proof or make changes if necessary before full production. A team expert will be assigned to your order in case you have any questions.   </p>
                     <div className='hero-firstdiv'>
                         <div>
                             <ul className='list-express'>
-                                <li>Up to 8 thread colors</li>
-                                <li>Sew-on or iron-on woven labels</li>
-                                <li>Add size versions</li>
-                                <li>Gold or silver metallic thread</li>
-                                <li>Free sample photo option</li>
-                                <li>Graphic artwork assistance</li>
+                                <li>Up to 4 print colors
+                                </li>
+                                <li>Any background material color
+                                </li>
+                                <li>Any fold style
+                                </li>
+                                <li>Free sample photo option
+                                </li>
+                                <li>Graphic artwork assistance
+                                </li>
                                 <li>Fast turnaround & delivery</li>
                             </ul>
                             <img className='image-post' alt='post' src='../images/post.png' />
@@ -70,4 +73,4 @@ function Wovenhero() {
     );
 }
 
-export default Wovenhero;
+export default Screenprintedhero;

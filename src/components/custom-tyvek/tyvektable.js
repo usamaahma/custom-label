@@ -32,34 +32,9 @@ const firstcardData = [
     },
     {
         image: '../images/straight.png',
-        title: 'Centre Fold',
-
-    },
-    {
-        image: '../images/straight.png',
         title: 'Loop Fold',
 
     },
-    {
-        image: '../images/straight.png',
-        title: 'End Fold',
-
-    },
-    {
-        image: '../images/straight.png',
-        title: 'Mitre Fold',
-
-    },
-    {
-        image: '../images/straight.png',
-        title: 'Manhatten Fold',
-
-    }, {
-        image: '../images/straight.png',
-        title: 'Book Cover Fold',
-
-    }
-    // Add more cards as needed
 ];
 const cardData = [
     { id: 1, imgSrc: '../images/straight.png', title: '2 x 0.625' },
@@ -68,7 +43,7 @@ const cardData = [
     { id: 4, imgSrc: '../images/straight.png', title: 'Custom' },
 ];
 
-function Satintable() {
+function Tyvektable() {
     return (
         <div className='table-express'>
             <Row className="centered-row-table">
@@ -82,28 +57,29 @@ function Satintable() {
 
                     </Dragger>
                     <div>
-                        <div className="divs-tableexpress">
-                            <Row  >
-                                {firstcardData.map((card, index) => (
-                                    <Col
-                                        xs={24} // Full width on extra small devices
-                                        sm={12} // 2 cards per row on small devices
-                                        md={8}  // 3 cards per row on medium devices
-                                        lg={6}  // 4 cards per row on large devices
-                                        xl={6}  // 4 cards per row on extra large devices
-                                        key={index}
-                                    >
-                                        <Card
-                                            bordered={false}
-                                            className="image-card-express"
-                                            style={{ width: 150 }}
-                                        >
-                                            <img alt={card.title} src={card.image} className="image-card-express" />
-                                            <p>{card.title}</p>
-                                        </Card>
-                                    </Col>
-                                ))}
-                            </Row>
+                    <div className='divs-tableexpress'>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Straight Cut (Flat)</p>
+                            </Card>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Loop Fold</p>
+                            </Card>
                         </div>
                         <div className='divs-tableexpress'>
                             <div className="card-grid">
@@ -113,108 +89,59 @@ function Satintable() {
                                             bordered={false}
                                         >
                                             <img alt={card.title} src={card.imgSrc} className='image-card-express-1' />
-                                            <p>{card.title} <br /> {card.subtitle}</p>
+                                            <p>{card.title} {card.subtitle}</p>
                                         </Card>
                                     </div>
                                 ))}
                             </div>
                         </div>
                         <div className='divs-tableexpress'>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>One Color</p>
+                            </Card>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Two Color</p>
+                            </Card>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Three Color</p>
+                            </Card>
+                            <Card
+                                bordered={false}
+                                style={{
+                                    width: "11rem",
+                                    height: "12rem",
+                                    background: "#FAFAFA",
+                                }}
+                            >
+                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
+                                <p>Four Color</p>
+                            </Card>
+                        </div>
 
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>White Satin</p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Black Satin</p>
-                            </Card>
-                        </div>
-                        <div className='divs-tableexpress'>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>None (Sew-<br />On)</p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Iron-On</p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Peel & Stick</p>
-                            </Card>
-                        </div>
-                        <div className='divs-tableexpress'>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>None (Regular Thread)
-                                </p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Gold Metallic</p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Silver Metallic  </p>
-                            </Card>
-                        </div>
                         <div className='divs-tableexpress'>
                             <Card
                                 bordered={false}
@@ -312,7 +239,7 @@ function Satintable() {
                         {/* Your sticky content goes here */}
                         <div className='sticky-first'><p>Your Instant Quote</p></div>
                         <div className='sticky-blue-1'>
-                            <p className='marg-bot'>Satin Woven Labels
+                            <p className='marg-bot'>Custom Tyvek Labels
                             </p>
                             <div className='sticky-blue-inside'>
                                 <p>Artwork File:</p>
@@ -334,20 +261,8 @@ function Satintable() {
                                 </p>
                             </div>
                         </div>
-                        <div className='sticky-blue'>
-                            <div className='sticky-blue-inside'>
-                                <p>Satin Material Color:</p>
-                                <p>White Satin
-                                </p>
-                            </div>
-                        </div>
-                        <div className='sticky-blue'>
-                            <div className='sticky-blue-inside'>
-                                <p>Backing Options:
-                                </p>
-                                <p>None(Sew-On)</p>
-                            </div>
-                        </div>
+                        
+                        
                         <div className='sticky-blue'>
                             <div className='sticky-blue-inside'>
                                 <p>Versions:
@@ -359,6 +274,14 @@ function Satintable() {
                         <div className='sticky-blue'>
                             <div className='sticky-blue-inside'>
                                 <p>Proof Options:
+                                </p>
+                                <p>Digital Proof Only
+                                </p>
+                            </div>
+                        </div>
+                        <div className='sticky-blue'>
+                            <div className='sticky-blue-inside'>
+                                <p>Print Colors:
                                 </p>
                                 <p>Digital Proof Only
                                 </p>
@@ -409,4 +332,4 @@ function Satintable() {
     );
 }
 
-export default Satintable;
+export default Tyvektable;

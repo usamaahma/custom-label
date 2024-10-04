@@ -68,7 +68,8 @@ const cardData = [
     { id: 4, imgSrc: '../images/straight.png', title: 'Custom' },
 ];
 
-function Satintable() {
+
+function SublimationTable() {
     return (
         <div className='table-express'>
             <Row className="centered-row-table">
@@ -120,31 +121,6 @@ function Satintable() {
                             </div>
                         </div>
                         <div className='divs-tableexpress'>
-
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>White Satin</p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Black Satin</p>
-                            </Card>
-                        </div>
-                        <div className='divs-tableexpress'>
                             <Card
                                 bordered={false}
                                 style={{
@@ -179,42 +155,7 @@ function Satintable() {
                                 <p>Peel & Stick</p>
                             </Card>
                         </div>
-                        <div className='divs-tableexpress'>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>None (Regular Thread)
-                                </p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Gold Metallic</p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Silver Metallic  </p>
-                            </Card>
-                        </div>
+
                         <div className='divs-tableexpress'>
                             <Card
                                 bordered={false}
@@ -312,8 +253,7 @@ function Satintable() {
                         {/* Your sticky content goes here */}
                         <div className='sticky-first'><p>Your Instant Quote</p></div>
                         <div className='sticky-blue-1'>
-                            <p className='marg-bot'>Satin Woven Labels
-                            </p>
+                            <p className='marg-bot'>Custom Sublimation Labels</p>
                             <div className='sticky-blue-inside'>
                                 <p>Artwork File:</p>
                                 <p>No Artwork Uploaded</p>
@@ -333,15 +273,7 @@ function Satintable() {
                                 <p>Straight Cut (Flat)
                                 </p>
                             </div>
-                        </div>
-                        <div className='sticky-blue'>
-                            <div className='sticky-blue-inside'>
-                                <p>Satin Material Color:</p>
-                                <p>White Satin
-                                </p>
-                            </div>
-                        </div>
-                        <div className='sticky-blue'>
+                        </div> <div className='sticky-blue'>
                             <div className='sticky-blue-inside'>
                                 <p>Backing Options:
                                 </p>
@@ -409,4 +341,4 @@ function Satintable() {
     );
 }
 
-export default Satintable;
+export default SublimationTable;
