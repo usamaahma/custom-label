@@ -20,6 +20,7 @@ import Wovenlabelpage from './pages/wovenlabel.js';
  import Satinwovenpage from './pages/satinwovenpage.js';
 import Fancyhangtagspage from './pages/fancyhangtagspage.js';
 import Aboutpage from './pages/aboutpage.js';
+import Tpulabelspage1 from './pages/tpulabelspage.js';
  
 
 const AppRoutes = () => {
@@ -47,6 +48,7 @@ const AppRoutes = () => {
                     <Route path="/satin-woven" element={< Satinwovenpage />} />
                     <Route path="/fancy-hangtags" element={< Fancyhangtagspage />} />
                     <Route path="/about-us" element={< Aboutpage />} />
+                    <Route path="/tpu-labels" element={< Tpulabelspage1 />} />
 
                 </Routes>
                 <Footer1 />

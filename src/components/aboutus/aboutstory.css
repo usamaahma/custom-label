@@ -1,52 +1,139 @@
-.aboutstory-container {
-    display: flex; /* Use flexbox for layout */
-    flex-wrap: wrap; /* Allow wrapping for smaller screens */
-    padding: 20px; /* Add some padding */
-    gap: 20px; /* Space between columns */
-  }
+.aboutstory-main {
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+  flex-direction: column; /* Stack containers vertically */
+  min-height: 100vh; /* Take full viewport height */
+  text-align: center; /* Center text within containers */
+}
+
+.aboutstory-container,
+.aboutstory-container1 {
+  display: flex; /* Use flexbox for layout */
+  flex-wrap: wrap; /* Allow wrapping for smaller screens */
+  padding: 20px; /* Add some padding */
+  gap: 20px; /* Space between columns */
+}
+
+.aboutstory-image,
+.aboutstory-text,
+.aboutstory-image1,
+.aboutstory-text1 {
+  flex: 1; /* Allow both columns to take available space */
+  min-width: 300px; /* Minimum width to prevent too narrow columns */
+}
+
+.aboutstory-image img,
+.aboutstory-image1 img {
+  max-width: 80%; /* Make the image responsive */
+  height: auto; /* Maintain aspect ratio */
+  border-radius: 10px; /* Optional: add rounded corners */
+}
+
+.aboutstory-image,
+.aboutstory-image1 {
+  display: flex; /* Use flexbox for centering */
+  justify-content: center; /* Center the image horizontally */
+  align-items: center; /* Center the image vertically */
+}
+
+.aboutstory-text,
+.aboutstory-text1 {
+  display: flex;
+  flex-direction: column; /* Stack text vertically */
+  justify-content: center; /* Center the text vertically */
+  text-align: left;
+}
+
+.aboutstory-title,
+.aboutstory-title1 {
+  font-size: 2rem; /* Title size */
+  margin-bottom: 1rem; /* Space below title */
+  text-align: left;
+}
+.aboutstory-title1 {
+  margin-left: 3.5rem;
   
+}
+
+.aboutstory-description,
+.aboutstory-description1 {
+  font-size: 1.2rem; /* Description text size */
+  line-height: 1.4; /* Space between lines */
+  width: 90%; /* Adjust width */
+}
+
+.aboutstory-description1 {
+  width: 85%;
+  margin-left: 3.5rem;
+}
+
+@media (max-width: 1024px) {
+  .aboutstory-container,
+  .aboutstory-container1 {
+    flex-direction: column; /* Stack columns on smaller screens */
+    align-items: center; /* Center items */
+  }
+
   .aboutstory-image,
-  .aboutstory-text {
-    flex: 1; /* Allow both columns to take available space */
-    min-width: 300px; /* Minimum width to prevent too narrow columns */
+  .aboutstory-image1 {
+    margin-bottom: 20px; /* Space between image and text */
+    justify-content: center; /* Center image */
   }
-  
-  .aboutstory-image img {
-    max-width: 80%; /* Make the image responsive */
-    height: auto; /* Maintain aspect ratio */
-    border-radius: 10px; /* Optional: add rounded corners */
+
+  .aboutstory-text,
+  .aboutstory-text1 {
+    text-align: center; /* Center text on smaller screens */
+    width: 90%; /* Make text width responsive */
+   
   }
-  
-  .aboutstory-text {
-    display: flex;
-    flex-direction: column; /* Stack text vertically */
-    justify-content: center; /* Center the text vertically */
+
+  .aboutstory-title,
+  .aboutstory-title1 {
+    font-size: 1.8rem; /* Slightly smaller title size for smaller screens */
+    text-align: center;
   }
-  
-  .aboutstory-title {
-    font-size: 2rem; /* Title size */
-    margin-bottom: 1rem; /* Space below title */
-  }
-  
-  .aboutstory-description {
-    font-size: 1.2rem; /* Description text size */
-    line-height: 1.5; /* Space between lines */
-    width:70%
+
+  .aboutstory-description,
+  .aboutstory-description1 {
+    font-size: 1rem; /* Slightly smaller description size */
+    width: 100%;
   }
   .aboutstory-description1 {
-    font-size: 1.2rem; /* Description text size */
-    line-height: 1.5; /* Space between lines */
-    width:90%
+    width: 95%;
+     
   }
-  
-  @media (max-width: 768px) {
-    .aboutstory-container {
-      flex-direction: column; /* Stack columns on smaller screens */
-      align-items: center; /* Center items */
-    }
-  
-    .aboutstory-image {
-      margin-bottom: 20px; /* Add space between image and text when stacked */
-    }
+}
+
+@media (max-width: 768px) {
+  /* Additional styles for screens smaller than 768px */
+  .aboutstory-image,
+  .aboutstory-image1 {
+    max-width: 90%; /* Adjust image width */
   }
-  
+  .aboutstory-description1 {
+    width: 90%;
+     
+     
+  }
+}
+@media (max-width: 425px) {
+  .aboutstory-description1 {
+    width: 75%;
+     
+  } 
+  .aboutstory-title1 {
+    width: 75%;
+
+   }
+}
+@media (max-width: 375px) {
+  .aboutstory-description1 {
+    width: 70%;
+     
+  } 
+  .aboutstory-title1 {
+    width: 70%;
+
+   }
+}

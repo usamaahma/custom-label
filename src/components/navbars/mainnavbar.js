@@ -140,7 +140,7 @@ const Mainnavbar = () => {
                 Custom Tyvek Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-tpu"
+                as={Link} to="/tpu-labels"
                 className="nav-dropdown-item"
               >
                 Custom TPU Labels
