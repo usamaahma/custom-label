@@ -26,6 +26,9 @@ import Customcottonpage from './pages/customcottonpage.js';
 import Customsublimationpage from './pages/customsublimationpage.js';
 import Customtyvekpage from './pages/customtyvekpage.js';
 import Tpulabelspage1 from './pages/tpulabelspage.js';
+import Faq1 from './components/faq.js';
+import Customheatpage from './pages/customheatpage.js';
+import Privacypolicy1 from './components/privacypolicy.js';
  
 
 const AppRoutes = () => {
@@ -59,6 +62,9 @@ const AppRoutes = () => {
                     <Route path="/custom-sublimation-label" element={< Customsublimationpage />} />
                     <Route path="/custom-tyvek-label" element={< Customtyvekpage />} />
                     <Route path="/tpu-labels" element={< Tpulabelspage1 />} />
+                    <Route path="/faqs" element={< Faq1 />} />
+                    <Route path="/privacy-policy" element={< Privacypolicy1 />} />
+                    <Route path="/custom-heat-labels" element={< Customheatpage />} />
                 </Routes>
                 <Footer1 />
             </>

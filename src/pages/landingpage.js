@@ -9,6 +9,7 @@ import Offers1 from '../components/offers';
 import Formcustom1 from '../components/formcustom';
 import Question from '../components/question';
 import Featureproduct from '../components/featureproduct';
+import Faq1 from '../components/faq';
  
 
 
@@ -25,6 +26,7 @@ function Landingpage() {
       <Offers1 />
       <Formcustom1 />
       <Question/>
+      <Faq1/>
     </div>
   )
 }

@@ -17,7 +17,7 @@
   flex: 1; /* Allow columns to take equal width */
   min-width: 240px; /* Minimum width for responsiveness */
   margin: 10px; /* Margin for spacing */
-  text-align: center; /* Center-align text within columns */
+  text-align: left; /* Center-align text within columns */
   color: white; /* Change text color to white */
 }
 
@@ -66,7 +66,8 @@
 
 .visaimg {
   width: 20rem;
-  margin: 5px 0; /* Add margin for spacing */
+   
+  
 }
 
 .highimg {
@@ -87,25 +88,95 @@
   margin: 10px 0; /* Spacing above and below the line */
 }
 
-/* Responsive adjustments */
+.clothing-labels-main {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;           /* Remove padding */
+}
+
+.cl-label {
+  margin: 5px 0;       /* Optional: Add spacing between items */
+}
+
+.clothing-labels-main a {
+  text-decoration: none; /* Remove underline */
+  color: white;         /* Set text color to white */
+  transition: text-decoration 0.2s ease; /* Smooth transition for underline */
+}
+
+.clothing-labels-main a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+.hangtag-main {
+  list-style-type: none; /* Remove bullet points */
+  padding: 0;           /* Remove padding */
+}
+
+.hang {
+  margin: 5px 0;       /* Optional: Add spacing between items */
+}
+
+.hangtag-main a {
+  text-decoration: none; /* Remove underline */
+  color: white;         /* Set text color to white */
+  transition: text-decoration 0.2s ease; /* Smooth transition for underline */
+}
+
+.hangtag-main a:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+.contact-link {
+  text-decoration: none; /* Remove underline */
+  color: white;         /* Set text color to white */
+  transition: text-decoration 0.2s ease; /* Smooth transition for underline */
+}
+
+.contact-link:hover {
+  text-decoration: underline; /* Add underline on hover */
+}
+.email-link {
+  color: rgb(252, 252, 253);
+  text-decoration: underline;
+}
 /* Responsive adjustments */
 @media (max-width: 1204px) {
   .footer-container {
     justify-content: center; /* Center columns on smaller screens */
   }
 }
+@media (max-width: 1206px) {
+  .visaimg {
+    width: 16.5rem;
+    display: flex;
+  justify-content: flex-start !important;
+  }
+  .footer-image{
+    display: flex;
+    justify-content: left !important;
+    align-items: flex-start !important;
+  }
 
+}
 @media (max-width: 1024px) {
   .footer-input {
     width:   17rem; /* Decrease the width */
     padding: 6px; /* Adjust padding for a smaller input */
   }
+  .visaimg {
+    display: flex;
+    justify-content: flex-start !important; /* Ensures left alignment on screens up to 1024px */
 }
-
-@media (max-width: 768px) {
-  .footer-container {
-    flex-direction: column; /* Stack columns vertically on small screens */
-    align-items: center; /* Center-align all columns */
-  }
+.footer-image{
+  display: flex;
+  justify-content: left !important;
+  align-items: flex-start !important;
+}
+}
+@media (max-width: 680px) {
+  .visaimg {
+    width: 17rem;
+}
+     
+   
+   
 }
 

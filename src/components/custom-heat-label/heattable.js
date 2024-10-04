@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from "react";
 import { Button, Card, Col, Row, Upload, message } from 'antd';
 import "../expressclothing/tablescart.css"
 import LastTable from '../expressclothing/lasttable';
@@ -23,53 +23,25 @@ const props = {
         console.log('Dropped files', e.dataTransfer.files);
     },
 };
-const firstcardData = [
-    {
-        image: '../images/straight.png',
-        title: 'Straight Cut (Flat)',
-
-    },
-    {
-        image: '../images/straight.png',
-        title: 'Centre Fold',
-
-    },
-    {
-        image: '../images/straight.png',
-        title: 'Loop Fold',
-
-    },
-    {
-        image: '../images/straight.png',
-        title: 'End Fold',
-
-    },
-    {
-        image: '../images/straight.png',
-        title: 'Mitre Fold',
-
-    },
-    {
-        image: '../images/straight.png',
-        title: 'Manhatten Fold',
-
-    }, {
-        image: '../images/straight.png',
-        title: 'Book Cover Fold',
-
-    }
-    // Add more cards as needed
-];
 const cardData = [
-    { id: 1, imgSrc: '../images/straight.png', title: '1 x 2.5' },
-    { id: 2, imgSrc: '../images/straight.png', title: '1.25 x 3' },
-    { id: 3, imgSrc: '../images/straight.png', title: '1.5 x 3.5' },
-    { id: 4, imgSrc: '../images/straight.png', title: 'Custom' },
-
+    { id: 1, imgSrc: '../images/straight.png', title: '2 x 1' },
+    { id: 2, imgSrc: '../images/straight.png', title: '3 x 1.5' },
+    { id: 3, imgSrc: '../images/straight.png', title: 'Custom' },
 ];
 
 
-function Woventable() {
+function Heattable() {
+    const [slider1Value, setSlider1Value] = useState(0);
+    const [slider2Value, setSlider2Value] = useState(0);
+
+    // Handler functions for the sliders
+    const handleSlider1Change = (e) => {
+        setSlider1Value(e.target.value);
+    };
+
+    const handleSlider2Change = (e) => {
+        setSlider2Value(e.target.value);
+    };
     return (
         <div className='table-express'>
             <Row className="centered-row-table">
@@ -83,29 +55,7 @@ function Woventable() {
 
                     </Dragger>
                     <div>
-                        <div className="divs-tableexpress">
-                            <Row className='row-small-screens'>
-                                {firstcardData.map((card, index) => (
-                                    <Col
-                                        xs={24} // Full width on extra small devices
-                                        sm={12} // 2 cards per row on small devices
-                                        md={8}  // 3 cards per row on medium devices
-                                        lg={6}  // 4 cards per row on large devices
-                                        xl={6}  // 4 cards per row on extra large devices
-                                        key={index}
-                                    >
-                                        <Card
-                                            bordered={false}
-                                            className="image-card-express"
-                                            style={{ width: 150 }}
-                                        >
-                                            <img alt={card.title} src={card.image} className="image-card-express" />
-                                            <p>{card.title}</p>
-                                        </Card>
-                                    </Col>
-                                ))}
-                            </Row>
-                        </div>
+
                         <div className='divs-tableexpress'>
                             <div className="card-grid">
                                 {cardData.map((card) => (
@@ -121,97 +71,75 @@ function Woventable() {
                             </div>
                         </div>
                         <div className='divs-tableexpress'>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Straight Cut <br />(Flat)</p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Straight Cut <br />(Flat)</p>
-                            </Card>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Straight Cut <br />(Flat)</p>
-                            </Card>
+                            <input
+                                id="slider1"
+                                type="range"
+                                min="0"
+                                max="5"
+                                step="0.125"
+                                value={slider1Value}
+                                onChange={handleSlider1Change}
+                                className="slider"
+                            />
+                            <label htmlFor="slider2">{slider1Value}</label>
+                        </div>
+                        <div className='divs-tableexpress'>
+                            <input
+                                id="slider2"
+                                type="range"
+                                min="0"
+                                max="5"
+                                step="0.125"
+                                value={slider2Value}
+                                onChange={handleSlider2Change}
+                                className="slider"
+                            />
+                            <label htmlFor="slider2">  {slider2Value}</label>
                         </div>
                         <div className='divs-tableexpress'>
                             <Card
                                 bordered={false}
                                 style={{
-                                    width: "11rem",
+                                    width: "10rem",
                                     height: "12rem",
                                     background: "#FAFAFA",
                                 }}
                             >
                                 <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Straight Cut <br />(Flat)</p>
+                                <p>One Color</p>
                             </Card>
                             <Card
                                 bordered={false}
                                 style={{
-                                    width: "11rem",
+                                    width: "10rem",
                                     height: "12rem",
                                     background: "#FAFAFA",
                                 }}
                             >
                                 <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Straight Cut <br />(Flat)</p>
+                                <p>Two Color</p>
                             </Card>
                             <Card
                                 bordered={false}
                                 style={{
-                                    width: "11rem",
+                                    width: "10rem",
                                     height: "12rem",
                                     background: "#FAFAFA",
                                 }}
                             >
                                 <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Straight Cut <br />(Flat)</p>
-                            </Card>
-                        </div>
-                        <div className='divs-tableexpress'>
-                            <Card
-                                bordered={false}
-                                style={{
-                                    width: "11rem",
-                                    height: "12rem",
-                                    background: "#FAFAFA",
-                                }}
-                            >
-                                <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Straight Cut <br />(Flat)</p>
+                                <p>Three Color</p>
                             </Card>
                             <Card
                                 bordered={false}
                                 style={{
-                                    width: "11rem",
+                                    width: "10rem",
                                     height: "12rem",
                                     background: "#FAFAFA",
                                 }}
                             >
                                 <img alt='abc' src='../images/straight.png' className='image-card-express' />
-                                <p>Straight Cut <br />(Flat)</p>
+                                <p>Four Color</p>
                             </Card>
                         </div>
                         <div className='divs-tableexpress'>
@@ -250,6 +178,9 @@ function Woventable() {
                                 <img alt='abc' src='../images/straight.png' className='image-card-express' />
                                 <p>Straight Cut <br />(Flat)</p>
                             </Card>
+
+                        </div>
+                        <div className='divs-tableexpress'>
                             <Card
                                 bordered={false}
                                 style={{
@@ -261,6 +192,7 @@ function Woventable() {
                                 <img alt='abc' src='../images/straight.png' className='image-card-express' />
                                 <p>Straight Cut <br />(Flat)</p>
                             </Card>
+
                         </div>
                         <div className='divs-tableexpress'>
                             <textarea
@@ -285,7 +217,7 @@ function Woventable() {
                         {/* Your sticky content goes here */}
                         <div className='sticky-first'><p>Your Instant Quote</p></div>
                         <div className='sticky-blue-1'>
-                            <p className='marg-bot'>Custom Woven Labels</p>
+                            <p className='marg-bot'>Custom Heat Transfer Labels</p>
                             <div className='sticky-blue-inside'>
                                 <p>Artwork File:</p>
                                 <p>No Artwork Uploaded</p>
@@ -296,7 +228,7 @@ function Woventable() {
                                 <p>Size:
                                 </p>
                                 <p>
-                                    2" / 0.625" (50.80mm x 15.88mm)</p>
+                                    0.25" / 0.25" (6.35mm x 6.35mm)</p>
                             </div>
                         </div>
                         <div className='sticky-blue'>
@@ -307,18 +239,13 @@ function Woventable() {
                             </div>
                         </div> <div className='sticky-blue'>
                             <div className='sticky-blue-inside'>
-                                <p>Backing Options:
+                                <p>Number of Colors:
                                 </p>
-                                <p>None(Sew-On)</p>
-                            </div>
-                        </div> <div className='sticky-blue'>
-                            <div className='sticky-blue-inside'>
-                                <p>Metallic Thread:
-                                </p>
-                                <p>None (Regular Thread)
+                                <p>One Color
                                 </p>
                             </div>
                         </div>
+
                         <div className='sticky-blue'>
                             <div className='sticky-blue-inside'>
                                 <p>Versions:
@@ -380,4 +307,4 @@ function Woventable() {
     );
 }
 
-export default Woventable;
+export default Heattable;

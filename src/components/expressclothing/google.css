@@ -21,6 +21,11 @@
     border-radius: 0%;
     padding: 1.3rem;
 }
+.rate-button:hover{
+    color: white !important;
+    background-color: black !important;
+
+}
 
 .cards-reviewing {
     display: flex;

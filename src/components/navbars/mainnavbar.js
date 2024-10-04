@@ -53,7 +53,7 @@ const Mainnavbar = () => {
         <div className="changenavbar-nav ml-auto">
           <Link to="/login" className="changenavbar-link">
             <div>
-              <FaUserCircle />
+            <FaUserCircle style={{ color: 'black' }} />
             </div>
           </Link>
           <Link className="changenavbar-link">
@@ -146,7 +146,7 @@ const Mainnavbar = () => {
                 Custom TPU Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                href="#custom-heat-transfer"
+                as={Link} to="/custom-heat-labels"
                 className="nav-dropdown-item"
               >
                 Custom Heat Transfer Labels
