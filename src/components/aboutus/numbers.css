@@ -1,0 +1,99 @@
+.projects2 {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+    margin-bottom: 2rem;
+}
+
+.section-title1 {
+    text-align: center; 
+    color: black;
+}
+
+.row-number {
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    margin: 0 -15px;
+}
+
+.col-md1 {
+    flex: 1 1 33%;
+    margin: 15px;
+    box-sizing: border-box;
+}
+
+.stat-card {
+    position: relative; /* Positioning context for the card */
+    background-color: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin-top: 1rem;
+    width: 20rem;
+    overflow: hidden; /* Hide overflow for animation */
+}
+
+.stat-card:hover {
+    transform: translateY(-5px) scale(1.05); /* Slight lift and scale on hover */
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.number-image {
+    width: 6rem; /* Adjusted size for images */
+}
+
+.stat-number {
+    font-size: 1.3rem;
+    margin: 0;
+    color: #0a0a0a;
+    animation: pulse 1.5s infinite; /* Optional: keep or remove */
+}
+
+.stat-label {
+    font-size: 1.25rem;
+    margin: 0;
+    color: #080808;
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Responsive styling */
+@media (max-width: 768px) {
+    .row-number {
+        flex-direction: column;
+        align-items: center;
+        margin: 0;
+    }
+
+    .col-md1 {
+        margin-bottom: 20px;
+        max-width: 90% !important;
+    }
+}
+
+@media (max-width: 425px) {
+    .row-number {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .col-md1 {
+        max-width: 90% !important;
+        margin-bottom: 20px;
+    }
+}

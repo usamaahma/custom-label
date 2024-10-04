@@ -1,0 +1,88 @@
+.product-card-container {
+    max-width: 95%; /* Ensures the container is aligned */
+    margin: 0 auto; /* Centers the container */
+    padding: 20px;
+    background-color: rgb(25,39,51);
+}
+
+.product-main-heading {
+    text-align: center; /* Aligns the heading to the left */
+    margin-bottom: 20px; /* Adds space between heading and grid */
+    margin-top: 2rem;
+    font-size: 3rem;
+    color: #fffbfb; /* Adjust color as needed */
+}
+
+.product-card-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 20px;
+    padding: 20px;
+    justify-content: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.product-card {
+    width: 100%;
+    max-width: 160px; /* Adjust this value to change the width */
+    max-height: 190px; /* Adjust this value to change the height */
+    padding: 10px; /* Reduce padding */
+    border-radius: 1.2rem;
+    text-align: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    border: 2px solid #aeb5bd; /* Add border */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+    text-decoration: none; /* Remove underline */
+    overflow: hidden; /* Hide overflow */
+}
+
+
+.product-card:hover {
+    background-color: #133749;
+    color: white;
+    border-color: white; /* Change border color on hover */
+}
+
+.product-card-image {
+    max-width: 100%;
+    height: auto;
+    margin-bottom: 10px;
+}
+
+.product-card-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: rgb(253, 252, 252);
+}
+
+
+
+@media (max-width: 1200px) {
+    .product-card-grid {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+@media (max-width: 900px) {
+    .product-card-grid {
+        grid-template-columns: repeat(4, 1fr);
+        justify-content: center; /* Center the grid items */
+        align-items: center; /* Center the items vertically if needed */
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px) {
+    .product-card-grid {
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center; /* Center the grid items */
+        align-items: center; /* Center the items vertically if needed */
+    }
+}
+@media (max-width: 425px) {
+    .product-card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+}

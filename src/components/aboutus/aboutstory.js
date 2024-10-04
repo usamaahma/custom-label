@@ -3,7 +3,7 @@ import "./aboutstory.css";
 
 function Aboutstory() {
   return (
-    <div>
+    <div className="aboutstory-main">
       <div className="aboutstory-container">
         <div className="aboutstory-image">
           <img src="../images/about2.webp" alt="Descriptive Alt Text" />
@@ -19,9 +19,9 @@ function Aboutstory() {
           </p>
         </div>
       </div>
-      <div className="aboutstory-container">
-        <div className="aboutstory-text">
-          <h2 className="aboutstory-title">Our Story</h2>
+      <div className="aboutstory-container1">
+        <div className="aboutstory-text1">
+          <h2 className="aboutstory-title1">Our Story</h2>
           <p className="aboutstory-description1">
             In 2004, a group of passionate entrepreneurs identified a shift in
             the textile and fashion industry: customers were seeking unique,
@@ -36,7 +36,7 @@ function Aboutstory() {
             their audience.
           </p>
         </div>
-        <div className="aboutstory-image">
+        <div className="aboutstory-image1">
           <img src="../images/ceo.webp" alt="Descriptive Alt Text" />
         </div>
       </div>
