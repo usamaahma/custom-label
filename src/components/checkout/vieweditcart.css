@@ -88,6 +88,10 @@
 .subtotal-value {
   font-weight: bold;
 }
+.main-view-cart{
+  margin-bottom: 3rem;
+  margin-top: 3rem;
+}
 @media (max-width: 768px) {
   .main-view-cart {
     display: grid !important;
