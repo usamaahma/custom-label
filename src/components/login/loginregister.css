@@ -57,7 +57,7 @@
  
 .login-button {
     padding: 10px 20px;
-    background-color: #070707;
+    background-color: #070707 !important;
     color: white;
     border: 2px solid transparent;
     border-radius: 5px;
@@ -71,9 +71,9 @@
 }
 
 .login-button:hover {
-    background-color: #fcfcfc;
-    color: #070707;
-    border-color: #070707;
+    background-color: #fcfcfc !important;
+    color: #070707 !important;
+    border-color: #070707 !important;
      
 }
 :where(.css-dev-only-do-not-override-14qglws).ant-btn-primary.ant-btn-solid{

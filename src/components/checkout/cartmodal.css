@@ -40,8 +40,8 @@
     font-weight: bold;
 }
 .btn-cart:hover{
-    background-color: #fcfcfc;
-    color: #070707;
+    background-color: #fcfcfc !important;
+    color: #070707 !important;
     border-color: #070707 !important;
 }
 .price-txt{
