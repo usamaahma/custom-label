@@ -14,17 +14,19 @@
 
 .rate-button {
     margin-top: 2rem;
-    background-color: #007AB7 !important;
+    background-color: black !important;
     color: white;
     font-size: medium;
     font-weight: 700;
     border-radius: 0%;
     padding: 1.3rem;
+    border: solid 0.1px white !important;
 }
-.rate-button:hover{
-    color: white !important;
-    background-color: black !important;
 
+.rate-button:hover {
+    color: black !important;
+    background-color: white !important;
+    border: solid 0.1px black !important;
 }
 
 .cards-reviewing {
@@ -51,9 +53,10 @@
     font-size: large;
     text-align: left;
 }
+
 @media only screen and (max-width: 950px) {
     .cards-reviewing {
         display: flex;
-       flex-direction: column;
+        flex-direction: column;
     }
 }
