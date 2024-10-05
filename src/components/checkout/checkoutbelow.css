@@ -93,8 +93,8 @@
 
 .place-button {
   padding: 10px 20px;
-  background-color: #070707;
-  color: white;
+  background-color: #070707 !important;
+  color: white !important;
   border: 2px solid transparent;
   border-radius: 5px;
   width: 100%;
@@ -105,9 +105,9 @@
 }
 
 .place-button:hover {
-  background-color: #fcfcfc;
-  color: #070707;
-  border-color: #070707;
+  background-color: #fcfcfc !important;
+  color: #070707 !important;
+  border-color: #070707 !important;
 }
 
 .summary-main {
