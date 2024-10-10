@@ -1,0 +1,73 @@
+.dash-p {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.op {
+  margin-left: 6rem;
+}
+.dash-p-manage {
+  font-weight: 600;
+  color: #007cc3;
+}
+.dash-first-card {
+  margin-top: 1rem;
+  display: flex;
+  justify-content: space-around;
+}
+.dash-gap-between {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+.ant-card-head-title {
+  font-size: larger !important;
+  font-weight: 700;
+}
+.card-dash {
+  width: 28rem;
+  height: 15rem;
+  border: solid rgb(190, 186, 186) 0.1px;
+  border-radius: 0%;
+}
+.submit-button-news {
+  color: white;
+  background-color: black;
+  width: 10rem;
+  margin-top: 2rem;
+}
+.submit-button-news:hover {
+  background-color: white;
+  color: black;
+  border: solid 0.1px black;
+}
+
+@media (max-width: 1269px) {
+  .card-dash {
+    width: 25rem;
+    height: auto;
+  }
+  .dash-p {
+    font-size: 0.7rem;
+    font-weight: bold;
+  }
+
+  .card-dash {
+    margin-top: 1rem;
+  }
+}
+@media (max-width: 768px) {
+  .dash-first-card {
+    margin-top: 1rem;
+    display: block;
+    justify-content: center !important;
+    margin: 0 auto;
+  }
+  .dash-p {
+    width: 10rem !important;
+    font-size: small;
+  }
+  .card-dash {
+    width: 20rem;
+    height: auto;
+  }
+}

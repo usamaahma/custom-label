@@ -46,25 +46,25 @@ const cardData3 = [
   { id: 2, imgSrc: "../images/taghole.png", title: "1/8' hole" },
 ];
 const cardData4 = [
-    { id: 1, imgSrc: "../images/holepunchposition.png", title: "Top Center" },
-    { id: 2, imgSrc: "../images/holepunchposition.png", title: "Top Center" },
-  ];
-  const cardData5 = [
-    { id: 1, imgSrc: "../images/stringcolor.png", title: "white" },
-    { id: 2, imgSrc: "../images/stringcolor.png", title: "white" },
-  ];
-  const cardData6 = [
-    { id: 1, imgSrc: "../images/safteypincolor.jpg", title: "Silver" },
-    { id: 2, imgSrc: "../images/safteypincolor.jpg", title: "Silver" },
-  ];
-  const cardData7 = [
-    { id: 1, imgSrc: "../images/proof.png", title: "Digital Proof Only" },
-    { id: 2, imgSrc: "../images/proof.png", title: "Digital Proof Only" },
-  ];
-  const cardData8 = [
-    { id: 1, imgSrc: "../images/turnaround.png", title: "Standard: 12 Days" },
-    { id: 2, imgSrc: "../images/turnaround.png", title: "Standard: 12 Days" },
-  ];
+  { id: 1, imgSrc: "../images/holepunchposition.png", title: "Top Center" },
+  { id: 2, imgSrc: "../images/holepunchposition.png", title: "Top Center" },
+];
+const cardData5 = [
+  { id: 1, imgSrc: "../images/stringcolor.png", title: "white" },
+  { id: 2, imgSrc: "../images/stringcolor.png", title: "white" },
+];
+const cardData6 = [
+  { id: 1, imgSrc: "../images/safteypincolor.jpg", title: "Silver" },
+  { id: 2, imgSrc: "../images/safteypincolor.jpg", title: "Silver" },
+];
+const cardData7 = [
+  { id: 1, imgSrc: "../images/proof.png", title: "Digital Proof Only" },
+  { id: 2, imgSrc: "../images/proof.png", title: "Digital Proof Only" },
+];
+const cardData8 = [
+  { id: 1, imgSrc: "../images/turnaround.png", title: "Standard: 12 Days" },
+  { id: 2, imgSrc: "../images/turnaround.png", title: "Standard: 12 Days" },
+];
 
 function Simpletable1() {
   return (
@@ -344,7 +344,7 @@ function Simpletable1() {
         </Col>
 
         {/* Right Column with Sticky Div */}
-        
+
         <Col xs={24} md={8} className="simpletable-right-column">
           <div className="simpletable-sticky-div">
             <div className="simpletable-sticky-first">

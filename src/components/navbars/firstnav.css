@@ -26,10 +26,9 @@
 
 .firstnavbar-link {
   margin-left: 5px; /* Gap between links */
-   
 }
-.cart-strong{
-  color: rgb(82,83,84);
+.cart-strong {
+  color: rgb(82, 83, 84);
 }
 .firstnavbar-center {
   margin-left: 5px;
@@ -47,17 +46,16 @@
   font-weight: lighter;
   color: aliceblue;
 }
-.button-show{
+.button-show {
   display: none;
 }
 .mainnav-quote-button {
-  margin-left: 20px; 
+  margin-left: 20px;
   background-color: rgb(3, 28, 29);
   color: white; /* Text color */
   border: none; /* Remove border */
   transition: background-color 0.3s; /* Smooth transition */
   font-weight: bold;
-   
 }
 
 .mainnav-quote-button:hover {
@@ -71,17 +69,16 @@
   width: 8rem;
 }
 @media (max-width: 768px) {
-  .button-show{
+  .button-show {
     display: flex;
     justify-content: center;
   }
   .firstnavbar-logo {
     display: none; /* Hide the logo on smaller screens */
   }
-.firstnavbar-brand{
-  display: none; /* Hide login/register and icons on smaller screens */
-
-}
+  .firstnavbar-brand {
+    display: none; /* Hide login/register and icons on smaller screens */
+  }
   .firstnavbar-link {
     display: none; /* Hide login/register and icons on smaller screens */
   }
@@ -105,5 +102,3 @@
     margin-right: 10px;
   }
 }
-
-

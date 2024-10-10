@@ -53,7 +53,7 @@ const Mainnavbar = () => {
         <div className="changenavbar-nav ml-auto">
           <Link to="/login" className="changenavbar-link">
             <div>
-            <FaUserCircle style={{ color: 'black' }} />
+              <FaUserCircle style={{ color: "black" }} />
             </div>
           </Link>
           <Link className="changenavbar-link">
@@ -88,65 +88,79 @@ const Mainnavbar = () => {
               >
                 All Clothing Labels
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/express-clothing" className="nav-dropdown-item">
+              <NavDropdown.Item
+                as={Link}
+                to="/express-clothing"
+                className="nav-dropdown-item"
+              >
                 Express Clothing Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/customwoven"
+                as={Link}
+                to="/customwoven"
                 className="nav-dropdown-item"
               >
                 Custom Woven Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/woven-text-label"
+                as={Link}
+                to="/woven-text-label"
                 className="nav-dropdown-item"
               >
                 Woven Text Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/satin-woven"
+                as={Link}
+                to="/satin-woven"
                 className="nav-dropdown-item"
               >
                 Custom Satin Woven Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/custom-care-label"
+                as={Link}
+                to="/custom-care-label"
                 className="nav-dropdown-item"
               >
                 Custom Care Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/screen-printed-label"
+                as={Link}
+                to="/screen-printed-label"
                 className="nav-dropdown-item"
               >
                 Screen Printed Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/custom-cotton-label"
+                as={Link}
+                to="/custom-cotton-label"
                 className="nav-dropdown-item"
               >
                 Custom Cotton Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/custom-sublimation-label"
+                as={Link}
+                to="/custom-sublimation-label"
                 className="nav-dropdown-item"
               >
                 Custom Sublimation Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/custom-tyvek-label"
+                as={Link}
+                to="/custom-tyvek-label"
                 className="nav-dropdown-item"
               >
                 Custom Tyvek Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/tpu-labels"
+                as={Link}
+                to="/tpu-labels"
                 className="nav-dropdown-item"
               >
                 Custom TPU Labels
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/custom-heat-labels"
+                as={Link}
+                to="/custom-heat-labels"
                 className="nav-dropdown-item"
               >
                 Custom Heat Transfer Labels
@@ -156,14 +170,23 @@ const Mainnavbar = () => {
               title={<span className="mainnav-link">HANGTAGS</span>}
               id="clothing-dropdown"
             >
-              <NavDropdown.Item as={Link} to="/custom-hangtags" className="nav-dropdown-item">
+              <NavDropdown.Item
+                as={Link}
+                to="/custom-hangtags"
+                className="nav-dropdown-item"
+              >
                 All Hang Tags
               </NavDropdown.Item>
-              <NavDropdown.Item as={Link} to="/simple-hangtags" className="nav-dropdown-item">
+              <NavDropdown.Item
+                as={Link}
+                to="/simple-hangtags"
+                className="nav-dropdown-item"
+              >
                 Simple Hang Tags
               </NavDropdown.Item>
               <NavDropdown.Item
-                as={Link} to="/fancy-hangtags"
+                as={Link}
+                to="/fancy-hangtags"
                 className="nav-dropdown-item"
               >
                 Fancy Hang Tags

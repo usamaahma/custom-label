@@ -1,156 +1,155 @@
 .fancyhero-centered-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    margin-top: 4rem;
-    padding: 0 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin-top: 4rem;
+  padding: 0 1rem;
 }
 
 .fancyhero-centered-row {
-    width: 100%;
-    display: flex;
-    flex-direction: row; /* Ensure rows stay aligned */
-    justify-content: center; /* Center the row contents */
+  width: 100%;
+  display: flex;
+  flex-direction: row; /* Ensure rows stay aligned */
+  justify-content: center; /* Center the row contents */
 }
 
 .fancyhero-text-column {
-    text-align: left;
+  text-align: left;
 }
 
 .img-fluid {
-    width: 100%;
-    height: auto;
+  width: 100%;
+  height: auto;
 }
 
 .fancyhero-expresstext-clothing {
-    font-size: 2rem;
-    font-weight: 700;
+  font-size: 2rem;
+  font-weight: 700;
 }
 
 .fancyhero-largetext-express {
-    font-size: 1.1rem;
-    margin-top: 1rem;
+  font-size: 1.1rem;
+  margin-top: 1rem;
 }
 
 .fancyhero-image-post {
-    width: 10rem;
+  width: 10rem;
 }
 
 .fancyhero-list-express {
-    font-size: large;
-    
+  font-size: large;
 }
 .fancyhero-list-express li {
-    margin-bottom: 10px;  
+  margin-bottom: 10px;
 }
 
 .fancyhero-hero-firstdiv {
-    display: flex;
-    flex-direction: row;  
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-top: 1rem;
 }
 
 .fancyhero-second-firstdiv {
-    border: solid 2px #436886;
-    padding: 1rem;
-    width: 60%;
-    max-width: 400px;
-    border-radius: 2rem;
+  border: solid 2px #436886;
+  padding: 1rem;
+  width: 60%;
+  max-width: 400px;
+  border-radius: 2rem;
 }
 
 .fancyhero-order-list {
-    list-style-type: decimal;
-    width: 90%;
-    font-size: 1rem;
+  list-style-type: decimal;
+  width: 90%;
+  font-size: 1rem;
 }
 
 .fancyhero-our-productexpress {
-    font-size: 1.5rem;
-    font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .fancyhero-main-image-container {
-    text-align: center;
-    margin-bottom: 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
 }
 
 .fancyhero-main-image {
-    max-width: 100%;
-    height: auto;
+  max-width: 100%;
+  height: auto;
 }
 
 .fancyhero-main-image:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .fancyhero-thumbnail-carousel {
-    display: flex;
-    overflow-x: auto;
-    padding: 1rem 0;
+  display: flex;
+  overflow-x: auto;
+  padding: 1rem 0;
 }
 
 .fancyhero-thumbnail-image {
-    width: 80px;
-    height: 80px;
-    margin-right: 10px;
-    cursor: pointer;
-    transition: transform 0.2s;
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: transform 0.2s;
 }
 
 .fancyhero-thumbnail-image:hover {
-    transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 @media (max-width: 1024px) {
-    .fancyhero-hero-firstdiv {
-        flex-direction: column;
-        align-items: center; /* Center items vertically */
-        text-align: center;
-    }
+  .fancyhero-hero-firstdiv {
+    flex-direction: column;
+    align-items: center; /* Center items vertically */
+    text-align: center;
+  }
 
-    .fancyhero-second-firstdiv {
-        width: auto;
-        margin-top: 1rem; /* Add some margin for spacing */
-    }
+  .fancyhero-second-firstdiv {
+    width: auto;
+    margin-top: 1rem; /* Add some margin for spacing */
+  }
 }
 
 @media (max-width: 768px) {
-    .fancyhero-centered-row {
-        flex-wrap: wrap;
-    }
+  .fancyhero-centered-row {
+    flex-wrap: wrap;
+  }
 
-    .fancyhero-text-column,
-    .fancyhero-image-column {
-        width: 100%;
-        margin-bottom: 2rem;
-        text-align: center; /* Center align text in columns */
-    }
+  .fancyhero-text-column,
+  .fancyhero-image-column {
+    width: 100%;
+    margin-bottom: 2rem;
+    text-align: center; /* Center align text in columns */
+  }
 
-    .fancyhero-image-post {
-        width: 100%;
-        height: auto;
-        margin: 0 auto;
-    }
+  .fancyhero-image-post {
+    width: 100%;
+    height: auto;
+    margin: 0 auto;
+  }
 
-    .fancyhero-list-express,
-    .fancyhero-order-list {
-        padding-left: 15px;
-    }
+  .fancyhero-list-express,
+  .fancyhero-order-list {
+    padding-left: 15px;
+  }
 
-    .fancyhero-largetext-express {
-        font-size: 0.9rem;
-    }
+  .fancyhero-largetext-express {
+    font-size: 0.9rem;
+  }
 
-    .fancyhero-our-productexpress {
-        font-size: 1rem;
-    }
+  .fancyhero-our-productexpress {
+    font-size: 1rem;
+  }
 }
 
 @media (max-width: 425px) {
-    .fancyhero-second-firstdiv {
-        width: auto;
-    }
+  .fancyhero-second-firstdiv {
+    width: auto;
+  }
 }

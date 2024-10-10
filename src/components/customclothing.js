@@ -13,7 +13,7 @@ function Customclothing() {
     { src: "../../images/girl.png", title: "Heat Transfer Labels" },
     { src: "../../images/girl.png", title: "Cotton Labels" },
     { src: "../../images/girl.png", title: "Custom Woven Labels" },
-  ]
+  ];
 
   const [slidesToShow, setSlidesToShow] = useState(3);
 
@@ -41,7 +41,7 @@ function Customclothing() {
       <Button variant="primary" className="customclothing-button1">
         Custom Clothing Labels
       </Button>
-      <Carousel dots={false} slidesToShow={slidesToShow} arrows={true} >
+      <Carousel dots={false} slidesToShow={slidesToShow} arrows={true}>
         {images.map((image, index) => (
           <div key={index} className="carousel-slide">
             <div className="image-container">
@@ -51,7 +51,9 @@ function Customclothing() {
                 className="carousel-image"
               />
               <h3 className="carousel-title-1">
-                {image.title === "express clothing label" && <FaFire style={{ color: "red", marginRight: "8px" }} />}
+                {image.title === "express clothing label" && (
+                  <FaFire style={{ color: "red", marginRight: "8px" }} />
+                )}
                 {image.title}
               </h3>
             </div>

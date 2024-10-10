@@ -11,10 +11,10 @@ function Samplepack() {
         align="middle"
         className="row-sample"
       >
-        <Col xs={24} md={18}   className="col-image">
+        <Col xs={24} md={18} className="col-image">
           <img src="../../images/brands.png" alt="Description" />
         </Col>
-        <Col xs={24} md={6}   className="col-text">
+        <Col xs={24} md={6} className="col-text">
           <div className="get">
             <p>Get a Feel For Our Products</p>
           </div>

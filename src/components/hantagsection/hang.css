@@ -1,58 +1,56 @@
 .hang-card-container {
-    max-width: 95%; /* Ensures the container is aligned */
-    margin: 0 auto; /* Centers the container */
-    padding: 20px;
+  max-width: 95%; /* Ensures the container is aligned */
+  margin: 0 auto; /* Centers the container */
+  padding: 20px;
 }
 
 .hang-main-heading {
-    text-align: left; /* Aligns the heading to the left */
-    margin-bottom: 20px; /* Adds space between heading and grid */
-    margin-left: 3rem;
-    margin-top: 2rem;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #102051; /* Adjust color as needed */
+  text-align: left; /* Aligns the heading to the left */
+  margin-bottom: 20px; /* Adds space between heading and grid */
+  margin-left: 3rem;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #102051; /* Adjust color as needed */
 }
 
 .hang-card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 20px;
-    justify-content: center;
-    max-width: 95%;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  max-width: 95%;
+  margin: 0 auto;
 }
 
 .hang-card {
-    width: 100%;
-    padding: 20px;
-    border-radius: 1.2rem;
-    text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    border: 2px solid #aeb5bd; /* Add border */
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
-    text-decoration: none; /* Remove underline */
+  width: 100%;
+  padding: 20px;
+  border-radius: 1.2rem;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  border: 2px solid #aeb5bd; /* Add border */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional: add a subtle shadow */
+  text-decoration: none; /* Remove underline */
 }
-
 
 .hang-card:hover {
-    background-color: #007AB7;
-    color: white;
-    border-color: white; /* Change border color on hover */
+  background-color: #007ab7;
+  color: white;
+  border-color: white; /* Change border color on hover */
 }
 
-
 .hang-card-image {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
 }
 
 .hang-card-text {
-    font-size: 1.4rem;
-    font-weight: 600;
-    color: black;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: black;
 }
 
 /* .hang-card:hover {
@@ -61,19 +59,19 @@
 } */
 
 @media (max-width: 1200px) {
-    .hang-card-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .hang-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 900px) {
-    .hang-card-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .hang-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 600px) {
-    .hang-card-grid {
-        grid-template-columns: 1fr;
-    }
+  .hang-card-grid {
+    grid-template-columns: 1fr;
+  }
 }

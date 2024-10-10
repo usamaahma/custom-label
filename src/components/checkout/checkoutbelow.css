@@ -20,7 +20,6 @@
   margin-right: auto; /* Keep the right margin auto to push it left */
 }
 
-
 .ship-address {
   background-color: rgb(95, 91, 91);
   height: 3rem;
@@ -38,7 +37,7 @@
 
 .input-heading-email,
 .input-heading {
-   width: 90%;
+  width: 90%;
   margin-top: 1rem;
   font-weight: bold;
 }
@@ -150,16 +149,16 @@
 }
 
 .dropdown-content2 {
-  max-height: 200px;  
-  overflow-y: auto;  
-  padding: 10px;  
-  border: 1px solid lightgray; 
-  border-radius: 4px;  
-  background-color: white; 
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 10px;
+  border: 1px solid lightgray;
+  border-radius: 4px;
+  background-color: white;
   margin-left: 4rem;
 }
-@media (max-width:1190px) {
-  .shipping-txt{
+@media (max-width: 1190px) {
+  .shipping-txt {
     font-size: 1.2rem;
   }
 }
@@ -167,11 +166,12 @@
   .check-txt {
     font-size: 1.5rem;
   }
-  
-  .input-email, .input {
+
+  .input-email,
+  .input {
     width: 100%;
   }
-  
+
   .place-button {
     width: 100%;
   }
@@ -181,7 +181,7 @@
   .check-below {
     width: 100%; /* Full width for smaller screens */
   }
-  
+
   .total-item {
     flex-direction: column; /* Stack items vertically */
     align-items: flex-start; /* Align items to the start */
@@ -192,7 +192,6 @@
   }
 }
 @media (max-width: 375px) {
-
   .amount-cart-txt {
     margin-left: -0.7rem;
   }

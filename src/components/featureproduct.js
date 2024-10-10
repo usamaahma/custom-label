@@ -27,7 +27,7 @@ const products = [
     title: "Express Clothing Labels  3 Day",
     image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
     bottomText: "3 Day Turn Around Made in USA",
-  }
+  },
 ];
 
 function Featureproduct() {

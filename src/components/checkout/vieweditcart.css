@@ -32,7 +32,7 @@
 .button1-container {
   display: flex;
   justify-content: center; /* Center horizontally */
-  align-items: center;    /* Center vertically (if needed) */
+  align-items: center; /* Center vertically (if needed) */
   margin-top: 2rem;
 }
 
@@ -88,7 +88,7 @@
 .subtotal-value {
   font-weight: bold;
 }
-.main-view-cart{
+.main-view-cart {
   margin-bottom: 3rem;
   margin-top: 3rem;
 }

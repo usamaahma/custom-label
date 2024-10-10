@@ -44,7 +44,6 @@ function Fancyhanghero1() {
                 <li>Custom String or Safety Pin Colors</li>
                 <li>Hole Grommets</li>
               </ul>
-               
             </div>
           </div>
         </Col>
