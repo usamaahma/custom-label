@@ -61,14 +61,62 @@ const AppRoutes = () => {
             }
           >
             {/* Nested Routes for Account Dashboard */}
-            <Route path="account-dashboard" element={<Dashboard />} />
-            <Route path="pending-approvals" element={<PendingApprovals />} />
-            <Route path="order-history" element={<OrderHistory />} />
-            <Route path="addresses" element={<Addresses />} />
-            <Route path="newsletter" element={<NewsletterSubscriptions />} />
-            <Route path="account-details" element={<AccountDetails />} />
-            <Route path="payment-options" element={<PaymentOptions />} />
-            {/* You can add more nested routes here if needed */}
+            <Route
+              path="account-dashboard"
+              element={
+                <PrivateRoute>
+                  <Dashboard />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="pending-approvals"
+              element={
+                <PrivateRoute>
+                  <PendingApprovals />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="order-history"
+              element={
+                <PrivateRoute>
+                  <OrderHistory />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="addresses"
+              element={
+                <PrivateRoute>
+                  <Addresses />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="newsletter"
+              element={
+                <PrivateRoute>
+                  <NewsletterSubscriptions />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="account-details"
+              element={
+                <PrivateRoute>
+                  <AccountDetails />
+                </PrivateRoute>
+              }
+            />
+            <Route
+              path="payment-options"
+              element={
+                <PrivateRoute>
+                  <PaymentOptions />
+                </PrivateRoute>
+              }
+            />
           </Route>
 
           {/* Public Routes: Accessible to everyone */}
@@ -90,15 +138,21 @@ const AppRoutes = () => {
           <Route path="/fancy-hangtags" element={<Fancyhangtagspage />} />
           <Route path="/about-us" element={<Aboutpage />} />
           <Route path="/custom-care-label" element={<CustomCareLabelPage />} />
-          <Route path="/screen-printed-label" element={<Screenprintedlabels />} />
+          <Route
+            path="/screen-printed-label"
+            element={<Screenprintedlabels />}
+          />
           <Route path="/custom-cotton-label" element={<Customcottonpage />} />
-          <Route path="/custom-sublimation-label" element={<Customsublimationpage />} />
+          <Route
+            path="/custom-sublimation-label"
+            element={<Customsublimationpage />}
+          />
           <Route path="/custom-tyvek-label" element={<Customtyvekpage />} />
           <Route path="/tpu-labels" element={<Tpulabelspage1 />} />
           <Route path="/faqs" element={<Faq1 />} />
           <Route path="/custom-heat-labels" element={<Customheatpage />} />
           <Route path="/privacy-policy" element={<Privacypolicy1 />} />
-          
+
           {/* Catch all route for 404 - redirect to home */}
           <Route path="*" element={<Navigate to="/" />} />
         </Routes>
