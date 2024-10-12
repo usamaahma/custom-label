@@ -20,9 +20,9 @@ function Custompatches() {
   useEffect(() => {
     const updateMedia = () => {
       if (window.innerWidth < 576) {
-        setSlidesToShow(3);
+        setSlidesToShow(1);
       } else if (window.innerWidth < 768) {
-        setSlidesToShow(4);
+        setSlidesToShow(2);
       } else if (window.innerWidth < 992) {
         setSlidesToShow(4);
       } else {

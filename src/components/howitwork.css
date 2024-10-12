@@ -76,3 +76,16 @@
     font-weight: bold;
   }
 }
+@media (max-width: 768px) {
+  .image-row {
+    display: block;
+    justify-content: center;
+    align-items: center;
+  }
+  .step-image1 {
+    display: none;
+  }
+  .image-item{
+    margin-top: 2rem;
+  }
+}

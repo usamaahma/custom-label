@@ -77,11 +77,21 @@
     font-size: 1rem !important;
   }
 }
+@media (max-width: 550px) {
+  .herosec-container {
+    background-size: contain;
+    background-size: 170%; /* Increase the image size for smaller screens */
+  }
+}
 @media (max-width: 425px) {
   .custom {
     font-size: 1rem !important;
   }
   .herosec-button {
     width: auto !important; /* Make button full width on small screens */
+  }
+  .herosec-container {
+    background-size: contain;
+    background-size: 200%; /* Increase the image size for smaller screens */
   }
 }
