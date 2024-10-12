@@ -1,7 +1,7 @@
-import React from 'react'
-import Fancyhanghero1 from '../components/hantagsection/fancyhanghero';
-import FancyForm1 from '../components/hantagsection/fancyform';
-import GoogleReviews from '../components/expressclothing/googlereviews';
+import React from "react";
+import Fancyhanghero1 from "../components/hantagsection/fancyhanghero";
+import FancyForm1 from "../components/hantagsection/fancyform";
+import GoogleReviews from "../components/expressclothing/googlereviews";
 
 function Fancyhangtagspage() {
   return (
@@ -10,7 +10,7 @@ function Fancyhangtagspage() {
       <FancyForm1 />
       <GoogleReviews />
     </div>
-  )
+  );
 }
 
 export default Fancyhangtagspage;

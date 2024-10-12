@@ -1,245 +1,245 @@
 .simpletable-centered-row {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    min-height: 100vh;
-    flex-wrap: wrap;
-    width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  flex-wrap: wrap;
+  width: 100%;
 }
 
 .simpletable-left-column,
 .simpletable-right-column {
-    display: grid;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 1rem;
+  display: grid;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 1rem;
 }
 
 .simpletable-left-column {
-    text-align: center;
-    width: 60rem;
+  text-align: center;
+  width: 60rem;
 }
 
 .simpletable-sticky-div {
-    position: sticky;
-    top: 20px;
-    padding: 20px;
-    border-radius: 5px;
+  position: sticky;
+  top: 20px;
+  padding: 20px;
+  border-radius: 5px;
 }
 
 .simpletable-table-express {
-    display: grid;
-    justify-content: center;
+  display: grid;
+  justify-content: center;
 }
 
 .simpletable-image-card-express {
-    width: 4rem;
+  width: 4rem;
 }
-.size-txt{
-    margin-top: 1rem;
-    margin-bottom: -2.5rem;
-    text-align: left;
-    margin-left: 1rem;
+.size-txt {
+  margin-top: 1rem;
+  margin-bottom: -2.5rem;
+  text-align: left;
+  margin-left: 1rem;
 }
 .simpletable-divs-tableexpress {
-    margin-top: 3rem;
-    border: solid 0.5px #436886;
-    display: flex;
-    justify-content: space-evenly;
-    border-radius: 1rem;
-    padding: 1rem;
-    align-items: center;
-    background-color: #F2F4F8;
-    flex-wrap: wrap; /* Allows wrapping if there’s not enough space */
+  margin-top: 3rem;
+  border: solid 0.5px #436886;
+  display: flex;
+  justify-content: space-evenly;
+  border-radius: 1rem;
+  padding: 1rem;
+  align-items: center;
+  background-color: #f2f4f8;
+  flex-wrap: wrap; /* Allows wrapping if there’s not enough space */
 }
 
 .simpletable-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
-    gap: 1rem;
-    padding: 2rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
+  gap: 1rem;
+  padding: 2rem;
 }
 
 .simpletable-card-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .simpletable-image-card-express-1 {
-    width: 2rem;
+  width: 2rem;
 }
 
 .simpletable-card-grid p {
-    text-align: center;
-    font-size: 1rem;
-    margin: 0;
+  text-align: center;
+  font-size: 1rem;
+  margin: 0;
 }
 
 .simpletable-card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 16px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 }
 
 .simpletable-sticky-first {
-    display: flex;
-    justify-content: center;
-    align-items: center !important;
-    padding: 0.5rem;
-    margin-bottom: 0rem !important;
-    background-color: #F2F4F8;
-    width: 20rem;
-    border-radius: 0%;
-    font-weight: bold;
-    font-size: large;
+  display: flex;
+  justify-content: center;
+  align-items: center !important;
+  padding: 0.5rem;
+  margin-bottom: 0rem !important;
+  background-color: #f2f4f8;
+  width: 20rem;
+  border-radius: 0%;
+  font-weight: bold;
+  font-size: large;
 }
 
 .simpletable-sticky-blue-1 {
-    display: block;
-    justify-content: center;
-    text-align: center;
-    align-items: center !important;
-    padding: 0.5rem;
-    margin-bottom: 0rem !important;
-    background-color: #102051;
-    color: white;
-    width: 20rem;
-    border-radius: 0%;
-    font-weight: bold;
-    font-size: large;
+  display: block;
+  justify-content: center;
+  text-align: center;
+  align-items: center !important;
+  padding: 0.5rem;
+  margin-bottom: 0rem !important;
+  background-color: #102051;
+  color: white;
+  width: 20rem;
+  border-radius: 0%;
+  font-weight: bold;
+  font-size: large;
 }
 
 .simpletable-sticky-blue {
-    display: block;
-    justify-content: center !important;
-    align-items: center !important;
-    padding: 0.5rem;
-    margin-bottom: 0rem !important;
-    background-color: #102051;
-    color: white;
-    width: 20rem;
-    border-radius: 0%;
-    font-weight: bold;
-    font-size: large;
+  display: block;
+  justify-content: center !important;
+  align-items: center !important;
+  padding: 0.5rem;
+  margin-bottom: 0rem !important;
+  background-color: #102051;
+  color: white;
+  width: 20rem;
+  border-radius: 0%;
+  font-weight: bold;
+  font-size: large;
 }
 
 .simpletable-sticky-blue-inside {
-    display: flex;
-    justify-content: space-between;
-    font-size: small;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid white;
+  display: flex;
+  justify-content: space-between;
+  font-size: small;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid white;
 }
 
 p {
-    margin-bottom: 0rem !important;
+  margin-bottom: 0rem !important;
 }
 
 .simpletable-marg-bot {
-    margin-bottom: 1rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .simpletable-button-tablecart {
-    display: flex;
-    align-items: center;
-    background-color: #007AB7 !important;
-    font-size: large;
-    font-weight: 700;
-    border: none;
-    border-radius: 0rem;
-    width: 12rem;
-    height: 3rem;
-    color: white;
+  display: flex;
+  align-items: center;
+  background-color: #007ab7 !important;
+  font-size: large;
+  font-weight: 700;
+  border: none;
+  border-radius: 0rem;
+  width: 12rem;
+  height: 3rem;
+  color: white;
 }
 
 .simpletable-sticky-help {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: center;
-    background-color: #F2F4F8;
-    width: 20rem;
-    height: 5rem;
-    border: solid 0.1px #102051;
-    margin-top: 2rem;
-    font-size: larger;
-    color: #007AB7;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #f2f4f8;
+  width: 20rem;
+  height: 5rem;
+  border: solid 0.1px #102051;
+  margin-top: 2rem;
+  font-size: larger;
+  color: #007ab7;
 }
 
 .size-i {
-    font-size: 3rem;
+  font-size: 3rem;
 }
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-    .simpletable-card-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .simpletable-card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 576px) {
-    .simpletable-card-grid {
-        grid-template-columns: 1fr;
-    }
+  .simpletable-card-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 @media (min-width: 768px) and (max-width: 900px) {
-    .simpletable-sticky-first,
-    .simpletable-sticky-blue,
-    .simpletable-sticky-blue-1,
-    .simpletable-sticky-help {
-        width: 16rem;
-    }
+  .simpletable-sticky-first,
+  .simpletable-sticky-blue,
+  .simpletable-sticky-blue-1,
+  .simpletable-sticky-help {
+    width: 16rem;
+  }
 }
 
 @media (max-width: 768px) {
-    .simpletable-centered-row {
-        display: grid;
-        justify-content: center;
-    }
+  .simpletable-centered-row {
+    display: grid;
+    justify-content: center;
+  }
 
-    .simpletable-card-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .simpletable-card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 
-    .simpletable-left-column,
-    .simpletable-right-column {
-        width: 100%;
-    }
+  .simpletable-left-column,
+  .simpletable-right-column {
+    width: 100%;
+  }
 }
 
 @media (max-width: 425px) {
-    .simpletable-centered-row {
-        flex-direction: column;
-        align-items: stretch;
-    }
+  .simpletable-centered-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-    .simpletable-left-column,
-    .simpletable-right-column {
-        width: 10rem;
-        padding: 0 !important;
-    }
+  .simpletable-left-column,
+  .simpletable-right-column {
+    width: 10rem;
+    padding: 0 !important;
+  }
 
-    .simpletable-sticky-div {
-        position: static;
-        margin-top: 1rem;
-    }
+  .simpletable-sticky-div {
+    position: static;
+    margin-top: 1rem;
+  }
 
-    .simpletable-divs-tableexpress {
-        flex-direction: column;
-        align-items: center;
-    }
+  .simpletable-divs-tableexpress {
+    flex-direction: column;
+    align-items: center;
+  }
 
-    .simpletable-card-grid {
-        grid-template-columns: repeat(1, 1fr);
-        padding: 1rem;
-    }
+  .simpletable-card-grid {
+    grid-template-columns: repeat(1, 1fr);
+    padding: 1rem;
+  }
 
-    .simpletable-image-card-express {
-        width: 4rem;
-    }
+  .simpletable-image-card-express {
+    width: 4rem;
+  }
 
-    .simpletable-image-card-express-1 {
-        width: 3rem;
-    }
+  .simpletable-image-card-express-1 {
+    width: 3rem;
+  }
 }

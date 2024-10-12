@@ -23,7 +23,7 @@ const Firstnavbar = () => {
         {/* Second div: Centered text */}
 
         <Nav className="firstnavbar-nav mx-auto">
-          <Nav.Link href="#home" className="firstnavbar-center">
+          <Nav.Link  className="firstnavbar-center">
             <span className="code-off">10% OFF FIRST ORDER </span>
             <span className="code-text">CODE CWL10</span>
           </Nav.Link>
@@ -48,7 +48,7 @@ const Firstnavbar = () => {
           <Nav.Link as={Link} to="/login" className="firstnavbar-link">
             Login/Register <FaUserCircle />
           </Nav.Link>
-          <Nav.Link  className="firstnavbar-link">
+          <Nav.Link className="firstnavbar-link">
             <button
               onClick={() => setVisible(true)}
               style={{
@@ -56,9 +56,10 @@ const Firstnavbar = () => {
                 border: "none",
                 padding: 0,
                 cursor: "pointer",
-              }} 
+              }}
             >
-              <strong className="cart-strong">Cart</strong> <FaShoppingCart style={{ color: 'rgb(82,83,84)' }} />
+              <strong className="cart-strong">Cart</strong>{" "}
+              <FaShoppingCart style={{ color: "rgb(82,83,84)" }} />
             </button>
             <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
           </Nav.Link>

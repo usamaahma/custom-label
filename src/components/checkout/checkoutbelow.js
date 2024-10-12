@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Row, Col, Form, Input, Button, Radio, Card, Select } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import "./checkoutbelow.css";
-import IconMessage from "./iconmessage";  
+import IconMessage from "./iconmessage";
 
 const { Option } = Select;
 
@@ -26,7 +26,6 @@ function CheckoutBelow1() {
     setDropdownVisible1(!dropdownVisible1);
   };
 
-   
   return (
     <div className="checkout-container">
       <div className="check-below">
@@ -204,7 +203,7 @@ function CheckoutBelow1() {
             >
               2 Items in Cart <DownOutlined />
             </p>
-            <hr style={{ border: '1px solid gray', margin: '10px 0' }} />
+            <hr style={{ border: "1px solid gray", margin: "10px 0" }} />
             {dropdownVisible && (
               <div className="dropdown-content">
                 <Row>
@@ -221,7 +220,6 @@ function CheckoutBelow1() {
                     <p onClick={toggleDropdown1} style={{ cursor: "pointer" }}>
                       View Details <DownOutlined />
                     </p>
-
                   </Col>
                   <Col className="amount-cart">
                     <p className="amount-cart-txt">$46.00</p>
@@ -250,16 +248,15 @@ function CheckoutBelow1() {
                             {label === "Area"
                               ? "1 +$40.00"
                               : label === "Style"
-                                ? "Straight Cut (Flat)"
-                                : "None"}
+                              ? "Straight Cut (Flat)"
+                              : "None"}
                           </p>
                         </div>
                       ))}
                     </div>
                   )}
-
                 </Row>
-                <hr style={{ border: '1px solid gray', margin: '10px 0' }} />
+                <hr style={{ border: "1px solid gray", margin: "10px 0" }} />
               </div>
             )}
             <div className="total-details">
@@ -284,7 +281,6 @@ function CheckoutBelow1() {
           </div>
         </Col>
       </Row>
-      
     </div>
   );
 }

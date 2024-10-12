@@ -1,66 +1,67 @@
 .card-container {
-    max-width: 95%; /* Ensures the container is aligned */
-    margin: 0 auto; /* Centers the container */
-    padding: 20px;
+  max-width: 95%; /* Ensures the container is aligned */
+  margin: 0 auto; /* Centers the container */
+  padding: 20px;
 }
 
 .main-heading {
-    text-align: left; /* Aligns the heading to the left */
-    margin-bottom: 20px; /* Adds space between heading and grid */
-    margin-left: 3rem;
-    margin-top: 2rem;
-    font-size: 2rem;
-    font-weight: 700;
-    color: #102051; /* Adjust color as needed */
+  text-align: left; /* Aligns the heading to the left */
+  margin-bottom: 20px; /* Adds space between heading and grid */
+  margin-left: 3rem;
+  margin-top: 2rem;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #102051; /* Adjust color as needed */
 }
 
 .card-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
-    padding: 20px;
-    justify-content: center;
-    max-width: 95%;
-    margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+  padding: 20px;
+  justify-content: center;
+  max-width: 95%;
+  margin: 0 auto;
 }
 
 .card {
-    width: 100%;
-    padding: 20px;
-    border-radius: 1.2rem;
-    text-align: center;
-    transition: background-color 0.3s ease, color 0.3s ease;}
+  width: 100%;
+  padding: 20px;
+  border-radius: 1.2rem;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
 
 .card-image {
-    max-width: 100%;
-    height: auto;
-    margin-bottom: 10px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 10px;
 }
 
 .card-text {
-    font-size: 1.4rem;
-    font-weight: 600;
+  font-size: 1.4rem;
+  font-weight: 600;
 }
 
 .card:hover {
-    background-color: #007AB7;
-    color: white;
+  background-color: #007ab7;
+  color: white;
 }
 
 @media (max-width: 1200px) {
-    .card-grid {
-        grid-template-columns: repeat(3, 1fr);
-    }
+  .card-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 @media (max-width: 900px) {
-    .card-grid {
-        grid-template-columns: repeat(2, 1fr);
-    }
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 @media (max-width: 600px) {
-    .card-grid {
-        grid-template-columns: 1fr;
-    }
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
 }

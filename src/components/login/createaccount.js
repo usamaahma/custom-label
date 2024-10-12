@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 import ReCAPTCHA from "react-google-recaptcha";
 import "./createaccount.css";
 
@@ -18,7 +18,9 @@ function Create() {
     e.preventDefault();
 
     if (!validatePassword(password)) {
-      setError("Password must be at least 8 characters long and include a special character.");
+      setError(
+        "Password must be at least 8 characters long and include a special character."
+      );
       return;
     }
 
@@ -98,7 +100,9 @@ function Create() {
 
         <p className="signup-prompt">
           Do you have an account?{" "}
-          <Link className="SIGN-UP-TEXT" to="/login">Sign In</Link>
+          <Link className="SIGN-UP-TEXT" to="/login">
+            Sign In
+          </Link>
         </p>
       </div>
       <style>{`

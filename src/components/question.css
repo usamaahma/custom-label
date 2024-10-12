@@ -1,26 +1,26 @@
 .question-row {
   display: flex;
-  flex-direction: column;  
-  align-items: center;  
-  text-align: center; 
-  padding: 20px;  
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
 }
 
 .image-col {
   display: flex;
-  justify-content: flex-end;  
-  align-items: center;  
-  width: 100%;  
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
 }
 
 .text-col {
-  text-align: center;  
+  text-align: center;
 }
-.button-col{
-  display: flex;  
-  justify-content: flex-start;  
-  width: 100%;  
-  margin-top: 10px;  
+.button-col {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+  margin-top: 10px;
 }
 .contact-button {
   padding: 10px 20px;
@@ -36,49 +36,48 @@
 
 .contact-button:hover {
   background-color: #fcfcfc;
-    color: #070707;
-    border-color: #070707;
+  color: #070707;
+  border-color: #070707;
 }
 
 .img-bulb {
   width: 10rem;
-  height: auto;  
+  height: auto;
 }
 
 .question-text {
   font-size: 1.8rem;
   font-weight: bold;
   text-align: left;
-  margin:  1rem;  
+  margin: 1rem;
 }
 
 .we-text {
-  margin: 0 1rem;  
-  line-height: 1.5;  
+  margin: 0 1rem;
+  line-height: 1.5;
   text-align: left;
 }
 
- 
 @media (max-width: 767px) {
   .image-col {
     justify-content: center;
   }
-  .button-col{
+  .button-col {
     justify-content: center;
   }
-  .question-text ,.we-text {
+  .question-text,
+  .we-text {
     text-align: center;
   }
 }
 @media (min-width: 576px) {
   .question-row {
-    flex-direction: row; 
+    flex-direction: row;
   }
 }
 
 @media (max-width: 576px) {
   .we-text {
-    white-space: normal;  
+    white-space: normal;
   }
 }
-

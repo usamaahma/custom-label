@@ -1,91 +1,97 @@
- .herosec-container {
-   position: relative;
-   height: 80vh; /* Full height */
-   background-image: url('../../../public/images/shirt.jpg'); /* Replace with your image path */
-   background-size: cover; /* Cover the whole area */
-   background-position: center; /* Center the image */
-   background-repeat: no-repeat; /* Prevent repeating */
- }
- .herosec-content {
-   position: absolute;
-    top: 50%; /* Center vertically */
-   left: 2rem; /* Align text to the left with some margin */
-   transform: translateY(-50%); /* Offset to center vertically */
-   text-align: left; /* Align text to the left */
-   color: white; /* Text color */
-   padding: 20px;
- }
- 
- .herosec-button {
-   background-color: rgb(3, 28, 29); /* Button color */
-   color: white; /* Button text color */
-   border: none;
-   padding: 0.5rem;
-   border-radius: 5px;
-   cursor: pointer;
-   margin-top: 20px;
-   font-weight: bold;
-   transition: background-color 0.3s;
- }
- 
- .herosec-button:hover {
-   background-color: white; /* Change background on hover */
-   color: rgb(3, 28, 29); /* Change text color on hover */
-   border: 1px solid rgb(3, 28, 29);
- }
- .custom{
-   font-size: 3rem;
-   font-weight: bold;
-   width: 60%;
- }
- .premium{
-   width: 60%;
- }
- /* Responsive styles */
+.herosec-container {
+  position: relative;
+  height: 80vh; /* Full height */
+  background-image: url("../../../public/images/shirt.jpg"); /* Replace with your image path */
+  background-size: cover; /* Cover the whole area */
+  background-position: center; /* Center the image */
+  background-repeat: no-repeat; /* Prevent repeating */
+}
+.herosec-content {
+  position: absolute;
+  top: 50%; /* Center vertically */
+  left: 2rem; /* Align text to the left with some margin */
+  transform: translateY(-50%); /* Offset to center vertically */
+  text-align: left; /* Align text to the left */
+  color: white; /* Text color */
+  padding: 20px;
+}
 
- @media (max-width: 1440px) {
-    .custom{
-      font-size: 3rem !important;
-    }
-    .premium{
-      font-size: 1.5rem !important;
-    }
-    
- }
+.herosec-button {
+  background-color: rgb(3, 28, 29); /* Button color */
+  color: white; /* Button text color */
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 20px;
+  font-weight: bold;
+  transition: background-color 0.3s;
+}
 
- @media (max-width: 1366px) {
-   .custom{
-      font-size: 3rem !important;
-    }
-    .premium{
-      font-size: 1.5rem !important;
-    }
-     
-    
- }
- @media (max-width: 1024px) {
-   .custom{
-      font-size: 2rem !important;
-    }
-    .premium{
-      font-size: 1rem !important;
-    }
- }
+.herosec-button:hover {
+  background-color: white; /* Change background on hover */
+  color: rgb(3, 28, 29); /* Change text color on hover */
+  border: 1px solid rgb(3, 28, 29);
+}
+.custom {
+  font-size: 3rem;
+  font-weight: bold;
+  width: 60%;
+}
+.premium {
+  width: 60%;
+}
+/* Responsive styles */
 
- @media (max-width: 768px) {
-   .custom{
-      font-size: 1rem !important;
-    }
-    .premium{
-      font-size: 1rem !important;
-    }
- }
- @media (max-width: 425px) {
-   .custom{
-      font-size: 1rem !important;
-    }  
-    .herosec-button {
-      width: auto !important; /* Make button full width on small screens */
-    }
-   
- }
+@media (max-width: 1440px) {
+  .custom {
+    font-size: 3rem !important;
+  }
+  .premium {
+    font-size: 1.5rem !important;
+  }
+}
+
+@media (max-width: 1366px) {
+  .custom {
+    font-size: 3rem !important;
+  }
+  .premium {
+    font-size: 1.5rem !important;
+  }
+}
+@media (max-width: 1024px) {
+  .custom {
+    font-size: 2rem !important;
+  }
+  .premium {
+    font-size: 1rem !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .custom {
+    font-size: 1rem !important;
+  }
+  .premium {
+    font-size: 1rem !important;
+  }
+}
+@media (max-width: 550px) {
+  .herosec-container {
+    background-size: contain;
+    background-size: 170%; /* Increase the image size for smaller screens */
+  }
+}
+@media (max-width: 425px) {
+  .custom {
+    font-size: 1rem !important;
+  }
+  .herosec-button {
+    width: auto !important; /* Make button full width on small screens */
+  }
+  .herosec-container {
+    background-size: contain;
+    background-size: 200%; /* Increase the image size for smaller screens */
+  }
+}

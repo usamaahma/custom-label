@@ -53,7 +53,6 @@
 }
 .aboutstory-title1 {
   margin-left: 3.5rem;
-  
 }
 
 .aboutstory-description,
@@ -85,7 +84,6 @@
   .aboutstory-text1 {
     text-align: center; /* Center text on smaller screens */
     width: 90%; /* Make text width responsive */
-   
   }
 
   .aboutstory-title,
@@ -101,7 +99,6 @@
   }
   .aboutstory-description1 {
     width: 95%;
-     
   }
 }
 
@@ -113,27 +110,21 @@
   }
   .aboutstory-description1 {
     width: 90%;
-     
-     
   }
 }
 @media (max-width: 425px) {
   .aboutstory-description1 {
     width: 75%;
-     
-  } 
+  }
   .aboutstory-title1 {
     width: 75%;
-
-   }
+  }
 }
 @media (max-width: 375px) {
   .aboutstory-description1 {
     width: 70%;
-     
-  } 
+  }
   .aboutstory-title1 {
     width: 70%;
-
-   }
+  }
 }

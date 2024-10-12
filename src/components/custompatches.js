@@ -12,7 +12,7 @@ function Custompatches() {
     { src: "../../images/girl.png", title: "custom woven ribbons" },
     { src: "../../images/girl.png", title: "Woven patches" },
     { src: "../../images/girl.png", title: "chenille patches" },
-    { src: "../../images/girl.png", title: "Woven stain patches" },  
+    { src: "../../images/girl.png", title: "Woven stain patches" },
   ];
 
   const [slidesToShow, setSlidesToShow] = useState(3);
@@ -20,9 +20,9 @@ function Custompatches() {
   useEffect(() => {
     const updateMedia = () => {
       if (window.innerWidth < 576) {
-        setSlidesToShow(3);
+        setSlidesToShow(1);
       } else if (window.innerWidth < 768) {
-        setSlidesToShow(4);
+        setSlidesToShow(2);
       } else if (window.innerWidth < 992) {
         setSlidesToShow(4);
       } else {
@@ -51,7 +51,9 @@ function Custompatches() {
                 className="carousel-image"
               />
               <h3 className="carousel-title-1">
-                {image.title === "express clothing label" && <FaFire style={{ color: "red", marginRight: "8px" }} />}
+                {image.title === "express clothing label" && (
+                  <FaFire style={{ color: "red", marginRight: "8px" }} />
+                )}
                 {image.title}
               </h3>
             </div>
