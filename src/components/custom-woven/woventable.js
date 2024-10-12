@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Button, Card, Col, Row, Upload, message } from "antd";
 import "../expressclothing/tablescart.css";
 import LastTable from "../expressclothing/lasttable";
@@ -55,13 +55,71 @@ const firstcardData = [
   // Add more cards as needed
 ];
 const cardData = [
-  { id: 1, imgSrc: "../images/straight.png", title: "1 x 2.5" },
-  { id: 2, imgSrc: "../images/straight.png", title: "1.25 x 3" },
-  { id: 3, imgSrc: "../images/straight.png", title: "1.5 x 3.5" },
+  { id: 1, imgSrc: "../images/straight.png", title: "2 x 0.625" },
+  { id: 2, imgSrc: "../images/straight.png", title: "2 x 1" },
+  { id: 3, imgSrc: "../images/straight.png", title: "2 x 2" },
   { id: 4, imgSrc: "../images/straight.png", title: "Custom" },
 ];
 
+const card3 = [
+  { id: 1, imgSrc: "../images/straight.png", title: "None (Sew-On)" },
+  { id: 2, imgSrc: "../images/straight.png", title: "Iron-On" },
+  { id: 3, imgSrc: "../images/straight.png", title: "Peel & Stick" },
+];
+
+const card4 = [
+  { id: 1, imgSrc: "../images/straight.png", title: "None (Regular Thread)" },
+  { id: 2, imgSrc: "../images/straight.png", title: "Gold Metallic" },
+  { id: 3, imgSrc: "../images/straight.png", title: "Silver Metallic" },
+];
+const card5 = [
+  { id: 1, imgSrc: "../images/straight.png", title: "None" },
+  { id: 2, imgSrc: "../images/straight.png", title: "Yes, I Need Versions" },
+];
+const card6 = [
+  { id: 1, imgSrc: "../images/straight.png", title: "Digital Proof Only" },
+  {
+    id: 2,
+    imgSrc: "../images/straight.png",
+    title: "Digital Proof & Sample Photo",
+  },
+];
+const card7 = [
+  {
+    id: 1,
+    imgSrc: "../images/straight.png",
+    title: "Standard: 15 Business Days",
+  },
+  {
+    id: 2,
+    imgSrc: "../images/straight.png",
+    title: "RUSH: 10 Business Days",
+  },
+];
+
 function Woventable() {
+  const [selectedData, setSelectedData] = useState({
+    artwork: "No Artwork Uploaded",
+    size: '2" x 0.625" (50.80mm x 25.40mm)',
+    style: "Straight Cut (Flat)",
+    versions: "None",
+    proofOptions: "Digital Proof Only",
+    backingoptions: "None (Sew On)",
+    mettalicthread: "None (Regular Thread)",
+    turnaroundOptions: "RUSH: 3 Business Days",
+    quantity: "1000 pcs",
+    price: "$0.54/Each",
+    totalPrice: "$540.00",
+  });
+
+  // Function to handle card clicks
+  const handleCardClick = (key, value) => {
+    setSelectedData((prevData) => ({
+      ...prevData,
+      [key]: value,
+    }));
+  };
+
   return (
     <div className="table-express">
       <Row className="centered-row-table">
@@ -87,6 +145,7 @@ function Woventable() {
                     <Card
                       bordered={false}
                       className="image-card-express"
+                      onClick={() => handleCardClick("style", card.title)}
                       style={{ width: 150 }}
                     >
                       <img
@@ -104,7 +163,10 @@ function Woventable() {
               <div className="card-grid">
                 {cardData.map((card) => (
                   <div key={card.id} className="card-container">
-                    <Card bordered={false}>
+                    <Card
+                      bordered={false}
+                      onClick={() => handleCardClick("size", card.title)}
+                    >
                       <img
                         alt={card.title}
                         src={card.imgSrc}
@@ -119,230 +181,116 @@ function Woventable() {
               </div>
             </div>
             <div className="divs-tableexpress">
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
+              {card3.map((card, index) => (
+                <Card
+                  key={index}
+                  bordered={false}
+                  onClick={() => handleCardClick("backingoptions", card.title)}
+                  style={{
+                    width: "11rem",
+                    height: "12rem",
+                    background: "#FAFAFA",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    alt={card.title}
+                    src={card.imgSrc}
+                    className="image-card-express"
+                  />
+                  <p>{card.title}</p>
+                </Card>
+              ))}
             </div>
             <div className="divs-tableexpress">
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
+              {card4.map((card, index) => (
+                <Card
+                  key={index}
+                  bordered={false}
+                  onClick={() => handleCardClick("mettalicthread", card.title)}
+                  style={{
+                    width: "11rem",
+                    height: "12rem",
+                    background: "#FAFAFA",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    alt={card.title}
+                    src={card.imgSrc}
+                    className="image-card-express"
+                  />
+                  <p>{card.title}</p>
+                </Card>
+              ))}
             </div>
             <div className="divs-tableexpress">
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
+              {card5.map((card, index) => (
+                <Card
+                  key={index}
+                  onClick={() => handleCardClick("versions", card.title)}
+                  bordered={false}
+                  style={{
+                    width: "11rem",
+                    height: "12rem",
+                    background: "#FAFAFA",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    alt={card.title}
+                    src={card.imgSrc}
+                    className="image-card-express"
+                  />
+                  <p>{card.title}</p>
+                </Card>
+              ))}
             </div>
             <div className="divs-tableexpress">
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
+              {card6.map((card, index) => (
+                <Card
+                  key={index}
+                  onClick={() => handleCardClick("proofOptions", card.title)}
+                  bordered={false}
+                  style={{
+                    width: "11rem",
+                    height: "12rem",
+                    background: "#FAFAFA",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    alt={card.title}
+                    src={card.imgSrc}
+                    className="image-card-express"
+                  />
+                  <p>{card.title}</p>
+                </Card>
+              ))}
             </div>
             <div className="divs-tableexpress">
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
-              <Card
-                bordered={false}
-                style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/straight.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
+              {card7.map((card, index) => (
+                <Card
+                  key={index}
+                  onClick={() =>
+                    handleCardClick("turnaroundOptions", card.title)
+                  }
+                  bordered={false}
+                  style={{
+                    width: "11rem",
+                    height: "12rem",
+                    background: "#FAFAFA",
+                    cursor: "pointer",
+                  }}
+                >
+                  <img
+                    alt={card.title}
+                    src={card.imgSrc}
+                    className="image-card-express"
+                  />
+                  <p>{card.title}</p>
+                </Card>
+              ))}
             </div>
             <div className="divs-tableexpress">
               <textarea
@@ -372,56 +320,56 @@ function Woventable() {
               <p className="marg-bot">Custom Woven Labels</p>
               <div className="sticky-blue-inside">
                 <p>Artwork File:</p>
-                <p>No Artwork Uploaded</p>
+                <p>{selectedData.artwork}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Size:</p>
-                <p>2" / 0.625" (50.80mm x 15.88mm)</p>
+                <p>{selectedData.size}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Style:</p>
-                <p>Straight Cut (Flat)</p>
+                <p>{selectedData.style}</p>
               </div>
             </div>{" "}
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Backing Options:</p>
-                <p>None(Sew-On)</p>
+                <p>{selectedData.backingoptions}</p>
               </div>
             </div>{" "}
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Metallic Thread:</p>
-                <p>None (Regular Thread)</p>
+                <p>{selectedData.mettalicthread}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Versions:</p>
-                <p>None</p>
+                <p>{selectedData.versions}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Proof Options:</p>
-                <p>Digital Proof Only</p>
+                <p>{selectedData.proofOptions}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Turnaround Options:</p>
-                <p>Standard: 15 Business Days</p>
+                <p>{selectedData.turnaroundOptions}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
-                <p>1000 pcs</p>
-                <p>$0.54/Each</p>
-                <p>$540.00</p>
+                <p>{selectedData.quantity}</p>
+                <p>{selectedData.price}</p>
+                <p>{selectedData.totalPrice}</p>
               </div>
             </div>
             <div className="sticky-blue">
