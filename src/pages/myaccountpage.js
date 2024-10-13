@@ -3,7 +3,7 @@ import Accdash from '../components/myaccount/accdash'
 
 function Myaccountpage() {
   return (
-    <div>
+    <div className="landingback">
         <Accdash />
     </div>
   )

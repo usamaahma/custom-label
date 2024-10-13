@@ -5,7 +5,7 @@ import GoogleReviews from "../components/expressclothing/googlereviews";
 
 function Expressclothing() {
   return (
-    <div>
+    <div className="landingback">
       <Expresshero />
       <TablesCart />
       <GoogleReviews />

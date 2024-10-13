@@ -5,7 +5,7 @@ import GoogleReviews from "../components/expressclothing/googlereviews";
 
 function Wovenlabelpage() {
   return (
-    <div>
+    <div className="landingback">
       <Wovenlabelhero />
       <Wovenlabeldesc />
       <GoogleReviews />

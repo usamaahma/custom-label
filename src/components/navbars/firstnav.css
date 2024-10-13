@@ -2,7 +2,7 @@
 
 .firstnavbar-navbar {
   padding: 10px 20px;
-  background-color: rgb(236, 238, 242);
+  background-color: #5f6f65;
 }
 
 .firstnavbar-logo {
@@ -32,19 +32,22 @@
 }
 .firstnavbar-center {
   margin-left: 5px;
-  background-color: rgb(3, 28, 29);
+  background-color: #faf4eb;
+  width: 22rem;
+  text-align: center;
   border-radius: 6px;
   font-weight: lighter;
-}
-
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+ }
 .code-text {
-  font-weight: bold;
-  color: aliceblue;
+  font-weight: 800;
+  color: black ;
 }
-
 .code-off {
-  font-weight: lighter;
-  color: aliceblue;
+  font-weight: bold;
+  color: black ;
 }
 .button-show {
   display: none;

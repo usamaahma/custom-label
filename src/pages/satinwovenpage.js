@@ -5,7 +5,7 @@ import Satintable from "../components/satin-woven/satintable";
 
 function Satinwovenpage() {
   return (
-    <div>
+    <div className="landingback">
       <Satinhero />
       <Satintable />
       <GoogleReviews />

@@ -5,7 +5,7 @@ import GoogleReviews from "../components/expressclothing/googlereviews";
 
 function Tpulabelspage1() {
   return (
-    <div>
+    <div className="landingback">
       <Tpuhero1 />
       <Tputabel1 />
       <GoogleReviews />

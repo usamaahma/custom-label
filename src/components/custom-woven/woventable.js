@@ -146,7 +146,7 @@ function Woventable() {
                       bordered={false}
                       className="image-card-express"
                       onClick={() => handleCardClick("style", card.title)}
-                      style={{ width: 150 }}
+                      style={{ width: 150, background: "#FAF4EB " }}
                     >
                       <img
                         alt={card.title}
@@ -189,7 +189,7 @@ function Woventable() {
                   style={{
                     width: "11rem",
                     height: "12rem",
-                    background: "#FAFAFA",
+                    background: "#FAF4EB ",
                     cursor: "pointer",
                   }}
                 >
@@ -233,7 +233,7 @@ function Woventable() {
                   style={{
                     width: "11rem",
                     height: "12rem",
-                    background: "#FAFAFA",
+                    background: "#FAF4EB ",
                     cursor: "pointer",
                   }}
                 >

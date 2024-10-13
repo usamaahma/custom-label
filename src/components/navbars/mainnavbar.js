@@ -32,7 +32,11 @@ const Mainnavbar = () => {
   }, []);
   const [visible, setVisible] = useState(false);
   return (
-    <Navbar className="mainnav-navbar" bg="light" expand="lg">
+    <Navbar
+      className="mainnav-navbar"
+      style={{ backgroundColor: "#FAF4EB" }}
+      expand="lg"
+    >
       <Container className="mainnav-container">
         {/* First div: Logo aligned to the left */}
 

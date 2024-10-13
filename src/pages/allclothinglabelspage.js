@@ -6,7 +6,7 @@ import Stockwoven from "../components/clothingsection/Stockwoven";
 
 function Allclothingpage() {
   return (
-    <div>
+    <div className="landingback">
       <Clothingcard />
       <Patchescard />
       <Hangtags />

@@ -12,13 +12,7 @@ const Firstnavbar = () => {
     <Navbar className="firstnavbar-navbar" expand="lg">
       <Container className="firstnavbar-container">
         {/* First div: Image aligned to the left */}
-        <Navbar.Brand href="#" className="firstnavbar-brand">
-          <img
-            src="../images/google stars.png" // Replace with your image path
-            className="firstnavbar-logo d-inline-block align-top"
-            alt="Logo"
-          />
-        </Navbar.Brand>
+         x
 
         {/* Second div: Centered text */}
 

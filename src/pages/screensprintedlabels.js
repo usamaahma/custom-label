@@ -5,7 +5,7 @@ import Screenprintedtable from "../components/screen-printed-labels/screenprinte
 
 function Screenprintedlabels() {
   return (
-    <div>
+    <div className="landingback">
       <Screenprintedhero />
       <Screenprintedtable />
       <GoogleReviews />

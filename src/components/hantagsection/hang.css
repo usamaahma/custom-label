@@ -1,14 +1,14 @@
 .hang-card-container {
-  max-width: 95%; /* Ensures the container is aligned */
-  margin: 0 auto; /* Centers the container */
+   margin: 0 auto; /* Centers the container */
   padding: 20px;
+  background-color: #FAF4EB;
 }
 
 .hang-main-heading {
   text-align: left; /* Aligns the heading to the left */
   margin-bottom: 20px; /* Adds space between heading and grid */
   margin-left: 3rem;
-  margin-top: 2rem;
+  padding-top: 4rem !important;
   font-size: 2rem;
   font-weight: 700;
   color: #102051; /* Adjust color as needed */

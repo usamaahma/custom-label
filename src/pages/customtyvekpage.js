@@ -5,7 +5,7 @@ import Tyvektable from "../components/custom-tyvek/tyvektable";
 
 function Customtyvekpage() {
   return (
-    <div>
+    <div className="landingback">
       <Tyvekhero />
       <Tyvektable />
       <GoogleReviews />

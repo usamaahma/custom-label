@@ -7,7 +7,7 @@ import Ourproduct1 from "../components/aboutus/ourproduct";
 
 function Aboutpage() {
   return (
-    <div>
+    <div className="landingback">
       <Abouthero1 />
       <Aboutstory />
       <Ourproduct1 />
