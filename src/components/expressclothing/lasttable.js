@@ -65,7 +65,7 @@ const data = [
     unitprice: "Wholesale Pricing",
     total: (
       <Link to="/get-quote">
-        <Button style={{ backgroundColor: "#007AB7", color: "#fff" }}>
+        <Button style={{ background: "#007AB7", color: "#fff" }}>
           Get a Quote
         </Button>
       </Link>

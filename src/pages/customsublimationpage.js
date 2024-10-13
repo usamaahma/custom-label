@@ -5,7 +5,7 @@ import SublimationTable from "../components/custom-sublimation/sublimationtable"
 
 function Customsublimationpage() {
   return (
-    <div>
+    <div className="landingback">
       <Sublimationhero />
       <SublimationTable />
       <GoogleReviews />

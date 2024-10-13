@@ -5,7 +5,7 @@ import GoogleReviews from "../components/expressclothing/googlereviews";
 
 function Fancyhangtagspage() {
   return (
-    <div>
+    <div className="landingback">
       <Fancyhanghero1 />
       <FancyForm1 />
       <GoogleReviews />

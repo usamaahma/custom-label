@@ -5,7 +5,7 @@ import Heattable from "../components/custom-heat-label/heattable";
 
 function Customheatpage() {
   return (
-    <div>
+    <div className="landingback">
       <Heathero />
       <Heattable />
       <GoogleReviews />

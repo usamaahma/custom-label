@@ -97,7 +97,7 @@ function CenteredColumns() {
             <h2 className="simpletable-heading">Upload Artwork</h2>
           </div>
           <div>
-            <Dragger {...props} style={{ marginTop: "3rem" }}>
+            <Dragger {...props} style={{ marginTop: "3rem",background:"#FAF4EB" }}>
               <p className="ant-upload-drag-icon">
                 <i className="fa fa-upload" aria-hidden="true"></i>
               </p>
@@ -110,7 +110,7 @@ function CenteredColumns() {
           <div className="divs-tableexpress">
             <Card
               bordered={false}
-              style={{ width: "11rem", height: "12rem", background: "#FAFAFA" }}
+              style={{ width: "11rem", height: "12rem", background: "#FAF4EB" }}
               onClick={() => handleCardClick("style", "Straight Cut (Flat)")}
             >
               <img
@@ -135,6 +135,7 @@ function CenteredColumns() {
                   <Card
                     bordered={false}
                     onClick={() => handleCardClick("size", card.title)}
+                    style={{ background: "#FAF4EB" }}
                   >
                     <img
                       alt={card.title}
@@ -158,6 +159,7 @@ function CenteredColumns() {
                 <Card
                   bordered={false}
                   onClick={() => handleCardClick("versions", card.title)}
+                  style={{ background: "#FAF4EB" }}
                 >
                   <img
                     alt={card.title}
@@ -178,7 +180,7 @@ function CenteredColumns() {
               style={{
                 width: "11rem",
                 height: "12rem",
-                background: "#FAFAFA",
+                background: "#FAF4EB",
               }}
             >
               <img
@@ -202,7 +204,7 @@ function CenteredColumns() {
               style={{
                 width: "11rem",
                 height: "12rem",
-                background: "#FAFAFA",
+                background: "#FAF4EB",
               }}
             >
               <img
@@ -235,8 +237,7 @@ function CenteredColumns() {
           <div className="divs-tableexpress">
             <LastTable1 />
           </div>
-
-         </Col>
+        </Col>
 
         <Col xs={24} md={8} className="right-column">
           <div className="sticky-div">
@@ -270,7 +271,7 @@ function CenteredColumns() {
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
-                <p>Proof Options:</p> 
+                <p>Proof Options:</p>
                 <p>{selectedData.proofOptions}</p>
               </div>
             </div>

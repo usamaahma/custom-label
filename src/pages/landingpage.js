@@ -10,10 +10,11 @@ import Formcustom1 from "../components/formcustom";
 import Question from "../components/question";
 import Featureproduct from "../components/featureproduct";
 import Faq1 from "../components/faq";
+import "./landing.css"
 
 function Landingpage() {
   return (
-    <div>
+    <div className="landingback">
       <Herosec1 />
       <Alice />
       <Featureproduct />

@@ -17,6 +17,7 @@
 .image-row {
   display: flex; /* Use flexbox for horizontal alignment */
   justify-content: center; /* Center the images */
+  align-items: center;
   margin-top: 20px; /* Space above the images */
 }
 
@@ -26,7 +27,7 @@
 }
 
 .step-image {
-  width: 150px; /* Set width for the images */
+  width: 10rem; /* Set width for the images */
   height: auto; /* Maintain aspect ratio */
 }
 
@@ -62,7 +63,7 @@
 }
 @media (max-width: 950px) {
   .step-image {
-    width: 50px; /* Set width for the images */
+    width: 7rem; /* Set width for the images */
   }
 
   .step-image1 {
@@ -83,9 +84,10 @@
     align-items: center;
   }
   .step-image1 {
-    display: none;
-  }
-  .image-item{
+    transform: rotate(90deg);
+
+   }
+  .image-item {
     margin-top: 2rem;
   }
 }

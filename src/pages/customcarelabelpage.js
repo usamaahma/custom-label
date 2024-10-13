@@ -5,7 +5,7 @@ import Caretable from "../components/custom-care-label/caretable";
 
 function CustomCareLabelPage() {
   return (
-    <div>
+    <div className="landingback">
       <Carehero />
       <Caretable />
       <GoogleReviews />

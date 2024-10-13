@@ -1,64 +1,64 @@
 /* Container styles */
 .addresses-container {
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 8px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 0 auto;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+/* Form title */
+.form-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+/* Ant Design overrides */
+.ant-form-item-label > label {
+  font-weight: 600;
+  color: #555;
+}
+
+.ant-input,
+.ant-select {
+  border-radius: 4px;
+  border: 1px solid #d9d9d9;
+  width: 100%; /* Ensure inputs take full width */
+}
+
+.ant-btn {
+  background-color: #faf4eb !important;
+  color: black !important;
+}
+
+.ant-btn:hover {
+  background-color: #5f6f65 !important;
+  color: white !important;
+  border: solid 0.1px white !important;
+}
+
+/* Form item margin */
+.formitem-address {
+  margin-top: 1rem;
+}
+
+/* Submit button */
+.submit-button {
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .addresses-container {
+    width: 100%; /* Full width on smaller screens */
+    padding: 10px; /* Adjust padding for smaller screens */
   }
-  
-  /* Form title */
-  .form-title {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-    color: #333;
+
+  .ant-col {
+    width: 100%; /* Ensure columns take full width */
   }
-  
-  /* Ant Design overrides */
-  .ant-form-item-label > label {
-    font-weight: 600;
-    color: #555;
-  }
-  
-  .ant-input, .ant-select {
-    border-radius: 4px;
-    border: 1px solid #d9d9d9;
-    width: 100%; /* Ensure inputs take full width */
-  }
-  
-  .ant-btn {
-    background-color: black !important;
-    color: white !important;
-  }
-  
-  .ant-btn:hover {
-    background-color: white !important;
-    color: black !important;
-    border: solid 0.1px black !important;
-  }
-  
-  /* Form item margin */
-  .formitem-address {
-    margin-top: 1rem;
-  }
-  
-  /* Submit button */
-  .submit-button {
-    width: 100%;
-    margin-top: 20px;
-  }
-  
-  /* Media query for responsiveness */
-  @media (max-width: 768px) {
-    .addresses-container {
-      width: 100%; /* Full width on smaller screens */
-      padding: 10px; /* Adjust padding for smaller screens */
-    }
-  
-    .ant-col {
-      width: 100%; /* Ensure columns take full width */
-    }
-  }
-  
+}

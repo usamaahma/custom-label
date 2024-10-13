@@ -5,7 +5,7 @@ import Customcottontable from "../components/custom-cotton-label/customcottontab
 
 function Customcottonpage() {
   return (
-    <div>
+    <div className="landingback">
       <Customcottonhero />
       <Customcottontable />
       <GoogleReviews />

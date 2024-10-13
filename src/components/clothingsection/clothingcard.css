@@ -8,7 +8,7 @@
   text-align: left; /* Aligns the heading to the left */
   margin-bottom: 20px; /* Adds space between heading and grid */
   margin-left: 3rem;
-  margin-top: 2rem;
+  padding-top: 4rem;
   font-size: 2rem;
   font-weight: 700;
   color: #102051; /* Adjust color as needed */
@@ -29,6 +29,7 @@
   padding: 20px;
   border-radius: 1.2rem;
   text-align: center;
+  background-color: #FAF4EB !important; /* Replace with your desired background color */
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 

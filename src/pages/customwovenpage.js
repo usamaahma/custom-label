@@ -8,7 +8,7 @@ import Lastbest from "../components/custom-woven/lastbest";
 
 function CustomWovenPage() {
   return (
-    <div>
+    <div className="landingback">
       <Wovenhero />
       <Woventable />
       <GoogleReviews />

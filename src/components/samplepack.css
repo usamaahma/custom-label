@@ -13,7 +13,7 @@
 .col-text {
   display: flex;
   flex-direction: column;
-  background-color: rgb(244, 244, 244);
+  background-color: #faf4eb;
   width: 100%;
   align-items: center;
 }
@@ -40,12 +40,13 @@
 
 .btn-sample {
   padding: 10px 20px;
-  background-color: #070707;
+  background-color: #5F6F65;
   color: white;
   border: 2px solid transparent;
   border-radius: 5px;
   width: 14rem;
   cursor: pointer;
+  margin-top: 2rem;
   margin-bottom: 4rem;
   font-weight: bold;
 }
