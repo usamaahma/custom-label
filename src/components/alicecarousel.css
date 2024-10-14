@@ -3,13 +3,12 @@
   white-space: nowrap;
   box-sizing: border-box;
   width: 100%;
-  height: 90px; /* Adjust height for different screen sizes */
+  height: auto; /* Adjust height for different screen sizes */
   background: none;
   padding: 10px 0; /* Padding for visual appeal */
   margin-top: 2rem;
   margin-bottom: 2rem;
   /* Subtle transparent shadow */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   border-radius: 5px; /* Optional: rounded corners */
 }
 
@@ -31,7 +30,7 @@
 }
 
 .logo {
-  height: 65px;
+  height: 8rem;
   /* Default height of logos */
   width: auto;
   /* Keep aspect ratio intact */
@@ -59,36 +58,7 @@
 }
 
 /* Media Queries for responsiveness */
-@media (max-width: 1200px) {
-  .logo {
-    height: 60px;
-    /* Smaller height for medium screens */
-    margin-right: 20px;
-    /* Smaller spacing for medium screens */
-  }
-}
 
-@media (max-width: 768px) {
-  .scrolling-text {
-    height: 75px;
-    /* Adjust height for small screens */
-  }
-  .logo {
-    height: 60px;
-    /* Smaller height for medium screens */
-   }
-
- 
-}
-
-@media (max-width: 480px) {
-  .scrolling-text {
-    height: 75px;
-    /* Further adjustment for very small screens */
-  }
-
- 
-}
 @media (max-width: 480px) {
   .trustedtext {
     font-weight: bold;

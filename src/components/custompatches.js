@@ -6,13 +6,13 @@ import "./custompatches.css";
 
 function Custompatches() {
   const images = [
-    { src: "../../images/girl.png", title: "leather patches" },
-    { src: "../../images/girl.png", title: "PVC patches" },
-    { src: "../../images/girl.png", title: "printed patches" },
-    { src: "../../images/girl.png", title: "custom woven ribbons" },
-    { src: "../../images/girl.png", title: "Woven patches" },
-    { src: "../../images/girl.png", title: "chenille patches" },
-    { src: "../../images/girl.png", title: "Woven stain patches" },
+    { src: "../../images/x-label.jpg", title: "leather patches" },
+    { src: "../../images/x-small.jpg", title: "PVC patches" },
+    { src: "../../images/x-label.jpg", title: "printed patches" },
+    { src: "../../images/x-small.jpg", title: "custom woven ribbons" },
+    { src: "../../images/x-label.jpg", title: "Woven patches" },
+    { src: "../../images/x-small.jpg", title: "chenille patches" },
+    { src: "../../images/x-label.jpg", title: "Woven stain patches" },
   ];
 
   const [slidesToShow, setSlidesToShow] = useState(3);

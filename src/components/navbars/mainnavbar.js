@@ -9,6 +9,7 @@ import Cartmodal1 from "../checkout/cartmodal";
 const Mainnavbar = () => {
   const navigate = useNavigate(); // Hook to navigate
   const navbarRef = useRef(null); // Reference to the navbar
+  const [scrolled, setScrolled] = useState(false); // State to handle scroll position
 
   // Function to handle clicks outside of the navbar
   const handleClickOutside = (event) => {
@@ -25,21 +26,32 @@ const Mainnavbar = () => {
   };
 
   useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setScrolled(true); // Set scrolled to true when scrolling
+      } else {
+        setScrolled(false); // Set to false when at the top
+      }
+    };
+
     document.addEventListener("mousedown", handleClickOutside);
+    window.addEventListener("scroll", handleScroll); // Add scroll event listener
+
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
+      window.removeEventListener("scroll", handleScroll); // Clean up
     };
   }, []);
+
   const [visible, setVisible] = useState(false);
   return (
     <Navbar
-      className="mainnav-navbar"
+      className={`mainnav-navbar ${scrolled ? "scrolled" : ""}`} // Add scrolled class based on state
       style={{ backgroundColor: "#FAF4EB" }}
       expand="lg"
+      ref={navbarRef} // Attach the ref to the navbar
     >
       <Container className="mainnav-container">
-        {/* First div: Logo aligned to the left */}
-
         <Navbar.Brand
           as={Link}
           to="/"
@@ -47,7 +59,7 @@ const Mainnavbar = () => {
           className="mainnav-brand"
         >
           <img
-            src="../images/cwl-logo.svg" // Replace with your image path
+            src="../images/clothing-logo.svg" // Replace with your image path
             className="mainnav-logo d-inline-block align-top"
             alt="Logo"
           />
