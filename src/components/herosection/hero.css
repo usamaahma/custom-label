@@ -17,9 +17,10 @@
 }
 
 .herosec-button {
-  background-color: rgb(3, 28, 29); /* Button color */
-  color: white; /* Button text color */
-  border: none;
+  background-color: #5f6f65; /* Button color */
+  color: #faf4eb; /* Button text color */
+  width: 10rem;
+  border: solid 1px #faf4eb;
   padding: 0.5rem;
   border-radius: 5px;
   cursor: pointer;
@@ -30,6 +31,7 @@
 
 .herosec-button:hover {
   background-color: white; /* Change background on hover */
+  border: solid 1px black;
   color: rgb(3, 28, 29); /* Change text color on hover */
   border: 1px solid rgb(3, 28, 29);
 }
@@ -87,11 +89,15 @@
   .custom {
     font-size: 1rem !important;
   }
+  .premium{
+    font-size: small !important;
+  }
   .herosec-button {
     width: auto !important; /* Make button full width on small screens */
   }
   .herosec-container {
     background-size: contain;
     background-size: 200%; /* Increase the image size for smaller screens */
+    height: 50vh; /* Full height */
   }
 }

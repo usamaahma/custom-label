@@ -1,7 +1,21 @@
 /* mainnav.css */
 .mainnav-navbar {
   padding: 10px 20px;
+  position: fixed; /* Make the navbar sticky */
+  top: 5; /* Initially 5px from the top */
+  left: 0;
+  width: 100%; /* Take the full width of the screen */
+  z-index: 1000; /* Ensure it stays on top of other elements */
+  transition: all 0.3s ease; /* Smooth transition for any future styling changes */
 }
+
+.mainnav-navbar.scrolled {
+  top: 0; /* Set top to 0 when scrolled */
+}
+
+.main-content {
+  margin-top: 80px; /* Adjust based on your navbar height */
+ }
 .mainnav-logo {
   width: 8rem;
 }
@@ -47,6 +61,8 @@
 
 .mainnav-link {
   margin-left: 15px; /* Gap between tabs */
+  color: #231f20;
+  font-weight: bold !important;
 }
 .mainnav-quote-button1 {
   margin-left: 20px;

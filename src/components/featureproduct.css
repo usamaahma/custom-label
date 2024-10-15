@@ -21,14 +21,13 @@
 
 .overlay {
   position: absolute;
-  top: 5%; /* Adjust vertical positioning as needed */
+  top: 40%; /* Adjust vertical positioning as needed */
   left: 0; /* Start from the left edge */
   width: 100%; /* Full width */
   text-align: center; /* Center the text */
   color: white; /* Text color */
-  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+  background-color: rgba(95, 111, 101, 0.5); /* 70% opacity */
   padding: 10px 0; /* Vertical padding */
-  border-radius: 5px; /* Rounded corners */
 }
 
 .bottom-text {

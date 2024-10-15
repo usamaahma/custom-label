@@ -6,13 +6,13 @@ import "./custompatches.css";
 
 function Customclothing() {
   const images = [
-    { src: "../../images/girl.png", title: "Custom Woven Labels" },
-    { src: "../../images/girl.png", title: "Heat Transfer Labels" },
-    { src: "../../images/girl.png", title: "Cotton Labels" },
-    { src: "../../images/girl.png", title: "Custom Woven Labels" },
-    { src: "../../images/girl.png", title: "Heat Transfer Labels" },
-    { src: "../../images/girl.png", title: "Cotton Labels" },
-    { src: "../../images/girl.png", title: "Custom Woven Labels" },
+    { src: "../../images/x-small.jpg", title: "Custom Woven Labels" },
+    { src: "../../images/x-label.jpg", title: "Heat Transfer Labels" },
+    { src: "../../images/x-small.jpg", title: "Cotton Labels" },
+    { src: "../../images/x-label.jpg", title: "Custom Woven Labels" },
+    { src: "../../images/x-small.jpg", title: "Heat Transfer Labels" },
+    { src: "../../images/x-label.jpg", title: "Cotton Labels" },
+    { src: "../../images/x-small.jpg", title: "Custom Woven Labels" },
   ];
 
   const [slidesToShow, setSlidesToShow] = useState(3);

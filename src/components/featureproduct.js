@@ -7,25 +7,25 @@ const products = [
   {
     id: 1,
     title: "Custom Woven Labels",
-    image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+    image: "../images/x-label.jpg",
     bottomText: "Most Popular 1000 pcs starting at 0.19ea!",
   },
   {
     id: 2,
     title: "Express Clothing Labels  3 Day",
-    image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+    image: "../images/x-small.jpg",
     bottomText: "3 Day Turn Around Made in USA",
   },
   {
     id: 3,
     title: "Custom Woven Labels",
-    image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+    image: "../images/x-label.jpg",
     bottomText: "Most Popular 1000 pcs starting at 0.19ea!",
   },
   {
     id: 4,
     title: "Express Clothing Labels  3 Day",
-    image: "https://os.alipayobjects.com/rmsportal/QBnOOoLaAfKPirc.png",
+    image: "../images/x-small.jpg",
     bottomText: "3 Day Turn Around Made in USA",
   },
 ];

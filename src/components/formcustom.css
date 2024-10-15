@@ -25,7 +25,7 @@
   position: relative; /* Position the form container relative to stack above the background */
   width: 45rem;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.8); /* Slight transparency for contrast */
+  background: #FAF4EB; /* Slight transparency for contrast */
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   border-radius: 10px;
   margin: 1rem auto;
