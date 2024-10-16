@@ -1,7 +1,7 @@
 .hang-card-container {
-   margin: 0 auto; /* Centers the container */
+  margin: 0 auto; /* Centers the container */
   padding: 20px;
-  background-color: #FAF4EB;
+  background-color: #faf4eb;
 }
 
 .hang-main-heading {
@@ -11,7 +11,7 @@
   padding-top: 4rem !important;
   font-size: 2rem;
   font-weight: 700;
-  color: #102051; /* Adjust color as needed */
+  color: #5f6f65; /* Adjust color as needed */
 }
 
 .hang-card-grid {
@@ -36,7 +36,7 @@
 }
 
 .hang-card:hover {
-  background-color: #007ab7;
+  background-color: rgb(95, 111, 101, 0.7) !important;
   color: white;
   border-color: white; /* Change border color on hover */
 }

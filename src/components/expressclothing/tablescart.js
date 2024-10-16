@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Button, Card, Col, Row, Upload, message } from "antd";
-import "./tablescart.css";
 import LastTable1 from "./lasttable";
 import { useCart } from "../../context/cartcontext";
+import "./tablescart.css";
+import "./expresshero.css";
+import { UploadOutlined } from "@ant-design/icons";
 
 const { Dragger } = Upload;
 const props = {
@@ -10,18 +12,18 @@ const props = {
   multiple: true,
   action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
   onChange(info) {
-    const { status } = info.file;
-    if (status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
+    const { status, response } = info.file;
     if (status === "done") {
       message.success(`${info.file.name} file uploaded successfully.`);
     } else if (status === "error") {
-      message.error(`${info.file.name} file upload failed.`);
+      // Check the status code
+      const errorMessage =
+        response?.status === 503
+          ? "The server is currently unavailable. Please try again later."
+          : `${info.file.name} file upload failed.`;
+      message.error(errorMessage);
+      console.error("Error details:", response);
     }
-  },
-  onDrop(e) {
-    console.log("Dropped files", e.dataTransfer.files);
   },
 };
 
@@ -60,6 +62,14 @@ const card1 = [
     imgSrc: "../images/straight.png",
   },
 ];
+const imagesData = [
+  { src: "../images/center1.png", text: "Free Graphics" },
+  { src: "../images/center2.png", text: "Eco-Friendly" },
+  { src: "../images/center3.png", text: "Environmental Friendly Ink" },
+  { src: "../images/center4.png", text: "Short Run" },
+  { src: "../images/center5.png", text: "Custom Size & Style" },
+  { src: "../images/center6.png", text: "Competitive Price" },
+];
 
 function CenteredColumns() {
   const { addToCart } = useCart();
@@ -88,22 +98,95 @@ function CenteredColumns() {
   const handleAddToCart = (item) => {
     addToCart(item);
   };
+  const [selectedImage, setSelectedImage] = useState("../images/martin.png");
+  // State to track mouse position
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  // The full text
+  const fullText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`;
+
+  // The truncated version of the text (first 100 characters, you can adjust as needed)
+  const truncatedText = `${fullText.substring(0, 100)}`;
+
+  // Toggle function to switch between expanded and collapsed states
+  const toggleText = () => {
+    setIsExpanded(!isExpanded);
+  };
+
+  // Array of images for the thumbnail carousel
+  const thumbnailImages = [
+    "../images/martin.png",
+    "../images/girl.png",
+    "../images/post.png",
+    "../images/martin.png",
+  ];
+
+  // Function to handle mouse movement over the image
+  const handleMouseMove = (e) => {
+    // Get the dimensions of the image container
+    const { left, top, width, height } = e.target.getBoundingClientRect();
+    // Calculate mouse position as a percentage of the image
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setMousePosition({ x, y });
+
+    // Set the transform origin based on mouse position
+    e.target.style.transformOrigin = `${x}% ${y}%`;
+    e.target.style.transform = "scale(2)"; // Scale the image when hovering
+  };
+
+  // Function to reset image scale when the mouse leaves
+  const handleMouseLeave = (e) => {
+    e.target.style.transform = "scale(1)";
+    e.target.style.transformOrigin = "center center";
+  };
 
   return (
     <div className="table-express">
       <Row className="centered-row-table">
-        <Col xs={24} md={16} className="left-column">
+        <Col xs={24} md={8} lg={12} className="left-column ">
+          <div className="image-column">
+            {" "}
+            <div className="main-image-container">
+              <img
+                alt="Express Clothing Labels"
+                src={selectedImage}
+                className="img-fluid main-image"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              />
+            </div>
+            <div className="thumbnail-carousel">
+              {thumbnailImages.map((image, index) => (
+                <img
+                  key={index}
+                  alt={`Thumbnail ${index}`}
+                  src={image}
+                  className="thumbnail-image"
+                  onClick={() => setSelectedImage(image)}
+                />
+              ))}
+            </div>
+          </div>
           <div className="size-txt">
             <h2 className="simpletable-heading">Upload Artwork</h2>
           </div>
-          <div>
-            <Dragger {...props} style={{ marginTop: "3rem",background:"#FAF4EB" }}>
+          <div className="divs-tableexpress">
+            <Dragger {...props}>
               <p className="ant-upload-drag-icon">
-                <i className="fa fa-upload" aria-hidden="true"></i>
+                <UploadOutlined />
               </p>
-              <p className="ant-upload-text">Upload Your Artwork File?</p>
+              <p className="ant-upload-text">
+                Click or drag file to this area to upload
+              </p>
+              <p className="ant-upload-hint">
+                Support for a single or bulk upload. Strictly prohibited from
+                uploading company data or other banned files.
+              </p>
             </Dragger>
           </div>
+
           <div className="size-txt">
             <h2 className="simpletable-heading">Style?</h2>
           </div>
@@ -238,8 +321,57 @@ function CenteredColumns() {
             <LastTable1 />
           </div>
         </Col>
+        <Col xs={24} md={8} lg={6} className="center-column ">
+          <h3>Express Clothing</h3>
+          <p style={{ width: "90%" }}>
+            {/* If isExpanded is true, show the full text, else show the truncated version */}
+            {isExpanded ? fullText : truncatedText}{" "}
+            <button onClick={toggleText} className="readmore-button">
+              {isExpanded ? "Read Less" : "Read More.."}
+            </button>
+          </p>
 
-        <Col xs={24} md={8} className="right-column">
+          <div>
+            <div className="image-container-express">
+              {imagesData.map((image, index) => (
+                <div className="image-wrapper-express" key={index}>
+                  <img
+                    src={image.src}
+                    alt={image.text}
+                    className="responsive-image1"
+                  />
+                  <p className="center-text-images">{image.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Col>
+        <div className="center-nodisplay">
+          <h2>Express Clothing</h2>
+          <p style={{ width: "80%",fontSize:"large" }}>
+            {/* If isExpanded is true, show the full text, else show the truncated version */}
+            {isExpanded ? fullText : truncatedText}{" "}
+            <button onClick={toggleText} className="readmore-button">
+              {isExpanded ? "Read Less" : "Read More.."}
+            </button>
+          </p>
+
+          <div>
+            <div className="image-container-express">
+              {imagesData.map((image, index) => (
+                <div className="image-wrapper-express" key={index}>
+                  <img
+                    src={image.src}
+                    alt={image.text}
+                    className="responsive-image1"
+                  />
+                  <p className="center-text-images">{image.text}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+        <Col xs={24} md={8} lg={5} className="right-column">
           <div className="sticky-div">
             <div className="sticky-first">
               <p>Your Instant Quote</p>

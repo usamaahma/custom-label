@@ -49,8 +49,7 @@ function Satinhero() {
                 <li>Graphic artwork assistance</li>
                 <li>Fast turnaround & delivery</li>
               </ul>
-              <img className="image-post" alt="post" src="../images/post.png" />
-            </div>
+             </div>
             <div className="second-firstdiv">
               <p className="our-productexpress">Our Product Process</p>
               <ol className="order-list">

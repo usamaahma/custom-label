@@ -40,10 +40,9 @@ function Wovenlabelhero() {
                 <li>Straight cut (flat) only</li>
                 <li>Fast turnaround & delivery</li>
               </ul>
-              <img className="image-post" alt="post" src="../images/post.png" />
-            </div>
+             </div>
             <div className="second-firstdiv">
-              <p className="our-productexpress"> Our Order Process</p>
+              <p className="our-productexpress">Our Order Process</p>
               <ol className="order-list">
                 <li>Create your label and approve before adding to cart.</li>
                 <li>Complete our fast checkout.</li>

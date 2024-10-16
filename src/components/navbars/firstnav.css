@@ -34,15 +34,15 @@
 
 .firstnavbar-link {
   margin-left: 5px; /* Gap between links */
-  color: #231F20;
+  color: #FAF4EB;
 }
 .cart-strong {
-  color: #231F20;
+  color: #FAF4EB;
 }
 .social-icon-first {
   width: 2rem;
   height: 2rem;
-  background: white;
+  background: #FAF4EB;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +73,7 @@
 }
 .mainnav-quote-button {
   margin-left: 20px;
-  background-color: rgb(3, 28, 29);
+  background-color: #5F6F65;
   color: white; /* Text color */
   border: none; /* Remove border */
   transition: background-color 0.3s; /* Smooth transition */
@@ -82,8 +82,7 @@
 
 .mainnav-quote-button:hover {
   background-color: white; /* Change background to white on hover */
-  color: rgb(3, 28, 29); /* Change text color on hover */
-  border: 1px solid rgb(3, 28, 29); /* Add border on hover */
+   border: 1px solid rgb(3, 28, 29); /* Add border on hover */
 }
 
 .mainnav-image {
