@@ -34,10 +34,10 @@
 
 .firstnavbar-link {
   margin-left: 5px; /* Gap between links */
-  color: #231F20;
+  color: #FAF4EB;
 }
 .cart-strong {
-  color: #231F20;
+  color: #FAF4EB;
 }
 .social-icon-first {
   width: 2rem;
@@ -82,8 +82,7 @@
 
 .mainnav-quote-button:hover {
   background-color: white; /* Change background to white on hover */
-  color: rgb(3, 28, 29); /* Change text color on hover */
-  border: 1px solid rgb(3, 28, 29); /* Add border on hover */
+   border: 1px solid rgb(3, 28, 29); /* Add border on hover */
 }
 
 .mainnav-image {

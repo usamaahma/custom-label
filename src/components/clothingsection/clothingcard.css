@@ -11,7 +11,7 @@
   padding-top: 4rem;
   font-size: 2rem;
   font-weight: 700;
-  color: #102051; /* Adjust color as needed */
+  color: #5f6f65; /* Adjust color as needed */
 }
 
 .card-grid {
@@ -29,8 +29,9 @@
   padding: 20px;
   border-radius: 1.2rem;
   text-align: center;
-  background-color: #FAF4EB !important; /* Replace with your desired background color */
+  background-color: #faf4eb !important; /* Replace with your desired background color */
   transition: background-color 0.3s ease, color 0.3s ease;
+  text-decoration: none !important;
 }
 
 .card-image {
@@ -45,7 +46,7 @@
 }
 
 .card:hover {
-  background-color: #007ab7;
+  background-color:rgb(95, 111, 101, 0.7) !important;
   color: white;
 }
 

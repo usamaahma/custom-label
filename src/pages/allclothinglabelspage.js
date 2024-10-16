@@ -1,17 +1,13 @@
 import React from "react";
 import Clothingcard from "../components/clothingsection/Clothingcard";
-import Patchescard from "../components/clothingsection/Patchescard";
-import Hangtags from "../components/clothingsection/Hangtags";
-import Stockwoven from "../components/clothingsection/Stockwoven";
-
+ import Hangtags from "../components/clothingsection/Hangtags";
+ 
 function Allclothingpage() {
   return (
     <div className="landingback">
       <Clothingcard />
-      <Patchescard />
-      <Hangtags />
-      <Stockwoven />
-    </div>
+       <Hangtags />
+     </div>
   );
 }
 

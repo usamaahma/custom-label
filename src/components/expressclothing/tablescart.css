@@ -14,20 +14,25 @@
   display: grid;
   justify-content: center;
   align-items: flex-start;
-  padding: 1rem;
+   padding: 1rem;
 }
 .left-column {
   text-align: center;
   width: 60rem;
 }
+.center-column {
+  text-align: left;
+  margin-top: 3rem;
+}
 
 .sticky-div {
   position: sticky;
   display: block;
-  justify-content:flex-end;
+  justify-content: flex-end;
   top: 20px;
   padding: 20px;
   border-radius: 5px;
+  padding-top: 5rem;
 }
 
 .table-express {
@@ -48,6 +53,7 @@
   padding: 1rem;
   align-items: center;
   background-color: #faf4eb;
+  max-width: 33rem;
 }
 
 .card-grid {
@@ -84,7 +90,7 @@
   border: solid 0.5px #436886;
   width: 100%;
   padding: 1rem;
-  background-color: #FAF4EB;
+  background-color: #faf4eb;
   border-radius: 8px;
 }
 
@@ -235,17 +241,69 @@ p {
   border: solid white 0.2rem;
   margin: 0 auto;
 }
+.image-container-express {
+  display: flex;
+  flex-wrap: wrap; /* Allows the images to wrap to the next line */
+  gap: 8px; /* Space between the images */
+}
 
+.image-wrapper-express {
+  width: calc(50% - 8px); /* Width of each image wrapper (50% minus the gap) */
+  box-sizing: border-box; /* Ensures padding and borders are included in width/height */
+}
+
+.responsive-image1 {
+  width: 60%; /* Makes the image responsive to the wrapper */
+  height: auto;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  margin: 1rem 0;
+}
+
+.responsive-image1:hover {
+  transform: scale(1.05);
+}
+.readmore-button {
+  background: transparent !important;
+  border: none;
+  color: #5f6f65;
+}
+.center-text-images {
+  text-align: left;
+  margin-top: "8px";
+  font-size: "14px";
+}
+.center-nodisplay{
+  display: none;
+ }
 /* Responsive adjustments */
 @media (max-width: 1200px) {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
     /* 3 cards per row on medium screens */
   }
+  .centered-row-table{
+    display: block !important;
+    margin-left: 20rem;
+  }
 
   .centered-row-table-label {
     display: grid !important;
     margin-left: 10rem;
+  }
+  .center-column{
+    display: none;
+  }
+  .center-nodisplay{
+    display: block;
+    width: 60%;
+    margin-top: 3rem;
+   }
+}
+@media (min-width: 1024px) {
+  .rowgap {
+    width: auto;
+    margin: 0 auto;
   }
 }
 
@@ -271,6 +329,26 @@ p {
   .sticky-help {
     width: 16rem;
   }
+
+}
+@media (max-width: 768px) {
+  .center-column {
+    text-align: center;
+  }
+  .center-text-images {
+    text-align: center;
+  }
+  .centered-row-table{
+    display: block !important;
+    margin-left: 0rem;
+  }
+  .center-column{
+    display: block;
+  }
+  .center-nodisplay{
+    display: none
+   }
+
 }
 
 @media (max-width: 850px) {

@@ -12,7 +12,7 @@ import { BsDiscord } from "react-icons/bs";
 const Firstnavbar = () => {
   const [visible, setVisible] = useState(false);
   return (
-    <Navbar className="firstnavbar-navbar" expand="lg" >
+    <Navbar className="firstnavbar-navbar" expand="lg">
       <Container className="firstnavbar-container">
         <div className="logos-firstnav">
           {" "}
@@ -60,7 +60,8 @@ const Firstnavbar = () => {
         {/* Third div: Login/Register and icons on the right side */}
         <Nav className="firstnavbar-nav ml-auto">
           <Nav.Link as={Link} to="/login" className="firstnavbar-link">
-            Login/Register <FaUserCircle style={{ color: "#231F20" }} />
+            <span className="cart-strong"> Login/Register </span>{" "}
+            <FaUserCircle style={{ color: "#FAF4EB" }} />
           </Nav.Link>
           <Nav.Link className="firstnavbar-link">
             <button
@@ -73,7 +74,7 @@ const Firstnavbar = () => {
               }}
             >
               <strong className="cart-strong">Cart</strong>{" "}
-              <FaShoppingCart style={{ color: "#231F20" }} />
+              <FaShoppingCart style={{ color: "#FAF4EB" }} />
             </button>
             <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
           </Nav.Link>
