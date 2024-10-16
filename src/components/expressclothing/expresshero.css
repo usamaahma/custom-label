@@ -1,6 +1,6 @@
+/* expresshero.css */
 .centered-container {
   display: flex;
-  justify-content: center;
   align-items: center;
   min-height: 100vh;
   padding: 0 1rem; /* Add horizontal padding for better appearance */
@@ -65,22 +65,24 @@
   font-size: 1.5rem;
   font-weight: 700;
 }
-/* expresshero.css */
-.centered-container {
-  padding: 2rem;
-}
 
 .main-image-container {
-  text-align: center; /* Center the main image */
-  margin-bottom: 1rem; /* Add space below the main image */
+  overflow: hidden; /* Ensures the image stays within the container when enlarged */
+  position: relative;
+  cursor: crosshair; /* Optional: Changes cursor to indicate interaction */
 }
 
 .main-image {
-  max-width: 100%; /* Responsive main image */
-  height: auto; /* Maintain aspect ratio */
+  width: 20rem !important;
+  height: 20rem !important;
+  transition: transform 0.2s ease, transform-origin 0.2s ease; /* Smooth transition */
+  transform-origin: center center; /* Set default transform origin to center */
 }
-.main-image:hover {
-  transform: scale(1.1); /* Enlarge the image on hover */
+
+/* Magnifying effect */
+.main-image-container:hover .main-image {
+  transform: scale(2); /* Scale the image when hovering */
+  cursor: crosshair; /* Optional: Changes cursor to indicate interaction */
 }
 
 .thumbnail-carousel {

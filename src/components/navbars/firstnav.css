@@ -42,7 +42,7 @@
 .social-icon-first {
   width: 2rem;
   height: 2rem;
-  background: white;
+  background: #FAF4EB;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -73,7 +73,7 @@
 }
 .mainnav-quote-button {
   margin-left: 20px;
-  background-color: rgb(3, 28, 29);
+  background-color: #5F6F65;
   color: white; /* Text color */
   border: none; /* Remove border */
   transition: background-color 0.3s; /* Smooth transition */

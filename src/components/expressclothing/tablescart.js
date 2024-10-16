@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { Button, Card, Col, Row, Upload, message } from "antd";
-import "./tablescart.css";
 import LastTable1 from "./lasttable";
 import { useCart } from "../../context/cartcontext";
+import "./tablescart.css";
+import "./expresshero.css";
 
 const { Dragger } = Upload;
 const props = {
@@ -88,16 +89,74 @@ function CenteredColumns() {
   const handleAddToCart = (item) => {
     addToCart(item);
   };
+  const [selectedImage, setSelectedImage] = useState("../images/martin.png");
+  // State to track mouse position
+  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
+
+  // Array of images for the thumbnail carousel
+  const thumbnailImages = [
+    "../images/martin.png",
+    "../images/girl.png",
+    "../images/post.png",
+    "../images/martin.png",
+  ];
+
+  // Function to handle mouse movement over the image
+  const handleMouseMove = (e) => {
+    // Get the dimensions of the image container
+    const { left, top, width, height } = e.target.getBoundingClientRect();
+    // Calculate mouse position as a percentage of the image
+    const x = ((e.clientX - left) / width) * 100;
+    const y = ((e.clientY - top) / height) * 100;
+    setMousePosition({ x, y });
+
+    // Set the transform origin based on mouse position
+    e.target.style.transformOrigin = `${x}% ${y}%`;
+    e.target.style.transform = "scale(2)"; // Scale the image when hovering
+  };
+
+  // Function to reset image scale when the mouse leaves
+  const handleMouseLeave = (e) => {
+    e.target.style.transform = "scale(1)";
+    e.target.style.transformOrigin = "center center";
+  };
 
   return (
     <div className="table-express">
       <Row className="centered-row-table">
-        <Col xs={24} md={16} className="left-column">
+        <Col xs={24} md={16} className="left-column ">
+          <div className="image-column">
+            {" "}
+            <div className="main-image-container">
+              <img
+                alt="Express Clothing Labels"
+                src={selectedImage}
+                className="img-fluid main-image"
+                onMouseMove={handleMouseMove}
+                onMouseLeave={handleMouseLeave}
+              />
+            </div>
+            <div className="thumbnail-carousel">
+              {thumbnailImages.map((image, index) => (
+                <img
+                  key={index}
+                  alt={`Thumbnail ${index}`}
+                  src={image}
+                  className="thumbnail-image"
+                  onClick={() => setSelectedImage(image)}
+                />
+              ))}
+            </div>
+          </div>
+
           <div className="size-txt">
             <h2 className="simpletable-heading">Upload Artwork</h2>
           </div>
           <div>
-            <Dragger {...props} style={{ marginTop: "3rem",background:"#FAF4EB" }}>
+            <Dragger
+              {...props}
+              style={{ marginTop: "3rem", background: "#FAF4EB" }}
+            >
               <p className="ant-upload-drag-icon">
                 <i className="fa fa-upload" aria-hidden="true"></i>
               </p>

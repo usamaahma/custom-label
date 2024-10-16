@@ -12,7 +12,7 @@ import { BsDiscord } from "react-icons/bs";
 const Firstnavbar = () => {
   const [visible, setVisible] = useState(false);
   return (
-    <Navbar className="firstnavbar-navbar" expand="lg">
+    <Navbar className="firstnavbar-navbar" expand="lg" >
       <Container className="firstnavbar-container">
         <div className="logos-firstnav">
           {" "}

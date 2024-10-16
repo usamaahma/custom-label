@@ -1,6 +1,6 @@
 .centered-row {
   display: flex;
-  justify-content: center;
+  justify-content: space-around;
   align-items: center;
   min-height: 100vh;
   flex-wrap: wrap;
@@ -23,6 +23,8 @@
 
 .sticky-div {
   position: sticky;
+  display: block;
+  justify-content:flex-end;
   top: 20px;
   padding: 20px;
   border-radius: 5px;

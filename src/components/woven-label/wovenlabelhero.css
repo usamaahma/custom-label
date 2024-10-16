@@ -17,8 +17,7 @@
 }
 
 .img-fluid {
-  width: 100%; /* Make the image responsive */
-  height: auto; /* Maintain aspect ratio */
+   height: auto; /* Maintain aspect ratio */
 }
 
 .expresstext-clothing {
@@ -75,8 +74,7 @@
 }
 
 .main-image {
-  max-width: 100%; /* Responsive main image */
-  height: auto; /* Maintain aspect ratio */
+   height: auto; /* Maintain aspect ratio */
 }
 .main-image:hover {
   transform: scale(1.1); /* Enlarge the image on hover */
