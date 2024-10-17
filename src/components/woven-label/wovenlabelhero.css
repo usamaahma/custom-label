@@ -82,9 +82,10 @@
 
 .thumbnail-carousel {
   display: flex;
+  justify-content: center;
   overflow-x: auto; /* Allow horizontal scrolling */
   padding: 1rem 0; /* Add vertical padding */
-}
+} 
 
 .thumbnail-image {
   width: 80px; /* Width of thumbnails */

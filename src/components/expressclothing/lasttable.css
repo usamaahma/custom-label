@@ -19,3 +19,12 @@
     width: 200px; /* Width for Total column */
   }
 }
+@media (max-width: 425px) {
+  .ant-table-wrapper {
+    overflow-x: auto; /* Allow horizontal scroll */
+  }
+
+  .ant-table {
+    width: 300px; /* Set a fixed width for table to allow scrolling */
+  }
+}
