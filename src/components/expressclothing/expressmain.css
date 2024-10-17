@@ -1,0 +1,17 @@
+.main-express {
+  display: flex;
+  padding-top: 4rem;
+  justify-content: space-between;
+  padding: 2rem;
+}
+ 
+
+@media (max-width: 1100px) {
+    .simpletable-heading{
+        text-align: center;
+    }
+  .main-express {
+    display: block;
+    justify-content: center;
+  }
+}

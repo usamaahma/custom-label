@@ -14,7 +14,7 @@
   display: grid;
   justify-content: center;
   align-items: flex-start;
-   padding: 1rem;
+  padding: 1rem;
 }
 .left-column {
   text-align: center;
@@ -30,8 +30,7 @@
   display: block;
   justify-content: flex-end;
   top: 20px;
-  padding: 20px;
-  border-radius: 5px;
+   border-radius: 5px;
   padding-top: 5rem;
 }
 
@@ -45,17 +44,17 @@
 }
 
 .divs-tableexpress {
-  margin-top: 3rem;
+  margin: 3rem auto; /* Vertically and horizontally center */
   border: solid 0.5px #436886;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center !important;
   border-radius: 1rem;
   padding: 1rem;
   align-items: center;
   background-color: #faf4eb;
   max-width: 33rem;
+  width: 100%; /* Ensures it takes the full width available */
 }
-
 .card-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12rem, 1fr));
@@ -250,10 +249,11 @@ p {
 .image-wrapper-express {
   width: calc(50% - 8px); /* Width of each image wrapper (50% minus the gap) */
   box-sizing: border-box; /* Ensures padding and borders are included in width/height */
+  margin: 0 auto;
 }
 
 .responsive-image1 {
-  width: 60%; /* Makes the image responsive to the wrapper */
+  width: 40%; /* Makes the image responsive to the wrapper */
   height: auto;
   border-radius: 8px;
   transition: transform 0.3s;
@@ -269,20 +269,19 @@ p {
   color: #5f6f65;
 }
 .center-text-images {
-  text-align: left;
   margin-top: "8px";
   font-size: "14px";
 }
-.center-nodisplay{
+.center-nodisplay {
   display: none;
- }
+}
 /* Responsive adjustments */
 @media (max-width: 1200px) {
   .card-grid {
     grid-template-columns: repeat(3, 1fr);
     /* 3 cards per row on medium screens */
   }
-  .centered-row-table{
+  .centered-row-table {
     display: block !important;
     margin-left: 20rem;
   }
@@ -291,14 +290,23 @@ p {
     display: grid !important;
     margin-left: 10rem;
   }
-  .center-column{
+  .center-column {
     display: none;
   }
-  .center-nodisplay{
+  .center-nodisplay {
     display: block;
     width: 60%;
     margin-top: 3rem;
-   }
+  }
+}
+@media (max-width: 1100px) {
+  .sticky-div {
+    position: static;
+    margin: 1rem auto; /* Vertically and horizontally center */
+    width: 100%; /* Full width by default */
+    max-width: 500px; /* Adjust this to your preferred max width */
+    display: block; /* Ensure it's block level to respect the margin */
+  }
 }
 @media (min-width: 1024px) {
   .rowgap {
@@ -329,7 +337,6 @@ p {
   .sticky-help {
     width: 16rem;
   }
-
 }
 @media (max-width: 768px) {
   .center-column {
@@ -338,17 +345,16 @@ p {
   .center-text-images {
     text-align: center;
   }
-  .centered-row-table{
+  .centered-row-table {
     display: block !important;
     margin-left: 0rem;
   }
-  .center-column{
+  .center-column {
     display: block;
   }
-  .center-nodisplay{
-    display: none
-   }
-
+  .center-nodisplay {
+    display: none;
+  }
 }
 
 @media (max-width: 850px) {
@@ -394,6 +400,7 @@ p {
     position: static;
     /* Make the sticky div static for smaller screens */
     margin-top: 1rem;
+    margin: 0 auto;
     /* Add some margin above the sticky content */
   }
 
@@ -419,7 +426,7 @@ p {
   }
 
   .card-grid {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     /* 1 card per row on extra small screens */
     padding: 1rem;
     /* Adjust padding */
