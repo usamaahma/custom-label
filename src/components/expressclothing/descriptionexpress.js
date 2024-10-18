@@ -1,10 +1,11 @@
 import { Col, Row } from "antd";
+import "./descriptionexpress.css"
 
-function descriptionexpress() {
+function Descriptionexpress() {
   return (
     <div>
       <div>
-        <Row>
+        <Row justify={"center"}>
           <Col span={12}>col-12</Col>
           <Col span={12}>col-12</Col>
         </Row>
@@ -13,4 +14,4 @@ function descriptionexpress() {
   );
 }
 
-export default descriptionexpress;
+export default Descriptionexpress;
