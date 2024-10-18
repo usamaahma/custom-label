@@ -30,8 +30,13 @@
   display: block;
   justify-content: flex-end;
   top: 20px;
-   border-radius: 5px;
-  padding-top: 5rem;
+  line-height: 1;
+  border-radius: 5px;
+  transition: padding-top 0.3s; /* Smooth transition for padding change */
+
+ }
+ .scrolled-padding {
+  padding-top: 6rem;
 }
 
 .table-express {
@@ -52,8 +57,7 @@
   padding: 1rem;
   align-items: center;
   background-color: #faf4eb;
-  max-width: 33rem;
-  width: 100%; /* Ensures it takes the full width available */
+   width: 80%; /* Ensures it takes the full width available */
 }
 .card-grid {
   display: grid;
@@ -253,7 +257,7 @@ p {
 }
 
 .responsive-image1 {
-  width: 40%; /* Makes the image responsive to the wrapper */
+  width: 20%; /* Makes the image responsive to the wrapper */
   height: auto;
   border-radius: 8px;
   transition: transform 0.3s;
@@ -323,6 +327,11 @@ p {
   .centered-row-table-label {
     margin-left: 0rem;
   }
+  .divs-tableexpress{
+    width: 100% !important;
+  }
+  
+  
 }
 @media (min-width: 700px) and (max-width: 900px) {
   .centered-row-table-label {
@@ -355,6 +364,7 @@ p {
   .center-nodisplay {
     display: none;
   }
+  
 }
 
 @media (max-width: 850px) {
@@ -422,7 +432,7 @@ p {
     flex-direction: column;
     /* Stack cards vertically */
     align-items: center;
-    /* Center align items */
+     /* Center align items */
   }
 
   .card-grid {

@@ -148,4 +148,25 @@
   .second-firstdiv {
     width: auto; /* Reset width for very small screens */
   }
+  .thumbnail-carousel {
+    display: flex;
+    justify-content: flex-start;
+    overflow-x: auto; /* Enables horizontal scrolling */
+    white-space: nowrap; /* Prevents wrapping of items */
+    scroll-behavior: smooth; /* Optional: makes the scroll smooth */
+  }
+  
+  /* Optional: styling the scrollbar */
+  .thumbnail-carousel::-webkit-scrollbar {
+    height: 8px; /* Height of the scrollbar */
+  }
+  
+  .thumbnail-carousel::-webkit-scrollbar-thumb {
+    background: #888; /* Color of the scrollbar thumb */
+    border-radius: 4px; /* Rounded corners */
+  }
+  
+  .thumbnail-carousel::-webkit-scrollbar-thumb:hover {
+    background: #555; /* Color on hover */
+  }
 }

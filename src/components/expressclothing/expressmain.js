@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Button, Card, Col, Row, Upload, message } from "antd";
+import React, { useState,useEffect } from "react";
+import { Button, Card, Breadcrumb, Upload, message } from "antd";
 import LastTable1 from "./lasttable";
 import { useCart } from "../../context/cartcontext";
 import { UploadOutlined } from "@ant-design/icons";
@@ -70,8 +70,31 @@ const imagesData = [
   { src: "../images/center6.png", text: "Free Artwork Assistance" },
 ];
 
+    
+ 
 function Expressmain() {
   const { addToCart } = useCart();
+  useEffect(() => {
+    const stickyDiv = document.querySelector(".sticky-div");
+
+    const handleScroll = () => {
+      if (stickyDiv) {
+        if (window.scrollY > 50) {
+          stickyDiv.classList.add("scrolled-padding");
+        } else {
+          stickyDiv.classList.remove("scrolled-padding");
+        }
+      }
+    };
+
+    // Add event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // State for selected data
   const [selectedData, setSelectedData] = useState({
@@ -142,294 +165,352 @@ function Expressmain() {
   };
 
   return (
-    <div className="main-express">
-      {/* First Div */}
+    <div className="first-main-express">
+      <div className="headingbread">
+        <p className="express-clothing-heading">Express Clothing Labels</p>
+        <Breadcrumb
+          items={[
+            {
+              title: <a href="/">Home</a>,
+            },
+            {
+              title: <a href="/all-clothing-labels">Clothing Labels</a>,
+            },
 
-      <div>
-        {" "}
-        <div style={{margin:"0 auto"}}>
-          {" "}
-          <div className="main-image-container">
-            <img
-              alt="Express Clothing Labels"
-              src={selectedImage}
-              className="img-fluid main-image"
-              onMouseMove={handleMouseMove}
-              onMouseLeave={handleMouseLeave}
-            />
-          </div>
-          <div className="thumbnail-carousel">
-            {thumbnailImages.map((image, index) => (
-              <img
-                key={index}
-                alt={`Thumbnail ${index}`}
-                src={image}
-                className="thumbnail-image"
-                onClick={() => setSelectedImage(image)}
-              />
-            ))}
-          </div>
-        </div>
-        <div className="size-txt">
-          <h2 className="simpletable-heading">Upload Artwork</h2>
-        </div>
-        <div className="divs-tableexpress">
-          <Dragger {...props}>
-            <p className="ant-upload-drag-icon">
-              <UploadOutlined />
-            </p>
-            <p className="ant-upload-text">
-              Click or drag file to this area to upload
-            </p>
-            <p className="ant-upload-hint">
-              Support for a single or bulk upload. Strictly prohibited from
-              uploading company data or other banned files.
-            </p>
-          </Dragger>
-        </div>
-        <div className="size-txt">
-          <h2 className="simpletable-heading">Style?</h2>
-        </div>
-        <div className="divs-tableexpress">
-          <Card
-            bordered={false}
-            style={{ width: "11rem", height: "12rem", background: "#FAF4EB" }}
-            onClick={() => handleCardClick("style", "Straight Cut (Flat)")}
-          >
-            <img
-              alt="Straight Cut"
-              src="../images/straight.png"
-              className="image-card-express"
-            />
-            <p>
-              Straight Cut <br />
-              (Flat)
-            </p>
-          </Card>
-        </div>
-        <div className="size-txt">
-          <h2 className="simpletable-heading">Size?</h2>
-        </div>
-        <div className="divs-tableexpress">
-          <div className="card-grid">
-            {cardData.map((card) => (
-              <div key={card.id} className="card-container">
-                <Card
-                  bordered={false}
-                  onClick={() => handleCardClick("size", card.title)}
-                  style={{ background: "#FAF4EB" }}
-                >
+            {
+              title: "Express Clothing",
+            },
+          ]}
+          className="breadcrumb"
+        />
+      </div>
+      <div className="main-express">
+        <div className="column-direction-express">
+          <div className="inside-col-dire">
+            {" "}
+            {/* First Div */}
+            <div>
+              {" "}
+              <div style={{ margin: "0 auto" }}>
+                {" "}
+                <div className="main-image-container">
                   <img
-                    alt={card.title}
-                    src={card.imgSrc}
-                    className="image-card-express-1"
+                    alt="Express Clothing Labels"
+                    src={selectedImage}
+                    className="img-fluid main-image"
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
                   />
-                  <p>{card.title}</p>
-                </Card>
+                </div>
+                <div className="thumbnail-carousel">
+                  {thumbnailImages.map((image, index) => (
+                    <img
+                      key={index}
+                      alt={`Thumbnail ${index}`}
+                      src={image}
+                      className="thumbnail-image"
+                      onClick={() => setSelectedImage(image)}
+                    />
+                  ))}
+                </div>
               </div>
-            ))}
+            </div>
+            {/* Second Div */}
+            <div
+              style={{
+                display: "block",
+                justifyContent: "center",
+                textAlign: "center",
+              }}
+            >
+              {" "}
+              <h2>Express Clothing</h2>
+              <p
+                style={{ width: "70%", textAlign: "center", margin: "0 auto" }}
+              >
+                {/* If isExpanded is true, show the full text, else show the truncated version */}
+                {isExpanded ? fullText : truncatedText}{" "}
+                <button onClick={toggleText} className="readmore-button">
+                  {isExpanded ? "Read Less" : "Read More.."}
+                </button>
+              </p>
+              <div>
+                <div className="image-container-express">
+                  {imagesData.map((image, index) => (
+                    <div className="image-wrapper-express" key={index}>
+                      <img
+                        src={image.src}
+                        alt={image.text}
+                        className="responsive-image1"
+                      />
+                      <p className="center-text-images">{image.text}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
-        </div>
-        <div className="size-txt">
-          <h2 className="simpletable-heading">
-            Size Symbol or Color Versions?
-          </h2>
-        </div>
-        <div className="divs-tableexpress">
-          {card1.map((card) => (
-            <div key={card.id} className="card-container">
+          <div className="process-express">
+            <h2>The Wunderlabel Difference </h2>
+            <div className="process-main-divs">
+              <div className="process-divs">
+                <img alt="process-image" src="../images/process.svg" />
+                <div className="process-image-text">
+                  <p className="process-main-font">Premium Quality</p>
+                  <p>OEKO-TEX® Standard 100 certified</p>{" "}
+                </div>
+              </div>
+              <div className="process-divs">
+                <img alt="process-image" src="../images/process.svg" />
+                <div className="process-image-text">
+                  <p className="process-main-font">Premium Quality</p>
+                  <p>OEKO-TEX® Standard 100 certified</p>{" "}
+                </div>
+              </div>{" "}
+              <div className="process-divs">
+                <img alt="process-image" src="../images/process.svg" />
+                <div className="process-image-text">
+                  <p className="process-main-font">Premium Quality</p>
+                  <p>OEKO-TEX® Standard 100 certified</p>{" "}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style={{ marginTop: "2rem" }}>
+            <div className="size-txt">
+              <h2 className="simpletable-heading">Upload Artwork</h2>
+            </div>
+            <div className="divs-tableexpress">
+              <Dragger {...props}>
+                <p className="ant-upload-drag-icon">
+                  <UploadOutlined />
+                </p>
+                <p className="ant-upload-text">
+                  Click or drag file to this area to upload
+                </p>
+                <p className="ant-upload-hint">
+                  Support for a single or bulk upload. Strictly prohibited from
+                  uploading company data or other banned files.
+                </p>
+              </Dragger>
+            </div>
+            <div className="size-txt">
+              <h2 className="simpletable-heading">Style?</h2>
+            </div>
+            <div className="divs-tableexpress">
               <Card
                 bordered={false}
-                onClick={() => handleCardClick("versions", card.title)}
-                style={{ background: "#FAF4EB" }}
+                style={{
+                  width: "11rem",
+                  height: "12rem",
+                  background: "#FAF4EB",
+                }}
+                onClick={() => handleCardClick("style", "Straight Cut (Flat)")}
               >
                 <img
-                  alt={card.title}
-                  src={card.imgSrc}
-                  className="image-card-express-1"
+                  alt="Straight Cut"
+                  src="../images/straight.png"
+                  className="image-card-express"
                 />
-                <p>{card.title}</p>
+                <p>
+                  Straight Cut <br />
+                  (Flat)
+                </p>
               </Card>
             </div>
-          ))}
-        </div>
-        <div className="size-txt">
-          <h2 className="simpletable-heading">Proof options?</h2>
-        </div>
-        <div className="divs-tableexpress">
-          <Card
-            bordered={false}
-            style={{
-              width: "11rem",
-              height: "12rem",
-              background: "#FAF4EB",
-            }}
-          >
-            <img
-              alt="abc"
-              src="../images/straight.png"
-              className="image-card-express"
-            />
-            <p>
-              Digital Proof
-              <br />
-              Only
-            </p>
-          </Card>
-        </div>
-        <div className="size-txt">
-          <h2 className="simpletable-heading">Turnaround options?</h2>
-        </div>
-        <div className="divs-tableexpress">
-          <Card
-            bordered={false}
-            style={{
-              width: "11rem",
-              height: "12rem",
-              background: "#FAF4EB",
-            }}
-          >
-            <img
-              alt="abc"
-              src="../images/straight.png"
-              className="image-card-express"
-            />
-            <p>
-              RUSH: <br />3 Business Days
-            </p>
-          </Card>
-        </div>
-        <div className="size-txt">
-          <h2 className="simpletable-heading">Comments?</h2>
-        </div>
-        <div className="divs-tableexpress">
-          <textarea
-            rows={4} // Set the number of rows to 4
-            style={{
-              width: "100%", // Make it full width or adjust as needed
-              resize: "vertical", // Allow vertical resizing
-              padding: "10px", // Add some padding for aesthetics
-            }}
-            placeholder="Enter your text here..."
-          />
-        </div>
-        <div className="size-txt">
-          <h2 className="simpletable-heading">Quantity?</h2>
-        </div>
-        <div className="divs-tableexpress">
-          <LastTable1 />
-        </div>
-      </div>
-
-      {/* Second Div */}
-
-      <div
-        style={{
-          display: "block",
-          justifyContent: "center",
-          textAlign: "center",
-          paddingTop: "5rem",
-        }}
-      >
-        {" "}
-        <h3>Express Clothing</h3>
-        <p style={{ width: "90%" }}>
-          {/* If isExpanded is true, show the full text, else show the truncated version */}
-          {isExpanded ? fullText : truncatedText}{" "}
-          <button onClick={toggleText} className="readmore-button">
-            {isExpanded ? "Read Less" : "Read More.."}
-          </button>
-        </p>
-        <div>
-          <div className="image-container-express">
-            {imagesData.map((image, index) => (
-              <div className="image-wrapper-express" key={index}>
-                <img
-                  src={image.src}
-                  alt={image.text}
-                  className="responsive-image1"
-                />
-                <p className="center-text-images">{image.text}</p>
+            <div className="size-txt">
+              <h2 className="simpletable-heading">Size?</h2>
+            </div>
+            <div className="divs-tableexpress">
+              <div className="card-grid">
+                {cardData.map((card) => (
+                  <div key={card.id} className="card-container">
+                    <Card
+                      bordered={false}
+                      onClick={() => handleCardClick("size", card.title)}
+                      style={{ background: "#FAF4EB" }}
+                    >
+                      <img
+                        alt={card.title}
+                        src={card.imgSrc}
+                        className="image-card-express-1"
+                      />
+                      <p>{card.title}</p>
+                    </Card>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            <div className="size-txt">
+              <h2 className="simpletable-heading">
+                Size Symbol or Color Versions?
+              </h2>
+            </div>
+            <div className="divs-tableexpress">
+              {card1.map((card) => (
+                <div key={card.id} className="card-container">
+                  <Card
+                    bordered={false}
+                    onClick={() => handleCardClick("versions", card.title)}
+                    style={{ background: "#FAF4EB" }}
+                  >
+                    <img
+                      alt={card.title}
+                      src={card.imgSrc}
+                      className="image-card-express-1"
+                    />
+                    <p>{card.title}</p>
+                  </Card>
+                </div>
+              ))}
+            </div>
+            <div className="size-txt">
+              <h2 className="simpletable-heading">Proof options?</h2>
+            </div>
+            <div className="divs-tableexpress">
+              <Card
+                bordered={false}
+                style={{
+                  width: "11rem",
+                  height: "12rem",
+                  background: "#FAF4EB",
+                }}
+              >
+                <img
+                  alt="abc"
+                  src="../images/straight.png"
+                  className="image-card-express"
+                />
+                <p>
+                  Digital Proof
+                  <br />
+                  Only
+                </p>
+              </Card>
+            </div>
+            <div className="size-txt">
+              <h2 className="simpletable-heading">Turnaround options?</h2>
+            </div>
+            <div className="divs-tableexpress">
+              <Card
+                bordered={false}
+                style={{
+                  width: "11rem",
+                  height: "12rem",
+                  background: "#FAF4EB",
+                }}
+              >
+                <img
+                  alt="abc"
+                  src="../images/straight.png"
+                  className="image-card-express"
+                />
+                <p>
+                  RUSH: <br />3 Business Days
+                </p>
+              </Card>
+            </div>
+            <div className="size-txt">
+              <h2 className="simpletable-heading">Comments?</h2>
+            </div>
+            <div className="divs-tableexpress">
+              <textarea
+                rows={4} // Set the number of rows to 4
+                style={{
+                  width: "100%", // Make it full width or adjust as needed
+                  resize: "vertical", // Allow vertical resizing
+                  padding: "10px", // Add some padding for aesthetics
+                }}
+                placeholder="Enter your text here..."
+              />
+            </div>
+            <div className="size-txt">
+              <h2 className="simpletable-heading">Quantity?</h2>
+            </div>
+            <div className="divs-tableexpress">
+              <LastTable1 />
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Third div */}
+        {/* Third div */}
 
-      <div>
-        {" "}
-        <div className="sticky-div">
-          <div className="sticky-first">
-            <p>Your Instant Quote</p>
-          </div>
-          <div className="sticky-blue-1">
-            <p className="marg-bot">Express Clothing Labels</p>
-            <div className="sticky-blue-inside">
-              <p>Artwork File:</p>
-              <p>{selectedData.artwork}</p>
+        <div>
+          {" "}
+          <div className="sticky-div  ">
+            <div className="sticky-first">
+              <p>Your Instant Quote</p>
             </div>
-          </div>
-          <div className="sticky-blue">
-            <div className="sticky-blue-inside">
-              <p>Size:</p>
-              <p>{selectedData.size}</p>
+            <div className="sticky-blue-1">
+              <p className="marg-bot">Express Clothing Labels</p>
+              <div className="sticky-blue-inside">
+                <p>Artwork File:</p>
+                <p>{selectedData.artwork}</p>
+              </div>
             </div>
-          </div>
-          <div className="sticky-blue">
-            <div className="sticky-blue-inside">
-              <p>Style:</p>
-              <p>{selectedData.style}</p>
+            <div className="sticky-blue">
+              <div className="sticky-blue-inside">
+                <p>Size:</p>
+                <p>{selectedData.size}</p>
+              </div>
             </div>
-          </div>
-          <div className="sticky-blue">
-            <div className="sticky-blue-inside">
-              <p>Versions:</p>
-              <p>{selectedData.versions}</p>
+            <div className="sticky-blue">
+              <div className="sticky-blue-inside">
+                <p>Style:</p>
+                <p>{selectedData.style}</p>
+              </div>
             </div>
-          </div>
-          <div className="sticky-blue">
-            <div className="sticky-blue-inside">
-              <p>Proof Options:</p>
-              <p>{selectedData.proofOptions}</p>
+            <div className="sticky-blue">
+              <div className="sticky-blue-inside">
+                <p>Versions:</p>
+                <p>{selectedData.versions}</p>
+              </div>
             </div>
-          </div>
-          <div className="sticky-blue">
-            <div className="sticky-blue-inside">
-              <p>Turnaround Options:</p>
-              <p>{selectedData.turnaroundOptions}</p>
+            <div className="sticky-blue">
+              <div className="sticky-blue-inside">
+                <p>Proof Options:</p>
+                <p>{selectedData.proofOptions}</p>
+              </div>
             </div>
-          </div>
-          <div className="sticky-blue">
-            <div className="sticky-blue-inside">
-              <p>{selectedData.quantity}</p>
-              <p>{selectedData.price}</p>
-              <p>{selectedData.totalPrice}</p>
+            <div className="sticky-blue">
+              <div className="sticky-blue-inside">
+                <p>Turnaround Options:</p>
+                <p>{selectedData.turnaroundOptions}</p>
+              </div>
             </div>
-          </div>
-          <div className="sticky-blue">
-            <div style={{ display: "flex", justifyContent: "center" }}>
-              <Button
-                onClick={() =>
-                  handleAddToCart({ id: 1, name: "Product 1", price: 10.1 })
-                }
-                className="button-tablecart"
-              >
-                <i className="fa fa-cart-arrow-down" aria-hidden="true"></i> ADD
-                TO CART
-              </Button>
+            <div className="sticky-blue">
+              <div className="sticky-blue-inside">
+                <p>{selectedData.quantity}</p>
+                <p>{selectedData.price}</p>
+                <p>{selectedData.totalPrice}</p>
+              </div>
             </div>
-          </div>
-          <div>
-            <div className="sticky-help">
-              <p>Need Help?</p>
-              <a href="tel:+1234567890">
-                <i className="fa fa-phone-square size-i" aria-hidden="true"></i>
-              </a>
-              <a href="mailto:demo@example.com">
-                <i className="fa fa-envelope size-i" aria-hidden="true"></i>
-              </a>
+            <div className="sticky-blue">
+              <div style={{ display: "flex", justifyContent: "center" }}>
+                <Button
+                  onClick={() =>
+                    handleAddToCart({ id: 1, name: "Product 1", price: 10.1 })
+                  }
+                  className="button-tablecart"
+                >
+                  <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}
+                  ADD TO CART
+                </Button>
+              </div>
+            </div>
+            <div>
+              <div className="sticky-help">
+                <p>Need Help?</p>
+                <a href="tel:+1234567890">
+                  <i
+                    className="fa fa-phone-square size-i"
+                    aria-hidden="true"
+                  ></i>
+                </a>
+                <a href="mailto:demo@example.com">
+                  <i className="fa fa-envelope size-i" aria-hidden="true"></i>
+                </a>
+              </div>
             </div>
           </div>
         </div>
