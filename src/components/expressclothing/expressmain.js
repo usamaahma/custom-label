@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { Button, Card, Breadcrumb, Upload, message } from "antd";
 import LastTable1 from "./lasttable";
 import { useCart } from "../../context/cartcontext";
@@ -70,19 +70,31 @@ const imagesData = [
   { src: "../images/center6.png", text: "Free Artwork Assistance" },
 ];
 
-window.addEventListener("scroll", function () {
-  const stickyDiv = document.querySelector(".sticky-div");
-
-  if (window.scrollY > 50) {
-    // Adjust the scroll position value as needed
-    stickyDiv.classList.add("scrolled-padding");
-  } else {
-    stickyDiv.classList.remove("scrolled-padding");
-  }
-});
-
+    
+ 
 function Expressmain() {
   const { addToCart } = useCart();
+  useEffect(() => {
+    const stickyDiv = document.querySelector(".sticky-div");
+
+    const handleScroll = () => {
+      if (stickyDiv) {
+        if (window.scrollY > 50) {
+          stickyDiv.classList.add("scrolled-padding");
+        } else {
+          stickyDiv.classList.remove("scrolled-padding");
+        }
+      }
+    };
+
+    // Add event listener
+    window.addEventListener("scroll", handleScroll);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
 
   // State for selected data
   const [selectedData, setSelectedData] = useState({
@@ -239,26 +251,26 @@ function Expressmain() {
             </div>
           </div>
           <div className="process-express">
-            <h3>The Wunderlabel Difference </h3>
+            <h2>The Wunderlabel Difference </h2>
             <div className="process-main-divs">
               <div className="process-divs">
                 <img alt="process-image" src="../images/process.svg" />
                 <div className="process-image-text">
-                  <p>Premium Quality</p>
+                  <p className="process-main-font">Premium Quality</p>
                   <p>OEKO-TEX® Standard 100 certified</p>{" "}
                 </div>
               </div>
               <div className="process-divs">
                 <img alt="process-image" src="../images/process.svg" />
                 <div className="process-image-text">
-                  <p>Premium Quality</p>
+                  <p className="process-main-font">Premium Quality</p>
                   <p>OEKO-TEX® Standard 100 certified</p>{" "}
                 </div>
               </div>{" "}
               <div className="process-divs">
                 <img alt="process-image" src="../images/process.svg" />
                 <div className="process-image-text">
-                  <p>Premium Quality</p>
+                  <p className="process-main-font">Premium Quality</p>
                   <p>OEKO-TEX® Standard 100 certified</p>{" "}
                 </div>
               </div>

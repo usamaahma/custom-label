@@ -4,7 +4,12 @@
   padding: 2rem;
 }
 .first-main-express {
+    margin-top: 1rem;
   padding-top: 0.2rem;
+}
+.process-main-font{
+    font-size: 1.2rem;
+    font-weight: bold;
 }
 .breadcrumb {
   margin-top: 1rem;
@@ -40,7 +45,7 @@
   color: #faf4eb;
 }
 .simpletable-heading {
-  margin-left: 2rem;
+  margin-left: 2rem;    
 }
 .process-express {
   padding: 3rem;
@@ -70,6 +75,15 @@
     display: block;
     justify-content: center;
   }
+  .process-main-divs {
+    display: flex;
+    flex-wrap: wrap; /* Allows wrapping */
+    width: 100%;
+    justify-content: space-between; /* Optional: space between the items */
+   }
+    .process-main-font{
+    font-size: 1rem;
+}
 }
 @media (max-width: 768px) {
   .headingbread {
