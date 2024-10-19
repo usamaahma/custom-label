@@ -60,7 +60,7 @@
 }
 
 .mainnav-link {
-  margin-left: 15px; /* Gap between tabs */
+  margin-left: 2rem ; /* Gap between tabs */
   color: #231f20;
   font-weight: bold !important;
 }
@@ -86,7 +86,20 @@
 .changenavbar-nav {
   display: none;
 }
-
+.phone-number-div{
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+.mobile-icon{
+  font-size: 3rem;
+  color: #5F6F65;
+}
+.text-phone{
+  font-size: smaller;
+  font-weight: bolder;
+  color: #5F6F65;
+ }
 @media (max-width: 768px) {
   .mainnav-quote-button1 {
     display: none;

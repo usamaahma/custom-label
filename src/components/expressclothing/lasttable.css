@@ -19,6 +19,8 @@
     width: 200px; /* Width for Total column */
   }
 }
+ 
+ 
 @media (max-width: 425px) {
   .ant-table-wrapper {
     overflow-x: auto; /* Allow horizontal scroll */

@@ -15,19 +15,13 @@ const logos = [
   { src: "../images/alice10.png", alt: "Brand Logo 10" },
   { src: "../images/alice11.png", alt: "Brand Logo 11" },
   { src: "../images/alice12.png", alt: "Brand Logo 12" },
-  { src: "../images/alice1.png", alt: "Brand Logo 1" },
-  { src: "../images/alice2.png", alt: "Brand Logo 2" },
-  { src: "../images/alice3.png", alt: "Brand Logo 3" },
-  { src: "../images/alice4.png", alt: "Brand Logo 4" },
-  { src: "../images/alice5.png", alt: "Brand Logo 5" },
-  { src: "../images/alice6.png", alt: "Brand Logo 6" },
 ];
 
 const Alice = () => {
   const props = useSpring({
-    from: { transform: "translateX(100%)" },
-    to: { transform: "translateX(-100%)" },
-    config: { duration: 20000 }, // Duration in milliseconds
+    from: { transform: "translateX(0%)" },
+    to: { transform: "translateX(-50%)" }, // Move half the width of the logos
+    config: { duration: 30000 }, // Duration for scrolling
     reset: true,
     loop: true, // Makes the animation loop indefinitely
   });
@@ -37,9 +31,16 @@ const Alice = () => {
       <h2 className="trustedtext"> TRUSTED BY OVER 25,000 BRANDS</h2>
       <div className="scrolling-text">
         <animated.div className="scroll-animation" style={props}>
-          {logos.map((logo, index) => (
-            <img key={index} src={logo.src} alt={logo.alt} className="logo" />
-          ))}
+          <div className="logo-container">
+            {/* Original logos */}
+            {logos.map((logo, index) => (
+              <img key={index} src={logo.src} alt={logo.alt} className="logo" />
+            ))}
+            {/* Duplicate logos for seamless scrolling */}
+            {logos.map((logo, index) => (
+              <img key={`duplicate-${index}`} src={logo.src} alt={logo.alt} className="logo" />
+            ))}
+          </div>
         </animated.div>
       </div>
     </div>

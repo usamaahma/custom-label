@@ -40,6 +40,14 @@
   margin-bottom: -2.5rem;
   text-align: left;
   margin-left: 1rem;
+  background: linear-gradient(135deg, #3a6a70, #5f6f65);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+  color: #faf4eb;
+  max-width: fit-content;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin-left: 6rem;
+  border: 0.1px solid #5f6f65;
 }
 .simpletable-divs-tableexpress {
   margin-top: 3rem;
@@ -103,7 +111,7 @@
   align-items: center !important;
   padding: 0.5rem;
   margin-bottom: 0rem !important;
-  background-color: #5F6F65;
+  background-color: #5f6f65;
   color: white;
   width: 20rem;
   border-radius: 0%;
@@ -117,7 +125,7 @@
   align-items: center !important;
   padding: 0.5rem;
   margin-bottom: 0rem !important;
-  background-color: #5F6F65;
+  background-color: #5f6f65;
   color: white;
   width: 20rem;
   border-radius: 0%;
@@ -198,7 +206,9 @@ p {
     display: grid;
     justify-content: center;
   }
-
+  .size-txt {
+    margin-left: 2rem;
+  }
   .simpletable-card-grid {
     grid-template-columns: repeat(2, 1fr);
   }

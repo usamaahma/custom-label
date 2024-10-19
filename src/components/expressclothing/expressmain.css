@@ -4,12 +4,12 @@
   padding: 2rem;
 }
 .first-main-express {
-    margin-top: 1rem;
+  margin-top: 1rem;
   padding-top: 0.2rem;
 }
-.process-main-font{
-    font-size: 1.2rem;
-    font-weight: bold;
+.process-main-font {
+  font-size: 1.2rem;
+  font-weight: bold;
 }
 .breadcrumb {
   margin-top: 1rem;
@@ -44,18 +44,15 @@
 .ant-breadcrumb li:last-child {
   color: #faf4eb;
 }
-.simpletable-heading {
-  margin-left: 2rem;    
-}
+ 
 .process-express {
   padding: 3rem;
   background-color: #5f6f65;
   color: #faf4eb;
-  width: 98%;
-  margin-top: 2rem;
+   margin-top: 2rem;
 }
-.process-image-text{
-    display: block;
+.process-image-text {
+  display: block;
 }
 .process-main-divs {
   display: flex;
@@ -63,9 +60,26 @@
   margin-top: 2rem;
 }
 .process-divs {
-    display: flex;
-    gap: 1rem;
-    align-items: center;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+.express-second-div {
+  display: block;
+  justify-content: center; /* This won't work with block elements, only with flex or grid */
+  text-align: center;
+  height: 24px; /* Make sure this is an appropriate value (e.g., px, rem, %, etc.) */
+}
+.step-image-express{
+    width: 5rem;
+    height: 5rem;
+}
+.txtmain{
+    margin-top: 2rem;
+}
+.icon-upload{
+    font-size: 2rem;
+    color: #3e4240;
 }
 @media (max-width: 1100px) {
   .simpletable-heading {
@@ -80,12 +94,16 @@
     flex-wrap: wrap; /* Allows wrapping */
     width: 100%;
     justify-content: space-between; /* Optional: space between the items */
-   }
-    .process-main-font{
+  }
+  .process-main-font {
     font-size: 1rem;
-}
+  }
 }
 @media (max-width: 768px) {
+  .express-second-div {
+    height: auto;
+    margin-bottom: 2rem;
+  }
   .headingbread {
     display: block;
   }
