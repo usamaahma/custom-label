@@ -1,43 +1,24 @@
 .scrolling-text {
-  overflow: hidden;
-  white-space: nowrap;
-  box-sizing: border-box;
-  width: 100%;
-  height: auto; /* Adjust height for different screen sizes */
-  background: none;
-  padding: 10px 0; /* Padding for visual appeal */
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-  /* Subtle transparent shadow */
+  overflow: hidden; /* Hide overflow */
+  white-space: nowrap; /* Prevent line breaks */
+  width: 100%; /* Full width */
+  height: 8rem; /* Set a fixed height */
+  background: none; /* No background */
+  padding: 10px 0; /* Adjust as needed */
+  margin-top: 2rem; /* Adjust as needed */
+  margin-bottom: 2rem; /* Adjust as needed */
   border-radius: 5px; /* Optional: rounded corners */
 }
 
 .scroll-animation {
-  white-space: nowrap;
-  /* Ensures the logos stay in a single line */
-  animation: scroll 20s linear infinite;
-  /* Animation to handle continuous scroll */
-}
-
-@keyframes scroll {
-  0% {
-    transform: translateX(100%);
-  }
-
-  100% {
-    transform: translateX(-100%);
-  }
+  display: flex; /* Use flexbox for horizontal alignment */
+  /* Width is automatically adjusted by flexbox */
 }
 
 .logo {
-  height: 8rem;
-  /* Default height of logos */
-  width: auto;
-  /* Keep aspect ratio intact */
-  margin-right: 50px;
-  /* Default spacing between logos */
-  vertical-align: middle;
-  /* Align logos properly */
+  height: 8rem; /* Adjust height of logos */
+  width: auto; /* Keep aspect ratio intact */
+  margin-right: 50px; /* Space between logos */
 }
 
 .trusted {
@@ -53,16 +34,9 @@
   font-size: x-large;
 }
 
-.span {
-  color: rgb(253, 126, 20);
-}
-
 /* Media Queries for responsiveness */
-
 @media (max-width: 480px) {
   .trustedtext {
-    font-weight: bold;
-    text-align: left;
     font-size: medium;
     margin-left: 1rem;
   }

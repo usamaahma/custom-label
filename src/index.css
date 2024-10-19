@@ -1,11 +1,23 @@
+@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap");
 * {
   margin: 0%;
   padding: 0%;
 }
-
+body {
+  font-family: "Space Grotesk", sans-serif;
+}
+h{
+  font-family: "Space Grotesk", sans-serif;
+}
+p {
+  font-family: "Space Grotesk", sans-serif;
+}
+.ant-btn {
+  font-family: "Space Grotesk", sans-serif;
+}
 .ant-card .ant-card-body {
   background: #faf4eb !important;
 }
-.ant-card{
+.ant-card {
   background: #faf4eb !important;
 }

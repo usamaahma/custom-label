@@ -78,8 +78,11 @@ const LastTable1 = () => (
     {/* <div className="size-txt">
             <h2 className="simpletable-heading">Quantity</h2>
         </div> */}
-    <div>
-      <Table columns={columns} dataSource={data} />
+    <div className="height-table">
+      <Table
+        columns={columns}
+        dataSource={data}
+       />
     </div>
   </div>
 );

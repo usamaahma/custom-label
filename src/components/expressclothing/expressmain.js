@@ -1,9 +1,11 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import { Button, Card, Breadcrumb, Upload, message } from "antd";
 import LastTable1 from "./lasttable";
 import { useCart } from "../../context/cartcontext";
 import { UploadOutlined } from "@ant-design/icons";
 import "./expressmain.css";
+import { Slide } from "react-awesome-reveal";
+import { GiCloudUpload } from "react-icons/gi";
 
 const { Dragger } = Upload;
 const props = {
@@ -70,8 +72,6 @@ const imagesData = [
   { src: "../images/center6.png", text: "Free Artwork Assistance" },
 ];
 
-    
- 
 function Expressmain() {
   const { addToCart } = useCart();
   useEffect(() => {
@@ -79,7 +79,8 @@ function Expressmain() {
 
     const handleScroll = () => {
       if (stickyDiv) {
-        if (window.scrollY > 50) {
+        if (window.scrollY > 200) {
+          // Increase this value for more scroll
           stickyDiv.classList.add("scrolled-padding");
         } else {
           stickyDiv.classList.remove("scrolled-padding");
@@ -138,8 +139,8 @@ function Expressmain() {
 
   // Array of images for the thumbnail carousel
   const thumbnailImages = [
-    "../images/martin.png",
     "../images/girl.png",
+    "../images/martin.png",
     "../images/post.png",
     "../images/martin.png",
   ];
@@ -216,13 +217,7 @@ function Expressmain() {
               </div>
             </div>
             {/* Second Div */}
-            <div
-              style={{
-                display: "block",
-                justifyContent: "center",
-                textAlign: "center",
-              }}
-            >
+            <div className="express-second-div">
               {" "}
               <h2>Express Clothing</h2>
               <p
@@ -250,44 +245,70 @@ function Expressmain() {
               </div>
             </div>
           </div>
-          <div className="process-express">
-            <h2>The Wunderlabel Difference </h2>
-            <div className="process-main-divs">
-              <div className="process-divs">
-                <img alt="process-image" src="../images/process.svg" />
-                <div className="process-image-text">
-                  <p className="process-main-font">Premium Quality</p>
-                  <p>OEKO-TEX® Standard 100 certified</p>{" "}
-                </div>
+
+          <div className="txtmain">
+            <p className="how">Order Process</p>
+            <p className="at" style={{ width: "70%", margin: "0 auto" }}>
+              We provide a free digital proof and photo sample for approval
+              before production, ensuring 100% satisfaction.
+            </p>
+
+            <div className="image-row">
+              <div className="image-item">
+                <img
+                  src="../../images/upload.png"
+                  alt="Upload"
+                  className="step-image-express"
+                />
+                <p className="image-text">Upload Artwork</p>
               </div>
-              <div className="process-divs">
-                <img alt="process-image" src="../images/process.svg" />
-                <div className="process-image-text">
-                  <p className="process-main-font">Premium Quality</p>
-                  <p>OEKO-TEX® Standard 100 certified</p>{" "}
-                </div>
-              </div>{" "}
-              <div className="process-divs">
-                <img alt="process-image" src="../images/process.svg" />
-                <div className="process-image-text">
-                  <p className="process-main-font">Premium Quality</p>
-                  <p>OEKO-TEX® Standard 100 certified</p>{" "}
-                </div>
+              <div className="image-item">
+                <Slide cascade>
+                  {" "}
+                  <img
+                    src="../../images/arrow.svg"
+                    alt="Arrow"
+                    className="step-image1"
+                  />{" "}
+                </Slide>
+              </div>
+              <div className="image-item">
+                <img
+                  src="../../images/approve.png"
+                  alt="Approve"
+                  className="step-image-express"
+                />
+                <p className="image-text">Approve Digital Proof</p>
+              </div>
+              <div className="image-item">
+                <Slide cascade>
+                  <img
+                    src="../../images/arrow.svg"
+                    alt="Approve"
+                    className="step-image1"
+                  />
+                </Slide>
+              </div>
+              <div className="image-item">
+                <img
+                  src="../../images/receive.png"
+                  alt="Approve"
+                  className="step-image-express"
+                />
+                <p className="image-text">Receive Order</p>
               </div>
             </div>
           </div>
           <div style={{ marginTop: "2rem" }}>
             <div className="size-txt">
-              <h2 className="simpletable-heading">Upload Artwork</h2>
+              <h3 className="simpletable-heading">Upload Artwork</h3>
             </div>
             <div className="divs-tableexpress">
               <Dragger {...props}>
                 <p className="ant-upload-drag-icon">
-                  <UploadOutlined />
+                  <GiCloudUpload className="icon-upload" />
                 </p>
-                <p className="ant-upload-text">
-                  Click or drag file to this area to upload
-                </p>
+                <p className="ant-upload-text">Upload Your Artwork File</p>
                 <p className="ant-upload-hint">
                   Support for a single or bulk upload. Strictly prohibited from
                   uploading company data or other banned files.
@@ -295,7 +316,7 @@ function Expressmain() {
               </Dragger>
             </div>
             <div className="size-txt">
-              <h2 className="simpletable-heading">Style?</h2>
+              <h3 className="simpletable-heading">Style?</h3>
             </div>
             <div className="divs-tableexpress">
               <Card
@@ -319,7 +340,7 @@ function Expressmain() {
               </Card>
             </div>
             <div className="size-txt">
-              <h2 className="simpletable-heading">Size?</h2>
+              <h3 className="simpletable-heading">Size?</h3>
             </div>
             <div className="divs-tableexpress">
               <div className="card-grid">
@@ -342,9 +363,9 @@ function Expressmain() {
               </div>
             </div>
             <div className="size-txt">
-              <h2 className="simpletable-heading">
+              <h3 className="simpletable-heading">
                 Size Symbol or Color Versions?
-              </h2>
+              </h3>
             </div>
             <div className="divs-tableexpress">
               {card1.map((card) => (
@@ -365,7 +386,7 @@ function Expressmain() {
               ))}
             </div>
             <div className="size-txt">
-              <h2 className="simpletable-heading">Proof options?</h2>
+              <h3 className="simpletable-heading">Proof options?</h3>
             </div>
             <div className="divs-tableexpress">
               <Card
@@ -389,7 +410,7 @@ function Expressmain() {
               </Card>
             </div>
             <div className="size-txt">
-              <h2 className="simpletable-heading">Turnaround options?</h2>
+              <h3 className="simpletable-heading">Turnaround options?</h3>
             </div>
             <div className="divs-tableexpress">
               <Card
@@ -411,7 +432,7 @@ function Expressmain() {
               </Card>
             </div>
             <div className="size-txt">
-              <h2 className="simpletable-heading">Comments?</h2>
+              <h3 className="simpletable-heading">Comments?</h3>
             </div>
             <div className="divs-tableexpress">
               <textarea
@@ -425,7 +446,7 @@ function Expressmain() {
               />
             </div>
             <div className="size-txt">
-              <h2 className="simpletable-heading">Quantity?</h2>
+              <h3 className="simpletable-heading">Quantity?</h3>
             </div>
             <div className="divs-tableexpress">
               <LastTable1 />
@@ -437,7 +458,7 @@ function Expressmain() {
 
         <div>
           {" "}
-          <div className="sticky-div  ">
+          <div className="sticky-div">
             <div className="sticky-first">
               <p>Your Instant Quote</p>
             </div>

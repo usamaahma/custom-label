@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { Navbar, Nav, Container, Button, NavDropdown } from "react-bootstrap";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
+import { CiMobile3 } from "react-icons/ci";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./mainnavbar.css";
 import Cartmodal1 from "../checkout/cartmodal";
@@ -224,11 +225,13 @@ const Mainnavbar = () => {
           </Link>
 
           {/* Fourth div: Image aligned to the right */}
-          <img
-            src="../images/phone.svg"
-            className="mainnav-image1"
-            alt="Some Image"
-          />
+          <a href="tel:+1234567890" className="phone-number-div">
+            <CiMobile3 className="mobile-icon" />
+            <div className="text-phone">
+              <p>+1234 345 543</p>
+              <p>Speak With an Expert</p>
+            </div>
+          </a>
         </Navbar.Collapse>
       </Container>
     </Navbar>
