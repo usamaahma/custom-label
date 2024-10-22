@@ -10,8 +10,7 @@ function CustomWovenPage() {
   return (
     <div className="landingback">
       <Wovenhero />
-      <Woventable />
-      <GoogleReviews />
+       <GoogleReviews />
       <Bestcustom />
       <Wovendesign />
       <Lastbest />

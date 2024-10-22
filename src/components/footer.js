@@ -80,7 +80,9 @@ function Footer1() {
         <div className="footer-column">
           <h3>My Account</h3>
           <p>Dashboard</p>
-          <p>1-844-868-3926</p>
+          <a href="tel:+1 (630) 995-9797" className="contact-link">
+            +1 (630) 995-9797
+          </a>{" "}
           <p>
             <Link
               to="/privacy-policy"
@@ -89,20 +91,19 @@ function Footer1() {
               Privacy Policy
             </Link>
           </p>
-
           <h3>Contact Us</h3>
           <p>Monday-Friday</p>
           <p>9AM-5:30PM EST</p>
-          <a href="tel:1-844-868-3926" className="contact-link">
-            1-844-868-3926
+          <a href="tel:+1 (630) 995-9797" className="contact-link">
+            +1 (630) 995-9797
           </a>
           <p>
             For inquiries, email us at:{" "}
             <a
               className="contact-link"
-              href="mailto:sales@customwovenlabels.com"
+              href="mailto:sales@theclothinglabels.com"
             >
-              sales@customwovenlabels.com
+              sales@theclothinglabels.com
             </a>
           </p>
           <p>1760 Glasco Turnpike</p>

@@ -245,7 +245,6 @@ function Expressmain() {
               </div>
             </div>
           </div>
-
           <div className="txtmain">
             <p className="how">Order Process</p>
             <p className="at" style={{ width: "70%", margin: "0 auto" }}>

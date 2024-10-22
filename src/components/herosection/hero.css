@@ -1,103 +1,116 @@
-.herosec-container {
-  position: relative;
-  height: 80vh; /* Full height */
-  background-image: url("../../../public/images/shirt.jpg"); /* Replace with your image path */
-  background-size: cover; /* Cover the whole area */
-  background-position: center; /* Center the image */
-  background-repeat: no-repeat; /* Prevent repeating */
-}
 .herosec-content {
-  position: absolute;
-  top: 50%; /* Center vertically */
-  left: 2rem; /* Align text to the left with some margin */
-  transform: translateY(-50%); /* Offset to center vertically */
   text-align: left; /* Align text to the left */
   color: white; /* Text color */
-  padding: 20px;
+  padding: 20px; /* Space around the content */
+  margin: 0 auto; /* Center the content */
+  width: 100%; /* Allow the content to take up full width */
+}
+.carousel-caption {
+  position: absolute; /* Keep it absolutely positioned */
+  left: 0; /* Align to the left */
+  right: auto; /* Avoid overriding */
+  bottom: 50%; /* Center vertically */
+  transform: translateY(50%); /* Move it up by 50% of its height to center it */
+  padding-left: 20px; /* Add left padding for spacing */
+  display: flex; /* Use flexbox for alignment */
+  flex-direction: column; /* Align items in a column */
+  justify-content: center; /* Center content vertically */
+  height: 100%; /* Use full height of the carousel item */
 }
 
+/* Button Styles */
 .herosec-button {
   background-color: #5f6f65; /* Button color */
   color: #faf4eb; /* Button text color */
-  width: 10rem;
+  width: 100%; /* Make button full-width on smaller screens */
+  max-width: 200px; /* Max width for larger screens */
   border: solid 1px #faf4eb;
   padding: 0.5rem;
   border-radius: 5px;
   cursor: pointer;
   margin-top: 20px;
-  font-weight: bold;
+  font-weight: bolder;
   transition: background-color 0.3s;
 }
-
+.custom {
+  font-size: 3rem;
+  font-weight: bolder;
+  width: 40%;
+}
+.premium {
+  font-size: 1rem;
+  width: 30%;
+}
+.woven-text-100 {
+  font-weight: bolder;
+}
 .herosec-button:hover {
   background-color: white; /* Change background on hover */
   border: solid 1px black;
   color: rgb(3, 28, 29); /* Change text color on hover */
   border: 1px solid rgb(3, 28, 29);
 }
-.custom {
-  font-size: 3rem;
-  font-weight: bold;
-  width: 60%;
-}
-.premium {
-  width: 60%;
-}
-/* Responsive styles */
-
-@media (max-width: 1440px) {
-  .custom {
-    font-size: 3rem !important;
-  }
-  .premium {
-    font-size: 1.5rem !important;
-  }
-}
-
-@media (max-width: 1366px) {
-  .custom {
-    font-size: 3rem !important;
-  }
-  .premium {
-    font-size: 1.5rem !important;
-  }
-}
 @media (max-width: 1024px) {
   .custom {
-    font-size: 2rem !important;
+    font-size: medium;
+    font-weight: bolder;
   }
   .premium {
-    font-size: 1rem !important;
-  }
-}
-
-@media (max-width: 768px) {
-  .custom {
-    font-size: 1rem !important;
-  }
-  .premium {
-    font-size: 1rem !important;
-  }
-}
-@media (max-width: 550px) {
-  .herosec-container {
-    background-size: contain;
-    background-size: 170%; /* Increase the image size for smaller screens */
-  }
-}
-@media (max-width: 425px) {
-  .custom {
-    font-size: 1rem !important;
-  }
-  .premium{
-    font-size: small !important;
+    font-size: small;
   }
   .herosec-button {
-    width: auto !important; /* Make button full width on small screens */
+    max-width: 7rem; /* Max width for larger screens */
+    font-size: x-small;
   }
-  .herosec-container {
-    background-size: contain;
-    background-size: 200%; /* Increase the image size for smaller screens */
-    height: 50vh; /* Full height */
+  .height-car-img {
+    height: 16rem;
+  }
+}
+/* Responsive styles */
+@media (max-width: 768px) {
+  .herosec-content {
+    padding: 10px; /* Reduce padding on smaller screens */
+  }
+
+  .herosec-button {
+    width: 100%; /* Button full width */
+    margin-top: 15px; /* Adjust margin */
+  }
+
+  .custom,
+  .premium {
+    font-size: 1rem; /* Adjust font size */
+  }
+}
+@media (min-width: 500px) and (max-width: 720px) {
+  .custom {
+    font-size: medium;
+    font-weight: bolder;
+  }
+  .premium {
+    font-size: small;
+  }
+  .herosec-button {
+    max-width: 7rem; /* Max width for larger screens */
+    font-size: x-small;
+  }
+  .height-car-img {
+    height: 16rem;
+  }
+}
+@media (max-width: 500px) {
+  .height-car-img {
+    height: 20rem;
+  }
+  .custom {
+    font-size: small;
+    font-weight: bolder;
+  }
+  .premium {
+    font-size: x-small;
+  }
+  .herosec-button {
+    max-width: 7rem; /* Max width for larger screens */
+    font-size: x-small;
   }
 }
