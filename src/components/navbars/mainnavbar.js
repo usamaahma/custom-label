@@ -92,7 +92,7 @@ const Mainnavbar = () => {
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="mainnav-collapse">
-          <Slide Cascade direction="right">
+          <Slide Cascade direction="down">
             <Nav className="mainnav-nav mx-auto">
               <NavDropdown
                 title={<span className="mainnav-link">CLOTHING LABELS</span>}
@@ -223,7 +223,7 @@ const Mainnavbar = () => {
               Get a Quote
             </Button>
           </Link>
-          <Slide direction="down">
+          <Slide direction="right">
             {/* Fourth div: Image aligned to the right */}
             <a href="tel:+1234567890" className="phone-number-div">
               <CiMobile3 className="mobile-icon" />
