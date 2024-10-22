@@ -2,8 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Breadcrumb, Upload, message } from "antd";
 import LastTable1 from "./lasttable";
 import { useCart } from "../../context/cartcontext";
-import { UploadOutlined } from "@ant-design/icons";
-import "./expressmain.css";
+ import "./expressmain.css";
 import { Slide } from "react-awesome-reveal";
 import { GiCloudUpload } from "react-icons/gi";
 

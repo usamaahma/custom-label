@@ -18,6 +18,7 @@ p {
 }
 .ant-card .ant-card-body {
   background: #faf4eb !important;
+  text-align: center;
 }
 .ant-card {
   background: #faf4eb !important;

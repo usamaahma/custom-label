@@ -94,6 +94,20 @@
   .button-show {
     display: flex;
     justify-content: center;
+    align-items: center;
+  }
+  .phone-number-div-show{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #FAF4EB;
+    text-decoration: none;
+  }
+  .mobile-icon-show{
+    font-size: 2rem;
+  }
+  .text-phone-show p{
+    font-size:x-small ;
   }
   .firstnavbar-logo {
     display: none; /* Hide the logo on smaller screens */

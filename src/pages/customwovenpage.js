@@ -5,15 +5,17 @@ import GoogleReviews from "../components/expressclothing/googlereviews";
 import Bestcustom from "../components/custom-woven/bestcustom";
 import Wovendesign from "../components/custom-woven/wovendesign";
 import Lastbest from "../components/custom-woven/lastbest";
+import Faqexpress1 from "../components/expressclothing/faqexpress";
 
 function CustomWovenPage() {
   return (
     <div className="landingback">
       <Wovenhero />
-       <GoogleReviews />
       <Bestcustom />
       <Wovendesign />
       <Lastbest />
+      <Faqexpress1 />
+      <GoogleReviews />
     </div>
   );
 }
