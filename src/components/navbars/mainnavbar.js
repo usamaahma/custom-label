@@ -4,8 +4,9 @@ import { Navbar, Nav, Container, Button, NavDropdown } from "react-bootstrap";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { CiMobile3 } from "react-icons/ci";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./mainnavbar.css";
 import Cartmodal1 from "../checkout/cartmodal";
+import { Slide } from "react-awesome-reveal";
+import "./mainnavbar.css";
 
 const Mainnavbar = () => {
   const navigate = useNavigate(); // Hook to navigate
@@ -65,7 +66,6 @@ const Mainnavbar = () => {
             alt="Logo"
           />
         </Navbar.Brand>
-
         {/* Second div: Centered tabs */}
         <div className="changenavbar-nav ml-auto">
           <Link to="/login" className="changenavbar-link">
@@ -90,148 +90,149 @@ const Mainnavbar = () => {
             <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
           </Link>
         </div>
-
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" className="mainnav-collapse">
-          <Nav className="mainnav-nav mx-auto">
-            <NavDropdown
-              title={<span className="mainnav-link">CLOTHING LABELS</span>}
-              id="clothing-dropdown"
-            >
-              <NavDropdown.Item
-                as={Link}
-                to="/all-clothing-labels"
-                className="nav-dropdown-item"
+          <Slide Cascade direction="right">
+            <Nav className="mainnav-nav mx-auto">
+              <NavDropdown
+                title={<span className="mainnav-link">CLOTHING LABELS</span>}
+                id="clothing-dropdown"
               >
-                All Clothing Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/express-clothing"
-                className="nav-dropdown-item"
+                <NavDropdown.Item
+                  as={Link}
+                  to="/all-clothing-labels"
+                  className="nav-dropdown-item"
+                >
+                  All Clothing Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/express-clothing"
+                  className="nav-dropdown-item"
+                >
+                  Express Clothing Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/customwoven"
+                  className="nav-dropdown-item"
+                >
+                  Custom Woven Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/woven-text-label"
+                  className="nav-dropdown-item"
+                >
+                  Woven Text Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/satin-woven"
+                  className="nav-dropdown-item"
+                >
+                  Custom Satin Woven Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/custom-care-label"
+                  className="nav-dropdown-item"
+                >
+                  Custom Care Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/screen-printed-label"
+                  className="nav-dropdown-item"
+                >
+                  Screen Printed Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/custom-cotton-label"
+                  className="nav-dropdown-item"
+                >
+                  Custom Cotton Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/custom-sublimation-label"
+                  className="nav-dropdown-item"
+                >
+                  Custom Sublimation Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/custom-tyvek-label"
+                  className="nav-dropdown-item"
+                >
+                  Custom Tyvek Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/tpu-labels"
+                  className="nav-dropdown-item"
+                >
+                  Custom TPU Labels
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/custom-heat-labels"
+                  className="nav-dropdown-item"
+                >
+                  Custom Heat Transfer Labels
+                </NavDropdown.Item>
+              </NavDropdown>
+              <NavDropdown
+                title={<span className="mainnav-link">HANGTAGS</span>}
+                id="clothing-dropdown"
               >
-                Express Clothing Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/customwoven"
-                className="nav-dropdown-item"
-              >
-                Custom Woven Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/woven-text-label"
-                className="nav-dropdown-item"
-              >
-                Woven Text Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/satin-woven"
-                className="nav-dropdown-item"
-              >
-                Custom Satin Woven Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/custom-care-label"
-                className="nav-dropdown-item"
-              >
-                Custom Care Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/screen-printed-label"
-                className="nav-dropdown-item"
-              >
-                Screen Printed Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/custom-cotton-label"
-                className="nav-dropdown-item"
-              >
-                Custom Cotton Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/custom-sublimation-label"
-                className="nav-dropdown-item"
-              >
-                Custom Sublimation Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/custom-tyvek-label"
-                className="nav-dropdown-item"
-              >
-                Custom Tyvek Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/tpu-labels"
-                className="nav-dropdown-item"
-              >
-                Custom TPU Labels
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/custom-heat-labels"
-                className="nav-dropdown-item"
-              >
-                Custom Heat Transfer Labels
-              </NavDropdown.Item>
-            </NavDropdown>
-            <NavDropdown
-              title={<span className="mainnav-link">HANGTAGS</span>}
-              id="clothing-dropdown"
-            >
-              <NavDropdown.Item
-                as={Link}
-                to="/custom-hangtags"
-                className="nav-dropdown-item"
-              >
-                All Hang Tags
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/simple-hangtags"
-                className="nav-dropdown-item"
-              >
-                Simple Hang Tags
-              </NavDropdown.Item>
-              <NavDropdown.Item
-                as={Link}
-                to="/fancy-hangtags"
-                className="nav-dropdown-item"
-              >
-                Fancy Hang Tags
-              </NavDropdown.Item>
-            </NavDropdown>
-            <Nav.Link as={Link} to="/about-us" className="mainnav-link">
-              About
-            </Nav.Link>
-            <Nav.Link as={Link} to="/contact-us" className="mainnav-link">
-              Contact
-            </Nav.Link>
-          </Nav>
-
+                <NavDropdown.Item
+                  as={Link}
+                  to="/custom-hangtags"
+                  className="nav-dropdown-item"
+                >
+                  All Hang Tags
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/simple-hangtags"
+                  className="nav-dropdown-item"
+                >
+                  Simple Hang Tags
+                </NavDropdown.Item>
+                <NavDropdown.Item
+                  as={Link}
+                  to="/fancy-hangtags"
+                  className="nav-dropdown-item"
+                >
+                  Fancy Hang Tags
+                </NavDropdown.Item>
+              </NavDropdown>
+              <Nav.Link as={Link} to="/about-us" className="mainnav-link">
+                About
+              </Nav.Link>
+              <Nav.Link as={Link} to="/contact-us" className="mainnav-link">
+                Contact
+              </Nav.Link>
+            </Nav>
+          </Slide>
           {/* Third div: Get a Quote button aligned to the right */}
           <Link to="/get-quote">
             <Button variant="primary" className="mainnav-quote-button1">
               Get a Quote
             </Button>
           </Link>
-
-          {/* Fourth div: Image aligned to the right */}
-          <a href="tel:+1234567890" className="phone-number-div">
-            <CiMobile3 className="mobile-icon" />
-            <div className="text-phone">
-              <p>+1234 345 543</p>
-              <p>Speak With an Expert</p>
-            </div>
-          </a>
+          <Slide direction="down">
+            {/* Fourth div: Image aligned to the right */}
+            <a href="tel:+1234567890" className="phone-number-div">
+              <CiMobile3 className="mobile-icon" />
+              <div className="text-phone">
+                <p>+1 (630) 995-9797</p>
+                <p>Speak With an Expert</p>
+              </div>
+            </a>
+          </Slide>
         </Navbar.Collapse>
       </Container>
     </Navbar>

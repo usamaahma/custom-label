@@ -42,11 +42,12 @@
 .social-icon-first {
   width: 2rem;
   height: 2rem;
-  background: #FAF4EB;
+  background: #FAF4EB ;
   display: flex;
   justify-content: center;
   align-items: center;
   border-radius: 2rem;
+  color: #5f6f65 !important;
 }
 
 .firstnavbar-center {
