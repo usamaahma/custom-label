@@ -7,7 +7,7 @@ import "./firstnav.css"; // Import your CSS file
 import Cartmodal1 from "../checkout/cartmodal";
 import { FaFacebookF, FaLinkedinIn } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
-import { BsDiscord } from "react-icons/bs";
+import { CiMobile3 } from "react-icons/ci";
 import { Slide } from "react-awesome-reveal";
 
 const Firstnavbar = () => {
@@ -47,11 +47,16 @@ const Firstnavbar = () => {
                     Get a Quote
                   </Button>
                 </Link>
-                <img
-                  src="../images/phone.svg"
-                  className="mainnav-image"
-                  alt="Some Image"
-                />
+                <Slide direction="right">
+                  {/* Fourth div: Image aligned to the right */}
+                  <a href="tel:+1234567890" className="phone-number-div-show">
+                    <CiMobile3 className="mobile-icon-show" />
+                    <div className="text-phone-show">
+                      <p>+1 (630) 995-9797</p>
+                      <p>Speak With an Expert</p>
+                    </div>
+                  </a>
+                </Slide>
               </div>
             </Nav.Link>
           </Nav>

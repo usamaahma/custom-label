@@ -547,7 +547,12 @@ function Wovenhero() {
                 placeholder="Enter your text here..."
               />
             </div>
-            
+            <div className="size-txt">
+              <h3 className="simpletable-heading">Quantity?</h3>
+            </div>
+            <div className="divs-tableexpress">
+              <LastTable1 />
+            </div>
           </div>
         </div>
 

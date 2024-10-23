@@ -2,6 +2,7 @@ import React from "react";
 import "./hero.css";
 import Carousel from "react-bootstrap/Carousel";
 import { Slide } from "react-awesome-reveal";
+import { Link } from "react-router-dom";
 
 const Herosec1 = () => {
   return (
@@ -50,7 +51,9 @@ const Herosec1 = () => {
               <p className="premium woven-text-100">
                 100 Woven LabelsStarting At $0.98ea
               </p>
-              <button className="herosec-button">Shop Woven Labels</button>
+              <Link to="/contact-us">
+                <button className="herosec-button">Shop Woven Labels</button>
+              </Link>
             </div>
           </Slide>
         </Carousel.Caption>
