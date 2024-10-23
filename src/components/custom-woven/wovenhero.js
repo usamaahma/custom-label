@@ -1,85 +1,56 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Breadcrumb, Upload, message } from "antd";
+import { Button, Card, Breadcrumb } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
-import { UploadOutlined } from "@ant-design/icons";
 import "../expressclothing/expressmain.css";
 import { Slide } from "react-awesome-reveal";
-import { GiCloudUpload } from "react-icons/gi";
-
-const { Dragger } = Upload;
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-  onChange(info) {
-    const { status, response } = info.file;
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      // Check the status code
-      const errorMessage =
-        response?.status === 503
-          ? "The server is currently unavailable. Please try again later."
-          : `${info.file.name} file upload failed.`;
-      message.error(errorMessage);
-      console.error("Error details:", response);
-    }
-  },
-};
+import ImageUploader from "../expressclothing/imagedragger";
 
 // Card data
-const cardData = [
-  { id: 1, imgSrc: "../images/straight.png", title: "1 x 1.5 " },
-  { id: 2, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 3, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 4, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 5, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 6, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 7, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 8, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 9, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 10, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 11, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 12, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 13, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 14, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 15, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 16, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  // Add more items as needed
-];
 
 const cardstyledata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "Straight Cut (Flat)" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Centre Fold" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Loop Fold " },
-  { id: 4, imgSrc: "../images/straight.png", title: "End Fold" },
-  { id: 6, imgSrc: "../images/straight.png", title: "Book Cover Fold" },
-  { id: 5, imgSrc: "../images/straight.png", title: "Manhatten Fold" },
-  { id: 7, imgSrc: "../images/straight.png", title: "Book Cover Fold" },
+  {
+    id: 1,
+    imgSrc: "../images/New Folder/style.jpg",
+    title: "Straight Cut (Flat)",
+  },
+  { id: 2, imgSrc: "../images/New Folder/style.jpg", title: "Centre Fold" },
+  { id: 3, imgSrc: "../images/New Folder/style.jpg", title: "Loop Fold " },
+  { id: 4, imgSrc: "../images/New Folder/style.jpg", title: "End Fold" },
+  { id: 6, imgSrc: "../images/New Folder/style.jpg", title: "Book Cover Fold" },
+  { id: 5, imgSrc: "../images/New Folder/style.jpg", title: "Manhatten Fold" },
+  { id: 7, imgSrc: "../images/New Folder/style.jpg", title: "Book Cover Fold" },
 
   // Add more items as needed
 ];
 const cardsizedata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "2 x 0.625" },
-  { id: 2, imgSrc: "../images/straight.png", title: "2 x 1" },
-  { id: 3, imgSrc: "../images/straight.png", title: "2 x 2 " },
-  { id: 4, imgSrc: "../images/straight.png", title: "Custom" },
+  { id: 1, imgSrc: "../images/New Folder/2 x 1.jpg", title: "2 x 0.625" },
+  { id: 2, imgSrc: "../images/New Folder/2 x 1.jpg", title: "2 x 1" },
+  { id: 3, imgSrc: "../images/New Folder/2 x 2.jpg", title: "2 x 2 " },
+  { id: 4, imgSrc: "../images/New Folder/2 x 2.jpg", title: "Custom" },
 ];
 const cardbackptiondata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "None" },
-  { id: 2, imgSrc: "../images/straight.png", title: "IronOn" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Peel & Stick" },
+  { id: 1, imgSrc: "../images/New Folder/custom.png", title: "None" },
+  { id: 2, imgSrc: "../images/New Folder/custom.png", title: "IronOn" },
+  {
+    id: 3,
+    imgSrc: "../images/New Folder/custom.png",
+    title: "Peel & Stick",
+  },
 ];
 const cardmetallicdata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "None" },
-  { id: 2, imgSrc: "../images/straight.png", title: "IronOn" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Peel & Stick" },
+  { id: 1, imgSrc: "../images/New Folder/custom.png", title: "None" },
+  { id: 2, imgSrc: "../images/New Folder/custom.png", title: "Gold Metallic" },
+  {
+    id: 3,
+    imgSrc: "../images/New Folder/custom.png",
+    title: "Silver Metallic",
+  },
 ];
 const card1 = [
   {
     title: "None",
-    imgSrc: "../images/straight.png",
+    imgSrc: "../images/New Folder/custom.png",
   },
   {
     title: (
@@ -88,9 +59,31 @@ const card1 = [
         versions
       </p>
     ),
-    imgSrc: "../images/straight.png",
+    imgSrc: "../images/New Folder/custom.png",
   },
 ];
+const cardproof = [
+  {
+    title: "Digital Proof Only",
+    imgSrc: "../images/New Folder/proof.png",
+  },
+  {
+    title: <p>Digital Proof & Sample Photo</p>,
+    imgSrc: "../images/New Folder/proof.png",
+  },
+];
+
+const cardturnaround = [
+  {
+    title: "Standard: 15 Business Days",
+    imgSrc: "../images/New Folder/rush3.png",
+  },
+  {
+    title: <p>RUSH: 10 Business Days</p>,
+    imgSrc: "../images/New Folder/rush3.png",
+  },
+];
+
 const imagesData = [
   { src: "../images/center1.png", text: "Fastest 3-Day Turnaround" },
   { src: "../images/center2.png", text: "Custom Woven Labels Made in USA" },
@@ -331,16 +324,7 @@ function Wovenhero() {
               <h3 className="simpletable-heading">Upload Artwork</h3>
             </div>
             <div className="divs-tableexpress">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                  <GiCloudUpload className="icon-upload" />
-                </p>
-                <p className="ant-upload-text">Upload Your Artwork File</p>
-                <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
+              <ImageUploader />
             </div>
             <div className="size-txt">
               <h3 className="simpletable-heading">Style?</h3>
@@ -358,7 +342,7 @@ function Wovenhero() {
                         <img
                           alt={card.title}
                           src={card.imgSrc}
-                          className="image-card-express-1"
+                          className="image-card-express"
                         />
                         <p>{card.title}</p>
                       </Card>
@@ -377,15 +361,13 @@ function Wovenhero() {
                     <Card
                       bordered={false}
                       style={{
-                        width: "8rem",
-                        height: "12rem",
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
                       <p>{card.title}</p>
@@ -404,22 +386,16 @@ function Wovenhero() {
                     <Card
                       bordered={false}
                       style={{
-                        width: "11rem",
-                        height: "12rem",
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
-                      <p>
-                        Digital Proof
-                        <br />
-                        Only
-                      </p>
+                      <p>{card.title}</p>
                     </Card>
                   </div>
                 ))}
@@ -435,22 +411,16 @@ function Wovenhero() {
                     <Card
                       bordered={false}
                       style={{
-                        width: "11rem",
-                        height: "12rem",
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
-                      <p>
-                        Digital Proof
-                        <br />
-                        Only
-                      </p>
+                      <p>{card.title}</p>
                     </Card>
                   </div>
                 ))}
@@ -467,15 +437,13 @@ function Wovenhero() {
                   <Card
                     bordered={false}
                     style={{
-                      width: "11rem",
-                      height: "12rem",
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
                   >
                     <img
-                      alt="abc"
-                      src="../images/straight.png"
+                      alt={card.title}
+                      src={card.imgSrc}
                       className="image-card-express"
                     />
                     <p>{card.title}</p>
@@ -487,20 +455,18 @@ function Wovenhero() {
               <h3 className="simpletable-heading">Proof options?</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {cardproof.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
                     style={{
-                      width: "11rem",
-                      height: "12rem",
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
                   >
                     <img
-                      alt="abc"
-                      src="../images/straight.png"
+                      alt={card.title}
+                      src={card.imgSrc}
                       className="image-card-express"
                     />
                     <p>{card.title}</p>
@@ -512,20 +478,18 @@ function Wovenhero() {
               <h3 className="simpletable-heading">Turnaround options?</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {cardturnaround.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
                     style={{
-                      width: "11rem",
-                      height: "12rem",
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
                   >
                     <img
-                      alt="abc"
-                      src="../images/straight.png"
+                      alt={card.title}
+                      src={card.imgSrc}
                       className="image-card-express"
                     />
                     <p>{card.title}</p>

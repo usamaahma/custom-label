@@ -1,56 +1,35 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Breadcrumb, Upload, message } from "antd";
+import { Button, Card, Breadcrumb } from "antd";
 import LastTable1 from "./lasttable";
 import { useCart } from "../../context/cartcontext";
- import "./expressmain.css";
+import "./expressmain.css";
 import { Slide } from "react-awesome-reveal";
-import { GiCloudUpload } from "react-icons/gi";
-
-const { Dragger } = Upload;
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-  onChange(info) {
-    const { status, response } = info.file;
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      // Check the status code
-      const errorMessage =
-        response?.status === 503
-          ? "The server is currently unavailable. Please try again later."
-          : `${info.file.name} file upload failed.`;
-      message.error(errorMessage);
-      console.error("Error details:", response);
-    }
-  },
-};
+import ImageUploader from "./imagedragger";
 
 // Card data
 const cardData = [
-  { id: 1, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 2, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 3, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 4, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 5, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 6, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 7, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 8, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 9, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 10, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 11, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 12, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 13, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 14, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 15, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 16, imgSrc: "../images/straight.png", title: "0.75 x 1" },
+  { id: 1, imgSrc: "../images/New Folder/0.75 x 1.jpg", title: "0.75 x 1" },
+  { id: 2, imgSrc: "../images/New Folder/0.75 x 1.5.jpg", title: "0.75 x 1.5" },
+  { id: 3, imgSrc: "../images/New Folder/0.75 x2.jpg", title: "0.75 x 2" },
+  { id: 4, imgSrc: "../images/New Folder/0.75 x 2.5.jpg", title: "0.75 x 2.5" },
+  { id: 5, imgSrc: "../images/New Folder/1 x 1.jpg", title: "1 x 1" },
+  { id: 6, imgSrc: "../images/New Folder/1 x 1.5.jpg", title: "1 x 1.5" },
+  { id: 7, imgSrc: "../images/New Folder/1 x 2.jpg", title: "1 x 2" },
+  { id: 8, imgSrc: "../images/New Folder/1 x 2.5.jpg", title: "1 x 2.5" },
+  { id: 9, imgSrc: "../images/New Folder/1.5 x 2.jpg", title: "1.5 x 2" },
+  { id: 10, imgSrc: "../images/New Folder/0.75 x 1.jpg", title: "0.75 x 1" },
+  { id: 11, imgSrc: "../images/New Folder/1 x 1.5.jpg", title: "1 x 1.5" },
+  { id: 12, imgSrc: "../images/New Folder/1.5 x 2.jpg", title: "1.5 x 2" },
+  { id: 13, imgSrc: "../images/New Folder/0.75 x 1.jpg", title: "0.75 x 1" },
+  { id: 14, imgSrc: "../images/New Folder/1 x 1.5.jpg", title: "1 x 1.5" },
+  { id: 15, imgSrc: "../images/New Folder/1.5 x 2.jpg", title: "1.5 x 2" },
+  { id: 16, imgSrc: "../images/New Folder/0.75 x 1.jpg", title: "0.75 x 1" },
   // Add more items as needed
 ];
 const card1 = [
   {
     title: "None",
-    imgSrc: "../images/straight.png",
+    imgSrc: "../images/New Folder/custom.png",
   },
   {
     title: (
@@ -59,7 +38,7 @@ const card1 = [
         versions
       </p>
     ),
-    imgSrc: "../images/straight.png",
+    imgSrc: "../images/New Folder/custom.png",
   },
 ];
 const imagesData = [
@@ -302,16 +281,7 @@ function Expressmain() {
               <h3 className="simpletable-heading">Upload Artwork</h3>
             </div>
             <div className="divs-tableexpress">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                  <GiCloudUpload className="icon-upload" />
-                </p>
-                <p className="ant-upload-text">Upload Your Artwork File</p>
-                <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
+              <ImageUploader />
             </div>
             <div className="size-txt">
               <h3 className="simpletable-heading">Style?</h3>
@@ -320,15 +290,14 @@ function Expressmain() {
               <Card
                 bordered={false}
                 style={{
-                  width: "11rem",
-                  height: "12rem",
+                   
                   background: "#FAF4EB",
                 }}
                 onClick={() => handleCardClick("style", "Straight Cut (Flat)")}
               >
                 <img
                   alt="Straight Cut"
-                  src="../images/straight.png"
+                  src="../images/New Folder/2 x 2.jpg"
                   className="image-card-express"
                 />
                 <p>
@@ -371,12 +340,14 @@ function Expressmain() {
                   <Card
                     bordered={false}
                     onClick={() => handleCardClick("versions", card.title)}
-                    style={{ background: "#FAF4EB" }}
+                    style={{
+                      background: "#FAF4EB",
+                    }}
                   >
                     <img
                       alt={card.title}
                       src={card.imgSrc}
-                      className="image-card-express-1"
+                      className="image-card-express"
                     />
                     <p>{card.title}</p>
                   </Card>
@@ -390,14 +361,12 @@ function Expressmain() {
               <Card
                 bordered={false}
                 style={{
-                  width: "11rem",
-                  height: "12rem",
                   background: "#FAF4EB",
                 }}
               >
                 <img
                   alt="abc"
-                  src="../images/straight.png"
+                  src="../images/New Folder/proof.png"
                   className="image-card-express"
                 />
                 <p>
@@ -414,14 +383,12 @@ function Expressmain() {
               <Card
                 bordered={false}
                 style={{
-                  width: "11rem",
-                  height: "12rem",
                   background: "#FAF4EB",
                 }}
               >
                 <img
                   alt="abc"
-                  src="../images/straight.png"
+                  src="../images/New Folder/rush3.png"
                   className="image-card-express"
                 />
                 <p>
