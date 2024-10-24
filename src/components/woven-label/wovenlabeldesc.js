@@ -42,13 +42,13 @@ const props = {
 
 // Card data
 const cardData = [
-  { id: 1, imgSrc: "../images/straight.png", title: "None" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Square" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Rounded" },
+  { id: 1, imgSrc: "../images/New Folder/2 x 2.jpg", title: "None" },
+  { id: 2, imgSrc: "../images/New Folder/2 x 2.jpg", title: "Square" },
+  { id: 3, imgSrc: "../images/New Folder/2 x 2.jpg", title: "Rounded" },
 ];
 const card1 = [
-  { id: 1, imgSrc: "../images/straight.png", title: "2.75 x .875" },
-  { id: 2, imgSrc: "../images/straight.png", title: "3 x 1" },
+  { id: 1, imgSrc: "../images/New Folder/2 x 1.5.jpg", title: "2.75 x .875" },
+  { id: 2, imgSrc: "../images/New Folder/2 x 2.jpg", title: "3 x 1" },
 ];
 
 const imagesData = [
@@ -321,15 +321,13 @@ function Wovenlabeldesc() {
               <h3 className="simpletable-heading">Size?</h3>
             </div>
             <div className="divs-tableexpress">
-              <div className="card-grid">
+              <div className="card-container">
                 {card1.map((card) => (
                   <Card
                     key={card.id}
                     onClick={() => handleCardClick("size", card.title)}
                     bordered={false}
                     style={{
-                      width: "11rem",
-                      height: "12rem",
                       background: "#FAFAFA",
                     }}
                   >
@@ -437,7 +435,6 @@ function Wovenlabeldesc() {
                 onChangeComplete={handleChangeComplete}
                 disableAlpha // Optional: Disable alpha (transparency) slider
               />
-              
             </div>
             <div className="size-txt">
               <h3 className="simpletable-heading">Border?</h3>
@@ -485,7 +482,7 @@ function Wovenlabeldesc() {
               >
                 <img
                   alt="abc"
-                  src="../images/straight.png"
+                  src="../images/New Folder/rush3.png"
                   className="image-card-express"
                 />
                 <p>Standard: 15</p>

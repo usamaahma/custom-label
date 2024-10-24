@@ -1,53 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Breadcrumb, Upload, message } from "antd";
+import { Button, Card, Breadcrumb } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
-import { UploadOutlined } from "@ant-design/icons";
 import "../expressclothing/expressmain.css";
 import { Slide } from "react-awesome-reveal";
 import { GiCloudUpload } from "react-icons/gi";
-
-const { Dragger } = Upload;
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-  onChange(info) {
-    const { status, response } = info.file;
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      // Check the status code
-      const errorMessage =
-        response?.status === 503
-          ? "The server is currently unavailable. Please try again later."
-          : `${info.file.name} file upload failed.`;
-      message.error(errorMessage);
-      console.error("Error details:", response);
-    }
-  },
-};
-
-// Card data
-const cardData = [
-  { id: 1, imgSrc: "../images/straight.png", title: "1 x 1.5 " },
-  { id: 2, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 3, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 4, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 5, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 6, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 7, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 8, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 9, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 10, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 11, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 12, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 13, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 14, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 15, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 16, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  // Add more items as needed
-];
+import ImageUploader from "../expressclothing/imagedragger";
 
 const cardstyledata = [
   { id: 1, imgSrc: "../images/straight.png", title: "Straight Cut (Flat)" },
@@ -327,16 +285,7 @@ function Screenprintedhero() {
               <h3 className="simpletable-heading">Upload Artwork</h3>
             </div>
             <div className="divs-tableexpress">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                  <GiCloudUpload className="icon-upload" />
-                </p>
-                <p className="ant-upload-text">Upload Your Artwork File</p>
-                <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
+              <ImageUploader />
             </div>
             <div className="size-txt">
               <h3 className="simpletable-heading">Style?</h3>

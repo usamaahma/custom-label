@@ -1,32 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Breadcrumb, Upload, message } from "antd";
+import { Button, Card, Breadcrumb, message } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
-import { UploadOutlined } from "@ant-design/icons";
 import "../expressclothing/expressmain.css";
 import { Slide } from "react-awesome-reveal";
-import { GiCloudUpload } from "react-icons/gi";
-
-const { Dragger } = Upload;
-const props = {
-  name: "file",
-  multiple: true,
-  action: "https://660d2bd96ddfa2943b33731c.mockapi.io/api/upload",
-  onChange(info) {
-    const { status, response } = info.file;
-    if (status === "done") {
-      message.success(`${info.file.name} file uploaded successfully.`);
-    } else if (status === "error") {
-      // Check the status code
-      const errorMessage =
-        response?.status === 503
-          ? "The server is currently unavailable. Please try again later."
-          : `${info.file.name} file upload failed.`;
-      message.error(errorMessage);
-      console.error("Error details:", response);
-    }
-  },
-};
+import ImageUploader from "../expressclothing/imagedragger";
 
 // Card data
 const cardData = [
@@ -331,16 +309,7 @@ function Satinhero() {
               <h3 className="simpletable-heading">Upload Artwork</h3>
             </div>
             <div className="divs-tableexpress">
-              <Dragger {...props}>
-                <p className="ant-upload-drag-icon">
-                  <GiCloudUpload className="icon-upload" />
-                </p>
-                <p className="ant-upload-text">Upload Your Artwork File</p>
-                <p className="ant-upload-hint">
-                  Support for a single or bulk upload. Strictly prohibited from
-                  uploading company data or other banned files.
-                </p>
-              </Dragger>
+              <ImageUploader />
             </div>
             <div className="size-txt">
               <h3 className="simpletable-heading">Style?</h3>
@@ -546,6 +515,12 @@ function Satinhero() {
                 }}
                 placeholder="Enter your text here..."
               />
+            </div>
+            <div className="size-txt">
+              <h3 className="simpletable-heading">Quantity?</h3>
+            </div>
+            <div className="divs-tableexpress">
+              <LastTable1/>
             </div>
           </div>
         </div>
