@@ -8,28 +8,28 @@ import ImageUploader from "./imagedragger";
 
 // Card data
 const cardData = [
-  { id: 1, imgSrc: "../images/New Folder/0.75 x 1.jpg", title: "0.75 x 1" },
-  { id: 2, imgSrc: "../images/New Folder/0.75 x 1.5.jpg", title: "0.75 x 1.5" },
-  { id: 3, imgSrc: "../images/New Folder/0.75 x2.jpg", title: "0.75 x 2" },
-  { id: 4, imgSrc: "../images/New Folder/0.75 x 2.5.jpg", title: "0.75 x 2.5" },
-  { id: 5, imgSrc: "../images/New Folder/1 x 1.jpg", title: "1 x 1" },
-  { id: 6, imgSrc: "../images/New Folder/1 x 1.5.jpg", title: "1 x 1.5" },
-  { id: 7, imgSrc: "../images/New Folder/1 x 2.jpg", title: "1 x 2" },
-  { id: 8, imgSrc: "../images/New Folder/1 x 2.5.jpg", title: "1 x 2.5" },
-  { id: 9, imgSrc: "../images/New Folder/1.5 x 2.jpg", title: "1.5 x 2" },
-  { id: 10, imgSrc: "../images/New Folder/0.75 x 1.jpg", title: "0.75 x 1" },
-  { id: 11, imgSrc: "../images/New Folder/1 x 1.5.jpg", title: "1 x 1.5" },
-  { id: 12, imgSrc: "../images/New Folder/1.5 x 2.jpg", title: "1.5 x 2" },
-  { id: 13, imgSrc: "../images/New Folder/0.75 x 1.jpg", title: "0.75 x 1" },
-  { id: 14, imgSrc: "../images/New Folder/1 x 1.5.jpg", title: "1 x 1.5" },
-  { id: 15, imgSrc: "../images/New Folder/1.5 x 2.jpg", title: "1.5 x 2" },
-  { id: 16, imgSrc: "../images/New Folder/0.75 x 1.jpg", title: "0.75 x 1" },
+  { id: 1, imgSrc: "../images/sizes/0.75 x 1.jpg", title: "0.75 x 1" },
+  { id: 2, imgSrc: "../images/sizes/0.75 x 1.5.jpg", title: "0.75 x 1.5" },
+  { id: 3, imgSrc: "../images/sizes/0.75 x2.jpg", title: "0.75 x 2" },
+  { id: 4, imgSrc: "../images/sizes/0.75 x 2.5.jpg", title: "0.75 x 2.5" },
+  { id: 5, imgSrc: "../images/sizes/1 x 1.jpg", title: "1 x 1" },
+  { id: 6, imgSrc: "../images/sizes/1 x 1.5.jpg", title: "1 x 1.5" },
+  { id: 7, imgSrc: "../images/sizes/1 x 2.jpg", title: "1 x 2" },
+  { id: 8, imgSrc: "../images/sizes/1 x 2.5.jpg", title: "1 x 2.5" },
+  { id: 9, imgSrc: "../images/sizes/1.5 x 2.jpg", title: "1.5 x 2" },
+  { id: 10, imgSrc: "../images/sizes/0.75 x 1.jpg", title: "0.75 x 1" },
+  { id: 11, imgSrc: "../images/sizes/1 x 1.5.jpg", title: "1 x 1.5" },
+  { id: 12, imgSrc: "../images/sizes/1.5 x 2.jpg", title: "1.5 x 2" },
+  { id: 13, imgSrc: "../images/sizes/0.75 x 1.jpg", title: "0.75 x 1" },
+  { id: 14, imgSrc: "../images/sizes/1 x 1.5.jpg", title: "1 x 1.5" },
+  { id: 15, imgSrc: "../images/sizes/1.5 x 2.jpg", title: "1.5 x 2" },
+  { id: 16, imgSrc: "../images/sizes/0.75 x 1.jpg", title: "0.75 x 1" },
   // Add more items as needed
 ];
 const card1 = [
   {
     title: "None",
-    imgSrc: "../images/New Folder/custom.png",
+    imgSrc: "../images/sizes/custom.png",
   },
   {
     title: (
@@ -38,7 +38,7 @@ const card1 = [
         versions
       </p>
     ),
-    imgSrc: "../images/New Folder/custom.png",
+    imgSrc: "../images/sizes/custom.png",
   },
 ];
 const imagesData = [
@@ -297,7 +297,7 @@ function Expressmain() {
               >
                 <img
                   alt="Straight Cut"
-                  src="../images/New Folder/2 x 2.jpg"
+                  src="../images/sizes/2 x 2.jpg"
                   className="image-card-express"
                 />
                 <p>
@@ -366,7 +366,7 @@ function Expressmain() {
               >
                 <img
                   alt="abc"
-                  src="../images/New Folder/proof.png"
+                  src="../images/sizes/proof.png"
                   className="image-card-express"
                 />
                 <p>
@@ -388,7 +388,7 @@ function Expressmain() {
               >
                 <img
                   alt="abc"
-                  src="../images/New Folder/rush3.png"
+                  src="../images/sizes/rush3.png"
                   className="image-card-express"
                 />
                 <p>
