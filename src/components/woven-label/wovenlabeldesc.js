@@ -42,13 +42,13 @@ const props = {
 
 // Card data
 const cardData = [
-  { id: 1, imgSrc: "../images/New Folder/2 x 2.jpg", title: "None" },
-  { id: 2, imgSrc: "../images/New Folder/2 x 2.jpg", title: "Square" },
-  { id: 3, imgSrc: "../images/New Folder/2 x 2.jpg", title: "Rounded" },
+  { id: 1, imgSrc: "../images/sizes/2 x 2.jpg", title: "None" },
+  { id: 2, imgSrc: "../images/sizes/2 x 2.jpg", title: "Square" },
+  { id: 3, imgSrc: "../images/sizes/2 x 2.jpg", title: "Rounded" },
 ];
 const card1 = [
-  { id: 1, imgSrc: "../images/New Folder/2 x 1.5.jpg", title: "2.75 x .875" },
-  { id: 2, imgSrc: "../images/New Folder/2 x 2.jpg", title: "3 x 1" },
+  { id: 1, imgSrc: "../images/sizes/2 x 1.5.jpg", title: "2.75 x .875" },
+  { id: 2, imgSrc: "../images/sizes/2 x 2.jpg", title: "3 x 1" },
 ];
 
 const imagesData = [
@@ -482,7 +482,7 @@ function Wovenlabeldesc() {
               >
                 <img
                   alt="abc"
-                  src="../images/New Folder/rush3.png"
+                  src="../images/sizes/rush3.png"
                   className="image-card-express"
                 />
                 <p>Standard: 15</p>

@@ -11,46 +11,46 @@ import ImageUploader from "../expressclothing/imagedragger";
 const cardstyledata = [
   {
     id: 1,
-    imgSrc: "../images/New Folder/style.jpg",
+    imgSrc: "../images/sizes/style.jpg",
     title: "Straight Cut (Flat)",
   },
-  { id: 2, imgSrc: "../images/New Folder/style.jpg", title: "Centre Fold" },
-  { id: 3, imgSrc: "../images/New Folder/style.jpg", title: "Loop Fold " },
-  { id: 4, imgSrc: "../images/New Folder/style.jpg", title: "End Fold" },
-  { id: 6, imgSrc: "../images/New Folder/style.jpg", title: "Book Cover Fold" },
-  { id: 5, imgSrc: "../images/New Folder/style.jpg", title: "Manhatten Fold" },
-  { id: 7, imgSrc: "../images/New Folder/style.jpg", title: "Book Cover Fold" },
+  { id: 2, imgSrc: "../images/sizes/style.jpg", title: "Centre Fold" },
+  { id: 3, imgSrc: "../images/sizes/style.jpg", title: "Loop Fold " },
+  { id: 4, imgSrc: "../images/sizes/style.jpg", title: "End Fold" },
+  { id: 6, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
+  { id: 5, imgSrc: "../images/sizes/style.jpg", title: "Manhatten Fold" },
+  { id: 7, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
 
   // Add more items as needed
 ];
 const cardsizedata = [
-  { id: 1, imgSrc: "../images/New Folder/2 x 1.jpg", title: "2 x 0.625" },
-  { id: 2, imgSrc: "../images/New Folder/2 x 1.jpg", title: "2 x 1" },
-  { id: 3, imgSrc: "../images/New Folder/2 x 2.jpg", title: "2 x 2 " },
-  { id: 4, imgSrc: "../images/New Folder/2 x 2.jpg", title: "Custom" },
+  { id: 1, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 0.625" },
+  { id: 2, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 1" },
+  { id: 3, imgSrc: "../images/sizes/2 x 2.jpg", title: "2 x 2 " },
+  { id: 4, imgSrc: "../images/sizes/2 x 2.jpg", title: "Custom" },
 ];
 const cardbackptiondata = [
-  { id: 1, imgSrc: "../images/New Folder/custom.png", title: "None" },
-  { id: 2, imgSrc: "../images/New Folder/custom.png", title: "IronOn" },
+  { id: 1, imgSrc: "../images/sizes/custom.png", title: "None" },
+  { id: 2, imgSrc: "../images/sizes/custom.png", title: "IronOn" },
   {
     id: 3,
-    imgSrc: "../images/New Folder/custom.png",
+    imgSrc: "../images/sizes/custom.png",
     title: "Peel & Stick",
   },
 ];
 const cardmetallicdata = [
-  { id: 1, imgSrc: "../images/New Folder/custom.png", title: "None" },
-  { id: 2, imgSrc: "../images/New Folder/custom.png", title: "Gold Metallic" },
+  { id: 1, imgSrc: "../images/sizes/custom.png", title: "None" },
+  { id: 2, imgSrc: "../images/sizes/custom.png", title: "Gold Metallic" },
   {
     id: 3,
-    imgSrc: "../images/New Folder/custom.png",
+    imgSrc: "../images/sizes/custom.png",
     title: "Silver Metallic",
   },
 ];
 const card1 = [
   {
     title: "None",
-    imgSrc: "../images/New Folder/custom.png",
+    imgSrc: "../images/sizes/custom.png",
   },
   {
     title: (
@@ -59,28 +59,28 @@ const card1 = [
         versions
       </p>
     ),
-    imgSrc: "../images/New Folder/custom.png",
+    imgSrc: "../images/sizes/custom.png",
   },
 ];
 const cardproof = [
   {
     title: "Digital Proof Only",
-    imgSrc: "../images/New Folder/proof.png",
+    imgSrc: "../images/sizes/proof.png",
   },
   {
     title: <p>Digital Proof & Sample Photo</p>,
-    imgSrc: "../images/New Folder/proof.png",
+    imgSrc: "../images/sizes/proof.png",
   },
 ];
 
 const cardturnaround = [
   {
     title: "Standard: 15 Business Days",
-    imgSrc: "../images/New Folder/rush3.png",
+    imgSrc: "../images/sizes/rush3.png",
   },
   {
     title: <p>RUSH: 10 Business Days</p>,
-    imgSrc: "../images/New Folder/rush3.png",
+    imgSrc: "../images/sizes/rush3.png",
   },
 ];
 
