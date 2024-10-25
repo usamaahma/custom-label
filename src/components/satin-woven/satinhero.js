@@ -7,52 +7,43 @@ import { Slide } from "react-awesome-reveal";
 import ImageUploader from "../expressclothing/imagedragger";
 
 // Card data
-const cardData = [
-  { id: 1, imgSrc: "../images/straight.png", title: "1 x 1.5 " },
-  { id: 2, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 3, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 4, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 5, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 6, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 7, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 8, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 9, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 10, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 11, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 12, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 13, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 14, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 15, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 16, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  // Add more items as needed
-];
 
 const cardstyledata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "Straight Cut (Flat)" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Centre Fold" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Loop Fold " },
-  { id: 4, imgSrc: "../images/straight.png", title: "End Fold" },
-  { id: 6, imgSrc: "../images/straight.png", title: "Book Cover Fold" },
-  { id: 5, imgSrc: "../images/straight.png", title: "Manhatten Fold" },
-  { id: 7, imgSrc: "../images/straight.png", title: "Book Cover Fold" },
+  { id: 1, imgSrc: "../images/sizes/style.jpg", title: "Straight Cut (Flat)" },
+  { id: 2, imgSrc: "../images/sizes/style.jpg", title: "Centre Fold" },
+  { id: 3, imgSrc: "../images/sizes/style.jpg", title: "Loop Fold " },
+  { id: 4, imgSrc: "../images/sizes/style.jpg", title: "End Fold" },
+  { id: 6, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
+  { id: 5, imgSrc: "../images/sizes/style.jpg", title: "Manhatten Fold" },
+  { id: 7, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
 
   // Add more items as needed
 ];
 const cardsizedata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "2 x 0.625" },
-  { id: 2, imgSrc: "../images/straight.png", title: "2 x 1" },
-  { id: 3, imgSrc: "../images/straight.png", title: "2 x 2 " },
-  { id: 4, imgSrc: "../images/straight.png", title: "Custom" },
+  { id: 1, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 0.625" },
+  { id: 2, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 1" },
+  { id: 3, imgSrc: "../images/sizes/2 x 2.jpg", title: "2 x 2 " },
+  { id: 4, imgSrc: "../images/sizes/2 x 2.5.jpg", title: "Custom" },
 ];
 const cardbackptiondata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "None" },
-  { id: 2, imgSrc: "../images/straight.png", title: "IronOn" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Peel & Stick" },
+  { id: 1, imgSrc: "../images/sizes/custom.png", title: "None (Sew-On)" },
+  { id: 2, imgSrc: "../images/sizes/custom.png", title: "IronOn" },
+  { id: 3, imgSrc: "../images/sizes/custom.png", title: "Peel & Stick" },
 ];
 const cardmetallicdata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "None" },
-  { id: 2, imgSrc: "../images/straight.png", title: "IronOn" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Peel & Stick" },
+  { id: 1, imgSrc: "../images/sizes/custom.png", title: "None (Regular Thread)" },
+  { id: 2, imgSrc: "../images/sizes/custom.png", title: "Gold Metallic" },
+  { id: 3, imgSrc: "../images/sizes/custom.png", title: "Silver Metallic" },
+];
+const satincolor = [
+  {
+    title: "White Satin",
+    imgSrc: "../images/sizes/whitesatin.png",
+  },
+  {
+    title: <p>Black Satin</p>,
+    imgSrc: "../images/sizes/whitesatin.png",
+  },
 ];
 const card1 = [
   {
@@ -66,6 +57,26 @@ const card1 = [
         versions
       </p>
     ),
+    imgSrc: "../images/straight.png",
+  },
+];
+const proofoptions = [
+  {
+    title: "Digital Proof Only",
+    imgSrc: "../images/straight.png",
+  },
+  {
+    title: "Digital Proof & Sample Photo",
+    imgSrc: "../images/straight.png",
+  },
+];
+const turnaroundoptions = [
+  {
+    title: "Standard: 15 Business Days",
+    imgSrc: "../images/straight.png",
+  },
+  {
+    title: "RUSH: 10 Business Days",
     imgSrc: "../images/straight.png",
   },
 ];
@@ -109,6 +120,9 @@ function Satinhero() {
     size: '0.75" / 1" (19.05mm x 25.40mm)',
     style: "Straight Cut (Flat)",
     versions: "None",
+    backing: "None",
+    satincolor: "White Satin",
+    metallic: "None (Regular Thread)",
     proofOptions: "Digital Proof Only",
     turnaroundOptions: "RUSH: 3 Business Days",
     quantity: "1000 pcs",
@@ -321,13 +335,13 @@ function Satinhero() {
                     <div key={card.id} className="card-container">
                       <Card
                         bordered={false}
-                        onClick={() => handleCardClick("size", card.title)}
+                        onClick={() => handleCardClick("style", card.title)}
                         style={{ background: "#FAF4EB" }}
                       >
                         <img
                           alt={card.title}
                           src={card.imgSrc}
-                          className="image-card-express-1"
+                          className="image-card-express"
                         />
                         <p>{card.title}</p>
                       </Card>
@@ -351,10 +365,11 @@ function Satinhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("size", card.title)}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
                       <p>{card.title}</p>
@@ -363,6 +378,35 @@ function Satinhero() {
                 ))}
               </div>
             </div>
+            <div className="size-txt">
+              <h3 className="simpletable-heading">Satin Material Color?</h3>
+            </div>
+            <div className="divs-tableexpress">
+              <div className="card-grid">
+                {satincolor.map((card) => (
+                  <div key={card.id} className="card-container">
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "8rem",
+                        height: "12rem",
+                        background: "#FAF4EB",
+                        textAlign: "center",
+                      }}
+                      onClick={() => handleCardClick("satincolor", card.title)}
+                    >
+                      <img
+                        alt={card.title}
+                        src={card.imgSrc}
+                        className="image-card-express"
+                      />
+                      <p>{card.title}</p>
+                    </Card>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="size-txt">
               <h3 className="simpletable-heading">Backing Options?</h3>
             </div>
@@ -378,17 +422,14 @@ function Satinhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("backing", card.title)}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
-                      <p>
-                        Digital Proof
-                        <br />
-                        Only
-                      </p>
+                      {card.title}
                     </Card>
                   </div>
                 ))}
@@ -409,17 +450,14 @@ function Satinhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("metallic", card.title)}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt= {card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
-                      <p>
-                        Digital Proof
-                        <br />
-                        Only
-                      </p>
+                      {card.title}
                     </Card>
                   </div>
                 ))}
@@ -441,6 +479,7 @@ function Satinhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("versions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -456,7 +495,7 @@ function Satinhero() {
               <h3 className="simpletable-heading">Proof options?</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {proofoptions.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -466,6 +505,7 @@ function Satinhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("proofOptions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -481,7 +521,7 @@ function Satinhero() {
               <h3 className="simpletable-heading">Turnaround options?</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {turnaroundoptions.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -491,6 +531,9 @@ function Satinhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("turnaroundOptions", card.title)
+                    }
                   >
                     <img
                       alt="abc"
@@ -520,7 +563,7 @@ function Satinhero() {
               <h3 className="simpletable-heading">Quantity?</h3>
             </div>
             <div className="divs-tableexpress">
-              <LastTable1/>
+              <LastTable1 />
             </div>
           </div>
         </div>
@@ -554,14 +597,20 @@ function Satinhero() {
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
+                <p>Satin Material Color::</p>
+                <p>{selectedData.satincolor}</p>
+              </div>
+            </div>
+            <div className="sticky-blue">
+              <div className="sticky-blue-inside">
                 <p>Backing Options:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.backing}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Metallic Thread:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.metallic}</p>
               </div>
             </div>
             <div className="sticky-blue">

@@ -4,7 +4,7 @@ import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
 import "../expressclothing/expressmain.css";
 import { Slide } from "react-awesome-reveal";
- import ImageUploader from "../expressclothing/imagedragger";
+import ImageUploader from "../expressclothing/imagedragger";
 
 // Card data
 
@@ -17,9 +17,9 @@ const cardturnaround = [
   // Add more items as needed
 ];
 const cardsizedata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "2 x 1" },
-  { id: 2, imgSrc: "../images/straight.png", title: "3 x 1.5" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Custom" },
+  { id: 1, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 1" },
+  { id: 2, imgSrc: "../images/sizes/2 x 2.jpg", title: "3 x 1.5" },
+  { id: 3, imgSrc: "../images/sizes/2 x 2.5.jpg", title: "Custom" },
 ];
 const cardbackptiondata = [
   { id: 1, imgSrc: "../images/straight.png", title: "One Color" },
@@ -29,7 +29,7 @@ const cardbackptiondata = [
 ];
 const cardproof = [
   {
-    title: "Yes I need Versions",
+    title: "Digital Proof Only",
     imgSrc: "../images/straight.png",
   },
 ];
@@ -83,6 +83,7 @@ function Heathero() {
     size: '0.75" / 1" (19.05mm x 25.40mm)',
     style: "Straight Cut (Flat)",
     versions: "None",
+    colors: "One Color",
     proofOptions: "Digital Proof Only",
     turnaroundOptions: "RUSH: 3 Business Days",
     quantity: "1000 pcs",
@@ -299,10 +300,11 @@ function Heathero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("size", card.title)}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
                       <p>{card.title}</p>
@@ -326,6 +328,7 @@ function Heathero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("colors", card.title)}
                     >
                       <img
                         alt="abc"
@@ -354,6 +357,7 @@ function Heathero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("versions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -379,6 +383,7 @@ function Heathero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("proofOptions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -404,6 +409,9 @@ function Heathero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("turnaroundOptions", card.title)
+                    }
                   >
                     <img
                       alt="abc"
@@ -462,7 +470,7 @@ function Heathero() {
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Number of Colors:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.colors}</p>
               </div>
             </div>
             <div className="sticky-blue">

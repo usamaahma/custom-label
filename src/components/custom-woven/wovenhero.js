@@ -124,6 +124,8 @@ function Wovenhero() {
     size: '0.75" / 1" (19.05mm x 25.40mm)',
     style: "Straight Cut (Flat)",
     versions: "None",
+    backing: "None",
+    metallic: "None",
     proofOptions: "Digital Proof Only",
     turnaroundOptions: "RUSH: 3 Business Days",
     quantity: "1000 pcs",
@@ -336,7 +338,7 @@ function Wovenhero() {
                     <div key={card.id} className="card-container">
                       <Card
                         bordered={false}
-                        onClick={() => handleCardClick("size", card.title)}
+                        onClick={() => handleCardClick("style", card.title)}
                         style={{ background: "#FAF4EB" }}
                       >
                         <img
@@ -364,6 +366,7 @@ function Wovenhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("size", card.title)}
                     >
                       <img
                         alt={card.title}
@@ -389,6 +392,7 @@ function Wovenhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("backing", card.title)}
                     >
                       <img
                         alt={card.title}
@@ -414,6 +418,7 @@ function Wovenhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("metallic", card.title)}
                     >
                       <img
                         alt={card.title}
@@ -440,6 +445,7 @@ function Wovenhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("versions", card.title)}
                   >
                     <img
                       alt={card.title}
@@ -463,6 +469,7 @@ function Wovenhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("proofOptions", card.title)}
                   >
                     <img
                       alt={card.title}
@@ -486,6 +493,9 @@ function Wovenhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("turnaroundOptions", card.title)
+                    }
                   >
                     <img
                       alt={card.title}
@@ -550,13 +560,13 @@ function Wovenhero() {
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Backing Options:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.backing}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Metallic Thread:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.metallic}</p>
               </div>
             </div>
             <div className="sticky-blue">

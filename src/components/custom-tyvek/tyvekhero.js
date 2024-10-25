@@ -1,45 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Breadcrumb,   } from "antd";
+import { Button, Card, Breadcrumb } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
- import "../expressclothing/expressmain.css";
+import "../expressclothing/expressmain.css";
 import { Slide } from "react-awesome-reveal";
 import { GiCloudUpload } from "react-icons/gi";
 import ImageUploader from "../expressclothing/imagedragger";
 
- 
-
 // Card data
-const cardData = [
-  { id: 1, imgSrc: "../images/straight.png", title: "1 x 1.5 " },
-  { id: 2, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 3, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 4, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 5, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 6, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 7, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 8, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 9, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 10, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 11, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 12, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 13, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  { id: 14, imgSrc: "../images/straight.png", title: "1 x 1.5" },
-  { id: 15, imgSrc: "../images/straight.png", title: "1.5 x 2" },
-  { id: 16, imgSrc: "../images/straight.png", title: "0.75 x 1" },
-  // Add more items as needed
+const turnaround = [
+  {
+    id: 1,
+    imgSrc: "../images/straight.png",
+    title: "Standard: 15 Business Days",
+  },
+  { id: 2, imgSrc: "../images/straight.png", title: "RUSH: 10 Business Days" },
 ];
 
 const cardstyledata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "Straight Cut (Flat)" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Centre Fold" },
+  { id: 1, imgSrc: "../images/sizes/style.jpg", title: "Straight Cut (Flat)" },
+  { id: 2, imgSrc: "../images/sizes/style.jpg", title: "Loop Fold" },
   // Add more items as needed
 ];
 const cardsizedata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "2 x 0.625" },
-  { id: 2, imgSrc: "../images/straight.png", title: "2 x 1" },
-  { id: 3, imgSrc: "../images/straight.png", title: "2 x 2 " },
-  { id: 4, imgSrc: "../images/straight.png", title: "Custom" },
+  { id: 1, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 0.625" },
+  { id: 2, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 1" },
+  { id: 3, imgSrc: "../images/sizes/2 x 2.jpg", title: "2 x 2 " },
+  { id: 4, imgSrc: "../images/sizes/2 x 2.jpg", title: "Custom" },
 ];
 const cardbackptiondata = [
   { id: 1, imgSrc: "../images/straight.png", title: "One Color" },
@@ -47,11 +34,9 @@ const cardbackptiondata = [
   { id: 3, imgSrc: "../images/straight.png", title: "Three Color" },
   { id: 4, imgSrc: "../images/straight.png", title: "Four Color" },
 ];
-const cardmetallicdata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "One Color" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Two Colors" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Three Colors" },
-  { id: 4, imgSrc: "../images/straight.png", title: "Four Colors" },
+const versions = [
+  { id: 1, imgSrc: "../images/straight.png", title: "None" },
+  { id: 2, imgSrc: "../images/straight.png", title: "Yes,I need versions" },
 ];
 const card1 = [
   {
@@ -103,8 +88,9 @@ function Tyvekhero() {
     size: '0.75" / 1" (19.05mm x 25.40mm)',
     style: "Straight Cut (Flat)",
     versions: "None",
+    printcolor: "One color",
     proofOptions: "Digital Proof Only",
-    turnaroundOptions: "RUSH: 3 Business Days",
+    turnaroundOptions: "Standard: 15 Business Days",
     quantity: "1000 pcs",
     price: "$0.54/Each",
     totalPrice: "$540.00",
@@ -303,7 +289,7 @@ function Tyvekhero() {
               <h3 className="simpletable-heading">Upload Artwork</h3>
             </div>
             <div className="divs-tableexpress">
-               <ImageUploader/>
+              <ImageUploader />
             </div>
             <div className="size-txt">
               <h3 className="simpletable-heading">Style?</h3>
@@ -319,10 +305,11 @@ function Tyvekhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("style", card.title)}
                   >
                     <img
-                      alt="abc"
-                      src="../images/straight.png"
+                      alt={card.title}
+                      src={card.imgSrc}
                       className="image-card-express"
                     />
                     <p>{card.title}</p>
@@ -345,10 +332,11 @@ function Tyvekhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("size", card.title)}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
                       <p>{card.title}</p>
@@ -372,6 +360,7 @@ function Tyvekhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("printcolor", card.title)}
                     >
                       <img
                         alt="abc"
@@ -390,7 +379,7 @@ function Tyvekhero() {
               </h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {versions.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -400,6 +389,7 @@ function Tyvekhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("versions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -425,6 +415,7 @@ function Tyvekhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("proofOptions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -440,7 +431,7 @@ function Tyvekhero() {
               <h3 className="simpletable-heading">Turnaround options?</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {turnaround.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -450,6 +441,9 @@ function Tyvekhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("turnaroundOptions", card.title)
+                    }
                   >
                     <img
                       alt="abc"
@@ -514,7 +508,7 @@ function Tyvekhero() {
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Print Colors:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.printcolor}</p>
               </div>
             </div>
             <div className="sticky-blue">

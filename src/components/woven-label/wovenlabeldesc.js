@@ -121,12 +121,8 @@ function Wovenlabeldesc() {
   };
 
   const [selectedData, setSelectedData] = useState({
-    artwork: "No Artwork Uploaded",
     size: '2.75" / 0.875" (69.85mm x 22.22mm)',
     turnaroundOptions: "Standard: 15 Business Days",
-    quantity: "1000 pcs",
-    price: "$0.54/Each",
-    totalPrice: "$540.00",
   });
 
   // Function to handle card clicks

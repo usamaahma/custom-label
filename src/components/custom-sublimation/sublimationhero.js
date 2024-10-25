@@ -9,32 +9,38 @@ import ImageUploader from "../expressclothing/imagedragger";
 // Card data
 
 const cardstyledata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "Straight Cut (Flat)" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Centre Fold" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Loop Fold " },
-  { id: 4, imgSrc: "../images/straight.png", title: "End Fold" },
-  { id: 6, imgSrc: "../images/straight.png", title: "Book Cover Fold" },
-  { id: 5, imgSrc: "../images/straight.png", title: "Manhatten Fold" },
-  { id: 7, imgSrc: "../images/straight.png", title: "Book Cover Fold" },
+  { id: 1, imgSrc: "../images/sizes/style.jpg", title: "Straight Cut (Flat)" },
+  { id: 2, imgSrc: "../images/sizes/style.jpg", title: "Centre Fold" },
+  { id: 3, imgSrc: "../images/sizes/style.jpg", title: "Loop Fold " },
+  { id: 4, imgSrc: "../images/sizes/style.jpg", title: "End Fold" },
+  { id: 6, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
+  { id: 5, imgSrc: "../images/sizes/style.jpg", title: "Manhatten Fold" },
+  { id: 7, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
 
   // Add more items as needed
 ];
 const cardsizedata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "2 x 0.625" },
-  { id: 2, imgSrc: "../images/straight.png", title: "2 x 1" },
-  { id: 3, imgSrc: "../images/straight.png", title: "2 x 2 " },
-  { id: 4, imgSrc: "../images/straight.png", title: "Custom" },
+  { id: 1, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 0.625" },
+  { id: 2, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 1" },
+  { id: 3, imgSrc: "../images/sizes/2 x 2.jpg", title: "2 x 2 " },
+  { id: 4, imgSrc: "../images/sizes/2 x 2.5.jpg", title: "Custom" },
 ];
 const cardbackptiondata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "None" },
+  { id: 1, imgSrc: "../images/straight.png", title: "None(Sew-On)" },
   { id: 2, imgSrc: "../images/straight.png", title: "IronOn" },
   { id: 3, imgSrc: "../images/straight.png", title: "Peel & Stick" },
 ];
-const cardmetallicdata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "One Color" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Two Colors" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Three Colors" },
-  { id: 4, imgSrc: "../images/straight.png", title: "Four Colors" },
+const versions = [
+  {
+    id: 1,
+    imgSrc: "../images/straight.png",
+    title: "Standard: 15 Business Days",
+  },
+  { id: 2, imgSrc: "../images/straight.png", title: "RUSH: 10 Business Days" },
+];
+const turnaround = [
+  { id: 1, imgSrc: "../images/straight.png", title: "None" },
+  { id: 2, imgSrc: "../images/straight.png", title: "Yes,I need versions" },
 ];
 const card1 = [
   {
@@ -85,9 +91,10 @@ function Sublimationhero() {
     artwork: "No Artwork Uploaded",
     size: '0.75" / 1" (19.05mm x 25.40mm)',
     style: "Straight Cut (Flat)",
+    backing: "None (Sew-On)",
     versions: "None",
     proofOptions: "Digital Proof Only",
-    turnaroundOptions: "RUSH: 3 Business Days",
+    turnaroundOptions: "Standard: 15 Business Days",
     quantity: "1000 pcs",
     price: "$0.54/Each",
     totalPrice: "$540.00",
@@ -298,13 +305,13 @@ function Sublimationhero() {
                     <div key={card.id} className="card-container">
                       <Card
                         bordered={false}
-                        onClick={() => handleCardClick("size", card.title)}
+                        onClick={() => handleCardClick("style", card.title)}
                         style={{ background: "#FAF4EB" }}
                       >
                         <img
                           alt={card.title}
                           src={card.imgSrc}
-                          className="image-card-express-1"
+                          className="image-card-express"
                         />
                         <p>{card.title}</p>
                       </Card>
@@ -328,10 +335,11 @@ function Sublimationhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("size", card.title)}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
                       <p>{card.title}</p>
@@ -355,17 +363,14 @@ function Sublimationhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("backing", card.title)}
                     >
                       <img
                         alt="abc"
                         src="../images/straight.png"
                         className="image-card-express"
                       />
-                      <p>
-                        Digital Proof
-                        <br />
-                        Only
-                      </p>
+                      {card.title}
                     </Card>
                   </div>
                 ))}
@@ -377,7 +382,7 @@ function Sublimationhero() {
               </h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {versions.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -387,6 +392,7 @@ function Sublimationhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("versions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -412,6 +418,7 @@ function Sublimationhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("proofOptions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -437,6 +444,9 @@ function Sublimationhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("turnaroundOptions", card.title)
+                    }
                   >
                     <img
                       alt="abc"
@@ -501,7 +511,7 @@ function Sublimationhero() {
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Backing Options:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.backing}</p>
               </div>
             </div>
             <div className="sticky-blue">
