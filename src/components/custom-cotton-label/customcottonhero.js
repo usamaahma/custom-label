@@ -9,44 +9,53 @@ import ImageUploader from "../expressclothing/imagedragger";
 // Card data
 
 const cardstyledata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "Straight Cut (Flat)" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Centre Fold" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Loop Fold " },
-  { id: 4, imgSrc: "../images/straight.png", title: "End Fold" },
-  { id: 6, imgSrc: "../images/straight.png", title: "Book Cover Fold" },
-  { id: 5, imgSrc: "../images/straight.png", title: "Manhatten Fold" },
-  { id: 7, imgSrc: "../images/straight.png", title: "Book Cover Fold" },
+  { id: 1, imgSrc: "../images/sizes/style.jpg", title: "Straight Cut (Flat)" },
+  { id: 2, imgSrc: "../images/sizes/style.jpg", title: "Centre Fold" },
+  { id: 3, imgSrc: "../images/sizes/style.jpg", title: "Loop Fold " },
+  { id: 4, imgSrc: "../images/sizes/style.jpg", title: "End Fold" },
+  { id: 6, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
+  { id: 5, imgSrc: "../images/sizes/style.jpg", title: "Manhatten Fold" },
+  { id: 7, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
 
   // Add more items as needed
 ];
 const cardsizedata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "2 x 0.625" },
-  { id: 2, imgSrc: "../images/straight.png", title: "2 x 1" },
-  { id: 3, imgSrc: "../images/straight.png", title: "2 x 2 " },
-  { id: 4, imgSrc: "../images/straight.png", title: "Custom" },
+  { id: 1, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 0.625" },
+  { id: 2, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 1" },
+  { id: 3, imgSrc: "../images/sizes/2 x 2.jpg", title: "2 x 2 " },
+  { id: 4, imgSrc: "../images/sizes/2 x 2.5.jpg", title: "Custom" },
 ];
-const cardbackptiondata = [
+const cottonmaterial = [
+  { id: 1, imgSrc: "../images/straight.png", title: "White Cotton" },
+  { id: 2, imgSrc: "../images/straight.png", title: "Black Cotton" },
+  { id: 3, imgSrc: "../images/straight.png", title: "Natural Color" },
+];
+const versions = [
   { id: 1, imgSrc: "../images/straight.png", title: "None" },
-  { id: 2, imgSrc: "../images/straight.png", title: "IronOn" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Peel & Stick" },
+  { id: 2, imgSrc: "../images/straight.png", title: "Yes, I need versions" },
 ];
+const proofoptions = [
+  { id: 1, imgSrc: "../images/straight.png", title: "Digital Proof Only" },
+  {
+    id: 2,
+    imgSrc: "../images/straight.png",
+    title: "Digital Proof & Sample Photo",
+  },
+];
+
 const cardmetallicdata = [
   { id: 1, imgSrc: "../images/straight.png", title: "One Color" },
   { id: 2, imgSrc: "../images/straight.png", title: "Two Color" },
   { id: 3, imgSrc: "../images/straight.png", title: "Three Color" },
   { id: 4, imgSrc: "../images/straight.png", title: "Four Color" },
 ];
-const card1 = [
+const turnaround = [
   {
-    title: " White Cotton",
+    title: " Standard: 15 Business Days",
     imgSrc: "../images/straight.png",
   },
   {
-    title: <p>Black Cotton</p>,
-    imgSrc: "../images/straight.png",
-  },
-  {
-    title: <p>Natural Cotton</p>,
+    title: <p>RUSH: 10 Business Days</p>,
     imgSrc: "../images/straight.png",
   },
 ];
@@ -90,10 +99,10 @@ function Customcottonhero() {
     size: '0.75" / 1" (19.05mm x 25.40mm)',
     style: "Straight Cut (Flat)",
     printcolor: "one color",
-    satinmaterial: "White Satin",
+    cottonmaterial: "White Satin",
     versions: "None",
     proofOptions: "Digital Proof Only",
-    turnaroundOptions: "RUSH: 3 Business Days",
+    turnaroundOptions: "Standard: 15 Business Days",
     quantity: "1000 pcs",
     price: "$0.54/Each",
     totalPrice: "$540.00",
@@ -304,13 +313,13 @@ function Customcottonhero() {
                     <div key={card.id} className="card-container">
                       <Card
                         bordered={false}
-                        onClick={() => handleCardClick("size", card.title)}
+                        onClick={() => handleCardClick("style", card.title)}
                         style={{ background: "#FAF4EB" }}
                       >
                         <img
                           alt={card.title}
                           src={card.imgSrc}
-                          className="image-card-express-1"
+                          className="image-card-express"
                         />
                         <p>{card.title}</p>
                       </Card>
@@ -334,10 +343,11 @@ function Customcottonhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("size", card.title)}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt= {card.title}
+                        src= {card.imgSrc}
                         className="image-card-express"
                       />
                       <p>{card.title}</p>
@@ -350,7 +360,7 @@ function Customcottonhero() {
               <h3 className="simpletable-heading">Cotton Material Color</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {cottonmaterial.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -360,6 +370,9 @@ function Customcottonhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("cottonmaterial", card.title)
+                    }
                   >
                     <img
                       alt="abc"
@@ -386,6 +399,7 @@ function Customcottonhero() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("printcolor", card.title)}
                     >
                       <img
                         alt="abc"
@@ -404,7 +418,7 @@ function Customcottonhero() {
               </h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {versions.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -414,6 +428,7 @@ function Customcottonhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("versions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -429,7 +444,7 @@ function Customcottonhero() {
               <h3 className="simpletable-heading">Proof options?</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {proofoptions.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -439,6 +454,7 @@ function Customcottonhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("proofOptions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -454,7 +470,7 @@ function Customcottonhero() {
               <h3 className="simpletable-heading">Turnaround options?</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {turnaround.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -464,6 +480,9 @@ function Customcottonhero() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("turnaroundOptions", card.title)
+                    }
                   >
                     <img
                       alt="abc"
@@ -527,7 +546,7 @@ function Customcottonhero() {
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Cotton Material Color:</p>
-                <p>{selectedData.satinmaterial}</p>
+                <p>{selectedData.cottonmaterial}</p>
               </div>
             </div>
             <div className="sticky-blue">

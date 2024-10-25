@@ -10,38 +10,49 @@ import ImageUploader from "../expressclothing/imagedragger";
 // Card data
 
 const cardstyledata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "Straight Cut (Flat)" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Centre Fold" },
+  { id: 1, imgSrc: "../images/sizes/style.jpg", title: "Straight Cut (Flat)" },
+  { id: 2, imgSrc: "../images/sizes/style.jpg", title: "Centre Fold" },
   // Add more items as needed
 ];
 const cardsizedata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "2 x 0.625" },
-  { id: 2, imgSrc: "../images/straight.png", title: "2 x 1" },
-  { id: 3, imgSrc: "../images/straight.png", title: "2 x 2 " },
-  { id: 4, imgSrc: "../images/straight.png", title: "Custom" },
+  { id: 1, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 0.625" },
+  { id: 2, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 1" },
+  { id: 3, imgSrc: "../images/sizes/2 x 2.jpg", title: "2 x 2 " },
+  { id: 4, imgSrc: "../images/sizes/2 x 2.5.jpg", title: "Custom" },
 ];
+const versions = [
+  { id: 1, imgSrc: "../images/straight.png", title: "None" },
+  { id: 2, imgSrc: "../images/straight.png", title: "Yes, I need Versions" },
+];
+
 const cardbackptiondata = [
   { id: 1, imgSrc: "../images/straight.png", title: "One Color" },
   { id: 2, imgSrc: "../images/straight.png", title: "Two Color" },
   { id: 3, imgSrc: "../images/straight.png", title: "Three Color" },
   { id: 4, imgSrc: "../images/straight.png", title: "Four Color" },
 ];
-const cardmetallicdata = [
-  { id: 1, imgSrc: "../images/straight.png", title: "One Color" },
-  { id: 2, imgSrc: "../images/straight.png", title: "Two Colors" },
-  { id: 3, imgSrc: "../images/straight.png", title: "Three Colors" },
-  { id: 4, imgSrc: "../images/straight.png", title: "Four Colors" },
-];
-const card1 = [
+const proofoptions = [
   {
+    id: 1,
+    imgSrc: "../images/straight.png",
     title: "Digital Proof Only",
-    imgSrc: "../images/straight.png",
   },
   {
-    title: <p>Digital Proof & Sample Photo</p>,
+    id: 2,
     imgSrc: "../images/straight.png",
+    title: "Digital Proof & Sample Photo",
   },
 ];
+
+const turnaround = [
+  {
+    id: 1,
+    imgSrc: "../images/straight.png",
+    title: "Standard: 15 Business Days",
+  },
+  { id: 2, imgSrc: "../images/straight.png", title: "RUSH: 10 Business Days" },
+];
+
 const imagesData = [
   { src: "../images/center1.png", text: "Fastest 3-Day Turnaround" },
   { src: "../images/center2.png", text: "Custom Woven Labels Made in USA" },
@@ -81,9 +92,10 @@ function Tpuhero1() {
     artwork: "No Artwork Uploaded",
     size: '0.75" / 1" (19.05mm x 25.40mm)',
     style: "Straight Cut (Flat)",
+    printcolor: "One Color",
     versions: "None",
     proofOptions: "Digital Proof Only",
-    turnaroundOptions: "RUSH: 3 Business Days",
+    turnaroundOptions: "Standard: 15 Business Days",
     quantity: "1000 pcs",
     price: "$0.54/Each",
     totalPrice: "$540.00",
@@ -298,10 +310,11 @@ function Tpuhero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("style", card.title)}
                   >
                     <img
-                      alt="abc"
-                      src="../images/straight.png"
+                      alt={card.title}
+                      src={card.imgSrc}
                       className="image-card-express"
                     />
                     <p>{card.title}</p>
@@ -324,10 +337,11 @@ function Tpuhero1() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("size", card.title)}
                     >
                       <img
-                        alt="abc"
-                        src="../images/straight.png"
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
                       <p>{card.title}</p>
@@ -351,6 +365,7 @@ function Tpuhero1() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("printcolor", card.title)}
                     >
                       <img
                         alt="abc"
@@ -369,7 +384,7 @@ function Tpuhero1() {
               </h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {versions.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -379,6 +394,7 @@ function Tpuhero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("versions", card.title)}
                   >
                     <img
                       alt="abc"
@@ -394,7 +410,7 @@ function Tpuhero1() {
               <h3 className="simpletable-heading">Proof options?</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {proofoptions.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -404,10 +420,11 @@ function Tpuhero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("proofOptions", card.title)}
                   >
                     <img
-                      alt="abc"
-                      src="../images/straight.png"
+                      alt={card.title}
+                      src={card.imgSrc}
                       className="image-card-express"
                     />
                     <p>{card.title}</p>
@@ -419,7 +436,7 @@ function Tpuhero1() {
               <h3 className="simpletable-heading">Turnaround options?</h3>
             </div>
             <div className="divs-tableexpress">
-              {card1.map((card) => (
+              {turnaround.map((card) => (
                 <div key={card.id} className="card-container">
                   <Card
                     bordered={false}
@@ -429,6 +446,9 @@ function Tpuhero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("turnaroundOptions", card.title)
+                    }
                   >
                     <img
                       alt="abc"
@@ -493,7 +513,7 @@ function Tpuhero1() {
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Print Colors:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.printcolor}</p>
               </div>
             </div>
             <div className="sticky-blue">

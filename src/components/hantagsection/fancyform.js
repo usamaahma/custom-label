@@ -8,7 +8,7 @@ const FancyForm1 = () => {
   return (
     <Form className="fancyform-main">
       <p className="fancy-heading-txt">Request Price Quote</p>
-      <Row gutter={16}>
+      <Row>
         <Col xs={24} sm={12}>
           <p className="txt-fancy-bold">Upload Artwork</p>
           <Form.Item className="custom-input-form">
@@ -180,7 +180,7 @@ const FancyForm1 = () => {
           </Form.Item>
 
           <Form.Item>
-            <Button className="btn-fancy" type="primary" htmlType="submit">
+            <Button className="btn-fancy" htmlType="submit">
               Submit
             </Button>
           </Form.Item>
