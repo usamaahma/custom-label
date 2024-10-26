@@ -6,6 +6,7 @@ import Bestcustom from "../components/custom-woven/bestcustom";
 import Wovendesign from "../components/custom-woven/wovendesign";
 import Lastbest from "../components/custom-woven/lastbest";
 import Faqexpress1 from "../components/expressclothing/faqexpress";
+import Finalprocess from "../components/expressclothing/finalprocess";
 
 function Screenprintedlabels() {
   return (
@@ -14,6 +15,7 @@ function Screenprintedlabels() {
       <Bestcustom />
       <Wovendesign />
       <Lastbest />
+      <Finalprocess />
       <Faqexpress1 />
       <GoogleReviews />
     </div>

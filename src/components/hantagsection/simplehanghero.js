@@ -8,21 +8,6 @@ import ImageUploader from "../expressclothing/imagedragger";
 
 // Card data
 
-const cardstyledata = [
-  {
-    id: 1,
-    imgSrc: "../images/sizes/style.jpg",
-    title: "Straight Cut (Flat)",
-  },
-  { id: 2, imgSrc: "../images/sizes/style.jpg", title: "Centre Fold" },
-  { id: 3, imgSrc: "../images/sizes/style.jpg", title: "Loop Fold " },
-  { id: 4, imgSrc: "../images/sizes/style.jpg", title: "End Fold" },
-  { id: 6, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
-  { id: 5, imgSrc: "../images/sizes/style.jpg", title: "Manhatten Fold" },
-  { id: 7, imgSrc: "../images/sizes/style.jpg", title: "Book Cover Fold" },
-
-  // Add more items as needed
-];
 const cardsizedata = [
   { id: 1, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 3" },
   { id: 2, imgSrc: "../images/sizes/2 x 1.jpg", title: "2 x 4" },
@@ -177,8 +162,12 @@ function Simplehanghero1() {
   const [selectedData, setSelectedData] = useState({
     artwork: "No Artwork Uploaded",
     size: '0.75" / 1" (19.05mm x 25.40mm)',
-    style: "Straight Cut (Flat)",
-    versions: "None",
+    paperoptions: "14pt Gloss Cover",
+    printoptions: "Full Color One Side",
+    holopunchsize: "1/8” Hole",
+    holopunchposition: "Top Center",
+    stringcolor: "White",
+    safetypincolor: "Silver",
     proofOptions: "Digital Proof Only",
     turnaroundOptions: "RUSH: 3 Business Days",
     quantity: "1000 pcs",
@@ -201,6 +190,7 @@ function Simplehanghero1() {
   // State to track mouse position
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isExpanded, setIsExpanded] = useState(false);
+  const [image, setImage] = useState(null);
 
   // The full text
   const fullText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`;
@@ -240,6 +230,13 @@ function Simplehanghero1() {
     e.target.style.transform = "scale(1)";
     e.target.style.transformOrigin = "center center";
   };
+  useEffect(() => {
+    // Get the uploaded image from local storage
+    const uploadedImage = localStorage.getItem("uploadedImage");
+    if (uploadedImage) {
+      setImage(uploadedImage); // Set the image to state if it exists
+    }
+  }, []);
 
   return (
     <div className="first-main-express">
@@ -394,6 +391,7 @@ function Simplehanghero1() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() => handleCardClick("size", card.title)}
                     >
                       <img
                         alt={card.title}
@@ -419,6 +417,9 @@ function Simplehanghero1() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() =>
+                        handleCardClick("paperoptions", card.title)
+                      }
                     >
                       <img
                         alt={card.title}
@@ -444,6 +445,9 @@ function Simplehanghero1() {
                         background: "#FAF4EB",
                         textAlign: "center",
                       }}
+                      onClick={() =>
+                        handleCardClick("printoptions", card.title)
+                      }
                     >
                       <img
                         alt={card.title}
@@ -468,6 +472,7 @@ function Simplehanghero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("holopunchsize", card.title)}
                   >
                     <img
                       alt={card.title}
@@ -491,6 +496,9 @@ function Simplehanghero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("holopunchposition", card.title)
+                    }
                   >
                     <img
                       alt={card.title}
@@ -514,6 +522,7 @@ function Simplehanghero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("stringcolor", card.title)}
                   >
                     <img
                       alt={card.title}
@@ -537,6 +546,9 @@ function Simplehanghero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("safetypincolor", card.title)
+                    }
                   >
                     <img
                       alt={card.title}
@@ -560,6 +572,7 @@ function Simplehanghero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() => handleCardClick("proofOptions", card.title)}
                   >
                     <img
                       alt={card.title}
@@ -583,6 +596,9 @@ function Simplehanghero1() {
                       background: "#FAF4EB",
                       textAlign: "center",
                     }}
+                    onClick={() =>
+                      handleCardClick("turnaroundOptions", card.title)
+                    }
                   >
                     <img
                       alt={card.title}
@@ -629,7 +645,13 @@ function Simplehanghero1() {
               <p className="marg-bot">Simple Hang Tags</p>
               <div className="sticky-blue-inside">
                 <p>Artwork File:</p>
-                <p>{selectedData.artwork}</p>
+                <div>
+                  {image ? (
+                    <img src={image} alt="Uploaded" style={{ width: "5rem" }} />
+                  ) : (
+                    <p>No image uploaded.</p>
+                  )}
+                </div>{" "}
               </div>
             </div>
             <div className="sticky-blue">
@@ -641,43 +663,43 @@ function Simplehanghero1() {
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Paper Options:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.paperoptions}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Print Options:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.printoptions}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Hole Punch Size:</p>
-                <p>{selectedData.style}</p>
+                <p>{selectedData.holopunchsize}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Hole Punch Position:</p>
-                <p>{selectedData.versions}</p>
+                <p>{selectedData.holopunchposition}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>String Color:</p>
-                <p>{selectedData.proofOptions}</p>
+                <p>{selectedData.stringcolor}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Safety Pin Color:</p>
-                <p>{selectedData.turnaroundOptions}</p>
+                <p>{selectedData.safetypincolor}</p>
               </div>
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
                 <p>Proof Options:</p>
-                <p>{selectedData.turnaroundOptions}</p>
+                <p>{selectedData.proofOptions}</p>
               </div>
             </div>
             <div className="sticky-blue">

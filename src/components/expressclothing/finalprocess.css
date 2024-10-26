@@ -1,0 +1,21 @@
+.main-final-process {
+  background-color: #5f6f65;
+  color: #faf4eb;
+}
+.padding-final-process {
+  padding: 3rem;
+}
+.divs-final-process {
+  display: flex;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+.div-flex-final {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.divs-final-process div p {
+  width: 80%;
+}

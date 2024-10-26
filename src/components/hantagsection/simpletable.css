@@ -41,7 +41,7 @@
   text-align: left;
   margin-left: 1rem;
   background: linear-gradient(135deg, #3a6a70, #5f6f65);
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
   color: #faf4eb;
   max-width: fit-content;
   border-radius: 1rem;

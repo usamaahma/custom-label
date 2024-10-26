@@ -8,6 +8,7 @@
   text-align: center !important;
   font-size: 4rem;
   font-weight: bold;
+  color: #5f6f65;
 }
 
 .image-container {
@@ -21,7 +22,7 @@
 
 .overlay {
   position: absolute;
-  top: 40%; /* Adjust vertical positioning as needed */
+  top: 0; /* Adjust vertical positioning as needed */
   left: 0; /* Start from the left edge */
   width: 100%; /* Full width */
   text-align: center; /* Center the text */

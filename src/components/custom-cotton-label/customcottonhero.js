@@ -123,6 +123,7 @@ function Customcottonhero() {
   // State to track mouse position
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isExpanded, setIsExpanded] = useState(false);
+  const [image, setImage] = useState(null);
 
   // The full text
   const fullText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`;
@@ -162,6 +163,13 @@ function Customcottonhero() {
     e.target.style.transform = "scale(1)";
     e.target.style.transformOrigin = "center center";
   };
+  useEffect(() => {
+    // Get the uploaded image from local storage
+    const uploadedImage = localStorage.getItem("uploadedImage");
+    if (uploadedImage) {
+      setImage(uploadedImage); // Set the image to state if it exists
+    }
+  }, []);
 
   return (
     <div className="first-main-express">
@@ -346,8 +354,8 @@ function Customcottonhero() {
                       onClick={() => handleCardClick("size", card.title)}
                     >
                       <img
-                        alt= {card.title}
-                        src= {card.imgSrc}
+                        alt={card.title}
+                        src={card.imgSrc}
                         className="image-card-express"
                       />
                       <p>{card.title}</p>
@@ -528,7 +536,13 @@ function Customcottonhero() {
               <p className="marg-bot">Custom Cotton Labels</p>
               <div className="sticky-blue-inside">
                 <p>Artwork File:</p>
-                <p>{selectedData.artwork}</p>
+                <div>
+                  {image ? (
+                    <img src={image} alt="Uploaded" style={{ width: "5rem" }} />
+                  ) : (
+                    <p>No image uploaded.</p>
+                  )}
+                </div>{" "}
               </div>
             </div>
             <div className="sticky-blue">

@@ -32,6 +32,8 @@
   text-align: left;
   margin-left: 2rem;
   font-size: x-large;
+  color: #5f6f65;
+  text-decoration: underline;
 }
 
 /* Media Queries for responsiveness */
