@@ -1,5 +1,6 @@
 .fancyform-main {
   margin-left: 4rem;
+  color: #5f6f65 !important;
 }
 .input-container-fancy {
   display: flex; /* Flex container */

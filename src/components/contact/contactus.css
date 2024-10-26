@@ -5,12 +5,13 @@
   border: 1px solid #ccc;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  background-color: #f9f9f9;
+  background-color: #faf4eb;
 }
 
 .txt-contact-us {
   text-align: center;
   font-weight: bold;
+  color: #5f6f65;
 }
 
 .contact-us-container h2 {
@@ -40,14 +41,14 @@
 
 .contact-us-form input:focus,
 .contact-us-form textarea:focus {
-  border-color: #007bff;
+  border-color: #5f6f65;
   outline: none;
 }
 
 .contact-us-form button {
   padding: 10px;
-  background-color: #070707;
-  color: white;
+  background-color: #5f6f65;
+  color: #faf4eb;
   border: 2px solid transparent;
   border-radius: 5px;
   width: 100%;
@@ -58,9 +59,9 @@
 }
 
 .contact-us-form button:hover {
-  background-color: #fcfcfc;
-  color: #070707;
-  border-color: #070707;
+  background-color: #faf4eb;
+  color: #5f6f65;
+  border-color: #5f6f65;
 }
 
 .error-message {
@@ -92,8 +93,11 @@
 .contact-us-details {
   margin-top: 20px;
   padding: 15px;
-  background-color: #f9f9f9;
+  background-color: #faf4eb;
   text-align: center;
+  display: grid;
+  justify-content: center;
+  color: #5f6f65;
 }
 
 .contact-us-details h2 {
@@ -110,6 +114,64 @@
 .address {
   color: #121213;
 }
+.contact-all-things {
+  display: flex;
+  gap: 2rem; /* Space between each section */
+  background: linear-gradient(
+    135deg,
+    #ffffff,
+    #f1f1f1
+  ); /* Subtle gradient background */
+  padding: 30px; /* Increase padding for spaciousness */
+  border-radius: 12px; /* More pronounced rounded corners */
+  max-width: auto; /* Restrict width for better readability */
+  margin: 20px auto; /* Center the div */
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15); /* Stronger shadow for depth */
+  border: 1px solid #e0e0e0; /* Light border for definition */
+}
+
+.contact-all-things p {
+  font-size: 17px; /* Slightly larger font size for better readability */
+  line-height: 1.8; /* Improved line spacing */
+  color: #5f6f65; /* Darker color for content */
+  position: relative; /* Position to add decorative elements */
+  padding-left: 15px; /* Create space between the line and the content */
+}
+
+.contact-all-things .address {
+  display: block; /* Heading takes a full line */
+  font-weight: 700; /* Make headings bold */
+  color: #5f6f65; /* Accent color for headings */
+  margin-bottom: 10px; /* Space between heading and content */
+  font-size: 18px; /* Larger font size for headings */
+}
+
+.contact-all-things p::before {
+  content: ""; /* Decorative line before each paragraph */
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: #5f6f65; /* Accent color for line */
+  border-radius: 4px; /* Smooth corners */
+  transform: scaleY(1);
+  transition: transform 0.3s ease-in-out;
+}
+
+.contact-all-things p:hover::before {
+  transform: scaleY(1.1); /* Animate the line on hover */
+}
+
+.contact-all-things p:last-child {
+  margin-bottom: 0; /* Remove margin from the last paragraph */
+}
+
+.contact-all-things:hover {
+  transform: scale(1.02); /* Subtle zoom effect on hover */
+  transition: transform 0.3s ease-in-out;
+}
+
 @media (max-width: 500px) {
   .contact-us-details {
     padding: 10px;

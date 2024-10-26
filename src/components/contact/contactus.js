@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import ReCAPTCHA from "react-google-recaptcha";
 import "./contactus.css";
 
 const countryCodes = [
@@ -40,10 +39,6 @@ function Contactus() {
     setMessage("");
     setAttachment(null);
     setCaptchaValue(null);
-  };
-
-  const onCaptchaChange = (value) => {
-    setCaptchaValue(value);
   };
 
   return (
@@ -102,11 +97,6 @@ function Contactus() {
             />
             {error && <div className="error-message">{error}</div>}
 
-            <ReCAPTCHA
-              sitekey="YOUR_SITE_KEY" // Replace with your actual site key
-              onChange={onCaptchaChange}
-            />
-
             <button className="contact-us-btn" type="submit">
               Submit
             </button>
@@ -115,28 +105,30 @@ function Contactus() {
       </div>
       <div className="contact-us-details">
         <h2>Contact Details</h2>
-        <p>
-          <strong className="address">Address:</strong>
-          <br />
-          1760 Glasco Turnpike
-          <br />
-          Woodstock, NY 12498
-        </p>
-        <p>
-          <strong className="address">Phone:</strong>
-          <br />
-          Toll Free 1-844-868-3926
-        </p>
-        <p>
-          <strong className="address">Email:</strong>
-          <br />
-          sales@customwovenlabels.com
-        </p>
-        <p>
-          <strong className="address">Working Days/Hours:</strong>
-          <br />
-          Mon - Fri 9:00AM - 5:30PM EST
-        </p>
+        <div className="contact-all-things">
+          <p>
+            <strong className="address">Address:</strong>
+            <br />
+            1760 Glasco Turnpike
+            <br />
+            Woodstock, NY 12498
+          </p>
+          <p>
+            <strong className="address">Phone:</strong>
+            <br />
+            Toll Free 1-844-868-3926
+          </p>
+          <p>
+            <strong className="address">Email:</strong>
+            <br />
+            sales@theclothinglabels.com
+          </p>
+          <p>
+            <strong className="address">Working Days/Hours:</strong>
+            <br />
+            Mon - Fri 9:00AM - 5:30PM EST
+          </p>
+        </div>
       </div>
     </div>
   );

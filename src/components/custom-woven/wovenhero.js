@@ -145,6 +145,7 @@ function Wovenhero() {
     addToCart(item);
   };
   const [selectedImage, setSelectedImage] = useState("../images/martin.png");
+  const [image, setImage] = useState(null);
   // State to track mouse position
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isExpanded, setIsExpanded] = useState(false);
@@ -187,6 +188,13 @@ function Wovenhero() {
     e.target.style.transform = "scale(1)";
     e.target.style.transformOrigin = "center center";
   };
+  useEffect(() => {
+    // Get the uploaded image from local storage
+    const uploadedImage = localStorage.getItem("uploadedImage");
+    if (uploadedImage) {
+      setImage(uploadedImage); // Set the image to state if it exists
+    }
+  }, []);
 
   return (
     <div className="first-main-express">
@@ -542,7 +550,13 @@ function Wovenhero() {
               <p className="marg-bot">Custom Woven Labels</p>
               <div className="sticky-blue-inside">
                 <p>Artwork File:</p>
-                <p>{selectedData.artwork}</p>
+                <div>
+                  {image ? (
+                    <img src={image} alt="Uploaded" style={{ width: "5rem" }} />
+                  ) : (
+                    <p>No image uploaded.</p>
+                  )}
+                </div>
               </div>
             </div>
             <div className="sticky-blue">

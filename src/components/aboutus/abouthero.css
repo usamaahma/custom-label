@@ -16,16 +16,17 @@
   align-items: center; /* Center items vertically */
   padding: 20px; /* Add padding around the container */
   flex-wrap: wrap; /* Allow wrapping for smaller screens */
-  background: linear-gradient(270deg, #007ab7, #444343);
+  background: linear-gradient(270deg, #5f6f65, #48534c);
   background-size: 400% 400%; /* Allow the background to animate */
   animation: gradientAnimation 15s ease infinite; /* Apply animation */
   border-radius: 0px; /* Optional: Add rounded corners */
   padding: 5rem;
+  color: #faf4eb;
 }
 
 .about-content {
   flex: 1; /* Allow this column to take available space */
-  color: white; /* Change text color to white for better visibility */
+  color: #faf4eb; /* Change text color to white for better visibility */
 }
 
 .about-heading {
