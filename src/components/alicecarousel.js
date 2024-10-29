@@ -21,7 +21,7 @@ const Alice = () => {
   // Slick slider settings
   const settings = {
     infinite: true,
-    speed: 3000, // Speed for smooth scrolling
+    speed: 30000, // Speed for smooth scrolling
     slidesToShow: 8, // Number of logos to show at a time
     slidesToScroll: 1,
     autoplay: true,
