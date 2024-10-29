@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { FaUserCircle, FaShoppingCart, FaTiktok } from "react-icons/fa";
+import { IoLogoWhatsapp } from "react-icons/io";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./firstnav.css"; // Import your CSS file
 import Cartmodal1 from "../checkout/cartmodal";
-import { FaFacebookF, FaLinkedinIn } from "react-icons/fa6";
+import { FaFacebookF } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import { CiMobile3 } from "react-icons/ci";
 import { Slide } from "react-awesome-reveal";
@@ -30,16 +31,20 @@ const Firstnavbar = () => {
               {" "}
               <RiInstagramFill />
             </a>
+            <a
+              href="https://wa.me/+19304440014"
+              target="_blank"
+              className="social-icon-first"
+            >
+              {" "}
+              <IoLogoWhatsapp />
+            </a>
           </div>
         </Slide>
 
         {/* Second div: Centered text */}
         <Slide direction="down">
           <Nav className="firstnavbar-nav mx-auto">
-            <Nav.Link className="firstnavbar-center">
-              <span className="code-off">10% OFF FIRST ORDER </span>
-              <span className="code-text">CODE CWL10</span>
-            </Nav.Link>
             <Nav.Link>
               <div className="button-show">
                 <Link to="/get-quote" className="mainnav-quote-link">

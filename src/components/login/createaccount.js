@@ -63,6 +63,14 @@ function Create() {
             required
           />
           <input
+            type="number"
+            placeholder="Phone Number"
+            className="create-input"
+            maxLength="11"
+
+            required
+          />
+          <input
             type="email"
             placeholder="Email"
             className="create-input"

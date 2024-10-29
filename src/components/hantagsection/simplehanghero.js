@@ -186,7 +186,7 @@ function Simplehanghero1() {
   const handleAddToCart = (item) => {
     addToCart(item);
   };
-  const [selectedImage, setSelectedImage] = useState("../images/martin.png");
+  const [selectedImage, setSelectedImage] = useState("../images/girl.png");
   // State to track mouse position
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isExpanded, setIsExpanded] = useState(false);
@@ -263,9 +263,17 @@ function Simplehanghero1() {
           <div className="inside-col-dire">
             {" "}
             {/* First Div */}
-            <div>
+            <div className="first-div-width">
               {" "}
-              <div style={{ margin: "0 auto" }}>
+              <div
+                style={{
+                  margin: "0 auto",
+                  borderRadius: "1rem",
+                  border: "solid 1px #5f6f65",
+                  width: "100%", // Make it full width within the container
+                  maxWidth: "30rem",
+                }}
+              >
                 {" "}
                 <div className="main-image-container">
                   <img
@@ -274,6 +282,7 @@ function Simplehanghero1() {
                     className="img-fluid main-image"
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
+                    style={{ borderRadius: "1rem" }}
                   />
                 </div>
                 <div className="thumbnail-carousel">
@@ -335,14 +344,12 @@ function Simplehanghero1() {
                 <p className="image-text">Upload Artwork</p>
               </div>
               <div className="image-item">
-                <Slide cascade>
-                  {" "}
-                  <img
-                    src="../../images/arrow.svg"
-                    alt="Arrow"
-                    className="step-image1"
-                  />{" "}
-                </Slide>
+                {" "}
+                <img
+                  src="../../images/arrow.svg"
+                  alt="Arrow"
+                  className="step-image1"
+                />{" "}
               </div>
               <div className="image-item">
                 <img
@@ -353,13 +360,11 @@ function Simplehanghero1() {
                 <p className="image-text">Approve Digital Proof</p>
               </div>
               <div className="image-item">
-                <Slide cascade>
-                  <img
-                    src="../../images/arrow.svg"
-                    alt="Approve"
-                    className="step-image1"
-                  />
-                </Slide>
+                <img
+                  src="../../images/arrow.svg"
+                  alt="Approve"
+                  className="step-image1"
+                />
               </div>
               <div className="image-item">
                 <img

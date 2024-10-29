@@ -2,7 +2,8 @@ import "./App.css";
 import { CartProvider } from "../src/context/cartcontext"; // Import the CartProvider
 import { AuthProvider } from "../src/context/authcontext"; // Import the CartProvider
 import AppRoutes from "./routes/routes";
-import WhatsappButton from "./components/navbars/whatsapp";
+import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick-theme.css";
 
 function App() {
   return (
@@ -10,7 +11,6 @@ function App() {
       <CartProvider>
         <div className="App">
           <AppRoutes />
-          <WhatsappButton />
         </div>
       </CartProvider>
     </AuthProvider>

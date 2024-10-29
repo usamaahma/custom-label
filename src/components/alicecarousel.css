@@ -1,32 +1,11 @@
-.scrolling-text {
-  overflow: hidden; /* Hide overflow */
-  white-space: nowrap; /* Prevent line breaks */
-  width: 100%; /* Full width */
-  height: 8rem; /* Set a fixed height */
-  background: none; /* No background */
-  padding: 10px 0; /* Adjust as needed */
-  margin-top: 2rem; /* Adjust as needed */
-  margin-bottom: 2rem; /* Adjust as needed */
-  border-radius: 5px; /* Optional: rounded corners */
-}
-
-.scroll-animation {
-  display: flex; /* Use flexbox for horizontal alignment */
-  /* Width is automatically adjusted by flexbox */
-}
-
-.logo {
-  height: 8rem; /* Adjust height of logos */
-  width: auto; /* Keep aspect ratio intact */
-  margin-right: 50px; /* Space between logos */
-}
-
+/* Styling for the slider container */
 .trusted {
   text-align: center;
   padding-top: 1.5rem;
   padding-bottom: 1.5rem;
 }
 
+/* Heading for the slider */
 .trustedtext {
   font-weight: bold;
   text-align: left;
@@ -36,10 +15,32 @@
   text-decoration: underline;
 }
 
+/* Slick slider default container */
+.scrolling-slider {
+  overflow: hidden;
+}
+
+/* Logo container inside the slider */
+.logo-container {
+  display: flex;
+  justify-content: center;
+}
+
+/* Individual logo styling */
+.logo {
+  height: 8rem;
+  width: auto;
+  margin: 0 auto;
+}
+
 /* Media Queries for responsiveness */
 @media (max-width: 480px) {
   .trustedtext {
     font-size: medium;
     margin-left: 1rem;
+  }
+
+  .logo {
+    height: 6rem;
   }
 }

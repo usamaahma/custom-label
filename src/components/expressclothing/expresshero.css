@@ -17,9 +17,9 @@
 }
 
 .img-fluid {
-  width: 100%; /* Make the image responsive */
-  height: auto; /* Maintain aspect ratio */
-}
+  max-width: 50%; /* Decreased the width from 60% to 50% */
+  height: auto; /* Keep aspect ratio intact */
+ }
 
 .expresstext-clothing {
   font-size: 2rem;
@@ -70,15 +70,13 @@
   overflow: hidden; /* Ensures the image stays within the container when enlarged */
   position: relative;
   cursor: crosshair; /* Optional: Changes cursor to indicate interaction */
-  height: 23rem ;
+  height: 23rem;
 }
 
 .main-image {
-  width: 20rem !important;
-  height: 20rem !important;
   transition: transform 0.2s ease, transform-origin 0.2s ease; /* Smooth transition */
   transform-origin: center center; /* Set default transform origin to center */
-}
+ }
 
 /* Magnifying effect */
 .main-image-container:hover .main-image {

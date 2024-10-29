@@ -1,6 +1,5 @@
 import React from "react";
 import "./howitwork.css";
-import { Slide } from "react-awesome-reveal";
 
 function Howitwork() {
   return (
@@ -22,14 +21,12 @@ function Howitwork() {
           <p className="image-text">Upload Artwork</p>
         </div>
         <div className="image-item">
-          <Slide cascade>
-            {" "}
-            <img
-              src="../../images/arrow.svg"
-              alt="Arrow"
-              className="step-image1"
-            />{" "}
-          </Slide>
+          {" "}
+          <img
+            src="../../images/arrow.svg"
+            alt="Arrow"
+            className="step-image1"
+          />{" "}
         </div>
         <div className="image-item">
           <img
@@ -40,13 +37,11 @@ function Howitwork() {
           <p className="image-text">Approve Digital Proof</p>
         </div>
         <div className="image-item">
-          <Slide cascade>
-            <img
-              src="../../images/arrow.svg"
-              alt="Approve"
-              className="step-image1"
-            />
-          </Slide>
+          <img
+            src="../../images/arrow.svg"
+            alt="Approve"
+            className="step-image1"
+          />
         </div>
         <div className="image-item">
           <img

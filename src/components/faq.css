@@ -1,7 +1,7 @@
 /* FAQ Section Styling */
 #faq {
   padding: 40px 20px;
-  background-color: #FAF4EB;
+  background-color: #faf4eb;
 }
 
 /* Header styling */
@@ -80,7 +80,7 @@
   color: #444;
 }
 .span {
-  color: rgb(0, 122, 179);
+  color: #5f6f65;
 }
 
 /* Responsive Adjustments */
