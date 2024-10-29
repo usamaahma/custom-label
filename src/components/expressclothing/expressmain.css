@@ -4,7 +4,7 @@
   padding: 2rem;
   color: #5f6f65 !important;
 }
- 
+
 .first-main-express {
   margin-top: 1rem;
   padding-top: 0.2rem;
@@ -34,7 +34,7 @@
   font-size: 1.2rem;
   font-weight: 700;
   margin-left: 4rem;
- }
+}
 .column-direction-express {
   display: flex;
   justify-content: center;
@@ -42,16 +42,18 @@
 }
 .inside-col-dire {
   display: flex;
+  justify-content: space-evenly; /* Distributes space evenly between items */
+   flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 .ant-breadcrumb li:last-child {
   color: #faf4eb;
 }
- 
+
 .process-express {
   padding: 3rem;
   background-color: #5f6f65;
   color: #faf4eb;
-   margin-top: 2rem;
+  margin-top: 2rem;
 }
 .process-image-text {
   display: block;
@@ -70,19 +72,56 @@
   display: block;
   justify-content: center; /* This won't work with block elements, only with flex or grid */
   text-align: center;
-  height: 24px; /* Make sure this is an appropriate value (e.g., px, rem, %, etc.) */
 }
-.step-image-express{
-    width: 5rem;
-    height: 5rem;
+.step-image-express {
+  width: 10rem;
 }
-.txtmain{
-    margin-top: 2rem;
+.first-div-width {
+  width: 45%; /* Assigns a relative width */
 }
-.icon-upload{
-    font-size: 2rem;
-    color: #3e4240;
+.txtmain {
+  margin-top: 5rem;
+  border-top: solid 1px #5f6f65;
 }
+.how {
+  margin-top: 2rem;
+}
+.icon-upload {
+  font-size: 2rem;
+  color: #3e4240;
+}
+.express-second-div {
+  width: 45%; /* Assigns a relative width */
+  text-align: center;
+  padding: 20px;
+  border-radius: 15px;
+  border: 1px solid #5f6f65;
+  box-shadow: 0 4px 10px rgba(185, 197, 190, 0.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Add a hover effect for a subtle interaction */
+.express-second-div:hover {
+  transform: translateY(-5px); /* Slight lift effect */
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+}
+
+/* Styling for the image container */
+.image-container-express {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Styling for individual image wrappers */
+
+.center-text-images {
+  margin-top: 10px;
+  font-size: 14px;
+  color: #5f6f65;
+}
+
 @media (max-width: 1100px) {
   .simpletable-heading {
     text-align: center;
@@ -99,6 +138,17 @@
   }
   .process-main-font {
     font-size: 1rem;
+  }
+}
+@media (max-width: 1024px) {
+  .inside-col-dire {
+    flex-direction: column; /* Stacks the divs vertically */
+    align-items: center; /* Center aligns the columns */
+    gap: 1.5rem; /* Adjusts the gap between divs */
+  }
+  .first-div-width,
+  .express-second-div {
+    width: 100%; /* Full width on smaller screens */
   }
 }
 @media (max-width: 768px) {

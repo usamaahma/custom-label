@@ -144,8 +144,7 @@ function Getaquote1() {
 
           <Form.Item>
             <Button
-              type="primary"
-              htmlType="submit"
+               htmlType="submit"
               block
               className="customform-submit-button"
             >

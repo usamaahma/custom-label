@@ -99,7 +99,7 @@ function Expressmain() {
   const handleAddToCart = (item) => {
     addToCart(item);
   };
-  const [selectedImage, setSelectedImage] = useState("../images/martin.png");
+  const [selectedImage, setSelectedImage] = useState("../images/girl.png");
   // State to track mouse position
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isExpanded, setIsExpanded] = useState(false);
@@ -176,21 +176,25 @@ function Expressmain() {
       <div className="main-express">
         <div className="column-direction-express">
           <div className="inside-col-dire">
-            {" "}
             {/* First Div */}
-            <div>
-              {" "}
-              <div style={{ margin: "0 auto" }}>
-                {" "}
-                <div className="main-image-container">
-                  <img
-                    alt="Express Clothing Labels"
-                    src={selectedImage}
-                    className="img-fluid main-image"
-                    onMouseMove={handleMouseMove}
-                    onMouseLeave={handleMouseLeave}
-                  />
-                </div>
+            <div className="first-div-width">
+              <div
+                style={{
+                  margin: "0 auto",
+                  borderRadius: "1rem",
+                  border: "solid 1px #5f6f65",
+                  width: "100%", // Make it full width within the container
+                  maxWidth: "30rem",
+                }}
+              >
+                <img
+                  alt="Express Clothing Labels"
+                  src={selectedImage}
+                  className="img-fluid main-image"
+                  onMouseMove={handleMouseMove}
+                  onMouseLeave={handleMouseLeave}
+                  style={{ borderRadius: "1rem" }}
+                />
                 <div className="thumbnail-carousel">
                   {thumbnailImages.map((image, index) => (
                     <img
@@ -204,35 +208,31 @@ function Expressmain() {
                 </div>
               </div>
             </div>
+
             {/* Second Div */}
             <div className="express-second-div">
-              {" "}
               <h2>Express Clothing</h2>
-              <p
-                style={{ width: "70%", textAlign: "center", margin: "0 auto" }}
-              >
-                {/* If isExpanded is true, show the full text, else show the truncated version */}
-                {isExpanded ? fullText : truncatedText}{" "}
+              <p style={{ width: "70%", margin: "0 auto" }}>
+                {isExpanded ? fullText : truncatedText}
                 <button onClick={toggleText} className="readmore-button">
                   {isExpanded ? "Read Less" : "Read More.."}
                 </button>
               </p>
-              <div>
-                <div className="image-container-express">
-                  {imagesData.map((image, index) => (
-                    <div className="image-wrapper-express" key={index}>
-                      <img
-                        src={image.src}
-                        alt={image.text}
-                        className="responsive-image1"
-                      />
-                      <p className="center-text-images">{image.text}</p>
-                    </div>
-                  ))}
-                </div>
+              <div className="image-container-express">
+                {imagesData.map((image, index) => (
+                  <div className="image-wrapper-express" key={index}>
+                    <img
+                      src={image.src}
+                      alt={image.text}
+                      className="responsive-image1"
+                    />
+                    <p className="center-text-images">{image.text}</p>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+
           <div className="txtmain">
             <p className="how">Order Process</p>
             <p className="at" style={{ width: "70%", margin: "0 auto" }}>
@@ -250,14 +250,12 @@ function Expressmain() {
                 <p className="image-text">Upload Artwork</p>
               </div>
               <div className="image-item">
-                <Slide cascade>
-                  {" "}
-                  <img
-                    src="../../images/arrow.svg"
-                    alt="Arrow"
-                    className="step-image1"
-                  />{" "}
-                </Slide>
+                {" "}
+                <img
+                  src="../../images/arrow.svg"
+                  alt="Arrow"
+                  className="step-image1"
+                />{" "}
               </div>
               <div className="image-item">
                 <img
@@ -268,13 +266,11 @@ function Expressmain() {
                 <p className="image-text">Approve Digital Proof</p>
               </div>
               <div className="image-item">
-                <Slide cascade>
-                  <img
-                    src="../../images/arrow.svg"
-                    alt="Approve"
-                    className="step-image1"
-                  />
-                </Slide>
+                <img
+                  src="../../images/arrow.svg"
+                  alt="Approve"
+                  className="step-image1"
+                />
               </div>
               <div className="image-item">
                 <img

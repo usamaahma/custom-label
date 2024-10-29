@@ -1,6 +1,6 @@
 import React from "react";
+import Slider from "react-slick";
 import "./alicecarousel.css";
-import { useSpring, animated } from "@react-spring/web";
 
 const logos = [
   { src: "../images/alice1.png", alt: "Brand Logo 1" },
@@ -18,31 +18,47 @@ const logos = [
 ];
 
 const Alice = () => {
-  const props = useSpring({
-    from: { transform: "translateX(0%)" },
-    to: { transform: "translateX(-50%)" }, // Move half the width of the logos
-    config: { duration: 30000 }, // Duration for scrolling
-    reset: true,
-    loop: true, // Makes the animation loop indefinitely
-  });
+  // Slick slider settings
+  const settings = {
+    infinite: true,
+    speed: 3000, // Speed for smooth scrolling
+    slidesToShow: 8, // Number of logos to show at a time
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 0, // 0 means it constantly moves without delay
+    cssEase: "linear", // Linear scroll for seamless effect
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+        },
+      },
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 3,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+    ],
+  };
 
   return (
     <div className="trusted">
       <h2 className="trustedtext"> TRUSTED BY OVER 25,000 BRANDS</h2>
-      <div className="scrolling-text">
-        <animated.div className="scroll-animation" style={props}>
-          <div className="logo-container">
-            {/* Original logos */}
-            {logos.map((logo, index) => (
-              <img key={index} src={logo.src} alt={logo.alt} className="logo" />
-            ))}
-            {/* Duplicate logos for seamless scrolling */}
-            {logos.map((logo, index) => (
-              <img key={`duplicate-${index}`} src={logo.src} alt={logo.alt} className="logo" />
-            ))}
+      <Slider {...settings} className="scrolling-slider">
+        {logos.map((logo, index) => (
+          <div key={index} className="logo-container">
+            <img src={logo.src} alt={logo.alt} className="logo" />
           </div>
-        </animated.div>
-      </div>
+        ))}
+      </Slider>
     </div>
   );
 };

@@ -256,7 +256,7 @@ p {
 }
 
 .responsive-image1 {
-  width: 20%; /* Makes the image responsive to the wrapper */
+  width: 40%; /* Makes the image responsive to the wrapper */
   height: auto;
   border-radius: 8px;
   transition: transform 0.3s;
@@ -307,7 +307,7 @@ p {
     position: static;
     margin: 1rem auto; /* Vertically and horizontally center */
     width: 100%; /* Full width by default */
-     display: block; /* Ensure it's block level to respect the margin */
+    display: block; /* Ensure it's block level to respect the margin */
   }
   .sticky-first,
   .sticky-div,

@@ -218,21 +218,22 @@ const Mainnavbar = () => {
             </Nav>
           </Slide>
           {/* Third div: Get a Quote button aligned to the right */}
-          <Link to="/get-quote">
-            <Button variant="primary" className="mainnav-quote-button1">
-              Get a Quote
-            </Button>
-          </Link>
-          <Slide direction="right">
-            {/* Fourth div: Image aligned to the right */}
-            <a href="tel:+1234567890" className="phone-number-div">
-              <CiMobile3 className="mobile-icon" />
-              <div className="text-phone">
-                <p>+1 (630) 995-9797</p>
-                <p>Speak With an Expert</p>
-              </div>
-            </a>
-          </Slide>
+          <div className="quote-and-contact">
+            <Link to="/get-quote">
+              <Button variant="primary" className="mainnav-quote-button1">
+                Get a Quote
+              </Button>
+            </Link>
+            <Slide direction="right">
+              <a href="tel:+1234567890" className="phone-number-div">
+                <CiMobile3 className="mobile-icon" />
+                <div className="text-phone">
+                  <p>+1 (630) 995-9797</p>
+                  <p>Speak With an Expert</p>
+                </div>
+              </a>
+            </Slide>
+          </div>
         </Navbar.Collapse>
       </Container>
     </Navbar>

@@ -15,7 +15,7 @@
 
 .main-content {
   margin-top: 80px; /* Adjust based on your navbar height */
- }
+}
 .mainnav-logo {
   width: 9rem;
 }
@@ -49,8 +49,9 @@
 
 .mainnav-collapse {
   display: flex;
-  justify-content: space-between; /* Ensure space between items */
+  justify-content:end; /* Ensure space between items */
   align-items: center;
+  gap: 2rem;
 }
 
 .mainnav-nav {
@@ -60,13 +61,13 @@
 }
 
 .mainnav-link {
-  margin-left: 2rem ; /* Gap between tabs */
+  margin-left: 2rem; /* Gap between tabs */
   color: #231f20;
   font-weight: bold !important;
 }
 .mainnav-quote-button1 {
   margin-left: 20px;
-  background-color: #5F6F65;
+  background-color: #5f6f65;
   color: white; /* Text color */
   border: none; /* Remove border */
   transition: background-color 0.3s; /* Smooth transition */
@@ -86,20 +87,32 @@
 .changenavbar-nav {
   display: none;
 }
-.phone-number-div{
+.phone-number-div {
   display: flex;
   align-items: center;
   text-decoration: none;
 }
-.mobile-icon{
+.mobile-icon {
   font-size: 3rem;
-  color: #5F6F65;
+  color: #5f6f65;
 }
-.text-phone{
+.text-phone {
   font-size: smaller;
   font-weight: bolder;
-  color: #5F6F65;
- }
+  color: #5f6f65;
+}
+.quote-and-contact {
+  display: flex;
+  align-items: center; /* Vertically centers items within the container */
+  justify-content: space-between; /* Adjusts spacing between the elements */
+}
+
+.phone-number-div {
+  display: flex;
+  align-items: center; /* Vertically centers the icon and text */
+  gap: 5px; /* Space between the icon and text */
+}
+
 @media (max-width: 768px) {
   .mainnav-quote-button1 {
     display: none;
