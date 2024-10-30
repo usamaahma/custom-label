@@ -43,7 +43,7 @@
 .inside-col-dire {
   display: flex;
   justify-content: space-evenly; /* Distributes space evenly between items */
-   flex-wrap: wrap; /* Allows wrapping on smaller screens */
+  flex-wrap: wrap; /* Allows wrapping on smaller screens */
 }
 .ant-breadcrumb li:last-child {
   color: #faf4eb;
@@ -152,12 +152,28 @@
   }
 }
 @media (max-width: 768px) {
+  .breadcrumb {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+  }
+  .express-clothing-heading {
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin-left: 0rem;
+    text-align: center;
+  }
   .express-second-div {
     height: auto;
     margin-bottom: 2rem;
   }
   .headingbread {
     display: block;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2rem;
+    font-size: small;
+    text-align: left;
   }
   .inside-col-dire {
     display: grid;

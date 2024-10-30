@@ -52,7 +52,7 @@ const Firstnavbar = () => {
                     Get a Quote
                   </Button>
                 </Link>
-                <Slide direction="right">
+                <Slide direction="right"> 
                   {/* Fourth div: Image aligned to the right */}
                   <a href="tel:+1234567890" className="phone-number-div-show">
                     <CiMobile3 className="mobile-icon-show" />
