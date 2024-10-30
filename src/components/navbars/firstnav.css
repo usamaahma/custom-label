@@ -91,6 +91,11 @@
   width: 8rem;
 }
 @media (max-width: 768px) {
+  .navbar>.container{
+    display: flex;
+    justify-content: center;
+  }
+  
   .button-show {
     display: flex;
     justify-content: center;
@@ -124,12 +129,13 @@
 }
 /* Media Queries for responsive design */
 @media (max-width: 991px) {
-  .social-icon-first {
-   display: none;
-  }
+  
   .firstnavbar-nav {
-    display: flex;
+    display: flex !important;
     align-items: center; /* Vertically center items */
+    justify-content: center;
+    gap: 2rem;
+    flex-direction: row !important;
   }
   .code-off {
     font-size: small;

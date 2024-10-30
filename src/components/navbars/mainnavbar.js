@@ -9,49 +9,50 @@ import { Slide } from "react-awesome-reveal";
 import "./mainnavbar.css";
 
 const Mainnavbar = () => {
-  const navigate = useNavigate(); // Hook to navigate
-  const navbarRef = useRef(null); // Reference to the navbar
-  const [scrolled, setScrolled] = useState(false); // State to handle scroll position
+  const navigate = useNavigate();
+  const navbarRef = useRef(null);
+  const [scrolled, setScrolled] = useState(false);
+  const [visible, setVisible] = useState(false);
+  const [expanded, setExpanded] = useState(false); // State to track collapse
 
-  // Function to handle clicks outside of the navbar
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
-      // Handle click outside
-      console.log("Clicked outside the navbar");
+      setExpanded(false); // Collapse navbar if clicked outside
     }
   };
 
-  // Handle navigation click
   const handleNavClick = (path) => {
     navigate(path);
     window.scrollTo(0, 0);
+    setExpanded(false); // Close the collapse after navigation
   };
 
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 0) {
-        setScrolled(true); // Set scrolled to true when scrolling
+        setScrolled(true);
       } else {
-        setScrolled(false); // Set to false when at the top
+        setScrolled(false);
       }
     };
 
     document.addEventListener("mousedown", handleClickOutside);
-    window.addEventListener("scroll", handleScroll); // Add scroll event listener
+    window.addEventListener("scroll", handleScroll);
 
     return () => {
       document.removeEventListener("mousedown", handleClickOutside);
-      window.removeEventListener("scroll", handleScroll); // Clean up
+      window.removeEventListener("scroll", handleScroll);
     };
   }, []);
 
-  const [visible, setVisible] = useState(false);
   return (
     <Navbar
-      className={`mainnav-navbar ${scrolled ? "scrolled" : ""}`} // Add scrolled class based on state
+      expanded={expanded} // Control the expanded state
+      onToggle={() => setExpanded(!expanded)} // Toggle collapse
+      className={`mainnav-navbar ${scrolled ? "scrolled" : ""}`}
       style={{ backgroundColor: "#FAF4EB" }}
       expand="lg"
-      ref={navbarRef} // Attach the ref to the navbar
+      ref={navbarRef}
     >
       <Container className="mainnav-container">
         <Navbar.Brand
@@ -61,12 +62,12 @@ const Mainnavbar = () => {
           className="mainnav-brand"
         >
           <img
-            src="../images/clothing-logo.svg" // Replace with your image path
+            src="../images/clothing-logo.svg"
             className="mainnav-logo d-inline-block align-top"
             alt="Logo"
           />
         </Navbar.Brand>
-        {/* Second div: Centered tabs */}
+
         <div className="changenavbar-nav ml-auto">
           <Link to="/login" className="changenavbar-link">
             <div>
@@ -81,7 +82,7 @@ const Mainnavbar = () => {
                 border: "none",
                 padding: 0,
                 cursor: "pointer",
-              }} // Remove default styles
+              }}
             >
               <div>
                 <FaShoppingCart />
@@ -98,90 +99,30 @@ const Mainnavbar = () => {
                 title={<span className="mainnav-link">CLOTHING LABELS</span>}
                 id="clothing-dropdown"
               >
-                <NavDropdown.Item
-                  as={Link}
-                  to="/all-clothing-labels"
-                  className="nav-dropdown-item"
-                >
-                  All Clothing Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/express-clothing"
-                  className="nav-dropdown-item"
-                >
-                  Express Clothing Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/customwoven"
-                  className="nav-dropdown-item"
-                >
-                  Custom Woven Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/woven-text-label"
-                  className="nav-dropdown-item"
-                >
-                  Woven Text Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/satin-woven"
-                  className="nav-dropdown-item"
-                >
-                  Custom Satin Woven Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/custom-care-label"
-                  className="nav-dropdown-item"
-                >
-                  Custom Care Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/screen-printed-label"
-                  className="nav-dropdown-item"
-                >
-                  Screen Printed Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/custom-cotton-label"
-                  className="nav-dropdown-item"
-                >
-                  Custom Cotton Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/custom-sublimation-label"
-                  className="nav-dropdown-item"
-                >
-                  Custom Sublimation Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/custom-tyvek-label"
-                  className="nav-dropdown-item"
-                >
-                  Custom Tyvek Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/tpu-labels"
-                  className="nav-dropdown-item"
-                >
-                  Custom TPU Labels
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/custom-heat-labels"
-                  className="nav-dropdown-item"
-                >
-                  Custom Heat Transfer Labels
-                </NavDropdown.Item>
+                {[
+                  { path: "/all-clothing-labels", label: "All Clothing Labels" },
+                  { path: "/express-clothing", label: "Express Clothing Labels" },
+                  { path: "/customwoven", label: "Custom Woven Labels" },
+                  { path: "/woven-text-label", label: "Woven Text Labels" },
+                  { path: "/satin-woven", label: "Custom Satin Woven Labels" },
+                  { path: "/custom-care-label", label: "Custom Care Labels" },
+                  { path: "/screen-printed-label", label: "Screen Printed Labels" },
+                  { path: "/custom-cotton-label", label: "Custom Cotton Labels" },
+                  { path: "/custom-sublimation-label", label: "Custom Sublimation Labels" },
+                  { path: "/custom-tyvek-label", label: "Custom Tyvek Labels" },
+                  { path: "/tpu-labels", label: "Custom TPU Labels" },
+                  { path: "/custom-heat-labels", label: "Custom Heat Transfer Labels" },
+                ].map(({ path, label }) => (
+                  <NavDropdown.Item
+                    as={Link}
+                    to={path}
+                    className="nav-dropdown-item"
+                    onClick={() => handleNavClick(path)}
+                    key={path}
+                  >
+                    {label}
+                  </NavDropdown.Item>
+                ))}
               </NavDropdown>
               <NavDropdown
                 title={<span className="mainnav-link">HANGTAGS</span>}
@@ -191,6 +132,7 @@ const Mainnavbar = () => {
                   as={Link}
                   to="/custom-hangtags"
                   className="nav-dropdown-item"
+                  onClick={() => handleNavClick("/custom-hangtags")}
                 >
                   All Hang Tags
                 </NavDropdown.Item>
@@ -198,6 +140,7 @@ const Mainnavbar = () => {
                   as={Link}
                   to="/simple-hangtags"
                   className="nav-dropdown-item"
+                  onClick={() => handleNavClick("/simple-hangtags")}
                 >
                   Simple Hang Tags
                 </NavDropdown.Item>
@@ -205,22 +148,37 @@ const Mainnavbar = () => {
                   as={Link}
                   to="/fancy-hangtags"
                   className="nav-dropdown-item"
+                  onClick={() => handleNavClick("/fancy-hangtags")}
                 >
                   Fancy Hang Tags
                 </NavDropdown.Item>
               </NavDropdown>
-              <Nav.Link as={Link} to="/about-us" className="mainnav-link">
+
+              <Nav.Link
+                as={Link}
+                to="/about-us"
+                className="mainnav-link"
+                onClick={() => handleNavClick("/about-us")}
+              >
                 About
               </Nav.Link>
-              <Nav.Link as={Link} to="/contact-us" className="mainnav-link">
+              <Nav.Link
+                as={Link}
+                to="/contact-us"
+                className="mainnav-link"
+                onClick={() => handleNavClick("/contact-us")}
+              >
                 Contact
               </Nav.Link>
             </Nav>
           </Slide>
-          {/* Third div: Get a Quote button aligned to the right */}
           <div className="quote-and-contact">
             <Link to="/get-quote">
-              <Button variant="primary" className="mainnav-quote-button1">
+              <Button
+                variant="primary"
+                className="mainnav-quote-button1"
+                onClick={() => handleNavClick("/get-quote")}
+              >
                 Get a Quote
               </Button>
             </Link>
