@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Breadcrumb } from "antd";
+import { Button, Card, Breadcrumb, message, Steps, theme } from "antd";
 import LastTable1 from "./lasttable";
 import { useCart } from "../../context/cartcontext";
 import "./expressmain.css";
-import { Slide } from "react-awesome-reveal";
 import ImageUploader from "./imagedragger";
+// Steps data
 
 // Card data
 const cardData = [
@@ -105,6 +105,182 @@ function Expressmain() {
   const [isExpanded, setIsExpanded] = useState(false);
   const [image, setImage] = useState(null);
 
+  const steps = [
+    {
+      title: "Upload Artwork",
+      content: (
+        <>
+          <div className="size-txt">
+            <h3 className="simpletable-heading">Upload Artwork</h3>
+          </div>
+          <div className="divs-tableexpress">
+            <ImageUploader />
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Style",
+      content: (
+        <>
+          <div className="size-txt">
+            <h3 className="simpletable-heading">Style?</h3>
+          </div>
+          <div className="divs-tableexpress">
+            <Card
+              bordered={false}
+              style={{
+                background: "#FAF4EB",
+              }}
+              onClick={() => handleCardClick("style", "Straight Cut (Flat)")}
+            >
+              <img
+                alt="Straight Cut"
+                src="../images/sizes/2 x 2.jpg"
+                className="image-card-express"
+              />
+              <p>
+                Straight Cut <br />
+                (Flat)
+              </p>
+            </Card>
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Size",
+      content: (
+        <>
+          <div className="size-txt">
+            <h3 className="simpletable-heading">Size?</h3>
+          </div>
+          <div className="divs-tableexpress">
+            <div className="card-grid">
+              {cardData.map((card) => (
+                <div key={card.id} className="card-container">
+                  <Card
+                    bordered={false}
+                    onClick={() => handleCardClick("size", card.title)}
+                    style={{ background: "#FAF4EB" }}
+                  >
+                    <img
+                      alt={card.title}
+                      src={card.imgSrc}
+                      className="image-card-express-1"
+                    />
+                    <p>{card.title}</p>
+                  </Card>
+                </div>
+              ))}
+            </div>
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Size Symbols or Color Versions?",
+      content: (
+        <>
+          <div className="size-txt">
+            <h3 className="simpletable-heading">
+              Size Symbol or Color Versions?
+            </h3>
+          </div>
+          <div className="divs-tableexpress">
+            {card1.map((card) => (
+              <div key={card.id} className="card-container">
+                <Card
+                  bordered={false}
+                  onClick={() => handleCardClick("versions", card.title)}
+                  style={{
+                    background: "#FAF4EB",
+                  }}
+                >
+                  <img
+                    alt={card.title}
+                    src={card.imgSrc}
+                    className="image-card-express"
+                  />
+                  <p>{card.title}</p>
+                </Card>
+              </div>
+            ))}
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Proof Options",
+      content: (
+        <>
+          <div className="size-txt">
+            <h3 className="simpletable-heading">Proof options?</h3>
+          </div>
+          <div className="divs-tableexpress">
+            <Card
+              bordered={false}
+              style={{
+                background: "#FAF4EB",
+              }}
+            >
+              <img
+                alt="abc"
+                src="../images/sizes/proof.png"
+                className="image-card-express"
+              />
+              <p>
+                Digital Proof
+                <br />
+                Only
+              </p>
+            </Card>
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "Turnaround Options",
+      content: (
+        <>
+          <div className="size-txt">
+            <h3 className="simpletable-heading">Turnaround options?</h3>
+          </div>
+          <div className="divs-tableexpress">
+            <Card
+              bordered={false}
+              style={{
+                background: "#FAF4EB",
+              }}
+            >
+              <img
+                alt="abc"
+                src="../images/sizes/rush3.png"
+                className="image-card-express"
+              />
+              <p>
+                RUSH: <br />3 Business Days
+              </p>
+            </Card>
+          </div>
+        </>
+      ),
+    },
+    {
+      title: "quantity ",
+      content: (
+        <>
+          <div className="size-txt">
+            <h3 className="simpletable-heading">Quantity?</h3>
+          </div>
+          <div className="divs-tableexpress">
+            <LastTable1 />
+          </div>
+        </>
+      ),
+    },
+  ];
+
   // The full text
   const fullText = `Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.`;
 
@@ -152,7 +328,25 @@ function Expressmain() {
     }
   }, []);
 
-  console.log(image, "sjikaj");
+  const { token } = theme.useToken();
+  const [current, setCurrent] = useState(0);
+  const next = () => {
+    setCurrent(current + 1);
+  };
+  const prev = () => {
+    setCurrent(current - 1);
+  };
+  const items = steps.map((item) => ({
+    title: <span className="responsive-title">{item.title}</span>,
+  }));
+
+  const contentStyle = {
+    textAlign: "center",
+    color: token.colorTextTertiary,
+    borderRadius: token.borderRadiusLG,
+    marginTop: 16,
+  };
+
   return (
     <div className="first-main-express">
       <div className="headingbread">
@@ -283,123 +477,33 @@ function Expressmain() {
             </div>
           </div>
           <div style={{ marginTop: "2rem" }}>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Upload Artwork</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <ImageUploader />
-            </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Style?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <Card
-                bordered={false}
-                style={{
-                  background: "#FAF4EB",
-                }}
-                onClick={() => handleCardClick("style", "Straight Cut (Flat)")}
-              >
-                <img
-                  alt="Straight Cut"
-                  src="../images/sizes/2 x 2.jpg"
-                  className="image-card-express"
-                />
-                <p>
-                  Straight Cut <br />
-                  (Flat)
-                </p>
-              </Card>
-            </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Size?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <div className="card-grid">
-                {cardData.map((card) => (
-                  <div key={card.id} className="card-container">
-                    <Card
-                      bordered={false}
-                      onClick={() => handleCardClick("size", card.title)}
-                      style={{ background: "#FAF4EB" }}
-                    >
-                      <img
-                        alt={card.title}
-                        src={card.imgSrc}
-                        className="image-card-express-1"
-                      />
-                      <p>{card.title}</p>
-                    </Card>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">
-                Size Symbol or Color Versions?
-              </h3>
-            </div>
-            <div className="divs-tableexpress">
-              {card1.map((card) => (
-                <div key={card.id} className="card-container">
-                  <Card
-                    bordered={false}
-                    onClick={() => handleCardClick("versions", card.title)}
-                    style={{
-                      background: "#FAF4EB",
-                    }}
-                  >
-                    <img
-                      alt={card.title}
-                      src={card.imgSrc}
-                      className="image-card-express"
-                    />
-                    <p>{card.title}</p>
-                  </Card>
-                </div>
-              ))}
-            </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Proof options?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <Card
-                bordered={false}
-                style={{
-                  background: "#FAF4EB",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/sizes/proof.png"
-                  className="image-card-express"
-                />
-                <p>
-                  Digital Proof
-                  <br />
-                  Only
-                </p>
-              </Card>
-            </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Turnaround options?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <Card
-                bordered={false}
-                style={{
-                  background: "#FAF4EB",
-                }}
-              >
-                <img
-                  alt="abc"
-                  src="../images/sizes/rush3.png"
-                  className="image-card-express"
-                />
-                <p>
-                  RUSH: <br />3 Business Days
-                </p>
-              </Card>
+            <Steps current={current} items={items} />
+            <div style={contentStyle}>{steps[current].content}</div>
+            <div
+              style={{
+                marginTop: 24,
+                display: "flex",
+                justifyContent: "center",
+              }}
+            >
+              {current < steps.length - 1 && (
+                <Button onClick={() => next()}>Next</Button>
+              )}
+              {current === steps.length - 1 && (
+                <Button onClick={() => message.success("Processing complete!")}>
+                  Done
+                </Button>
+              )}
+              {current > 0 && (
+                <Button
+                  style={{
+                    margin: "0 8px",
+                  }}
+                  onClick={() => prev()}
+                >
+                  Previous
+                </Button>
+              )}
             </div>
             <div className="size-txt">
               <h3 className="simpletable-heading">Comments?</h3>
@@ -414,12 +518,6 @@ function Expressmain() {
                 }}
                 placeholder="Enter your text here..."
               />
-            </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Quantity?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <LastTable1 />
             </div>
           </div>
         </div>
