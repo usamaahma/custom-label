@@ -1,77 +1,40 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { products } from "../../utils/axios"; // Adjust the import path as necessary
 import "./clothingcard.css"; // Import your CSS file
 
 const Clothingcard = () => {
-  // Your data array
-  const cardsData = [
-    {
-      id: 1,
-      image: "../images/x-label.jpg",
-      text: "Express Clothing Labels",
-      link: "/express-clothing", // Add the link here
-    },
-    {
-      id: 2,
-      image: "../images/x-small.jpg",
-      text: "Custom Woven Labels",
-      link: "/customwoven",
-    },
-    {
-      id: 3,
-      image: "../images/x-label.jpg",
-      text: "Woven Text Labels",
-      link: "/woven-text-label",
-    },
-    {
-      id: 4,
-      image: "../images/x-small.jpg",
-      text: "Custom Satin Woven Labels",
-      link: "/satin-woven",
-    },
-    {
-      id: 5,
-      image: "../images/x-label.jpg",
-      text: "Custom care Labels",
-      link: "/custom-care-label",
-    },
-    {
-      id: 6,
-      image: "../images/x-small.jpg",
-      text: "Screen Printed Labels",
-      link: "/screen-printed-label",
-    },
-    {
-      id: 7,
-      image: "../images/x-label.jpg",
-      text: "Custom Cotton Labels",
-      link: "/custom-cotton-label",
-    },
-    {
-      id: 8,
-      image: "../images/x-small.jpg",
-      text: "Custom Sublimation Labels",
-      link: "/custom-sublimation-label",
-    },
-    {
-      id: 9,
-      image: "../images/x-label.jpg",
-      text: "Custom Tyvek Labels",
-      link: "/custom-tyvek-label",
-    },
-    {
-      id: 10,
-      image: "../images/x-small.jpg",
-      text: "Custom Tpu Labels",
-      link: "/tpu-labels",
-    },
-    {
-      id: 11,
-      image: "../images/x-label.jpg",
-      text: "Custom Heat Transfer Labels",
-      link: "/custom-heat-labels",
-    },
-  ];
+  // State to hold the products data
+  const [cardsData, setCardsData] = useState([]);
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
+  // Fetch data from the API
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await products.get("/"); // Use the products instance to fetch data
+        console.log(response.data.results)
+        setCardsData(response.data.results); // Assuming data is an array in `products` key
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // Render loading state
+  if (loading) {
+    return <p>Loading...</p>;
+  }
+
+  // Render error state
+  if (error) {
+    return <p>Error: {error}</p>;
+  }
+
+  // Render product cards
   return (
     <div>
       <h2 className="main-heading">Clothing Labels</h2>
@@ -79,7 +42,7 @@ const Clothingcard = () => {
         {cardsData.map((card) => (
           <a href={card.link} key={card.id} className="card">
             <img src={card.image} alt={card.text} className="card-image" />
-            <p className="card-text">{card.text}</p>
+            <p className="card-text">{card.name}</p>
           </a>
         ))}
       </div>

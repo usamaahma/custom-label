@@ -1,5 +1,5 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
-import axios from "../utils/axios"; // Import your configured axios instance
+import { login } from "../utils/axios"; // Use named import for the login instance
 
 const AuthContext = createContext();
 
@@ -31,9 +31,9 @@ export const AuthProvider = ({ children }) => {
     }
   }, []);
 
-  const login = async (email, password) => {
+  const loginUser = async (email, password) => {
     try {
-      const response = await axios.post("/user/login", { email, password });
+      const response = await login.post("/login", { email, password }); // Use the login instance
       dispatch({ type: "LOGIN", payload: response.data.user });
       localStorage.setItem("user", JSON.stringify(response.data.user)); // Store only user data
       localStorage.setItem("loginstate", "true"); // Store login state
@@ -51,7 +51,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user: state.user, isLoggedIn: state.isLoggedIn, login, logout }}
+      value={{ user: state.user, isLoggedIn: state.isLoggedIn, login: loginUser, logout }}
     >
       {children}
     </AuthContext.Provider>

@@ -96,7 +96,7 @@ const Mainnavbar = () => {
           <Slide Cascade direction="down">
             <Nav className="mainnav-nav mx-auto">
               <NavDropdown
-                title={<span className="mainnav-link">CLOTHING LABELS</span>}
+                title={<span className="mainnav-link">WOVEN LABELS</span>}
                 id="clothing-dropdown"
               >
                 {[
