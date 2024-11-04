@@ -121,6 +121,14 @@
   font-size: 14px;
   color: #5f6f65;
 }
+.responsive-title {
+  font-size: 10px; /* Default font size */
+  font-weight: bold;
+}
+
+/* Smaller font size for medium screens */
+
+/* Even smaller font size for small screens */
 
 @media (max-width: 1100px) {
   .simpletable-heading {
@@ -152,6 +160,9 @@
   }
 }
 @media (max-width: 768px) {
+  .responsive-title {
+    font-size: 14px;
+  }
   .breadcrumb {
     text-align: center;
     display: flex;
@@ -180,5 +191,10 @@
   }
   .main-express {
     padding: 0rem;
+  }
+}
+@media (max-width: 480px) {
+  .responsive-title {
+    font-size: 12px;
   }
 }
