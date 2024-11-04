@@ -22,7 +22,7 @@ const Login = ({ onVerified }) => {
         onChange={(e) => setPassword(e.target.value)}
         placeholder="Enter password"
       />
-      <button type="submit">Open Sesame</button>
+      <button type="submit">Open Woven Labels</button>
     </form>
   );
 };
