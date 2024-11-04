@@ -1,7 +1,17 @@
 import React from "react";
-import { Form, Input, Button, InputNumber, Upload, Select } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  InputNumber,
+  Upload,
+  Select,
+  message,
+} from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Zoom } from "react-awesome-reveal";
+import { getquote } from "../utils/axios";
+
 import "./getaquote.css";
 
 const { TextArea } = Input;
@@ -9,7 +19,31 @@ const { Option } = Select;
 
 function Getaquote1() {
   const onFinish = (values) => {
-    console.log("Form Values:", values);
+    console.log("Success:", values);
+
+    const data1 = {
+      name: values.name,
+      email: values.email,
+      product: values.products,
+      artwork: values.artwork,
+      width: String(values.width), // Convert to string
+      height: String(values.height), // Convert to string
+      quantity: String(values.quantity), // Convert to string
+      phonenumber: values.contactNumber,
+      comments: values.comments,
+    };
+
+    getquote({
+      method: "post",
+      data: data1,
+    })
+      .then((res) => {
+        console.log(res);
+        message.success("Thank you for considering us!");
+      })
+      .catch(() => {
+        message.error("something went wrong, please try again!");
+      });
   };
 
   const handleChange = (info) => {
@@ -47,9 +81,9 @@ function Getaquote1() {
               placeholder="Select a product"
               className="customform-select"
             >
-              <Option value="product1">Express Clothing Labels</Option>
-              <Option value="product2">Custom Heat Transfer Labels</Option>
-              <Option value="product3">Custom Cotton Labels</Option>
+              <Option value="Express Clothing Labels">Express Clothing Labels</Option>
+              <Option value="Custom Heat Transfer Labels">Custom Heat Transfer Labels</Option>
+              <Option value="Custom Cotton Labels">Custom Cotton Labels</Option>
             </Select>
           </Form.Item>
 
@@ -107,6 +141,30 @@ function Getaquote1() {
               min={1}
             />
           </Form.Item>
+          <Form.Item
+            label={<span className="customform-label">Contact Number</span>}
+            name="contactNumber"
+            rules={[
+              { required: true, message: "Please enter your contact number!" },
+              { len: 11, message: "Contact number must be exactly 11 digits!" },
+              {
+                pattern: /^[0-9]+$/,
+                message: "Contact number must be numeric!",
+              }, // Ensures only digits are allowed
+            ]}
+          >
+            <Input
+              placeholder="Enter Your Contact Number"
+              className="customform-input-number"
+              type="tel" // Use 'tel' to open numeric keypad
+              maxLength={11} // Limit input to 11 characters
+              onKeyPress={(event) => {
+                if (!/[0-9]/.test(event.key)) {
+                  event.preventDefault(); // Prevent non-numeric input
+                }
+              }}
+            />
+          </Form.Item>
 
           <Form.Item
             label={<span className="customform-label">Name</span>}
@@ -144,7 +202,7 @@ function Getaquote1() {
 
           <Form.Item>
             <Button
-               htmlType="submit"
+              htmlType="submit"
               block
               className="customform-submit-button"
             >

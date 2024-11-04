@@ -1,25 +1,37 @@
 import axios from "axios";
 
-// Create an Axios instance
-const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_URL, // Use the environment variable for the base URL
-  headers: {
-    "Content-Type": "application/json",
-  },
+const url = process.env.REACT_APP_API_URL; // Ensure this is set correctly in your .env file
+
+const login = axios.create({
+  baseURL: `${url}authentication`, // Ensure this is the correct endpoint for login
 });
 
-// Add a request interceptor to include the token
-axiosInstance.interceptors.request.use(
-  (config) => {
-    const user = JSON.parse(localStorage.getItem("users"));
-    if (user && user.token) {
-      config.headers["Authorization"] = `Bearer ${user.token}`; // Include token
-    }
-    return config;
+const products = axios.create({
+  baseURL: `${url}/products`, // Ensure this is the correct endpoint for products
+});
+const getquote = axios.create({
+  baseURL: `${url}/getquote`, // Ensure this is the correct endpoint for products
+}); 
+
+// Request interceptor for products
+getquote.interceptors.request.use(
+  (req) => {
+    // Add any custom headers or logic here if needed
+    return req;
   },
-  (error) => {
-    return Promise.reject(error);
+  (err) => {
+    return Promise.reject(err);
+  }
+);
+// Request interceptor for products
+products.interceptors.request.use(
+  (req) => {
+    // Add any custom headers or logic here if needed
+    return req;
+  },
+  (err) => {
+    return Promise.reject(err);
   }
 );
 
-export default axiosInstance;
+export { login, products,getquote };
