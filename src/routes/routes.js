@@ -44,6 +44,8 @@ import NewsletterSubscriptions from "../components/myaccount/newslettersub.js";
 import AccountDetails from "../components/myaccount/accountdetails.js";
 import PaymentOptions from "../components/myaccount/paymentoption.js";
 import "./routes.css"; // Import the CSS file for margin styles
+import ProductDetail from "../components/productdetail/productDetail.js";
+import ThankYouPage from "../components/thankyou/thankyou.js";
 
 const AppRoutes = () => {
   return (
@@ -55,7 +57,6 @@ const AppRoutes = () => {
         <div className="routes-margin">
           {" "}
           {/* Add margin top here */}
-          
           <Routes>
             <Route
               path="/my-account"
@@ -123,7 +124,6 @@ const AppRoutes = () => {
                 }
               />
             </Route>
-
             {/* Public Routes: Accessible to everyone */}
             <Route path="/" element={<Landingpage />} />
             <Route path="/login" element={<Login />} />
@@ -167,7 +167,9 @@ const AppRoutes = () => {
             <Route path="/faqs" element={<Faq1 />} />
             <Route path="/custom-heat-labels" element={<Customheatpage />} />
             <Route path="/privacy-policy" element={<Privacypolicy1 />} />
-
+            <Route path="/thank-you" element={<ThankYouPage />} />            
+            <Route path="/product/:productName" element={<ProductDetail />} />
+            {/* This will display the product detail based on the ID */}
             {/* Catch all route for 404 - redirect to home */}
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

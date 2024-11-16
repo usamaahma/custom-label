@@ -38,7 +38,7 @@ function Getaquote1() {
       data: data1,
     })
       .then((res) => {
-        console.log(res);
+        console.log("success",res);
         message.success("Thank you for considering us!");
       })
       .catch(() => {

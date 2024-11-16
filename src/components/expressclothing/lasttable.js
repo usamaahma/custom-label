@@ -12,8 +12,8 @@ const columns = [
   },
   {
     title: <b style={{ fontSize: "16px" }}>Unit Price</b>,
-    dataIndex: "unitprice",
-    key: "unitprice",
+    dataIndex: "unitPrice",
+    key: "unitPrice",
   },
   {
     title: <b style={{ fontSize: "16px" }}>Total</b>,
@@ -22,47 +22,20 @@ const columns = [
   },
 ];
 
-const data = [
-  {
-    key: "1",
-    quantity: "50 pcs",
-    unitprice: "$1.96 Each",
-    total: "$98.00",
-  },
-  {
-    key: "2",
-    quantity: "100 pcs",
-    unitprice: "$1.68 Each",
-    total: "$168.00",
-  },
-  {
-    key: "3",
-    quantity: "200 pcs",
-    unitprice: "$1.12 Each",
-    total: "$224.00",
-  },
-  {
-    key: "4",
-    quantity: "300 pcs",
-    unitprice: "$0.92 Each",
-    total: "$276.00",
-  },
-  {
-    key: "5",
-    quantity: "500 pcs",
-    unitprice: "$0.69 Each",
-    total: "$345.00",
-  },
-  {
-    key: "6",
-    quantity: "1000 pcs",
-    unitprice: "$0.54 Each",
-    total: "$540.00",
-  },
-  {
-    key: "7",
+const LastTable1 = ({ allQuantityPrices, onRowClick }) => {
+  // Map allQuantityPrices to create the data array for the table
+  const data = allQuantityPrices.map((item, index) => ({
+    key: index,
+    quantity: `${item.quantity} pcs`,
+    unitPrice: `$${item.price.toFixed(2)} Each`,
+    total: `$${(item.quantity * item.price).toFixed(2)}`,
+  }));
+
+  // Add an additional entry for "1000+ pcs"
+  data.push({
+    key: data.length,
     quantity: "1000+ pcs",
-    unitprice: "Wholesale Pricing",
+    unitPrice: "Wholesale Pricing",
     total: (
       <Link to="/get-quote">
         <Button style={{ background: "#007AB7", color: "#fff" }}>
@@ -70,21 +43,21 @@ const data = [
         </Button>
       </Link>
     ),
-  },
-];
-
-const LastTable1 = () => (
-  <div>
-    {/* <div className="size-txt">
-            <h2 className="simpletable-heading">Quantity</h2>
-        </div> */}
+  });
+  const handleRowClick = (record) => {
+    onRowClick(record); // Send the clicked row data to the parent
+  };
+  return (
     <div className="height-table">
       <Table
         columns={columns}
         dataSource={data}
-       />
+        onRow={(record) => ({
+          onClick: () => handleRowClick(record), // Attach row click handler
+        })}
+      />
     </div>
-  </div>
-);
+  );
+};
 
 export default LastTable1;

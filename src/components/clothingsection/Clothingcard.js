@@ -13,7 +13,7 @@ const Clothingcard = () => {
     const fetchData = async () => {
       try {
         const response = await products.get("/"); // Use the products instance to fetch data
-        console.log(response.data.results)
+        console.log(response.data.results);
         setCardsData(response.data.results); // Assuming data is an array in `products` key
       } catch (error) {
         setError(error.message);
@@ -23,6 +23,11 @@ const Clothingcard = () => {
     };
     fetchData();
   }, []);
+
+  const StoreProductId = (id, title) => {
+    localStorage.setItem("selectedProductId", id); // Save the ID in local storage
+    localStorage.setItem("selectedProductTitle", title); // Save the ID in local storage
+  };
 
   // Render loading state
   if (loading) {
@@ -40,10 +45,17 @@ const Clothingcard = () => {
       <h2 className="main-heading">Clothing Labels</h2>
       <div className="card-grid">
         {cardsData.map((card) => (
-          <a href={card.link} key={card.id} className="card">
-            <img src={card.image} alt={card.text} className="card-image" />
-            <p className="card-text">{card.name}</p>
-          </a>
+          <div
+            key={card.id}
+            className="card"
+            onClick={() => {
+              StoreProductId(card._id, card.title); // Store ID
+              window.location.href = `/product/${card.title}`; // Navigate to product page
+            }}
+          >
+            <img src={card.image} alt={card.title} className="card-image" />
+            <p className="card-text">{card.title}</p>
+          </div>
         ))}
       </div>
     </div>

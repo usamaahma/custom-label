@@ -1,0 +1,48 @@
+.thank-you-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height:75vh;
+    background-image: url("/public/thankyouback.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  
+  .thank-you-card {
+    background-color: rgba(250, 244, 235, 0.9); /* Light beige overlay */
+    border-radius: 15px;
+    padding: 40px;
+    text-align: center;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+    max-width: 600px;
+  }
+  
+  .thank-you-title {
+     color: #5f6f65; /* Slightly darker color for contrast */
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+  }
+  
+  .thank-you-message {
+    color: #333;
+    font-size: 1.2rem;
+    line-height: 1.5;
+    margin-bottom: 30px;
+  }
+  
+  .thank-you-button {
+    background-color: #5f6f65;
+    color: #faf4eb;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+  }
+  
+  .thank-you-button:hover {
+    background-color: black;
+  }
+  

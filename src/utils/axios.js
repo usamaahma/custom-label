@@ -11,7 +11,10 @@ const products = axios.create({
 });
 const getquote = axios.create({
   baseURL: `${url}/getquote`, // Ensure this is the correct endpoint for products
-}); 
+});
+const orderdescription = axios.create({
+  baseURL: `${url}/orderdescription`, // Ensure this is the correct endpoint for products
+});
 
 // Request interceptor for products
 getquote.interceptors.request.use(
@@ -33,5 +36,14 @@ products.interceptors.request.use(
     return Promise.reject(err);
   }
 );
+orderdescription.interceptors.request.use(
+  (req) => {
+    // Add any custom headers or logic here if needed
+    return req;
+  },
+  (err) => {
+    return Promise.reject(err);
+  }
+);
 
-export { login, products,getquote };
+export { login, products, getquote, orderdescription };

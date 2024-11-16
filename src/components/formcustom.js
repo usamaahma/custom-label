@@ -1,15 +1,50 @@
 import React from "react";
-import { Form, Input, Button, InputNumber, Upload, Select } from "antd";
+import {
+  Form,
+  Input,
+  Button,
+  InputNumber,
+  Upload,
+  Select,
+  message,
+} from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Zoom } from "react-awesome-reveal";
+import { getquote } from "../utils/axios";
 import "./formcustom.css";
 
 const { TextArea } = Input;
 const { Option } = Select;
 
 function Formcustom1() {
+  const [form] = Form.useForm();
+
   const onFinish = (values) => {
     console.log("Form Values:", values);
+    const data1 = {
+      name: values.name,
+      email: values.email,
+      product: values.products,
+      artwork: values.artwork,
+      width: String(values.width), // Convert to string
+      height: String(values.height), // Convert to string
+      quantity: String(values.quantity), // Convert to string
+      phonenumber: values.phonenumber,
+      comments: values.comments,
+    };
+
+    getquote({
+      method: "post",
+      data: data1,
+    })
+      .then((res) => {
+        console.log(res);
+        message.success("Thank you for considering us!");
+        form.resetFields();
+      })
+      .catch(() => {
+        message.error("something went wrong, please try again!");
+      });
   };
 
   const handleChange = (info) => {
@@ -37,7 +72,7 @@ function Formcustom1() {
         <p className="customform-upload">
           Acceptable file types: png, jpg, jpeg, gif, pdf, ai, psd, svg
         </p>
-        <Form layout="vertical" onFinish={onFinish}>
+        <Form form={form} layout="vertical" onFinish={onFinish}>
           <Form.Item
             label={<span className="customform-label">Select Products</span>}
             name="products"
@@ -102,6 +137,7 @@ function Formcustom1() {
             rules={[{ required: true, message: "Please enter the quantity!" }]}
           >
             <InputNumber
+              type="number"
               placeholder="Enter quantity"
               className="customform-input-number"
               min={1}
@@ -114,6 +150,28 @@ function Formcustom1() {
             rules={[{ required: true, message: "Please enter your name!" }]}
           >
             <Input placeholder="Enter your name" className="customform-input" />
+          </Form.Item>
+
+          <Form.Item
+            label={<span className="customform-label">Phone Number</span>}
+            name="phonenumber"
+            rules={[
+              { required: true, message: "Please enter your Phone Number!" },
+            ]}
+          >
+            <Input
+              type="number"
+              maxLength="11"
+              placeholder="Enter your Phone Number"
+              className="customform-input"
+              onChange={(e) => {
+                const value = e.target.value;
+                if (/^\d*$/.test(value)) {
+                  // Ensure only digits are entered
+                  e.target.value = value;
+                }
+              }}
+            />
           </Form.Item>
 
           <Form.Item
