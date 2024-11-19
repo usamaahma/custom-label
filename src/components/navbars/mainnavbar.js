@@ -96,7 +96,7 @@ const Mainnavbar = () => {
           <Slide Cascade direction="down">
             <Nav className="mainnav-nav mx-auto">
               <NavDropdown
-                title={<span className="mainnav-link">WOVEN LABELS</span>}
+                title={<span className="mainnav-link">CUSTOM WOVEN LABELS</span>}
                 id="clothing-dropdown"
               >
                 {[
@@ -125,7 +125,7 @@ const Mainnavbar = () => {
                 ))}
               </NavDropdown>
               <NavDropdown
-                title={<span className="mainnav-link">HANGTAGS</span>}
+                title={<span className="mainnav-link">CUSTOM HANGTAGS</span>}
                 id="clothing-dropdown"
               >
                 <NavDropdown.Item
@@ -160,15 +160,15 @@ const Mainnavbar = () => {
                 className="mainnav-link"
                 onClick={() => handleNavClick("/about-us")}
               >
-                About
+                BLOG
               </Nav.Link>
               <Nav.Link
                 as={Link}
-                to="/contact-us"
+                to="/woven-text-label"
                 className="mainnav-link"
-                onClick={() => handleNavClick("/contact-us")}
+                onClick={() => handleNavClick("/woven-text-label")}
               >
-                Contact
+                DESIGN NOW
               </Nav.Link>
             </Nav>
           </Slide>

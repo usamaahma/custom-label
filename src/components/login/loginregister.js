@@ -1,16 +1,18 @@
+// Login Component
 import React, { useState } from "react";
 import { Form, Input, Button, Alert } from "antd";
 import { Link, Navigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css"; // Import CSS for toast notifications
+import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../../context/authcontext";
+import { login } from "../../utils/axios"; // Import the login API function
 import "./loginregister.css";
 
 function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
   const [redirect, setRedirect] = useState(false); // State for redirect
-  const { login } = useAuth();
+  const { login: loginUser } = useAuth();
 
   const validatePassword = (password) => {
     const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
@@ -19,7 +21,6 @@ function Login() {
 
   const handleSubmit = async (values) => {
     const { email, password } = values;
-    console.log(values);
 
     // Validate password
     if (!validatePassword(password)) {
@@ -30,29 +31,29 @@ function Login() {
     }
 
     try {
-      // Attempt to log in
-      await login(email, password);
+      // API Call for login
+      const response = await login.post("/login", { email, password });
+      loginUser(response.data.user); // Use the login function from AuthContext to set the user
       toast.success(`Logged in successfully!`);
+
       // Redirect after a brief delay to allow the toast to be seen
       setTimeout(() => {
         setRedirect(true); // Set redirect to true on successful login
       }, 2000); // 2000 milliseconds = 2 seconds
     } catch (err) {
-      // Handle errors
       setError("Login failed. Please check your credentials.");
-      toast.error("Login failed. Please check your credentials."); // Show error toast
+      toast.error("Login failed. Please check your credentials.");
       console.error(err);
     }
   };
 
-  // Redirect if redirect is true
   if (redirect) {
     return <Navigate to="/my-account" />;
   }
 
   return (
     <div className="login-container">
-      <ToastContainer /> {/* Add ToastContainer here */}
+      <ToastContainer />
       <div className="login-form-container">
         <h2 className="login-title">Sign In</h2>
 
@@ -85,7 +86,7 @@ function Login() {
           )}
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" className="login-button">
+            <Button type="primary" htmlType="submit" className="create-button">
               Sign In
             </Button>
           </Form.Item>

@@ -4,19 +4,15 @@ import { useCart } from "../../context/cartcontext";
 import {
   Button,
   Card,
-  Col,
   Breadcrumb,
   Select,
-  Row,
   Slider,
-  Progress,
   message,
   Upload,
 } from "antd";
 import { SketchPicker } from "react-color";
 import "../expressclothing/expressmain.css";
 import { Slide } from "react-awesome-reveal";
-import { GiCloudUpload } from "react-icons/gi";
 import "../expressclothing/tablescart.css";
 
 const { Dragger } = Upload;
@@ -494,12 +490,6 @@ function Wovenlabeldesc() {
                 <p>Business Days</p>
               </Card>
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Quantity?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <LastTable1 />
-            </div>
           </div>
         </div>
 
@@ -555,13 +545,7 @@ function Wovenlabeldesc() {
               </div>
             </div>
 
-            <div className="sticky-blue">
-              <div className="sticky-blue-inside">
-                <p>{selectedData.quantity}</p>
-                <p>{selectedData.price}</p>
-                <p>{selectedData.totalPrice}</p>
-              </div>
-            </div>
+         
             <div className="sticky-blue">
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button

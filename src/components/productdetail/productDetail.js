@@ -23,6 +23,7 @@ function ProductDetail() {
   const { addToCart } = useCart();
   const [productDescription, setProductDescription] = useState(null);
   const [descriptionTitle, setDescriptionTitle] = useState(null);
+  const [descriptionText, setDescriptionText] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(null);
   const [styles, setStyles] = useState([]);
   const [options, setOptions] = useState([]);
@@ -224,6 +225,20 @@ function ProductDetail() {
               </div>
             </div>
           ))}
+          <div className="size-txt">
+            <h3 className="simpletable-heading">Comments?</h3>
+          </div>
+          <div className="divs-tableexpress">
+            <textarea
+              rows={4} // Set the number of rows to 4
+              style={{
+                width: "100%", // Make it full width or adjust as needed
+                resize: "vertical", // Allow vertical resizing
+                padding: "10px", // Add some padding for aesthetics
+              }}
+              placeholder="Enter your text here..."
+            />
+          </div>
         </>
       ),
     },
@@ -247,10 +262,10 @@ function ProductDetail() {
   ];
 
   // The full text
-  const fullText =
-    Array.isArray(productDescription) && productDescription.length > 0
-      ? productDescription[0].text
-      : "No description available";
+  const fullText = descriptionText
+    ? descriptionText
+    : "No description available";
+
   // The truncated version of the text (first 100 characters, you can adjust as needed)
   const truncatedText = `${fullText.substring(0, 100)}`;
 
@@ -318,6 +333,7 @@ function ProductDetail() {
           setProductImages(response.data.descriptions[0].images);
           setSelectedImage(response.data.descriptions[0].images[0]);
           setProductDescription(response.data.descriptions[0]); // Set the product description in state
+          setDescriptionText(response.data.descriptions[0].text); // Set the product description in state
           setDescriptionTitle(response.data.descriptions[0].descriptionTitle);
           setStyles(response.data.descriptions[0].styles);
           const collectedQuantityPrices =
@@ -431,7 +447,7 @@ function ProductDetail() {
               before production, ensuring 100% satisfaction.
             </p>
 
-            <div className="image-row">
+            {/* <div className="image-row">
               <div className="image-item">
                 <img
                   src="../../images/upload.png"
@@ -471,10 +487,10 @@ function ProductDetail() {
                 />
                 <p className="image-text">Receive Order</p>
               </div>
-            </div>
+            </div> */}
           </div>
-          <div style={{ marginTop: "2rem" }}>
-            <Steps current={current} items={items} />
+          <div style={{ marginTop: "2rem"  }}>
+            <Steps style={{marginBottom:"2rem"}} current={current} items={items} />
             <div style={contentStyle}>{steps[current].content}</div>
             <div
               style={{
@@ -501,20 +517,6 @@ function ProductDetail() {
                   Previous
                 </Button>
               )}
-            </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Comments?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <textarea
-                rows={4} // Set the number of rows to 4
-                style={{
-                  width: "100%", // Make it full width or adjust as needed
-                  resize: "vertical", // Allow vertical resizing
-                  padding: "10px", // Add some padding for aesthetics
-                }}
-                placeholder="Enter your text here..."
-              />
             </div>
           </div>
         </div>

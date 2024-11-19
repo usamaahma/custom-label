@@ -14,44 +14,42 @@ const authReducer = (state, action) => {
   }
 };
 
+// AuthContext
 export const AuthProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
     user: null,
     isLoggedIn: false,
   });
 
-  // Check localStorage on mount
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     const storedLoginState = localStorage.getItem("loginstate");
 
     if (storedLoginState === "true") {
-      // If login state is true, restore the user from localStorage
       dispatch({ type: "LOGIN", payload: JSON.parse(storedUser) });
     }
   }, []);
 
-  const loginUser = async (email, password) => {
-    try {
-      const response = await login.post("/login", { email, password }); // Use the login instance
-      dispatch({ type: "LOGIN", payload: response.data.user });
-      localStorage.setItem("user", JSON.stringify(response.data.user)); // Store only user data
-      localStorage.setItem("loginstate", "true"); // Store login state
-    } catch (error) {
-      console.error("Login failed:", error);
-      throw error; // Propagate the error for handling in the component
-    }
+  const loginUser = (userData) => {
+    dispatch({ type: "LOGIN", payload: userData });
+    localStorage.setItem("user", JSON.stringify(userData));
+    localStorage.setItem("loginstate", "true");
   };
 
   const logout = () => {
     dispatch({ type: "LOGOUT" });
     localStorage.removeItem("user");
-    localStorage.setItem("loginstate", "false"); // Update login state
+    localStorage.setItem("loginstate", "false");
   };
 
   return (
     <AuthContext.Provider
-      value={{ user: state.user, isLoggedIn: state.isLoggedIn, login: loginUser, logout }}
+      value={{
+        user: state.user,
+        isLoggedIn: state.isLoggedIn,
+        login: loginUser,
+        logout,
+      }}
     >
       {children}
     </AuthContext.Provider>

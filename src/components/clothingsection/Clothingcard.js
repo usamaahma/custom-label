@@ -1,20 +1,21 @@
 import React, { useEffect, useState } from "react";
+import { Row, Col, Form } from "antd"; // Import Ant Design's Row and Col components
 import { products } from "../../utils/axios"; // Adjust the import path as necessary
+import Beatquote from "./beatquote"; // Import your Beatquote component
 import "./clothingcard.css"; // Import your CSS file
 
 const Clothingcard = () => {
-  // State to hold the products data
   const [cardsData, setCardsData] = useState([]);
-  const [loading, setLoading] = useState(true); // Loading state
-  const [error, setError] = useState(null); // Error state
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [form] = Form.useForm();
 
-  // Fetch data from the API
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await products.get("/"); // Use the products instance to fetch data
-        console.log(response.data.results);
-        setCardsData(response.data.results); // Assuming data is an array in `products` key
+        const response = await products.get("/");
+        setCardsData(response.data.results); // Assuming data is an array in `results`
+        form.resetFields(); // Reset the form after successful data fetch
       } catch (error) {
         setError(error.message);
       } finally {
@@ -22,42 +23,46 @@ const Clothingcard = () => {
       }
     };
     fetchData();
-  }, []);
+  }, [form]);
 
   const StoreProductId = (id, title) => {
-    localStorage.setItem("selectedProductId", id); // Save the ID in local storage
-    localStorage.setItem("selectedProductTitle", title); // Save the ID in local storage
+    localStorage.setItem("selectedProductId", id);
+    localStorage.setItem("selectedProductTitle", title);
   };
 
-  // Render loading state
   if (loading) {
     return <p>Loading...</p>;
   }
 
-  // Render error state
   if (error) {
     return <p>Error: {error}</p>;
   }
 
-  // Render product cards
   return (
     <div>
-      <h2 className="main-heading">Clothing Labels</h2>
-      <div className="card-grid">
-        {cardsData.map((card) => (
-          <div
-            key={card.id}
-            className="card"
-            onClick={() => {
-              StoreProductId(card._id, card.title); // Store ID
-              window.location.href = `/product/${card.title}`; // Navigate to product page
-            }}
-          >
-            <img src={card.image} alt={card.title} className="card-image" />
-            <p className="card-text">{card.title}</p>
+      <Row className="responsive-row">
+        <Col xs={24} md={15}>
+          <h2 className="main-heading">Clothing Labels</h2>
+          <div className="card-grid">
+            {cardsData.map((card) => (
+              <div
+                key={card.id}
+                className="card"
+                onClick={() => {
+                  StoreProductId(card._id, card.title);
+                  window.location.href = `/product/${card.title}`;
+                }}
+              >
+                <img src={card.image} alt={card.title} className="card-image" />
+                <p className="card-text">{card.title}</p>
+              </div>
+            ))}
           </div>
-        ))}
-      </div>
+        </Col>
+        <Col xs={24} md={8} className="right-column">
+          <Beatquote />
+        </Col>
+      </Row>
     </div>
   );
 };

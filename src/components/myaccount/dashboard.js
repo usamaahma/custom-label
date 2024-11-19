@@ -9,7 +9,7 @@ function AccountDashboard() {
       <p className="dash-p op">Account Information</p>
       <div className="dash-first-card">
         <Card title="Contact Information" className="card-dash">
-          <p>Name: {user?.userName || "No Username"}</p>
+          <p>Name: {user?.name || "No Username"}</p>
           <p>Email: {user?.email || "No Email"}</p>
           <div
             className="card-footer"
