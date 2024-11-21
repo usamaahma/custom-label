@@ -156,9 +156,9 @@ const Mainnavbar = () => {
 
               <Nav.Link
                 as={Link}
-                to="/about-us"
+                to="/blogs"
                 className="mainnav-link"
-                onClick={() => handleNavClick("/about-us")}
+                onClick={() => handleNavClick("/blogs")}
               >
                 BLOG
               </Nav.Link>

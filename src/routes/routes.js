@@ -46,6 +46,10 @@ import PaymentOptions from "../components/myaccount/paymentoption.js";
 import "./routes.css"; // Import the CSS file for margin styles
 import ProductDetail from "../components/productdetail/productDetail.js";
 import ThankYouPage from "../components/thankyou/thankyou.js";
+import Blog from "../components/blog/blog.js";
+import Customblog from "../components/blog/customwoven.js";
+import Blogdetail1 from "../components/blog/blogdetail.js";
+import Drawerviewedit from "../components/checkout/drawerviewedit.js";
 
 const AppRoutes = () => {
   return (
@@ -167,8 +171,12 @@ const AppRoutes = () => {
             <Route path="/faqs" element={<Faq1 />} />
             <Route path="/custom-heat-labels" element={<Customheatpage />} />
             <Route path="/privacy-policy" element={<Privacypolicy1 />} />
-            <Route path="/thank-you" element={<ThankYouPage />} />            
+            <Route path="/thank-you" element={<ThankYouPage />} /> 
+            <Route path="/blogs" element={<Blog />} />     
+            <Route path="/blogdetail" element={<Blogdetail1 />} /> 
+            <Route path="/custom-blogs" element={<Customblog />} />        
             <Route path="/product/:productName" element={<ProductDetail />} />
+            <Route path="/drawer-view-edit" element={<Drawerviewedit />} />
             {/* This will display the product detail based on the ID */}
             {/* Catch all route for 404 - redirect to home */}
             <Route path="*" element={<Navigate to="/" />} />

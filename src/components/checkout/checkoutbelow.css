@@ -2,6 +2,7 @@
   padding: 20px;
   background-color: #f3eaea;
   border-radius: 8px;
+   
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -157,9 +158,24 @@
   background-color: white;
   margin-left: 4rem;
 }
+/* Styling for the columns with border */
+.border-column {
+  border: 1px solid #ccc; /* Add a light border */
+  padding: 10px; /* Add padding inside the column */
+  box-sizing: border-box; /* Ensure padding doesn't affect layout */
+  border-radius: 1rem;
+  
+}
+
+
 @media (max-width: 1190px) {
   .shipping-txt {
     font-size: 1.2rem;
+  }
+}
+@media (max-width: 1048px) {
+  .shipping-txt {
+    font-size: 1rem;
   }
 }
 @media (max-width: 768px) {
@@ -174,6 +190,9 @@
 
   .place-button {
     width: 100%;
+  }
+  .border-column {
+    margin-top: 1rem;
   }
 }
 

@@ -34,7 +34,7 @@ function Cartmodal1({ visible, onClose }) {
   // Function to handle navigation to view and edit cart page
   const handleViewAndEditCart = () => {
     onClose(); // Close modal
-    navigate("/view-and-edit-cart"); // Navigate to view and edit cart page
+    navigate("/drawer-view-edit"); // Navigate to view and edit cart page
   };
 
   // Function to remove item from cart
