@@ -54,8 +54,8 @@ function Beatquote() {
 
   return (
     <div className="beatquote-customform-wrapper">
+      <h2 className="beatquote-customform-heading">Get a Quote</h2>
       <div className="beatquote-customform-container">
-        <h2 className="beatquote-customform-heading">Get a Quote</h2>
         <p className="beatquote-customform-quote-text">
           Receive the lowest pricing & work with a team of experts.
         </p>
@@ -92,24 +92,16 @@ function Beatquote() {
             valuePropName="fileList"
             getValueFromEvent={(e) => (Array.isArray(e) ? e : e && e.fileList)}
             rules={[{ required: true, message: "Please upload your artwork!" }]}
+            className="beatquote-customform-uploadbutton"
           >
             <Upload onChange={handleChange} beforeUpload={() => false} multiple>
-              <Button
-                className="beatquote-customform-uploadbutton"
-                icon={<UploadOutlined />}
-              >
-                Upload Artwork
-              </Button>
+              <Button icon={<UploadOutlined />}>Upload Artwork</Button>
             </Upload>
           </Form.Item>
 
           <div className="beatquote-customform-item-row">
             <Form.Item
-              label={
-                <span className="beatquote-customform-label">
-                  Width (inches)
-                </span>
-              }
+              label={<span className="beatquote-customform-label">Width</span>}
               name="width"
               rules={[{ required: true, message: "Please enter the width!" }]}
             >
@@ -121,11 +113,7 @@ function Beatquote() {
             </Form.Item>
 
             <Form.Item
-              label={
-                <span className="beatquote-customform-label">
-                  Height (inches)
-                </span>
-              }
+              label={<span className="beatquote-customform-label">Height</span>}
               name="height"
               rules={[{ required: true, message: "Please enter the height!" }]}
             >
@@ -135,6 +123,7 @@ function Beatquote() {
                 min={1}
               />
             </Form.Item>
+
             <Form.Item
               label={
                 <span className="beatquote-customform-label">Quantity</span>
