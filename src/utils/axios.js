@@ -14,6 +14,9 @@ const login = axios.create({
 const products = axios.create({
   baseURL: `${baseURL}/products`, // Ensure this is the correct endpoint for products
 });
+const hangtag = axios.create({
+  baseURL: `${baseURL}/hangtag`, // Ensure this is the correct endpoint for products
+});
 
 const getquote = axios.create({
   baseURL: `${baseURL}/getquote`, // Ensure this is the correct endpoint for getting quotes
@@ -39,7 +42,8 @@ const errorInterceptor = (err) => {
 register.interceptors.request.use(requestInterceptor, errorInterceptor);
 login.interceptors.request.use(requestInterceptor, errorInterceptor);
 products.interceptors.request.use(requestInterceptor, errorInterceptor);
+hangtag.interceptors.request.use(requestInterceptor, errorInterceptor);
 getquote.interceptors.request.use(requestInterceptor, errorInterceptor);
 orderdescription.interceptors.request.use(requestInterceptor, errorInterceptor);
 
-export { register, products, getquote, orderdescription,login };
+export { register, products, getquote, orderdescription,login ,hangtag};

@@ -95,64 +95,20 @@ const Mainnavbar = () => {
         <Navbar.Collapse id="basic-navbar-nav" className="mainnav-collapse">
           <Slide Cascade direction="down">
             <Nav className="mainnav-nav mx-auto">
-              <NavDropdown
-                title={<span className="mainnav-link">CUSTOM WOVEN LABELS</span>}
-                id="clothing-dropdown"
+              <Nav.Link
+                as={Link}
+                to="/all-clothing-labels"
+                className="mainnav-link"
               >
-                {[
-                  { path: "/all-clothing-labels", label: "All Clothing Labels" },
-                  { path: "/express-clothing", label: "Express Clothing Labels" },
-                  { path: "/customwoven", label: "Custom Woven Labels" },
-                  { path: "/woven-text-label", label: "Woven Text Labels" },
-                  { path: "/satin-woven", label: "Custom Satin Woven Labels" },
-                  { path: "/custom-care-label", label: "Custom Care Labels" },
-                  { path: "/screen-printed-label", label: "Screen Printed Labels" },
-                  { path: "/custom-cotton-label", label: "Custom Cotton Labels" },
-                  { path: "/custom-sublimation-label", label: "Custom Sublimation Labels" },
-                  { path: "/custom-tyvek-label", label: "Custom Tyvek Labels" },
-                  { path: "/tpu-labels", label: "Custom TPU Labels" },
-                  { path: "/custom-heat-labels", label: "Custom Heat Transfer Labels" },
-                ].map(({ path, label }) => (
-                  <NavDropdown.Item
-                    as={Link}
-                    to={path}
-                    className="nav-dropdown-item"
-                    onClick={() => handleNavClick(path)}
-                    key={path}
-                  >
-                    {label}
-                  </NavDropdown.Item>
-                ))}
-              </NavDropdown>
-              <NavDropdown
-                title={<span className="mainnav-link">CUSTOM HANGTAGS</span>}
-                id="clothing-dropdown"
+                CUSTOM WOVEN LABELS
+              </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/custom-hangtags"
+                className="mainnav-link"
               >
-                <NavDropdown.Item
-                  as={Link}
-                  to="/custom-hangtags"
-                  className="nav-dropdown-item"
-                  onClick={() => handleNavClick("/custom-hangtags")}
-                >
-                  All Hang Tags
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/simple-hangtags"
-                  className="nav-dropdown-item"
-                  onClick={() => handleNavClick("/simple-hangtags")}
-                >
-                  Simple Hang Tags
-                </NavDropdown.Item>
-                <NavDropdown.Item
-                  as={Link}
-                  to="/fancy-hangtags"
-                  className="nav-dropdown-item"
-                  onClick={() => handleNavClick("/fancy-hangtags")}
-                >
-                  Fancy Hang Tags
-                </NavDropdown.Item>
-              </NavDropdown>
+                CUSTOM HANGTAGS{" "}
+              </Nav.Link>
 
               <Nav.Link
                 as={Link}

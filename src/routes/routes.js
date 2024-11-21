@@ -50,6 +50,8 @@ import Blog from "../components/blog/blog.js";
 import Customblog from "../components/blog/customwoven.js";
 import Blogdetail1 from "../components/blog/blogdetail.js";
 import Drawerviewedit from "../components/checkout/drawerviewedit.js";
+import Hangtags from "../components/clothingsection/Hangtags.js";
+import HangtagDetail from "../components/productdetail/hangtagDetail.js";
 
 const AppRoutes = () => {
   return (
@@ -147,7 +149,7 @@ const AppRoutes = () => {
             <Route path="/checkout" element={<Checkoutbelow1 />} />
             <Route path="/customwoven" element={<CustomWovenPage />} />
             <Route path="/view-and-edit-cart" element={<Vieweditcart />} />
-            <Route path="/custom-hangtags" element={<Hang1 />} />
+            <Route path="/custom-hangtags" element={<Hangtags />} />
             <Route path="/simple-hangtags" element={<Simplehangtagspage />} />
             <Route path="/woven-text-label" element={<Wovenlabelpage />} />
             <Route path="/satin-woven" element={<Satinwovenpage />} />
@@ -177,6 +179,7 @@ const AppRoutes = () => {
             <Route path="/custom-blogs" element={<Customblog />} />        
             <Route path="/product/:productName" element={<ProductDetail />} />
             <Route path="/drawer-view-edit" element={<Drawerviewedit />} />
+            <Route path="/hangtag/:productName" element={<HangtagDetail />} />
             {/* This will display the product detail based on the ID */}
             {/* Catch all route for 404 - redirect to home */}
             <Route path="*" element={<Navigate to="/" />} />
