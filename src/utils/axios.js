@@ -10,6 +10,9 @@ const register = axios.create({
 const login = axios.create({
   baseURL: `${baseURL}/auth`, // Ensure this is the correct endpoint for login
 });
+const google = axios.create({
+  baseURL: `${baseURL}/auth`, // Ensure this is the correct endpoint for login
+});
 
 const products = axios.create({
   baseURL: `${baseURL}/products`, // Ensure this is the correct endpoint for products
@@ -24,6 +27,9 @@ const getquote = axios.create({
 
 const orderdescription = axios.create({
   baseURL: `${baseURL}/orderdescription`, // Ensure this is the correct endpoint for order descriptions
+});
+const blog = axios.create({
+  baseURL: `${baseURL}/blogs`, // Ensure this is the correct endpoint for order descriptions
 });
 
 // Generic request interceptor for all instances
@@ -41,9 +47,20 @@ const errorInterceptor = (err) => {
 // Apply interceptors for each axios instance
 register.interceptors.request.use(requestInterceptor, errorInterceptor);
 login.interceptors.request.use(requestInterceptor, errorInterceptor);
+google.interceptors.request.use(requestInterceptor, errorInterceptor);
 products.interceptors.request.use(requestInterceptor, errorInterceptor);
 hangtag.interceptors.request.use(requestInterceptor, errorInterceptor);
 getquote.interceptors.request.use(requestInterceptor, errorInterceptor);
 orderdescription.interceptors.request.use(requestInterceptor, errorInterceptor);
+blog.interceptors.request.use(requestInterceptor, errorInterceptor);
 
-export { register, products, getquote, orderdescription,login ,hangtag};
+export {
+  register,
+  products,
+  getquote,
+  orderdescription,
+  login,
+  hangtag,
+  google,
+  blog,
+};

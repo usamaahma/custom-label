@@ -175,11 +175,11 @@ const AppRoutes = () => {
             <Route path="/privacy-policy" element={<Privacypolicy1 />} />
             <Route path="/thank-you" element={<ThankYouPage />} /> 
             <Route path="/blogs" element={<Blog />} />     
-            <Route path="/blogdetail" element={<Blogdetail1 />} /> 
-            <Route path="/custom-blogs" element={<Customblog />} />        
+             <Route path="/custom-blogs" element={<Customblog />} />        
             <Route path="/product/:productName" element={<ProductDetail />} />
             <Route path="/drawer-view-edit" element={<Drawerviewedit />} />
             <Route path="/hangtag/:productName" element={<HangtagDetail />} />
+            <Route path="/blog/:blogname" element={<Blogdetail1 />} />
             {/* This will display the product detail based on the ID */}
             {/* Catch all route for 404 - redirect to home */}
             <Route path="*" element={<Navigate to="/" />} />

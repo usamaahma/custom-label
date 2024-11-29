@@ -48,7 +48,9 @@
     .blog-links:hover {
       color: rgb(88, 88, 88); /* Hover color */
     }
-    
+    .blog-img{
+     height: 14rem;
+    }
   @media (max-width: 768px) {
     .card-txt-blog {
       text-align: center;
