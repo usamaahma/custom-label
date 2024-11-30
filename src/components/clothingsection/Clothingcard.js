@@ -15,6 +15,7 @@ const Clothingcard = () => {
     const fetchData = async () => {
       try {
         const response = await products.get("/");
+        console.log(response)
         setCardsData(response.data.results); // Assuming data is an array in `results`
         form.resetFields(); // Reset the form after successful data fetch
       } catch (error) {

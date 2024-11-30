@@ -2,7 +2,7 @@
   padding: 20px;
   background-color: #f3eaea;
   border-radius: 8px;
-   
+
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
@@ -14,8 +14,8 @@
 }
 
 .check-below {
-  background-color: black;
-  width: 30%;
+  background-color: rgb(95, 91, 91);
+  width: 25%;
   margin-bottom: 1.2rem;
   margin-left: 0; /* Align to the left */
   margin-right: auto; /* Keep the right margin auto to push it left */
@@ -164,9 +164,7 @@
   padding: 10px; /* Add padding inside the column */
   box-sizing: border-box; /* Ensure padding doesn't affect layout */
   border-radius: 1rem;
-  
 }
-
 
 @media (max-width: 1190px) {
   .shipping-txt {

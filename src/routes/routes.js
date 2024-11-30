@@ -19,8 +19,7 @@ import Expressclothing from "../pages/expressclothing.js";
 import Checkoutbelow1 from "../components/checkout/checkoutbelow.js";
 import CustomWovenPage from "../pages/customwovenpage.js";
 import Vieweditcart from "../components/checkout/vieweditcart.js";
-import Hang1 from "../components/hantagsection/hang.js";
-import Simplehangtagspage from "../pages/simplehangtagspage.js";
+ import Simplehangtagspage from "../pages/simplehangtagspage.js";
 import Wovenlabelpage from "../pages/wovenlabel.js";
 import Satinwovenpage from "../pages/satinwovenpage.js";
 import Fancyhangtagspage from "../pages/fancyhangtagspage.js";
@@ -77,7 +76,7 @@ const AppRoutes = () => {
                 path="account-dashboard"
                 element={
                   <PrivateRoute>
-                    <Dashboard />
+                     <Dashboard />
                   </PrivateRoute>
                 }
               />

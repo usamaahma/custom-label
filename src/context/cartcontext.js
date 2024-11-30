@@ -1,27 +1,38 @@
 import React, { createContext, useReducer, useContext } from "react";
 
+// Action Types
+const ADD_TO_CART = "ADD_TO_CART";
+const REMOVE_FROM_CART = "REMOVE_FROM_CART";
+
+// Context
 const CartContext = createContext();
 
+// Reducer
 const cartReducer = (state, action) => {
   switch (action.type) {
-    case "ADD_TO_CART":
+    case ADD_TO_CART:
+      // Check for duplicates
+      if (state.some((item) => item.id === action.payload.id)) {
+        return state; // Return current state if item exists
+      }
       return [...state, action.payload];
-    case "REMOVE_FROM_CART":
+    case REMOVE_FROM_CART:
       return state.filter((item) => item.id !== action.payload.id);
     default:
-      return state;
+      throw new Error(`Unhandled action type: ${action.type}`);
   }
 };
+
+// Provider
 export const CartProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(cartReducer, []);
-  // Function to add item to cart
+
   const addToCart = (item) => {
-    dispatch({ type: "ADD_TO_CART", payload: item });
+    dispatch({ type: ADD_TO_CART, payload: item });
   };
 
-  // Function to remove item from cart
   const removeFromCart = (item) => {
-    dispatch({ type: "REMOVE_FROM_CART", payload: item });
+    dispatch({ type: REMOVE_FROM_CART, payload: item });
   };
 
   return (
@@ -31,4 +42,11 @@ export const CartProvider = ({ children }) => {
   );
 };
 
-export const useCart = () => useContext(CartContext);
+// Hook
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error("useCart must be used within a CartProvider");
+  }
+  return context;
+};

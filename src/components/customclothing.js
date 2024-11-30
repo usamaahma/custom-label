@@ -14,7 +14,7 @@ function Customclothing() {
     { src: "../../images/x-label.jpg", title: "Cotton Labels" },
     { src: "../../images/x-small.jpg", title: "Custom Woven Labels" },
   ];
-
+  
   const [slidesToShow, setSlidesToShow] = useState(3);
 
   useEffect(() => {

@@ -20,7 +20,7 @@ const imagesData = [
 ];
 
 function ProductDetail() {
-  const { addToCart } = useCart();
+  const { addToCart } = useCart(); // Cart functions aur state access karein
   const [productDescription, setProductDescription] = useState(null);
   const [descriptionTitle, setDescriptionTitle] = useState(null);
   const [descriptionText, setDescriptionText] = useState(null);
@@ -31,6 +31,7 @@ function ProductDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
+  const [image, setImage] = useState(null);
 
   // Define the onRowClick handler to handle the selected row data
   const handleRowClick = (rowData) => {
@@ -61,15 +62,12 @@ function ProductDetail() {
   }, []);
 
   // State for selected data
-  const [selectedData, setSelectedData] = useState({
-    artwork: " ",
-    size: " ",
-    style: " ",
-    options: [], // Initialized as an empty array to hold multiple selected options
-    quantity: " ",
-    price: " ",
-    totalPrice: " ",
-  });
+
+  const handleAddToCart = (selectedData) => {
+    addToCart(selectedData); // Product ko cart mein add karen
+    console.log("Product added to cart:", selectedData);
+    console.log(addToCart);
+  };
   const handleStyleClick = (type, style) => {
     if (!style) {
       console.error("Style is undefined in handleStyleClick");
@@ -94,16 +92,17 @@ function ProductDetail() {
       [key]: value,
     }));
   };
-
-  const handleAddToCart = (item) => {
-    addToCart(item);
+  const handleCardOptionClick = (key, value) => {
+    setSelectedData((prevData) => ({
+      ...prevData,
+      [key]: value, // Replace the previous value with the new one
+    }));
   };
   const [productImages, setProductImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   // State to track mouse position
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isExpanded, setIsExpanded] = useState(false);
-  const [image, setImage] = useState(null);
 
   const steps = [
     {
@@ -201,14 +200,14 @@ function ProductDetail() {
             <h3 className="simpletable-heading">Other Options?</h3>
           </div>
           {options.map((option, index) => (
-            <div className="divs-tableexpress">
-              <div key={index} className="card-grid">
+            <div className="divs-tableexpress" key={index}>
+              <div className="card-grid">
                 <h3>{option.type}</h3> {/* Display the type of option */}
                 {option.cards.map((card, cardIndex) => (
                   <div key={cardIndex} className="card-container">
                     <Card
                       bordered={false}
-                      onClick={() => handleCardClick("options", card.title)}
+                      onClick={() => handleCardClick(option.type, card.title)} // Pass option type and card title
                       style={{
                         background: "#FAF4EB",
                       }}
@@ -236,6 +235,7 @@ function ProductDetail() {
                 resize: "vertical", // Allow vertical resizing
                 padding: "10px", // Add some padding for aesthetics
               }}
+              onChange={(e) => handleCardClick("comments", e.target.value)} // Pass the value to handleCardClick
               placeholder="Enter your text here..."
             />
           </div>
@@ -322,7 +322,19 @@ function ProductDetail() {
   };
   const selectedProductId = localStorage.getItem("selectedProductId");
   const title = localStorage.getItem("selectedProductTitle");
-
+  const selectedImg = localStorage.getItem("uploadedImage");
+  const [selectedData, setSelectedData] = useState({
+    id: selectedProductId,
+    name: title,
+    artwork: selectedImg,
+    size: " ",
+    style: " ",
+    options: [], // Initialized as an empty array to hold multiple selected options
+    quantity: " ",
+    price: " ",
+    totalPrice: " ",
+    comments: "",
+  });
   useEffect(() => {
     const fetchProductDescription = async () => {
       try {
@@ -489,8 +501,12 @@ function ProductDetail() {
               </div>
             </div> */}
           </div>
-          <div style={{ marginTop: "2rem"  }}>
-            <Steps style={{marginBottom:"2rem"}} current={current} items={items} />
+          <div style={{ marginTop: "2rem" }}>
+            <Steps
+              style={{ marginBottom: "2rem" }}
+              current={current}
+              items={items}
+            />
             <div style={contentStyle}>{steps[current].content}</div>
             <div
               style={{
@@ -554,11 +570,12 @@ function ProductDetail() {
                 <p>{selectedData.style}</p>
               </div>
             </div>
-            {options.map((card, cardIndex) => (
-              <div className="sticky-blue">
+            {options.map((option, index) => (
+              <div className="sticky-blue" key={index}>
                 <div className="sticky-blue-inside">
-                  <p>{card.type}:</p>
-                  <p>{selectedData.options}</p>
+                  <p>{option.type}:</p>
+                  {/* Display the selected title */}
+                  <p>{selectedData[option.type] || "None selected"}</p>
                 </div>
               </div>
             ))}
@@ -576,9 +593,7 @@ function ProductDetail() {
             <div className="sticky-blue">
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
-                  onClick={() =>
-                    handleAddToCart({ id: 1, name: "Product 1", price: 10.1 })
-                  }
+                  onClick={() => handleAddToCart(selectedData)}
                   className="button-tablecart"
                 >
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}

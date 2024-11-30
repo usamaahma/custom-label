@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { Row, Col, Form, Input, Button, Select } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import { useCart } from "../../context/cartcontext"; // Import Cart Context
 import "./checkoutbelow.css";
 import IconMessage from "./iconmessage";
 
 const { Option } = Select;
 
 function CheckoutBelow1() {
- 
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownVisible1, setDropdownVisible1] = useState(false);
- 
+
+  const { cart, removeFromCart } = useCart(); // Get cart data from context
+
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
   };
@@ -18,17 +20,26 @@ function CheckoutBelow1() {
   const toggleDropdown1 = () => {
     setDropdownVisible1(!dropdownVisible1);
   };
+
   const redirectToPayPal = () => {
     window.location.href = "https://www.paypal.com"; // Redirect to PayPal website
   };
 
+  // Calculate Total Price
+  const calculateTotal = () => {
+    return cart
+      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .toFixed(2);
+  };
+
   return (
     <div className="checkout-container">
+      <div className="check-below"></div>
       <div className="check-below">
-        {/* <p className="check-txt">CHECKOUT BELOW</p> */}
+        <p className="check-txt">CHECKOUT</p>
       </div>
-      <Row  flex justify={"space-evenly"}>
-        {/* Column 1: Shipping Address */}
+      <Row flex justify={"space-evenly"}>
+        {/* Column 1: Billing Address */}
         <Col xs={24} sm={12} md={7} className="border-column">
           <div className="ship-address">
             <p className="shipping-txt">Billing Address</p>
@@ -72,7 +83,9 @@ function CheckoutBelow1() {
             <Form.Item
               label="Country"
               className="input-heading"
-              rules={[{ required: true, message: "Please select your country!" }]}
+              rules={[
+                { required: true, message: "Please select your country!" },
+              ]}
             >
               <Select placeholder="Select your country" required>
                 <Option value="usa">United States</Option>
@@ -101,14 +114,12 @@ function CheckoutBelow1() {
           </Form>
         </Col>
 
-        {/* Column 2: Shipping and Payment Method */}
+        {/* Column 2: Shipping and Payment */}
         <Col xs={24} sm={12} md={8} className="border-column">
           <div className="shipping-method">
             <div className="ship-address">
               <p className="shipping-txt">Shipping Method</p>
             </div>
-
-            {/* Added Input for shipping message with space above */}
             <Form.Item
               label=""
               className="shipping-message-label"
@@ -124,23 +135,20 @@ function CheckoutBelow1() {
                 />
               </div>
             </Form.Item>
-
-            {/* Payment Method */}
+            {/* Payment Button */}
             <div className="ship-address" style={{ marginTop: "20px" }}>
               <p className="shipping-txt">Payment Method</p>
             </div>
-
-            {/* Proceed to Pay button */}
             <Button
               type="primary"
               style={{
-                backgroundColor: "#808080", // Gray color for the button
+                backgroundColor: "#808080",
                 borderColor: "#808080",
                 color: "#fff",
                 width: "100%",
                 padding: "10px",
                 fontSize: "16px",
-                marginTop: "20px", // Space above the button
+                marginTop: "20px",
               }}
               onClick={redirectToPayPal}
             >
@@ -158,68 +166,54 @@ function CheckoutBelow1() {
               onClick={toggleDropdown}
               style={{ cursor: "pointer" }}
             >
-              2 Items in Cart <DownOutlined />
+              {cart.length} Items in Cart <DownOutlined />
             </p>
             <hr style={{ border: "1px solid gray", margin: "10px 0" }} />
             {dropdownVisible && (
               <div className="dropdown-content">
-                <Row>
-                  <Col>
-                    <img
-                      src="../../images/paypal.png"
-                      alt="PayPal"
-                      className="img-item-cart"
-                    />
-                  </Col>
-                  <Col className="cart-dropdown">
-                    <p>Custom Woven Labels</p>
-                    <p>Qty: 5</p>
-                    <p onClick={toggleDropdown1} style={{ cursor: "pointer" }}>
-                      View Details <DownOutlined />
-                    </p>
-                  </Col>
-                  <Col className="amount-cart">
-                    <p className="amount-cart-txt">$46.00</p>
-                  </Col>
+                {cart.map((item, index) => {
+                  console.log("Cart Item:", item); // Log the current item in the cart
+                  return (
+                    <Row key={index} style={{ marginBottom: "10px" }}>
+                      <p className="custom-viewedit">{item.name}</p>
 
-                  {dropdownVisible1 && (
-                    <div className="dropdown-content2">
-                      {/* Order details wrapped in <p> tags */}
-                      {[
-                        "Area",
-                        "Style",
-                        "Size",
-                        "Backing Options",
-                        "Metallic Thread",
-                        "Size Symbols or Color Versions?",
-                        "Proof Options",
-                        "Turnaround Options",
-                        "Quantity",
-                      ].map((label, index) => (
-                        <div key={index}>
-                          <p>
-                            <strong>{label}</strong>
-                          </p>
-                          <p>
-                            5 x{" "}
-                            {label === "Area"
-                              ? "1 +$40.00"
-                              : label === "Style"
-                              ? "Straight Cut (Flat)"
-                              : "None"}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </Row>
-                <hr style={{ border: "1px solid gray", margin: "10px 0" }} />
+                      <Col>
+                        <img
+                          src={item.artwork} // Assuming item has an image property
+                          alt={item.name}
+                          className="img-item-cart"
+                        />
+                      </Col>
+                      <Col className="cart-dropdown">
+                        <p>Options: {item.options}</p>
+                        <p>Size: {item.size}</p>
+                        <p>Style: {item.style}</p>
+                        <p>Comments: {item.comments}</p>
+                        <p>Qty: {item.quantity}</p>
+                      </Col>
+                      <Col className="amount-cart">
+                        <p className="amount-cart-txt">
+                          ${(item.price * item.quantity).toFixed(2)}
+                        </p>
+                      </Col>
+                      <Col>
+                        <Button
+                          type="danger"
+                          onClick={() => removeFromCart(item)}
+                          style={{ marginLeft: "10px" }}
+                        >
+                          Remove
+                        </Button>
+                      </Col>
+                    </Row>
+                  );
+                })}
               </div>
             )}
             <div className="total-details">
               <div className="total-item">
                 <p>Cart Subtotal:</p>
-                <p>$100.00</p>
+                <p>${calculateTotal()}</p>
               </div>
               <div className="total-item">
                 <p>Shipping Fee:</p>
@@ -227,7 +221,7 @@ function CheckoutBelow1() {
               </div>
               <div className="total-item">
                 <p>Total:</p>
-                <p>$105.00</p>
+                <p>${(parseFloat(calculateTotal()) + 5).toFixed(2)}</p>
               </div>
             </div>
             <div className="btn-main">
