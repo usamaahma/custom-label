@@ -303,7 +303,7 @@ function ProductDetail() {
   }, []);
 
   const { token } = theme.useToken();
-  const [current, setCurrent] = useState(0);
+  const [current, setCurrent] = useState(0);  
   const next = () => {
     setCurrent(current + 1);
   };
@@ -566,7 +566,7 @@ function ProductDetail() {
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
-                <p>Style:</p>
+                <p>Style:</p> 
                 <p>{selectedData.style}</p>
               </div>
             </div>
