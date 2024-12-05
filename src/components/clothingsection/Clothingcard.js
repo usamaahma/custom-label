@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col } from "antd"; // Import Ant Design's Row and Col components
+import { Row, Col, Form } from "antd"; // Import Ant Design's Row and Col components
 import { products } from "../../utils/axios"; // Adjust the import path as necessary
 import Beatquote from "./beatquote"; // Import your Beatquote component
 import "./clothingcard.css"; // Import your CSS file
@@ -11,13 +11,14 @@ const Clothingcard = () => {
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
-
+  const [form] = Form.useForm();
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await products.get("/"); // Fetch data from the API
-        setCardsData(response.data.results); // Set the fetched data
-        setFilteredData(response.data.results); // Initially show all products
+        const response = await products.get("/");
+        console.log(response);
+        setCardsData(response.data.results); // Assuming data is an array in `results`
+        form.resetFields(); // Reset the form after successful data fetch
       } catch (error) {
         setError(error.message); // Handle any errors
       } finally {

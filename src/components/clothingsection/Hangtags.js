@@ -73,8 +73,8 @@ const Hangtags = () => {
                 <div
                   className="card"
                   onClick={() => {
-                    StoreProductId(card._id, card.title);
-                    window.location.href = `/product/${card.title}`;
+                    StoreProductId(card.id, card.title);
+                    window.location.href = `/hangtag/${card.title}`;
                   }}
                 >
                   <img

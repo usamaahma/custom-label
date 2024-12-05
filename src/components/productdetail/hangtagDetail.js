@@ -59,16 +59,23 @@ function HangtagDetail() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+  const selectedImg = localStorage.getItem("uploadedImage");
+  const id = localStorage.getItem("selectedHangtagId");
+  const name = localStorage.getItem("selectedHangtagTitle");
 
   // State for selected data
+
   const [selectedData, setSelectedData] = useState({
-    artwork: " ",
+    id: id,
+    name: name,
+    artwork: selectedImg,
     size: " ",
     style: " ",
     options: [], // Initialized as an empty array to hold multiple selected options
     quantity: " ",
     price: " ",
     totalPrice: " ",
+    comments: "",
   });
   const handleStyleClick = (type, style) => {
     if (!style) {
@@ -95,8 +102,9 @@ function HangtagDetail() {
     }));
   };
 
-  const handleAddToCart = (item) => {
-    addToCart(item);
+  const handleAddToCart = (selectedData) => {
+    addToCart(selectedData); // Product ko cart mein add karen
+    console.log("Product added to cart:", selectedData);
   };
   const [productImages, setProductImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
@@ -236,6 +244,7 @@ function HangtagDetail() {
                 resize: "vertical", // Allow vertical resizing
                 padding: "10px", // Add some padding for aesthetics
               }}
+              onChange={(e) => handleCardClick("comments", e.target.value)} // Pass the value to handleCardClick
               placeholder="Enter your text here..."
             />
           </div>
@@ -580,9 +589,7 @@ function HangtagDetail() {
             <div className="sticky-blue">
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
-                  onClick={() =>
-                    handleAddToCart({ id: 1, name: "Product 1", price: 10.1 })
-                  }
+                  onClick={() => handleAddToCart(selectedData)}
                   className="button-tablecart"
                 >
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}
