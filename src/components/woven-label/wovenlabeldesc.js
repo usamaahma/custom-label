@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
 import {
   Button,
@@ -14,6 +13,7 @@ import { SketchPicker } from "react-color";
 import "../expressclothing/expressmain.css";
 import { Slide } from "react-awesome-reveal";
 import "../expressclothing/tablescart.css";
+import html2canvas from "html2canvas";
 
 const { Dragger } = Upload;
 const props = {
@@ -91,6 +91,12 @@ function Wovenlabeldesc() {
   const [fontSize1, setFontSize1] = useState(16); // Default font size for text2
   const [fontFamily, setFontFamily] = useState("Arial"); // Default font family
   const defaultText1 = "Your Company"; // Default text for the first input
+  const [selectedBorder, setSelectedBorder] = useState("None"); // Default border type is "None"
+
+  // Handle image click to change border style
+  const handleImageClick = (borderType) => {
+    setSelectedBorder(borderType); // Change border based on the clicked image
+  };
 
   const handleChangeComplete = (color) => {
     setColor(color.hex);
@@ -172,7 +178,30 @@ function Wovenlabeldesc() {
     e.target.style.transformOrigin = "center center";
   };
   const handleAddToCart = (item) => {
-    addToCart(item);
+    // Select the .sticky-blue-inside div
+    const targetElement = document.querySelector(".sticky-blue-inside");
+  
+    if (targetElement) {
+      // Capture the selected element as an image
+      html2canvas(targetElement).then((canvas) => {
+        // Convert the canvas to a base64 image string
+        const capturedImage = canvas.toDataURL("image/png");
+  
+        // Log the captured image (or use it as needed)
+        console.log("Captured Image Data URL:", capturedImage);
+  
+        // Add the captured image to the item data
+        const itemWithImage = {
+          ...item,
+          image: capturedImage, // Attach the image to the item
+        };
+  
+        // Call addToCart with the updated item
+        addToCart(itemWithImage);
+      });
+    } else {
+      console.error("Element '.sticky-blue-inside' not found.");
+    }
   };
 
   return (
@@ -270,7 +299,6 @@ function Wovenlabeldesc() {
               We provide a free digital proof and photo sample for approval
               before production, ensuring 100% satisfaction.
             </p>
-
             <div className="image-row">
               <div className="image-item">
                 <img
@@ -437,31 +465,34 @@ function Wovenlabeldesc() {
                 disableAlpha // Optional: Disable alpha (transparency) slider
               />
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Border?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              {cardData.map((card) => (
-                <div key={card.id} className="card-container">
-                  <Card
-                    bordered={false}
-                    style={{
-                      width: "11rem",
-                      height: "12rem",
-                      background: "#FAFAFA",
-                    }}
-                  >
-                    <img
-                      alt={card.title}
-                      src={card.imgSrc}
-                      className="image-card-express"
-                    />
-                    <p>
-                      {card.title} <br /> {card.subtitle}
-                    </p>
-                  </Card>
-                </div>
-              ))}
+            <div>
+              <div className="size-txt">
+                <h3 className="simpletable-heading">Border?</h3>
+              </div>
+
+              <div className="divs-tableexpress">
+                {cardData.map((card) => (
+                  <div key={card.id} className="card-container">
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "11rem",
+                        height: "12rem",
+                        background: "#FAFAFA",
+                      }}
+                    >
+                      <img
+                        alt={card.title}
+                        src={card.imgSrc}
+                        className="image-card-express"
+                        style={{ width: "100%", height: "auto" }}
+                        onClick={() => handleImageClick(card.title)} // Trigger border change on image click
+                      />
+                      <p>{card.title}</p>
+                    </Card>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="size-txt">
               <h3 className="simpletable-heading">Turnaround Options?</h3>
@@ -510,6 +541,9 @@ function Wovenlabeldesc() {
                     fontFamily: fontFamily,
                     backgroundColor: color, // Set the background color to the selected color for the entire div
                     padding: "10px", // Optional: Add padding for better spacing
+                    borderRadius: selectedBorder === "Rounded" ? "1rem" : "0", // Apply rounded or square border
+                    border:
+                      selectedBorder !== "None" ? "2px solid white" : "none", // Apply border if not "None"
                   }}
                 >
                   <p
@@ -545,7 +579,6 @@ function Wovenlabeldesc() {
               </div>
             </div>
 
-         
             <div className="sticky-blue">
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
