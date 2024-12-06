@@ -19,8 +19,7 @@ function Landingpage() {
       <Alice />
       <Featureproduct />
       <Customclothing />
-      <Custompatches />
-      <Howitwork />
+       <Howitwork />
       <Samplepack />
       <Offers1 />
       <Formcustom1 />
