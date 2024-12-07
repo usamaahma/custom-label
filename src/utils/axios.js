@@ -31,6 +31,9 @@ const orderdescription = axios.create({
 const blog = axios.create({
   baseURL: `${baseURL}/blogs`, // Ensure this is the correct endpoint for order descriptions
 });
+const requestquote = axios.create({
+  baseURL: `${baseURL}/requestquote`, // Ensure this is the correct endpoint for order descriptions
+});
 
 // Generic request interceptor for all instances
 const requestInterceptor = (req) => {
@@ -53,6 +56,7 @@ hangtag.interceptors.request.use(requestInterceptor, errorInterceptor);
 getquote.interceptors.request.use(requestInterceptor, errorInterceptor);
 orderdescription.interceptors.request.use(requestInterceptor, errorInterceptor);
 blog.interceptors.request.use(requestInterceptor, errorInterceptor);
+requestquote.interceptors.request.use(requestInterceptor, errorInterceptor);
 
 export {
   register,
@@ -63,4 +67,5 @@ export {
   hangtag,
   google,
   blog,
+  requestquote,
 };
