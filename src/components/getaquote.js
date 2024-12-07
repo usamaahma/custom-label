@@ -38,7 +38,7 @@ function Getaquote1() {
       data: data1,
     })
       .then((res) => {
-        console.log("success",res);
+        console.log("success", res);
         message.success("Thank you for considering us!");
       })
       .catch(() => {
@@ -81,8 +81,12 @@ function Getaquote1() {
               placeholder="Select a product"
               className="customform-select"
             >
-              <Option value="Express Clothing Labels">Express Clothing Labels</Option>
-              <Option value="Custom Heat Transfer Labels">Custom Heat Transfer Labels</Option>
+              <Option value="Express Clothing Labels">
+                Express Clothing Labels
+              </Option>
+              <Option value="Custom Heat Transfer Labels">
+                Custom Heat Transfer Labels
+              </Option>
               <Option value="Custom Cotton Labels">Custom Cotton Labels</Option>
             </Select>
           </Form.Item>
@@ -217,7 +221,6 @@ function Getaquote1() {
             +123-456-7890
           </a>
         </h6>
-
         <hr />
       </div>
     </div>

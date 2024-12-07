@@ -543,7 +543,7 @@ function Wovenlabeldesc() {
                     padding: "10px", // Optional: Add padding for better spacing
                     borderRadius: selectedBorder === "Rounded" ? "1rem" : "0", // Apply rounded or square border
                     border:
-                      selectedBorder !== "None" ? "2px solid white" : "none", // Apply border if not "None"
+                      selectedBorder !== "None" ? "2px solid black" : "none", // Apply border if not "None"
                   }}
                 >
                   <p

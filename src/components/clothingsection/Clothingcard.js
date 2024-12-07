@@ -16,13 +16,14 @@ const Clothingcard = () => {
     const fetchData = async () => {
       try {
         const response = await products.get("/");
-        console.log(response);
-        setCardsData(response.data.results); // Assuming data is an array in `results`
-        form.resetFields(); // Reset the form after successful data fetch
+        const data = response.data.results || response.data; // Adjust as per actual API response
+        setCardsData(data);
+        setFilteredData(data);
+        form.resetFields();
       } catch (error) {
-        setError(error.message); // Handle any errors
+        setError(error.message);
       } finally {
-        setLoading(false); // Set loading to false after fetching data
+        setLoading(false);
       }
     };
     fetchData();
@@ -83,24 +84,28 @@ const Clothingcard = () => {
             justify="center"
             gutter={[16, 16]}
           >
-            {filteredData.map((card) => (
-              <Col key={card.id} xs={24} sm={12} md={12} lg={8}>
-                <div
-                  className="card"
-                  onClick={() => {
-                    StoreProductId(card._id, card.title); // Store product ID and title
-                    window.location.href = `/product/${card.title}`; // Redirect to product page
-                  }}
-                >
-                  <img
-                    src={card.image}
-                    alt={card.title}
-                    className="card-image"
-                  />
-                  <p className="card-text">{card.title}</p>
-                </div>
-              </Col>
-            ))}
+            {filteredData.length > 0 ? (
+              filteredData.map((card) => (
+                <Col key={card.id} xs={24} sm={12} md={12} lg={8}>
+                  <div
+                    className="card"
+                    onClick={() => {
+                      StoreProductId(card._id, card.title);
+                      window.location.href = `/product/${card.title}`;
+                    }}
+                  >
+                    <img
+                      src={card.image}
+                      alt={card.title}
+                      className="card-image"
+                    />
+                    <p className="card-text">{card.title}</p>
+                  </div>
+                </Col>
+              ))
+            ) : (
+              <p>No products available</p>
+            )}
           </Row>
         </Col>
         <Col xs={24} md={8} className="right-column">
