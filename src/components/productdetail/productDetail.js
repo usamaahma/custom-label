@@ -5,8 +5,13 @@ import { useCart } from "../../context/cartcontext";
 import ImageUploader from "../expressclothing/imagedragger";
 import { products } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
-
-// Steps data
+import { Storage } from "../../firebaseConfig";
+import {
+  uploadBytes,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 // Card data
 
@@ -32,6 +37,46 @@ function ProductDetail() {
   const [error, setError] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
   const [image, setImage] = useState(null);
+  const [percent, setPercent] = useState("");
+  const [url, setUrl] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const date = new Date();
+
+  const showTime =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  const handlesubmit = (e) => {
+    const uploadedFile = e.target.files[0]; // Get the uploaded file
+    if (uploadedFile) {
+      const imageDocument = ref(
+        Storage,
+        `images/${uploadedFile.name + showTime}`
+      );
+      const uploadTask = uploadBytesResumable(imageDocument, uploadedFile);
+
+      uploadTask.on("state_changed", (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setPercent(percent);
+      });
+
+      uploadBytes(imageDocument, uploadedFile)
+        .then(() => {
+          getDownloadURL(imageDocument)
+            .then((Url) => {
+              setUrl(Url);
+              setUploadedImageUrl(Url); // Set the uploaded image URL
+              console.log(Url);
+            })
+            .catch((error) => {
+              console.log(error.message, "error getting the image url");
+            });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
 
   // Define the onRowClick handler to handle the selected row data
   const handleRowClick = (rowData) => {
@@ -113,7 +158,9 @@ function ProductDetail() {
             <h3 className="simpletable-heading">Upload Artwork</h3>
           </div>
           <div className="divs-tableexpress">
-            <ImageUploader />
+            {/* <ImageUploader /> */}
+            <input type="file" onChange={handlesubmit} />
+            <img src={url} alt="image" style={{width:"5rem",height:"5rem"}} />
           </div>
         </>
       ),
@@ -303,7 +350,7 @@ function ProductDetail() {
   }, []);
 
   const { token } = theme.useToken();
-  const [current, setCurrent] = useState(0);  
+  const [current, setCurrent] = useState(0);
   const next = () => {
     setCurrent(current + 1);
   };
@@ -566,7 +613,7 @@ function ProductDetail() {
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
-                <p>Style:</p> 
+                <p>Style:</p>
                 <p>{selectedData.style}</p>
               </div>
             </div>

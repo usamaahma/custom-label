@@ -1,0 +1,95 @@
+.thankyou-page {
+    padding: 40px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thankyou-container {
+    border: 2px solid #ddd; /* Light border */
+    border-radius: 15px; /* Rounded corners */
+    padding: 20px;
+    background-color: #fff; /* White background for the container */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
+    width: 100%;
+    max-width: 1200px; /* Maximum width for the container */
+  }
+  
+  .thankyou-text-column {
+    display: flex;
+    justify-content: flex-end; /* Right-align the text column */
+    align-items: center;
+    text-align: right;
+  }
+  
+  .thankyou-text {
+    max-width: 500px; /* To avoid text overflowing */
+  }
+  
+  .thankyou-buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+  }
+  
+  .thankyou-image-column {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thankyou-image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .thankyou-image {
+    max-width: 100%;
+    max-height: 400px; /* Adjust image size */
+    width: auto;
+    height: auto;
+    object-fit: cover; /* Make sure the image covers the space well */
+  }
+  .thank-txt{
+    text-align: left;
+    font-size: 4rem;
+    font-weight: bold;
+  }
+  .thank-txt2 {
+    text-align: left;
+    font-size: 18px;
+    line-height: 1.5;
+    margin-bottom: 20px; /* Adds space below this paragraph */
+  }
+  
+  .thank-txt3 {
+    text-align: left;
+    font-size: 16px;
+    line-height: 1.5;
+    margin-top: 3rem; /* Adds space above this paragraph */
+  }
+  
+  
+  @media (max-width: 768px) {
+    .thankyou-page {
+      padding: 20px;
+    }
+  
+    .thankyou-text-column {
+      text-align: center; /* Center text for smaller screens */
+      justify-content: center; /* Center align for smaller screens */
+    }
+  
+    .thankyou-buttons {
+      flex-direction: column;
+    }
+  
+    .thankyou-image {
+      max-width: 100%;
+      max-height: 300px;
+    }
+  }
+  

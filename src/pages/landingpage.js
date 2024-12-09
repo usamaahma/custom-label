@@ -1,4 +1,3 @@
-import React, { useEffect } from "react";
 import Herosec1 from "../components/herosection/hero";
 import Alice from "../components/alicecarousel";
 import Customclothing from "../components/customclothing";
@@ -11,6 +10,7 @@ import Question from "../components/question";
 import Featureproduct from "../components/featureproduct";
 import Faq1 from "../components/faq";
 import "./landing.css"
+import Thankyou1 from "../components/thankyou";
 
 function Landingpage() {
   return (
@@ -25,6 +25,7 @@ function Landingpage() {
       <Formcustom1 />
       <Question />
       <Faq1 />
+      <Thankyou1/>
     </div>
   );
 }

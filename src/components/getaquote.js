@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   Input,
@@ -11,6 +11,13 @@ import {
 import { UploadOutlined } from "@ant-design/icons";
 import { Zoom } from "react-awesome-reveal";
 import { getquote } from "../utils/axios";
+import { Storage } from "../firebaseConfig";
+import {
+  uploadBytes,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 import "./getaquote.css";
 
@@ -18,6 +25,11 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 function Getaquote1() {
+  const [percent, setPercent] = useState("");
+  const [url, setUrl] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const date = new Date();
+
   const onFinish = (values) => {
     console.log("Success:", values);
 
@@ -25,7 +37,7 @@ function Getaquote1() {
       name: values.name,
       email: values.email,
       product: values.products,
-      artwork: values.artwork,
+      artwork: [url],
       width: String(values.width), // Convert to string
       height: String(values.height), // Convert to string
       quantity: String(values.quantity), // Convert to string
@@ -38,7 +50,7 @@ function Getaquote1() {
       data: data1,
     })
       .then((res) => {
-        console.log("success",res);
+        console.log("success", res);
         message.success("Thank you for considering us!");
       })
       .catch(() => {
@@ -46,9 +58,39 @@ function Getaquote1() {
       });
   };
 
-  const handleChange = (info) => {
-    if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
+  const showTime =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  const handlesubmit = (e) => {
+    const uploadedFile = e.target.files[0]; // Get the uploaded file
+    if (uploadedFile) {
+      const imageDocument = ref(
+        Storage,
+        `images/${uploadedFile.name + showTime}`
+      );
+      const uploadTask = uploadBytesResumable(imageDocument, uploadedFile);
+
+      uploadTask.on("state_changed", (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setPercent(percent);
+      });
+
+      uploadBytes(imageDocument, uploadedFile)
+        .then(() => {
+          getDownloadURL(imageDocument)
+            .then((Url) => {
+              setUrl(Url);
+              setUploadedImageUrl(Url); // Set the uploaded image URL
+              console.log(Url);
+            })
+            .catch((error) => {
+              console.log(error.message, "error getting the image url");
+            });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
     }
   };
 
@@ -81,28 +123,18 @@ function Getaquote1() {
               placeholder="Select a product"
               className="customform-select"
             >
-              <Option value="Express Clothing Labels">Express Clothing Labels</Option>
-              <Option value="Custom Heat Transfer Labels">Custom Heat Transfer Labels</Option>
+              <Option value="Express Clothing Labels">
+                Express Clothing Labels
+              </Option>
+              <Option value="Custom Heat Transfer Labels">
+                Custom Heat Transfer Labels
+              </Option>
               <Option value="Custom Cotton Labels">Custom Cotton Labels</Option>
             </Select>
           </Form.Item>
 
-          <Form.Item
-            label={<span className="customform-label">Upload Artwork</span>}
-            name="artwork"
-            valuePropName="fileList"
-            getValueFromEvent={(e) => (Array.isArray(e) ? e : e && e.fileList)}
-            rules={[{ required: true, message: "Please upload your artwork!" }]}
-          >
-            <Upload onChange={handleChange} beforeUpload={() => false} multiple>
-              <Button
-                className="customform-uploadbutton"
-                icon={<UploadOutlined />}
-              >
-                Upload Artwork
-              </Button>
-            </Upload>
-          </Form.Item>
+          <input type="file" onChange={handlesubmit} />
+          <img src={url} alt="image" style={{width:"5rem",height:"5rem"}} />
 
           <div className="customform-item-row">
             <Form.Item
