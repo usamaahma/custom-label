@@ -1,10 +1,56 @@
-import React from "react";
+import React, { useState } from "react";
 import "./fancyform.css";
 import { Row, Col, Input, Select, Button, Form, message } from "antd";
 import { requestquote } from "../../utils/axios";
+import { Storage } from "../../firebaseConfig";
+import {
+  uploadBytes,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
 const { Option } = Select;
 
 const FancyForm1 = () => {
+  const [percent, setPercent] = useState("");
+  const [url, setUrl] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const date = new Date();
+  const showTime =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  const handlesubmit = (e) => {
+    const uploadedFile = e.target.files[0]; // Get the uploaded file
+    if (uploadedFile) {
+      const imageDocument = ref(
+        Storage,
+        `images/${uploadedFile.name + showTime}`
+      );
+      const uploadTask = uploadBytesResumable(imageDocument, uploadedFile);
+
+      uploadTask.on("state_changed", (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setPercent(percent);
+      });
+
+      uploadBytes(imageDocument, uploadedFile)
+        .then(() => {
+          getDownloadURL(imageDocument)
+            .then((Url) => {
+              setUrl(Url);
+              setUploadedImageUrl(Url); // Set the uploaded image URL
+              console.log(Url);
+            })
+            .catch((error) => {
+              console.log(error.message, "error getting the image url");
+            });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
   const onFinish = (values) => {
     console.log("Form Values:", values);
 
@@ -13,7 +59,7 @@ const FancyForm1 = () => {
       email: values.email || "",
       phoneNumber: values.phonenumber || "",
       // product: values.product || "",
-      image: values.artwork || "defaultImagePath",
+      image:url|| "defaultImagePath",
       width: Math.max(Number(values.width) || 0, 1), // Minimum width of 1
       height: Math.max(Number(values.height) || 0, 1),
       quantity: Number(values.quantity) || 1,
@@ -68,9 +114,12 @@ const FancyForm1 = () => {
       <Row>
         <Col xs={24} sm={12}>
           <p className="txt-fancy-bold">Upload Artwork</p>
-          <Form.Item className="custom-input-form" name="artwork">
-            <Input type="file" className="custom-input-fancy" />
-          </Form.Item>
+          <input type="file" onChange={handlesubmit} />
+          <img
+            src={url}
+            alt="image"
+            style={{ width: "5rem", height: "5rem" }}
+          />
 
           <p className="txt-fancy-bold">Size</p>
           <Row gutter={16} className="input-container-fancy">

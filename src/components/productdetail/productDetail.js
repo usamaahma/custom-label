@@ -3,10 +3,15 @@ import { Button, Card, Breadcrumb, message, Steps, theme } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
 import ImageUploader from "../expressclothing/imagedragger";
-import { products } from "../../utils/axios";
+import { pendingcheckout, products } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
-
-// Steps data
+import { Storage } from "../../firebaseConfig";
+import {
+  uploadBytes,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 // Card data
 
@@ -32,7 +37,90 @@ function ProductDetail() {
   const [error, setError] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
   const [image, setImage] = useState(null);
+  const [percent, setPercent] = useState("");
+  const [url, setUrl] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const date = new Date();
 
+  const showTime =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  const handlesubmit = (e) => {
+    const uploadedFile = e.target.files[0]; // Get the uploaded file
+    if (uploadedFile) {
+      const imageDocument = ref(
+        Storage,
+        `images/${uploadedFile.name + showTime}`
+      );
+      const uploadTask = uploadBytesResumable(imageDocument, uploadedFile);
+
+      uploadTask.on("state_changed", (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setPercent(percent);
+      });
+
+      uploadBytes(imageDocument, uploadedFile)
+        .then(() => {
+          getDownloadURL(imageDocument)
+            .then((Url) => {
+              setUrl(Url);
+              setUploadedImageUrl(Url); // Set the uploaded image URL
+              console.log(Url);
+            })
+            .catch((error) => {
+              console.log(error.message, "error getting the image url");
+            });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
+
+  const handlePending = async (selectedData) => {
+    console.log("Product for pending checkout:", selectedData);
+    const userdataString = localStorage.getItem("user");
+    const userdata = JSON.parse(userdataString); // Convert string to object     
+     const data = {
+      user: [
+        {
+          userId: userdata.id,
+          name: userdata.name,
+          email: userdata.email,
+          phonenumber: userdata.phonenumber,
+        },
+      ],
+      pendingCheckout: [
+        {
+          productName: selectedData.name, // Replace with actual product data
+          artwork: url, // Replace with the actual artwork URL
+          options: [
+            /* options array */
+          ], // Add actual options data here
+          size: selectedData.size, // Replace with actual size
+          style: selectedData.style, // Replace with actual style
+          quantityPrice: [
+            {
+              quantity: 10, // Example quantity
+              price: 100, // Example price
+            },
+          ],
+          comments: selectedData.comments, // Replace with actual comments
+        },
+      ],
+    };
+
+    try {
+      const response = await pendingcheckout.post("/", data); // Replace with your actual API endpoint
+      console.log("Pending checkout success:", response.data);
+    } catch (error) {
+      console.error(
+        "Error in pending checkout:",
+        error.response || error.message
+      );
+    }
+  };
   // Define the onRowClick handler to handle the selected row data
   const handleRowClick = (rowData) => {
     setSelectedRow(rowData); // Save the clicked row data
@@ -113,7 +201,13 @@ function ProductDetail() {
             <h3 className="simpletable-heading">Upload Artwork</h3>
           </div>
           <div className="divs-tableexpress">
-            <ImageUploader />
+            {/* <ImageUploader /> */}
+            <input type="file" onChange={handlesubmit} />
+            <img
+              src={url}
+              alt="image"
+              style={{ width: "5rem", height: "5rem" }}
+            />
           </div>
         </>
       ),
@@ -303,7 +397,7 @@ function ProductDetail() {
   }, []);
 
   const { token } = theme.useToken();
-  const [current, setCurrent] = useState(0);  
+  const [current, setCurrent] = useState(0);
   const next = () => {
     setCurrent(current + 1);
   };
@@ -322,11 +416,10 @@ function ProductDetail() {
   };
   const selectedProductId = localStorage.getItem("selectedProductId");
   const title = localStorage.getItem("selectedProductTitle");
-  const selectedImg = localStorage.getItem("uploadedImage");
   const [selectedData, setSelectedData] = useState({
     id: selectedProductId,
     name: title,
-    artwork: selectedImg,
+    artwork: url,
     size: " ",
     style: " ",
     options: [], // Initialized as an empty array to hold multiple selected options
@@ -550,8 +643,8 @@ function ProductDetail() {
               <div className="sticky-blue-inside">
                 <p>Artwork File:</p>
                 <div>
-                  {image ? (
-                    <img src={image} alt="Uploaded" style={{ width: "5rem" }} />
+                  {url ? (
+                    <img src={url} alt="Uploaded" style={{ width: "5rem" }} />
                   ) : (
                     <p>No image uploaded.</p>
                   )}
@@ -566,7 +659,7 @@ function ProductDetail() {
             </div>
             <div className="sticky-blue">
               <div className="sticky-blue-inside">
-                <p>Style:</p> 
+                <p>Style:</p>
                 <p>{selectedData.style}</p>
               </div>
             </div>
@@ -593,7 +686,10 @@ function ProductDetail() {
             <div className="sticky-blue">
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
-                  onClick={() => handleAddToCart(selectedData)}
+                  onClick={() => {
+                    handleAddToCart(selectedData); // First function
+                    handlePending(selectedData); // Second function
+                  }}
                   className="button-tablecart"
                 >
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}

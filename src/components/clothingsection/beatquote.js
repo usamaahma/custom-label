@@ -1,15 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   Form,
   Input,
   Button,
   InputNumber,
-  Upload,
   Select,
   message,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { Zoom } from "react-awesome-reveal";
+import { Storage } from "../../firebaseConfig";
+import {
+  uploadBytes,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { getquote } from "../../utils/axios";
 
 import "./beatquote.css";
@@ -18,6 +23,46 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 function Beatquote() {
+  const [percent, setPercent] = useState("");
+  const [url, setUrl] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+
+  const date = new Date();
+  const showTime =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  const handlesubmit = (e) => {
+    const uploadedFile = e.target.files[0]; // Get the uploaded file
+    if (uploadedFile) {
+      const imageDocument = ref(
+        Storage,
+        `images/${uploadedFile.name + showTime}`
+      );
+      const uploadTask = uploadBytesResumable(imageDocument, uploadedFile);
+
+      uploadTask.on("state_changed", (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setPercent(percent);
+      });
+
+      uploadBytes(imageDocument, uploadedFile)
+        .then(() => {
+          getDownloadURL(imageDocument)
+            .then((Url) => {
+              setUrl(Url);
+              setUploadedImageUrl(Url); // Set the uploaded image URL
+              console.log(Url);
+            })
+            .catch((error) => {
+              console.log(error.message, "error getting the image url");
+            });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
   const onFinish = (values) => {
     console.log("Success:", values);
 
@@ -25,14 +70,13 @@ function Beatquote() {
       name: values.name,
       email: values.email,
       product: values.products,
-      artwork: values.artwork,
+      artwork: [url],
       width: String(values.width),
       height: String(values.height),
       quantity: String(values.quantity),
       phonenumber: values.contactNumber,
       comments: values.comments,
     };
-
     getquote({
       method: "post",
       data: data1,
@@ -44,12 +88,6 @@ function Beatquote() {
       .catch(() => {
         message.error("Something went wrong, please try again!");
       });
-  };
-
-  const handleChange = (info) => {
-    if (info.file.status !== "uploading") {
-      console.log(info.file, info.fileList);
-    }
   };
 
   return (
@@ -84,20 +122,8 @@ function Beatquote() {
             </Select>
           </Form.Item>
 
-          <Form.Item
-            label={
-              <span className="beatquote-customform-label">Upload Artwork</span>
-            }
-            name="artwork"
-            valuePropName="fileList"
-            getValueFromEvent={(e) => (Array.isArray(e) ? e : e && e.fileList)}
-            rules={[{ required: true, message: "Please upload your artwork!" }]}
-            className="beatquote-customform-uploadbutton"
-          >
-            <Upload onChange={handleChange} beforeUpload={() => false} multiple>
-              <Button icon={<UploadOutlined />}>Upload Artwork</Button>
-            </Upload>
-          </Form.Item>
+          <input type="file" onChange={handlesubmit} />
+          <img src={url} alt="image" style={{width:"5rem",height:"5rem"}}/>
 
           <div className="beatquote-customform-item-row">
             <Form.Item

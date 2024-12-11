@@ -34,6 +34,9 @@ const blog = axios.create({
 const requestquote = axios.create({
   baseURL: `${baseURL}/requestquote`, // Ensure this is the correct endpoint for order descriptions
 });
+const pendingcheckout = axios.create({
+  baseURL: `${baseURL}/pendingcheckout`, // Ensure this is the correct endpoint for order descriptions
+});
 
 // Generic request interceptor for all instances
 const requestInterceptor = (req) => {
@@ -57,6 +60,7 @@ getquote.interceptors.request.use(requestInterceptor, errorInterceptor);
 orderdescription.interceptors.request.use(requestInterceptor, errorInterceptor);
 blog.interceptors.request.use(requestInterceptor, errorInterceptor);
 requestquote.interceptors.request.use(requestInterceptor, errorInterceptor);
+pendingcheckout.interceptors.request.use(requestInterceptor, errorInterceptor);
 
 export {
   register,
@@ -68,4 +72,5 @@ export {
   google,
   blog,
   requestquote,
+  pendingcheckout,
 };
