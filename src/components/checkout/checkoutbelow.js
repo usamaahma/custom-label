@@ -46,53 +46,59 @@ function CheckoutBelow1() {
           </div>
           <Form layout="vertical">
             <Form.Item
-              label="Email Address"
-              className="input-heading-email"
-              rules={[{ required: true, message: "Please enter your email!" }]}
-            >
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Input className="input-email" placeholder="Email" />
-                <IconMessage />
-              </div>
-            </Form.Item>
-            {[
-              "First Name",
-              "Last Name",
-              "Street Address",
-              "City",
-              "Zip/Postal Code",
-              "Phone Number",
-            ].map((label) => (
-              <Form.Item
-                key={label}
-                label={label}
-                className="input-heading"
-                rules={[
-                  {
-                    required: true,
-                    message: `Please enter your ${label.toLowerCase()}!`,
-                  },
-                ]}
-              >
-                <Input
-                  className="input"
-                  placeholder={`Enter your ${label.toLowerCase()}`}
-                />
-              </Form.Item>
-            ))}
-            <Form.Item
-              label="Country"
+              label="First Name"
               className="input-heading"
               rules={[
-                { required: true, message: "Please select your country!" },
+                { required: true, message: "Please enter your first name!" },
               ]}
             >
-              <Select placeholder="Select your country" required>
-                <Option value="usa">United States</Option>
-                <Option value="canada">Canada</Option>
-                <Option value="uk">United Kingdom</Option>
-                <Option value="australia">Australia</Option>
-              </Select>
+              <Input className="input" placeholder="Enter your first name" />
+            </Form.Item>
+            <Form.Item label="Middle Name" className="input-heading">
+              <Input
+                className="input"
+                placeholder="Enter your middle name (optional)"
+              />
+            </Form.Item>
+            <Form.Item
+              label="Last Name"
+              className="input-heading"
+              rules={[
+                { required: true, message: "Please enter your last name!" },
+              ]}
+            >
+              <Input className="input" placeholder="Enter your last name" />
+            </Form.Item>
+            <Form.Item label="Company Name" className="input-heading">
+              <Input
+                className="input"
+                placeholder="Enter your company name (optional)"
+              />
+            </Form.Item>
+            <Form.Item
+              label="Phone Number"
+              className="input-heading"
+              rules={[
+                { required: true, message: "Please enter your phone number!" },
+              ]}
+            >
+              <Input className="input" placeholder="Enter your phone number" />
+            </Form.Item>
+            <Form.Item
+              label="Street Address"
+              className="input-heading"
+              rules={[
+                { required: true, message: "Please enter your address!" },
+              ]}
+            >
+              <Input className="input" placeholder="Enter your address" />
+            </Form.Item>
+            <Form.Item
+              label="City"
+              className="input-heading"
+              rules={[{ required: true, message: "Please enter your city!" }]}
+            >
+              <Input className="input" placeholder="Enter your city" />
             </Form.Item>
             <Form.Item
               label="State/Province"
@@ -100,15 +106,38 @@ function CheckoutBelow1() {
               rules={[
                 {
                   required: true,
-                  message: "Please enter your state or province!",
+                  message: "Please select your state or province!",
                 },
               ]}
             >
-              <Select placeholder="Select your state/province" required>
+              <Select placeholder="Select your state/province">
                 <Option value="california">California</Option>
                 <Option value="ontario">Ontario</Option>
                 <Option value="london">London</Option>
                 <Option value="new-south-wales">New South Wales</Option>
+              </Select>
+            </Form.Item>
+            <Form.Item
+              label="Zip/Postal Code"
+              className="input-heading"
+              rules={[
+                { required: true, message: "Please enter your zip code!" },
+              ]}
+            >
+              <Input className="input" placeholder="Enter your zip code" />
+            </Form.Item>
+            <Form.Item
+              label="Country"
+              className="input-heading"
+              rules={[
+                { required: true, message: "Please select your country!" },
+              ]}
+            >
+              <Select placeholder="Select your country">
+                <Option value="usa">United States</Option>
+                <Option value="canada">Canada</Option>
+                <Option value="uk">United Kingdom</Option>
+                <Option value="australia">Australia</Option>
               </Select>
             </Form.Item>
           </Form>
@@ -120,21 +149,131 @@ function CheckoutBelow1() {
             <div className="ship-address">
               <p className="shipping-txt">Shipping Method</p>
             </div>
-            <Form.Item
-              label=""
-              className="shipping-message-label"
-              rules={[{ required: false }]} // Message is optional
-              style={{ marginBottom: "20px" }} // Added space below the item
-            >
-              <div className="ship-method-input">
-                <Input.TextArea
-                  placeholder="Enter a message for shipping instructions"
-                  rows={4}
-                  className="shipping-message-input"
-                  style={{ marginTop: "10px" }} // Optional: Adding a small margin between label and the text area
+            <Form layout="vertical">
+              <Form.Item
+                label="First Name"
+                name="shipFirstName"
+                className="input-heading"
+                rules={[
+                  { required: true, message: "Please enter your first name!" },
+                ]}
+              >
+                <Input className="input" placeholder="Enter your first name" />
+              </Form.Item>
+              <Form.Item
+                label="Middle Name"
+                name="shipMiddleName"
+                className="input-heading"
+              >
+                <Input
+                  className="input"
+                  placeholder="Enter your middle name (optional)"
                 />
-              </div>
-            </Form.Item>
+              </Form.Item>
+              <Form.Item
+                label="Last Name"
+                name="shipLastName"
+                className="input-heading"
+                rules={[
+                  { required: true, message: "Please enter your last name!" },
+                ]}
+              >
+                <Input className="input" placeholder="Enter your last name" />
+              </Form.Item>
+              <Form.Item
+                label="Company Name"
+                name="shipCompanyName"
+                className="input-heading"
+              >
+                <Input
+                  className="input"
+                  placeholder="Enter your company name (optional)"
+                />
+              </Form.Item>
+              <Form.Item
+                label="Phone Number"
+                name="shipPhoneNumber"
+                className="input-heading"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter your phone number!",
+                  },
+                ]}
+              >
+                <Input
+                  className="input"
+                  placeholder="Enter your phone number"
+                />
+              </Form.Item>
+              <Form.Item
+                label="Street Address"
+                name="shipStreetAddress"
+                className="input-heading"
+                rules={[
+                  { required: true, message: "Please enter your address!" },
+                ]}
+              >
+                <Input className="input" placeholder="Enter your address" />
+              </Form.Item>
+              <Form.Item
+                label="City"
+                name="shipCity"
+                className="input-heading"
+                rules={[{ required: true, message: "Please enter your city!" }]}
+              >
+                <Input className="input" placeholder="Enter your city" />
+              </Form.Item>
+              <Form.Item
+                label="State/Province"
+                name="shipState"
+                className="input-heading"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select your state or province!",
+                  },
+                ]}
+              >
+                <Select placeholder="Select your state/province">
+                  <Option value="california">California</Option>
+                  <Option value="ontario">Ontario</Option>
+                  <Option value="london">London</Option>
+                  <Option value="new-south-wales">New South Wales</Option>
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label="Ship Zip/Postal Code"
+                name="shipZipCode"
+                className="input-heading"
+                rules={[
+                  { required: true, message: "Please enter your zip code!" },
+                ]}
+              >
+                <Input className="input" placeholder="Enter your zip code" />
+              </Form.Item>
+              <Form.Item
+                label="Country"
+                name="shipCountry"
+                className="input-heading"
+                rules={[
+                  { required: true, message: "Please select your country!" },
+                ]}
+              >
+                <Select placeholder="Select your country">
+                  <Option value="usa">United States</Option>
+                  <Option value="canada">Canada</Option>
+                  <Option value="uk">United Kingdom</Option>
+                  <Option value="australia">Australia</Option>
+                </Select>
+              </Form.Item>
+            </Form>
+          </div>
+        </Col>
+
+        {/* Column 3: Order Summary */}
+        <Col xs={24} sm={12} md={8}>
+          <div className="summary-main">
             {/* Payment Button */}
             <div className="ship-address" style={{ marginTop: "20px" }}>
               <p className="shipping-txt">Payment Method</p>
@@ -149,17 +288,12 @@ function CheckoutBelow1() {
                 padding: "10px",
                 fontSize: "16px",
                 marginTop: "20px",
+                marginBottom:"3rem"
               }}
               onClick={redirectToPayPal}
             >
               Proceed to Pay
             </Button>
-          </div>
-        </Col>
-
-        {/* Column 3: Order Summary */}
-        <Col xs={24} sm={12} md={8}>
-          <div className="summary-main">
             <p className="order-summary-txt">Order Summary</p>
             <p
               className="cart-txt"
