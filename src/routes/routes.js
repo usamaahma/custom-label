@@ -51,6 +51,7 @@ import Blogdetail1 from "../components/blog/blogdetail.js";
 import Drawerviewedit from "../components/checkout/drawerviewedit.js";
 import Hangtags from "../components/clothingsection/Hangtags.js";
 import HangtagDetail from "../components/productdetail/hangtagDetail.js";
+import Thankyou1 from "../components/thankyou.js";
 
 const AppRoutes = () => {
   return (
@@ -154,6 +155,7 @@ const AppRoutes = () => {
             <Route path="/satin-woven" element={<Satinwovenpage />} />
             <Route path="/fancy-hangtags" element={<Fancyhangtagspage />} />
             <Route path="/about-us" element={<Aboutpage />} />
+            <Route path="/thank-you" element={<Thankyou1 />} />
             <Route
               path="/custom-care-label"
               element={<CustomCareLabelPage />}
@@ -170,11 +172,11 @@ const AppRoutes = () => {
             <Route path="/custom-tyvek-label" element={<Customtyvekpage />} />
             <Route path="/tpu-labels" element={<Tpulabelspage1 />} />
             <Route path="/faqs" element={<Faq1 />} />
-            <Route path="/custom-heat-labels" element={<Customheatpage />} />
+            <Route path="/custom-heat-labels" element={<Customheatpage />} />   
             <Route path="/privacy-policy" element={<Privacypolicy1 />} />
             <Route path="/thank-you" element={<ThankYouPage />} /> 
             <Route path="/blogs" element={<Blog />} />     
-             <Route path="/custom-blogs" element={<Customblog />} />        
+            <Route path="/custom-blogs" element={<Customblog />} />        
             <Route path="/product/:productName" element={<ProductDetail />} />
             <Route path="/drawer-view-edit" element={<Drawerviewedit />} />
             <Route path="/hangtag/:productName" element={<HangtagDetail />} />

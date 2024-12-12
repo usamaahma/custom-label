@@ -16,11 +16,11 @@ const Firstnavbar = () => {
   const [visible, setVisible] = useState(false);
   const { user, logout } = useAuth(); // Get user and logout from context
   const navigate = useNavigate(); // Hook for navigation
-  
+
   const handleLogout = async () => {
     try {
       await logout(); // Wait for the logout process to complete
-      navigate("/");  // Redirect to the home page
+      navigate("/"); // Redirect to the home page
     } catch (error) {
       console.error("Error during logout:", error); // Log any errors for debugging
     }
@@ -89,7 +89,7 @@ const Firstnavbar = () => {
                 <FaUserCircle style={{ color: "#FAF4EB" }} />
               </Nav.Link>
             )}
-            
+
             <Nav.Link className="firstnavbar-link">
               <button
                 onClick={() => setVisible(true)}
@@ -118,7 +118,7 @@ const Firstnavbar = () => {
                     cursor: "pointer",
                   }}
                 >
-                  <strong className="cart-strong" >Logout</strong>
+                  <strong className="cart-strong">Logout</strong>
                   {/* <FaUserCircle style={{ color: "#FAF4EB" }} /> */}
                 </button>
               </Nav.Link>

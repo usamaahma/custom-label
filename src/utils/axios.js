@@ -34,7 +34,9 @@ const blog = axios.create({
 const requestquote = axios.create({
   baseURL: `${baseURL}/requestquote`, // Ensure this is the correct endpoint for order descriptions
 });
-
+const designquote = axios.create({
+  baseURL: `${baseURL}/designQuote`, // Ensure this is the correct endpoint for order descriptions
+});
 // Generic request interceptor for all instances
 const requestInterceptor = (req) => {
   // Optionally add authorization headers or custom logic
@@ -57,6 +59,7 @@ getquote.interceptors.request.use(requestInterceptor, errorInterceptor);
 orderdescription.interceptors.request.use(requestInterceptor, errorInterceptor);
 blog.interceptors.request.use(requestInterceptor, errorInterceptor);
 requestquote.interceptors.request.use(requestInterceptor, errorInterceptor);
+designquote.interceptors.request.use(requestInterceptor, errorInterceptor);
 
 export {
   register,
@@ -68,4 +71,5 @@ export {
   google,
   blog,
   requestquote,
+  designquote,
 };

@@ -18,6 +18,7 @@ import {
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for redirecting
 
 import "./getaquote.css";
 
@@ -25,6 +26,7 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 function Getaquote1() {
+  const navigate = useNavigate(); // Initialize navigate hook for redirection
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
@@ -52,6 +54,9 @@ function Getaquote1() {
       .then((res) => {
         console.log("success", res);
         message.success("Thank you for considering us!");
+        
+        // Redirect to the thank-you page after successful submission
+        navigate("/thank-you"); 
       })
       .catch(() => {
         message.error("something went wrong, please try again!");
@@ -134,7 +139,7 @@ function Getaquote1() {
           </Form.Item>
 
           <input type="file" onChange={handlesubmit} />
-          <img src={url} alt="image" style={{width:"5rem",height:"5rem"}} />
+          <img src={url} alt="image" style={{ width: "5rem", height: "5rem" }} />
 
           <div className="customform-item-row">
             <Form.Item
