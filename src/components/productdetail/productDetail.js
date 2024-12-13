@@ -78,49 +78,6 @@ function ProductDetail() {
     }
   };
 
-  const handlePending = async (selectedData) => {
-    console.log("Product for pending checkout:", selectedData);
-    const userdataString = localStorage.getItem("user");
-    const userdata = JSON.parse(userdataString); // Convert string to object     
-     const data = {
-      user: [
-        {
-          userId: userdata.id,
-          name: userdata.name,
-          email: userdata.email,
-          phonenumber: userdata.phonenumber,
-        },
-      ],
-      pendingCheckout: [
-        {
-          productName: selectedData.name, // Replace with actual product data
-          artwork: url, // Replace with the actual artwork URL
-          options: [
-            /* options array */
-          ], // Add actual options data here
-          size: selectedData.size, // Replace with actual size
-          style: selectedData.style, // Replace with actual style
-          quantityPrice: [
-            {
-              quantity: 10, // Example quantity
-              price: 100, // Example price
-            },
-          ],
-          comments: selectedData.comments, // Replace with actual comments
-        },
-      ],
-    };
-
-    try {
-      const response = await pendingcheckout.post("/", data); // Replace with your actual API endpoint
-      console.log("Pending checkout success:", response.data);
-    } catch (error) {
-      console.error(
-        "Error in pending checkout:",
-        error.response || error.message
-      );
-    }
-  };
   // Define the onRowClick handler to handle the selected row data
   const handleRowClick = (rowData) => {
     setSelectedRow(rowData); // Save the clicked row data
@@ -150,10 +107,86 @@ function ProductDetail() {
   }, []);
 
   // State for selected data
+  const handlePending = async (selectedData) => {
+    const userdataString = localStorage.getItem("user");
+    const userdata = JSON.parse(userdataString); // Convert string to object
+    const data = {
+      user: [
+        {
+          userId: userdata.id,
+          name: userdata.name,
+          email: userdata.email,
+          phonenumber: userdata.phonenumber,
+        },
+      ],
+      pendingCheckout: [
+        {
+          productName: selectedData.name, // Replace with actual product data
+          artwork: url,
+          options: options.map((option) => ({
+            title: option.type || "",
+          })),
+          size: selectedData.size, // Replace with actual size
+          style: selectedData.style, // Replace with actual style
+          quantityPrice: [
+            {
+              price:
+                parseFloat(selectedRow.unitPrice.replace(/[^0-9.]/g, "")) || 0,
+              //
+              quantity: isNaN(parseInt(selectedRow.quantity))
+                ? null
+                : parseInt(selectedRow.quantity),
+            },
+          ],
+          comments: selectedData.comments, // Replace with actual comments
+        },
+      ],
+    };
 
+    try {
+      const response = await pendingcheckout.post("/", data); // Replace with your actual API endpoint
+      console.log("goingdata", response.data);
+      message.success("Go To Cart");
+    } catch (error) {
+      console.error(
+        "Error in pending checkout:",
+        error.response || error.message
+      );
+    }
+  };
   const handleAddToCart = (selectedData) => {
-    addToCart(selectedData); // Product ko cart mein add karen
-    console.log("Product added to cart:", selectedData);
+    console.log(selectedData, "data that is selected");
+
+    // Function to filter empty or undefined fields
+    const filterEmptyFields = (data) => {
+      const filteredData = {};
+      for (let key in data) {
+        filteredData[key] =
+          data[key] !== undefined && data[key] !== null ? data[key] : "";
+      }
+      return filteredData;
+    };
+
+    const filteredData = filterEmptyFields({
+      artwork: url,
+      comments: selectedData.comments || "",
+      id: selectedData.id,
+      name: selectedData.name,
+      options: options.map((option) => ({
+        title: option.type || "",
+        cardTitle: option.cards ? option.cards[0]?.title || "" : "", // Direct cardTitle from nested cards
+      })),
+      price: parseFloat(selectedRow.unitPrice.replace(/[^0-9.]/g, "")) || 0,
+      quantity: isNaN(parseInt(selectedRow.quantity))
+        ? null
+        : parseInt(selectedRow.quantity),
+      size: selectedData.size || "",
+      style: selectedData.style || "",
+      totalPrice: parseFloat(selectedRow.total.replace(/[^0-9.]/g, "")) || 0,
+    });
+
+    addToCart(filteredData); // Product ko cart mein add karen
+    console.log("Product added to cart:", filteredData);
     console.log(addToCart);
   };
   const handleStyleClick = (type, style) => {
