@@ -172,7 +172,7 @@ function ProductDetail() {
       comments: selectedData.comments || "",
       id: selectedData.id,
       name: selectedData.name,
-      options: options.map((option) => ({
+      options: options.map(option => ({
         title: option.type || "",
         cardTitle: option.cards ? option.cards[0]?.title || "" : "", // Direct cardTitle from nested cards
       })),

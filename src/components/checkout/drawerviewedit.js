@@ -29,7 +29,7 @@ function Drawerviewedit() {
   };
 
   // Calculate subtotal for a single item
-  const calculateSubtotal = (item) => (item.price * item.quantity).toFixed(2); // Use the item's price and quantity
+  const calculateSubtotal = (item) => item.price * item.quantity; // No .toFixed here
 
   return (
     <div>
@@ -83,10 +83,12 @@ function Drawerviewedit() {
                   {/* Column 3 - Price, Qty, Subtotal */}
                   <div className="cart-price-column">
                     <div className="cart-item-detail">
-                      <span className="price-label">Price:</span>
+                      <span className="price-label">
+                        Price: ${calculateSubtotal(item)}
+                      </span>
                       {/* <span className="price-value">${item.price.toFixed(2)}</span> */}
                     </div>
-                    <div className="cart-item-detail">
+                    {/* <div className="cart-item-detail">
                       <span className="qty-label">Qty:</span>
                       <input
                         type="number"
@@ -95,7 +97,7 @@ function Drawerviewedit() {
                         min="1"
                         onChange={(e) => handleQuantityChange(e, item)} // Update quantity here
                       />
-                    </div>
+                    </div> */}
                     <div className="cart-item-detail">
                       <span className="subtotal-label">Subtotal:</span>
                       <span className="subtotal-value">
@@ -128,10 +130,9 @@ function Drawerviewedit() {
                 <p>Sub Total</p>
                 <p>
                   $
-                  {cart.reduce(
-                    (total, item) => total + calculateSubtotal(item),
-                    0
-                  )}
+                  {cart
+                    .reduce((total, item) => total + calculateSubtotal(item), 0)
+                    .toFixed(2)}
                 </p>
               </div>
               <hr />
@@ -139,10 +140,9 @@ function Drawerviewedit() {
                 <p>Order Total</p>
                 <p>
                   $
-                  {cart.reduce(
-                    (total, item) => total + calculateSubtotal(item),
-                    0
-                  )}
+                  {cart
+                    .reduce((total, item) => total + calculateSubtotal(item), 0)
+                    .toFixed(2)}
                 </p>
               </div>
               <div className="button1-container">

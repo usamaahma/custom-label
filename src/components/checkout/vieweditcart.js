@@ -57,7 +57,7 @@ function Vieweditcart() {
                 <span className="price-label">Price:</span>
                 <span className="price-value">${price.toFixed(2)}</span>
               </div>
-              <div className="cart-item-detail">
+              {/* <div className="cart-item-detail">
                 <span className="qty-label">Qty:</span>
                 <input
                   type="number"
@@ -66,7 +66,7 @@ function Vieweditcart() {
                   min="1"
                   onChange={(e) => handleQuantityChange(e, item)}
                 />
-              </div>
+              </div> */}
               <div className="cart-item-detail">
                 <span className="subtotal-label">Subtotal:</span>
                 <span className="subtotal-value">${calculateSubtotal(price, item.quantity)}</span>

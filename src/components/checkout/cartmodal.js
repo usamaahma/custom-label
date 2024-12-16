@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Modal, Button, Input, Divider } from "antd";
 import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
@@ -42,6 +42,9 @@ function Cartmodal1({ visible, onClose }) {
   const handleRemoveFromCart = (item) => {
     removeFromCart(item); // Call remove function from context
   };
+  useEffect(() => {
+    localStorage.setItem("cartQuantities", JSON.stringify(quantities));
+  }, [quantities]);
 
   return (
     <Modal
@@ -60,7 +63,7 @@ function Cartmodal1({ visible, onClose }) {
               <div className="cart-item-details">
                 <h4>{item.name}</h4>
                 <p className="price-txt">Price: {item.totalPrice}</p>
-                <Input
+                {/* <Input
                   type="number"
                   min={1}
                   value={quantities[item.id] || 1} // Default to 1
@@ -68,25 +71,25 @@ function Cartmodal1({ visible, onClose }) {
                     handleQuantityChange(item.id, e.target.value)
                   }
                   style={{ width: "60px", marginRight: "8px" }}
-                />
+                /> */}
                 <span className="price-txt">
                   Subtotal: $
                   {item.totalPrice && !isNaN(item.totalPrice)
                     ? (item.totalPrice * (quantities[item.id] || 1)).toFixed(2)
                     : "0.00"}
-                  ({quantities[item.id] || 1} item
-                  {(quantities[item.id] || 1) > 1 ? "s" : ""})
+                  {/* ({quantities[item.id] || 1} item
+                  {(quantities[item.id] || 1) > 1 ? "s" : ""}) */}
                 </span>
               </div>
 
               {/* Item actions (edit and delete) */}
               <div className="cart-item-actions">
-                <Button
+                {/* <Button
                   icon={<EditOutlined />}
                   onClick={() =>
                     handleQuantityChange(item.id, quantities[item.id] || 1)
                   }
-                />
+                /> */}
                 <Button
                   icon={<DeleteOutlined />}
                   onClick={() => handleRemoveFromCart(item)}

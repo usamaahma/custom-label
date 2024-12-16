@@ -26,7 +26,9 @@ const Herosec1 = () => {
               <p className="premium woven-text-100">
                 100 Woven LabelsStarting At $0.98ea
               </p>
-              <button className="herosec-button">Shop Woven Labels</button>
+              <Link to="/all-clothing-labels">
+                <button className="herosec-button">Shop Woven Labels</button>
+              </Link>
             </div>
           </Slide>
         </Carousel.Caption>
