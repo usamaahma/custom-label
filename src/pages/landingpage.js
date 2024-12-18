@@ -11,6 +11,7 @@ import Featureproduct from "../components/featureproduct";
 import Faq1 from "../components/faq";
 import "./landing.css"
 import Thankyou1 from "../components/thankyou";
+import Getaquote1 from "../components/getaquote";
 
 function Landingpage() {
   return (
@@ -22,10 +23,10 @@ function Landingpage() {
        <Howitwork />
       <Samplepack />
       <Offers1 />
-      <Formcustom1 />
+      <Getaquote1 />
       <Question />
       <Faq1 />
-      <Thankyou1/>
+      {/* <Thankyou1/> */}
     </div>
   );
 }
