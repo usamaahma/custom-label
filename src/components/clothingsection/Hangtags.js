@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Row, Col } from "antd"; // Import Ant Design's Row and Col components
+import { Row, Col, Form } from "antd"; // Import Ant Design's Row and Col components
 import { hangtag } from "../../utils/axios"; // Adjust the import path as necessary
 import Beatquote from "./beatquote"; // Import your Beatquote component
 import "./clothingcard.css"; // Import your CSS file
@@ -7,8 +7,12 @@ import { SearchOutlined } from "@ant-design/icons";
 
 const Hangtags = () => {
   const [cardsData, setCardsData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]); // Store filtered product data
+  const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [form] = Form.useForm();
+
   const card1 = [
     {
       id: 1,
@@ -26,7 +30,10 @@ const Hangtags = () => {
     const fetchData = async () => {
       try {
         const response = await hangtag.get("/");
+        const data = response.data.results || response.data; // Adjust as per actual API response
         setCardsData(response.data.results); // Assuming data is an array in `results`
+        setFilteredData(data);
+        form.resetFields();
         console.log(response.data.results);
       } catch (error) {
         setError(error.message);
@@ -36,6 +43,20 @@ const Hangtags = () => {
     };
     fetchData();
   }, []);
+  const handleSearchChange = (e) => {
+    const query = e.target.value;
+    setSearchQuery(query);
+
+    // Filter products based on the search query
+    if (query) {
+      const filtered = cardsData.filter((card) =>
+        card.title.toLowerCase().includes(query.toLowerCase())
+      );
+      setFilteredData(filtered);
+    } else {
+      setFilteredData(cardsData); // Show all products if no search query
+    }
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -56,6 +77,8 @@ const Hangtags = () => {
                 type="text"
                 placeholder="Search for hangtags, categories, or articles..."
                 class="search-input"
+                value={searchQuery} // Bind the input value to the searchQuery state
+                onChange={handleSearchChange} // Handle input change
               />
               <button class="search-button">
                 <SearchOutlined />
@@ -68,7 +91,7 @@ const Hangtags = () => {
             justify="center"
             gutter={[16, 16]}
           >
-            {cardsData.map((card) => (
+            {filteredData.map((card) => (
               <Col key={card.id} xs={24} sm={12} md={12} lg={8}>
                 <div
                   className="card"

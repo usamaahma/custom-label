@@ -4,6 +4,7 @@ import { DownOutlined } from "@ant-design/icons";
 import { useCart } from "../../context/cartcontext"; // Import Cart Context
 import "./checkoutbelow.css";
 import IconMessage from "./iconmessage";
+import { checkout } from "../../utils/axios";
 
 const { Option } = Select;
 
@@ -31,6 +32,87 @@ function CheckoutBelow1() {
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
   };
+  const onFinish = async (values) => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    console.log(userData, "userdata");
+    const userDataCheckout = {
+      id: userData.id,
+      name: userData.name,
+      email: userData.email,
+      phoneNumber: userData.phonenumber,
+    };
+    console.log(userDataCheckout); // Output should reflect the extracted values
+
+    const billingvalues = {
+      firstName: values.billfirstname,
+      lastName: values.billlastname,
+      middleName: values.billmiddlename,
+      companyName: values.billcompanyname,
+      phoneNumber: values.billphonenumber,
+      streetAddress: values.billaddress,
+      city: values.billcity,
+      stateOrProvince: values.billstate,
+      zipOrPostalCode: values.billzipcode,
+      country: values.billcountry,
+    };
+
+    const shippingvalues = {
+      firstName: values.shipFirstName,
+      lastName: values.shipLastName,
+      middleName: values.shipMiddleName,
+      companyName: values.shipCompanyName,
+      phoneNumber: values.shipPhoneNumber,
+      streetAddress: values.shipStreetAddress,
+      city: values.shipCity,
+      stateOrProvince: values.shipState,
+      zipOrPostalCode: values.shipZipCode,
+      country: values.shipCountry,
+    };
+    console.log("dgduowbuwvdwdvwu", cart);
+
+    const cartdata = cart.map((item) => ({
+      productName: item.name,
+      artworkFile: item.artwork,
+      size: item.size,
+      style: item.style,
+      comments: item.comments,
+      quantity: item.quantity,
+      totalPrice: item.totalPrice,
+      qty: 1,
+    }));
+    const totalAmount = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
+    const paymentDetails = {
+      method: "PayPal",
+      totalAmount: totalAmount,
+      currency: "USD",
+      transactionId: "dw", // Optional, will be set after PayPal response
+      payerEmail: "usa@gmail.com", // Optional
+      status: "Pending", // Default status
+    };
+    console.log("Billing Values:", billingvalues);
+    console.log("Shipping Values:", shippingvalues);
+    console.log("Cart Data:", cartdata);
+    console.log("Payment Details:", paymentDetails);
+    console.log("Userdata:", userDataCheckout);
+
+    try {
+      // Call the Checkout API with both cart data and payment details
+      const response = await checkout.post("/", {
+        user: userDataCheckout,
+        checkoutProducts: cartdata,
+        billingAddress: billingvalues,
+        shippingAddress: shippingvalues,
+        payment: paymentDetails,
+      });
+      console.log("Checkout Successful:", response.data);
+    } catch (error) {
+      console.error("Error during checkout:", error);
+    }
+  };
 
   return (
     <div className="checkout-container">
@@ -38,13 +120,7 @@ function CheckoutBelow1() {
       <div className="check-below">
         <p className="check-txt">CHECKOUT</p>
       </div>
-      <Form
-        layout="vertical"
-        onFinish={(values) => {
-          console.log("Form Values:", values);
-          // Proceed with API call or further processing
-        }}
-      >
+      <Form layout="vertical" onFinish={onFinish}>
         <Row flex justify={"space-evenly"}>
           {/* Column 1: Billing Address */}
           <Col xs={24} sm={12} md={7} className="border-column">
@@ -54,7 +130,7 @@ function CheckoutBelow1() {
             <Form.Item
               label="First Name"
               className="input-heading"
-              name="bill-firstname"
+              name="billfirstname"
               rules={[
                 { required: true, message: "Please enter your first name!" },
               ]}
@@ -64,7 +140,7 @@ function CheckoutBelow1() {
             <Form.Item
               label="Middle Name"
               className="input-heading"
-              name="bill-middlename"
+              name="billmiddlename"
             >
               <Input
                 className="input"
@@ -74,7 +150,7 @@ function CheckoutBelow1() {
             <Form.Item
               label="Last Name"
               className="input-heading"
-              name="bill-lastname"
+              name="billlastname"
               rules={[
                 { required: true, message: "Please enter your last name!" },
               ]}
@@ -84,7 +160,7 @@ function CheckoutBelow1() {
             <Form.Item
               label="Company Name"
               className="input-heading"
-              name="bill-companyname"
+              name="billcompanyname"
             >
               <Input
                 className="input"
@@ -94,7 +170,7 @@ function CheckoutBelow1() {
             <Form.Item
               label="Phone Number"
               className="input-heading"
-              name="bill-phonenumber"
+              name="billphonenumber"
               rules={[
                 {
                   required: true,
@@ -107,7 +183,7 @@ function CheckoutBelow1() {
             <Form.Item
               label="Street Address"
               className="input-heading"
-              name="bill-address"
+              name="billaddress"
               rules={[
                 { required: true, message: "Please enter your address!" },
               ]}
@@ -117,7 +193,7 @@ function CheckoutBelow1() {
             <Form.Item
               label="City"
               className="input-heading"
-              name="bill-city"
+              name="billcity"
               rules={[{ required: true, message: "Please enter your city!" }]}
             >
               <Input className="input" placeholder="Enter your city" />
@@ -125,7 +201,7 @@ function CheckoutBelow1() {
             <Form.Item
               label="State/Province"
               className="input-heading"
-              name="bill-state"
+              name="billstate"
               rules={[
                 {
                   required: true,
@@ -142,7 +218,7 @@ function CheckoutBelow1() {
             </Form.Item>
             <Form.Item
               label="Zip/Postal Code"
-              name="bill-zipcode"
+              name="billzipcode"
               className="input-heading"
               rules={[
                 { required: true, message: "Please enter your zip code!" },
@@ -152,7 +228,7 @@ function CheckoutBelow1() {
             </Form.Item>
             <Form.Item
               label="Country"
-              name="bill-country"
+              name="billcountry"
               className="input-heading"
               rules={[
                 { required: true, message: "Please select your country!" },

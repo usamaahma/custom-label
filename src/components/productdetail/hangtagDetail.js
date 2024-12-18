@@ -3,10 +3,15 @@ import { Button, Card, Breadcrumb, message, Steps, theme } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
 import ImageUploader from "../expressclothing/imagedragger";
-import { hangtag } from "../../utils/axios";
+import { pendingcheckout, hangtag } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
-
-// Steps data
+import { Storage } from "../../firebaseConfig";
+import {
+  uploadBytes,
+  ref,
+  getDownloadURL,
+  uploadBytesResumable,
+} from "firebase/storage";
 
 // Card data
 
@@ -20,7 +25,7 @@ const imagesData = [
 ];
 
 function HangtagDetail() {
-  const { addToCart } = useCart();
+  const { addToCart } = useCart(); // Cart functions aur state access karein
   const [productDescription, setProductDescription] = useState(null);
   const [descriptionTitle, setDescriptionTitle] = useState(null);
   const [descriptionText, setDescriptionText] = useState(null);
@@ -31,6 +36,47 @@ function HangtagDetail() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [selectedRow, setSelectedRow] = useState(null);
+  const [image, setImage] = useState(null);
+  const [percent, setPercent] = useState("");
+  const [url, setUrl] = useState("");
+  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const date = new Date();
+
+  const showTime =
+    date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
+  const handlesubmit = (e) => {
+    const uploadedFile = e.target.files[0]; // Get the uploaded file
+    if (uploadedFile) {
+      const imageDocument = ref(
+        Storage,
+        `images/${uploadedFile.name + showTime}`
+      );
+      const uploadTask = uploadBytesResumable(imageDocument, uploadedFile);
+
+      uploadTask.on("state_changed", (snapshot) => {
+        const percent = Math.round(
+          (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+        );
+        setPercent(percent);
+      });
+
+      uploadBytes(imageDocument, uploadedFile)
+        .then(() => {
+          getDownloadURL(imageDocument)
+            .then((Url) => {
+              setUrl(Url);
+              setUploadedImageUrl(Url); // Set the uploaded image URL
+              console.log(Url);
+            })
+            .catch((error) => {
+              console.log(error.message, "error getting the image url");
+            });
+        })
+        .catch((error) => {
+          console.log(error.message);
+        });
+    }
+  };
 
   // Define the onRowClick handler to handle the selected row data
   const handleRowClick = (rowData) => {
@@ -59,24 +105,90 @@ function HangtagDetail() {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const selectedImg = localStorage.getItem("uploadedImage");
-  const id = localStorage.getItem("selectedHangtagId");
-  const name = localStorage.getItem("selectedHangtagTitle");
 
   // State for selected data
+  const handlePending = async (selectedData) => {
+    const userdataString = localStorage.getItem("user");
+    const userdata = JSON.parse(userdataString); // Convert string to object
+    const data = {
+      user: [
+        {
+          userId: userdata.id,
+          name: userdata.name,
+          email: userdata.email,
+          phonenumber: userdata.phonenumber,
+        },
+      ],
+      pendingCheckout: [
+        {
+          productName: selectedData.name, // Replace with actual product data
+          artwork: url,
+          options: options.map((option) => ({
+            title: option.type || "",
+          })),
+          size: selectedData.size, // Replace with actual size
+          style: selectedData.style, // Replace with actual style
+          quantityPrice: [
+            {
+              price:
+                parseFloat(selectedRow.unitPrice.replace(/[^0-9.]/g, "")) || 0,
+              //
+              quantity: isNaN(parseInt(selectedRow.quantity))
+                ? null
+                : parseInt(selectedRow.quantity),
+            },
+          ],
+          comments: selectedData.comments, // Replace with actual comments
+        },
+      ],
+    };
 
-  const [selectedData, setSelectedData] = useState({
-    id: id,
-    name: name,
-    artwork: selectedImg,
-    size: " ",
-    style: " ",
-    options: [], // Initialized as an empty array to hold multiple selected options
-    quantity: " ",
-    price: " ",
-    totalPrice: " ",
-    comments: "",
-  });
+    try {
+      const response = await pendingcheckout.post("/", data); // Replace with your actual API endpoint
+      console.log("goingdata", response.data);
+      message.success("Go To Cart");
+    } catch (error) {
+      console.error(
+        "Error in pending checkout:",
+        error.response || error.message
+      );
+    }
+  };
+  const handleAddToCart = (selectedData) => {
+    console.log(selectedData, "data that is selected");
+
+    // Function to filter empty or undefined fields
+    const filterEmptyFields = (data) => {
+      const filteredData = {};
+      for (let key in data) {
+        filteredData[key] =
+          data[key] !== undefined && data[key] !== null ? data[key] : "";
+      }
+      return filteredData;
+    };
+
+    const filteredData = filterEmptyFields({
+      artwork: url,
+      comments: selectedData.comments || "",
+      id: selectedData.id,
+      name: selectedData.name,
+      options: options.map((option) => ({
+        title: option.type || "",
+        cardTitle: option.cards ? option.cards[0]?.title || "" : "", // Direct cardTitle from nested cards
+      })),
+      price: parseFloat(selectedRow.unitPrice.replace(/[^0-9.]/g, "")) || 0,
+      quantity: isNaN(parseInt(selectedRow.quantity))
+        ? null
+        : parseInt(selectedRow.quantity),
+      size: selectedData.size || "",
+      style: selectedData.style || "",
+      totalPrice: parseFloat(selectedRow.total.replace(/[^0-9.]/g, "")) || 0,
+    });
+
+    addToCart(filteredData); // Product ko cart mein add karen
+    console.log("Product added to cart:", filteredData);
+    console.log(addToCart);
+  };
   const handleStyleClick = (type, style) => {
     if (!style) {
       console.error("Style is undefined in handleStyleClick");
@@ -101,17 +213,17 @@ function HangtagDetail() {
       [key]: value,
     }));
   };
-
-  const handleAddToCart = (selectedData) => {
-    addToCart(selectedData); // Product ko cart mein add karen
-    console.log("Product added to cart:", selectedData);
+  const handleCardOptionClick = (key, value) => {
+    setSelectedData((prevData) => ({
+      ...prevData,
+      [key]: value, // Replace the previous value with the new one
+    }));
   };
   const [productImages, setProductImages] = useState([]);
   const [selectedImage, setSelectedImage] = useState("");
   // State to track mouse position
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isExpanded, setIsExpanded] = useState(false);
-  const [image, setImage] = useState(null);
 
   const steps = [
     {
@@ -122,7 +234,13 @@ function HangtagDetail() {
             <h3 className="simpletable-heading">Upload Artwork</h3>
           </div>
           <div className="divs-tableexpress">
-            <ImageUploader />
+            {/* <ImageUploader /> */}
+            <input type="file" onChange={handlesubmit} />
+            <img
+              src={url}
+              alt="image"
+              style={{ width: "5rem", height: "5rem" }}
+            />
           </div>
         </>
       ),
@@ -209,14 +327,14 @@ function HangtagDetail() {
             <h3 className="simpletable-heading">Other Options?</h3>
           </div>
           {options.map((option, index) => (
-            <div className="divs-tableexpress">
-              <div key={index} className="card-grid">
+            <div className="divs-tableexpress" key={index}>
+              <div className="card-grid">
                 <h3>{option.type}</h3> {/* Display the type of option */}
                 {option.cards.map((card, cardIndex) => (
                   <div key={cardIndex} className="card-container">
                     <Card
                       bordered={false}
-                      onClick={() => handleCardClick("options", card.title)}
+                      onClick={() => handleCardClick(option.type, card.title)} // Pass option type and card title
                       style={{
                         background: "#FAF4EB",
                       }}
@@ -331,7 +449,18 @@ function HangtagDetail() {
   };
   const selectedHangtagId = localStorage.getItem("selectedHangtagId");
   const title = localStorage.getItem("selectedHangtagTitle");
-
+  const [selectedData, setSelectedData] = useState({
+    id: selectedHangtagId,
+    name: title,
+    artwork: url,
+    size: " ",
+    style: " ",
+    options: [], // Initialized as an empty array to hold multiple selected options
+    quantity: " ",
+    price: " ",
+    totalPrice: " ",
+    comments: "",
+  });
   useEffect(() => {
     const fetchProductDescription = async () => {
       try {
@@ -547,8 +676,8 @@ function HangtagDetail() {
               <div className="sticky-blue-inside">
                 <p>Artwork File:</p>
                 <div>
-                  {image ? (
-                    <img src={image} alt="Uploaded" style={{ width: "5rem" }} />
+                  {url ? (
+                    <img src={url} alt="Uploaded" style={{ width: "5rem" }} />
                   ) : (
                     <p>No image uploaded.</p>
                   )}
@@ -567,11 +696,12 @@ function HangtagDetail() {
                 <p>{selectedData.style}</p>
               </div>
             </div>
-            {options.map((card, cardIndex) => (
-              <div className="sticky-blue">
+            {options.map((option, index) => (
+              <div className="sticky-blue" key={index}>
                 <div className="sticky-blue-inside">
-                  <p>{card.type}:</p>
-                  <p>{selectedData.options}</p>
+                  <p>{option.type}:</p>
+                  {/* Display the selected title */}
+                  <p>{selectedData[option.type] || "None selected"}</p>
                 </div>
               </div>
             ))}
@@ -589,7 +719,10 @@ function HangtagDetail() {
             <div className="sticky-blue">
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
-                  onClick={() => handleAddToCart(selectedData)}
+                  onClick={() => {
+                    handleAddToCart(selectedData); // First function
+                    handlePending(selectedData); // Second function
+                  }}
                   className="button-tablecart"
                 >
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}
