@@ -10,6 +10,7 @@ function Cartmodal1({ visible, onClose }) {
   const [quantities, setQuantities] = useState({}); // State for multiple quantities
   const { cart, removeFromCart } = useCart(); // Access cart items and remove function from context
   const navigate = useNavigate(); // Initialize useNavigate hook
+  console.log(cart, "cart");
 
   // Function to handle quantity change
   const handleQuantityChange = (id, value) => {
@@ -22,7 +23,7 @@ function Cartmodal1({ visible, onClose }) {
   // Calculate the subtotal based on cart items and their quantities
   const subtotal = cart.reduce((total, item) => {
     const itemQuantity = quantities[item.id] || 1; // Default to 1 if quantity is not set
-    return total + item.price * itemQuantity;
+    return total + item.totalPrice * itemQuantity;
   }, 0);
 
   // Function to handle checkout
@@ -58,7 +59,7 @@ function Cartmodal1({ visible, onClose }) {
               {/* Item details */}
               <div className="cart-item-details">
                 <h4>{item.name}</h4>
-                <p className="price-txt">Price: ${item.price}</p>
+                <p className="price-txt">Price: {item.totalPrice}</p>
                 <Input
                   type="number"
                   min={1}
@@ -70,8 +71,10 @@ function Cartmodal1({ visible, onClose }) {
                 />
                 <span className="price-txt">
                   Subtotal: $
-                  {(item.price * (quantities[item.id] || 1)).toFixed(2)}(
-                  {quantities[item.id] || 1} item
+                  {item.totalPrice && !isNaN(item.totalPrice)
+                    ? (item.totalPrice * (quantities[item.id] || 1)).toFixed(2)
+                    : "0.00"}
+                  ({quantities[item.id] || 1} item
                   {(quantities[item.id] || 1) > 1 ? "s" : ""})
                 </span>
               </div>

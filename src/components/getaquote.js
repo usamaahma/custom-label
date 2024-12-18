@@ -254,7 +254,6 @@ function Getaquote1() {
             +123-456-7890
           </a>
         </h6>
-
         <hr />
       </div>
     </div>

@@ -3,7 +3,7 @@ import { Button, Card, Breadcrumb, message, Steps, theme } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
 import ImageUploader from "../expressclothing/imagedragger";
-import { products } from "../../utils/axios";
+import { pendingcheckout, products } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
 import { Storage } from "../../firebaseConfig";
 import {
@@ -107,10 +107,86 @@ function ProductDetail() {
   }, []);
 
   // State for selected data
+  const handlePending = async (selectedData) => {
+    const userdataString = localStorage.getItem("user");
+    const userdata = JSON.parse(userdataString); // Convert string to object
+    const data = {
+      user: [
+        {
+          userId: userdata.id,
+          name: userdata.name,
+          email: userdata.email,
+          phonenumber: userdata.phonenumber,
+        },
+      ],
+      pendingCheckout: [
+        {
+          productName: selectedData.name, // Replace with actual product data
+          artwork: url,
+          options: options.map((option) => ({
+            title: option.type || "",
+          })),
+          size: selectedData.size, // Replace with actual size
+          style: selectedData.style, // Replace with actual style
+          quantityPrice: [
+            {
+              price:
+                parseFloat(selectedRow.unitPrice.replace(/[^0-9.]/g, "")) || 0,
+              //
+              quantity: isNaN(parseInt(selectedRow.quantity))
+                ? null
+                : parseInt(selectedRow.quantity),
+            },
+          ],
+          comments: selectedData.comments, // Replace with actual comments
+        },
+      ],
+    };
 
+    try {
+      const response = await pendingcheckout.post("/", data); // Replace with your actual API endpoint
+      console.log("goingdata", response.data);
+      message.success("Go To Cart");
+    } catch (error) {
+      console.error(
+        "Error in pending checkout:",
+        error.response || error.message
+      );
+    }
+  };
   const handleAddToCart = (selectedData) => {
-    addToCart(selectedData); // Product ko cart mein add karen
-    console.log("Product added to cart:", selectedData);
+    console.log(selectedData, "data that is selected");
+
+    // Function to filter empty or undefined fields
+    const filterEmptyFields = (data) => {
+      const filteredData = {};
+      for (let key in data) {
+        filteredData[key] =
+          data[key] !== undefined && data[key] !== null ? data[key] : "";
+      }
+      return filteredData;
+    };
+
+    const filteredData = filterEmptyFields({
+      artwork: url,
+      comments: selectedData.comments || "",
+      id: selectedData.id,
+      name: selectedData.name,
+      options: options.map((option) => ({
+        title: option.type || "",
+        cardTitle: option.cards ? option.cards[0]?.title || "" : "", // Direct cardTitle from nested cards
+      })),
+      price: parseFloat(selectedRow.unitPrice.replace(/[^0-9.]/g, "")) || 0,
+      quantity: isNaN(parseInt(selectedRow.quantity))
+        ? null
+        : parseInt(selectedRow.quantity),
+      size: selectedData.size || "",
+      style: selectedData.style || "",
+      totalPrice: parseFloat(selectedRow.total.replace(/[^0-9.]/g, "")) || 0,
+    });
+
+    addToCart(filteredData); // Product ko cart mein add karen
+    console.log("Product added to cart:", filteredData);
     console.log(addToCart);
   };
   const handleStyleClick = (type, style) => {
@@ -160,7 +236,11 @@ function ProductDetail() {
           <div className="divs-tableexpress">
             {/* <ImageUploader /> */}
             <input type="file" onChange={handlesubmit} />
-            <img src={url} alt="image" style={{width:"5rem",height:"5rem"}} />
+            <img
+              src={url}
+              alt="image"
+              style={{ width: "5rem", height: "5rem" }}
+            />
           </div>
         </>
       ),
@@ -369,11 +449,10 @@ function ProductDetail() {
   };
   const selectedProductId = localStorage.getItem("selectedProductId");
   const title = localStorage.getItem("selectedProductTitle");
-  const selectedImg = localStorage.getItem("uploadedImage");
   const [selectedData, setSelectedData] = useState({
     id: selectedProductId,
     name: title,
-    artwork: selectedImg,
+    artwork: url,
     size: " ",
     style: " ",
     options: [], // Initialized as an empty array to hold multiple selected options
@@ -597,8 +676,8 @@ function ProductDetail() {
               <div className="sticky-blue-inside">
                 <p>Artwork File:</p>
                 <div>
-                  {image ? (
-                    <img src={image} alt="Uploaded" style={{ width: "5rem" }} />
+                  {url ? (
+                    <img src={url} alt="Uploaded" style={{ width: "5rem" }} />
                   ) : (
                     <p>No image uploaded.</p>
                   )}
@@ -640,7 +719,10 @@ function ProductDetail() {
             <div className="sticky-blue">
               <div style={{ display: "flex", justifyContent: "center" }}>
                 <Button
-                  onClick={() => handleAddToCart(selectedData)}
+                  onClick={() => {
+                    handleAddToCart(selectedData); // First function
+                    handlePending(selectedData); // Second function
+                  }}
                   className="button-tablecart"
                 >
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}

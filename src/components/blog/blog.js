@@ -37,7 +37,7 @@ function Blog() {
   }
   const StoreBlogId = (id, title) => {
     localStorage.setItem("selectedBlogId", id);
-    localStorage.setItem("selectedBlogTitle", title); 
+    localStorage.setItem("selectedBlogTitle", title);
   };
   return (
     <div>

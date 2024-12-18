@@ -92,6 +92,13 @@ function Blogdetail1() {
             <div key={index}>
               <h2>{desc.descriptionTitle}</h2>
               <p>{desc.text}</p>
+              {desc.image && (
+                <img
+                  src={desc.image}
+                  alt={desc.descriptionTitle}
+                  style={{ width: "4rem", height: "auto", marginTop: "1rem" }}
+                />
+              )}
             </div>
           ))}
           {/* Additional content dynamically fetched */}
