@@ -1,22 +1,18 @@
 import React, { useState } from "react";
-import { Row, Col, Form, Input, Button, Radio, Card, Select } from "antd";
+import { Row, Col, Form, Input, Button, Select } from "antd";
 import { DownOutlined } from "@ant-design/icons";
+import { useCart } from "../../context/cartcontext"; // Import Cart Context
 import "./checkoutbelow.css";
 import IconMessage from "./iconmessage";
+import { checkout } from "../../utils/axios";
 
 const { Option } = Select;
 
 function CheckoutBelow1() {
-  const currentYear = new Date().getFullYear();
-  const years = Array.from({ length: 11 }, (_, index) => currentYear + index); // 11 years including current
-
-  const [paymentMethod, setPaymentMethod] = useState(null);
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownVisible1, setDropdownVisible1] = useState(false);
 
-  const handlePaymentChange = (e) => {
-    setPaymentMethod(e.target.value);
-  };
+  const { cart, removeFromCart } = useCart(); // Get cart data from context
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -26,261 +22,465 @@ function CheckoutBelow1() {
     setDropdownVisible1(!dropdownVisible1);
   };
 
+  const redirectToPayPal = () => {
+    window.location.href = "https://www.paypal.com"; // Redirect to PayPal website
+  };
+
+  // Calculate Total Price
+  const calculateTotal = () => {
+    return cart
+      .reduce((total, item) => total + item.price * item.quantity, 0)
+      .toFixed(2);
+  };
+  const onFinish = async (values) => {
+    const userData = JSON.parse(localStorage.getItem("user"));
+    console.log(userData, "userdata");
+    const userDataCheckout = {
+      id: userData.id,
+      name: userData.name,
+      email: userData.email,
+      phoneNumber: userData.phonenumber,
+    };
+    console.log(userDataCheckout); // Output should reflect the extracted values
+
+    const billingvalues = {
+      firstName: values.billfirstname,
+      lastName: values.billlastname,
+      middleName: values.billmiddlename,
+      companyName: values.billcompanyname,
+      phoneNumber: values.billphonenumber,
+      streetAddress: values.billaddress,
+      city: values.billcity,
+      stateOrProvince: values.billstate,
+      zipOrPostalCode: values.billzipcode,
+      country: values.billcountry,
+    };
+
+    const shippingvalues = {
+      firstName: values.shipFirstName,
+      lastName: values.shipLastName,
+      middleName: values.shipMiddleName,
+      companyName: values.shipCompanyName,
+      phoneNumber: values.shipPhoneNumber,
+      streetAddress: values.shipStreetAddress,
+      city: values.shipCity,
+      stateOrProvince: values.shipState,
+      zipOrPostalCode: values.shipZipCode,
+      country: values.shipCountry,
+    };
+    console.log("dgduowbuwvdwdvwu", cart);
+
+    const cartdata = cart.map((item) => ({
+      productName: item.name,
+      artworkFile: item.artwork,
+      size: item.size,
+      style: item.style,
+      comments: item.comments,
+      quantity: item.quantity,
+      totalPrice: item.totalPrice,
+      qty: 1,
+    }));
+    const totalAmount = cart.reduce(
+      (sum, item) => sum + item.price * item.quantity,
+      0
+    );
+
+    const paymentDetails = {
+      method: "PayPal",
+      totalAmount: totalAmount,
+      currency: "USD",
+      transactionId: "dw", // Optional, will be set after PayPal response
+      payerEmail: "usa@gmail.com", // Optional
+      status: "Pending", // Default status
+    };
+    console.log("Billing Values:", billingvalues);
+    console.log("Shipping Values:", shippingvalues);
+    console.log("Cart Data:", cartdata);
+    console.log("Payment Details:", paymentDetails);
+    console.log("Userdata:", userDataCheckout);
+
+    try {
+      // Call the Checkout API with both cart data and payment details
+      const response = await checkout.post("/", {
+        user: userDataCheckout,
+        checkoutProducts: cartdata,
+        billingAddress: billingvalues,
+        shippingAddress: shippingvalues,
+        payment: paymentDetails,
+      });
+      console.log("Checkout Successful:", response.data);
+    } catch (error) {
+      console.error("Error during checkout:", error);
+    }
+  };
+
   return (
     <div className="checkout-container">
+      <div className="check-below"></div>
       <div className="check-below">
-        <p className="check-txt">CHECKOUT BELOW</p>
+        <p className="check-txt">CHECKOUT</p>
       </div>
-      <Row gutter={[16, 16]}>
-        {/* Column 1: Shipping Address */}
-        <Col xs={24} sm={12} md={8}>
-          <div className="ship-address">
-            <p className="shipping-txt">Shipping Address</p>
-          </div>
-          <Form layout="vertical">
+      <Form layout="vertical" onFinish={onFinish}>
+        <Row flex justify={"space-evenly"}>
+          {/* Column 1: Billing Address */}
+          <Col xs={24} sm={12} md={7} className="border-column">
+            <div className="ship-address">
+              <p className="shipping-txt">Billing Address</p>
+            </div>
             <Form.Item
-              label="Email Address"
-              className="input-heading-email"
-              rules={[{ required: true, message: "Please enter your email!" }]}
-            >
-              <div style={{ display: "flex", alignItems: "center" }}>
-                <Input className="input-email" placeholder="Email" />
-                <IconMessage />
-              </div>
-            </Form.Item>
-            {[
-              "First Name",
-              "Last Name",
-              "Street Address",
-              "City",
-              "Zip/Postal Code",
-              "Phone Number",
-            ].map((label) => (
-              <Form.Item
-                key={label}
-                label={label}
-                className="input-heading"
-                rules={[
-                  {
-                    required: true,
-                    message: `Please enter your ${label.toLowerCase()}!`,
-                  },
-                ]}
-              >
-                <Input
-                  className="input"
-                  placeholder={`Enter your ${label.toLowerCase()}`}
-                />
-              </Form.Item>
-            ))}
-            <Form.Item
-              label="Country"
+              label="First Name"
               className="input-heading"
+              name="billfirstname"
               rules={[
-                { required: true, message: "Please select your country!" },
+                { required: true, message: "Please enter your first name!" },
               ]}
             >
-              <Select placeholder="Select your country" required>
-                <Option value="usa">United States</Option>
-                <Option value="canada">Canada</Option>
-                <Option value="uk">United Kingdom</Option>
-                <Option value="australia">Australia</Option>
-              </Select>
+              <Input className="input" placeholder="Enter your first name" />
+            </Form.Item>
+            <Form.Item
+              label="Middle Name"
+              className="input-heading"
+              name="billmiddlename"
+            >
+              <Input
+                className="input"
+                placeholder="Enter your middle name (optional)"
+              />
+            </Form.Item>
+            <Form.Item
+              label="Last Name"
+              className="input-heading"
+              name="billlastname"
+              rules={[
+                { required: true, message: "Please enter your last name!" },
+              ]}
+            >
+              <Input className="input" placeholder="Enter your last name" />
+            </Form.Item>
+            <Form.Item
+              label="Company Name"
+              className="input-heading"
+              name="billcompanyname"
+            >
+              <Input
+                className="input"
+                placeholder="Enter your company name (optional)"
+              />
+            </Form.Item>
+            <Form.Item
+              label="Phone Number"
+              className="input-heading"
+              name="billphonenumber"
+              rules={[
+                {
+                  required: true,
+                  message: "Please enter your phone number!",
+                },
+              ]}
+            >
+              <Input className="input" placeholder="Enter your phone number" />
+            </Form.Item>
+            <Form.Item
+              label="Street Address"
+              className="input-heading"
+              name="billaddress"
+              rules={[
+                { required: true, message: "Please enter your address!" },
+              ]}
+            >
+              <Input className="input" placeholder="Enter your address" />
+            </Form.Item>
+            <Form.Item
+              label="City"
+              className="input-heading"
+              name="billcity"
+              rules={[{ required: true, message: "Please enter your city!" }]}
+            >
+              <Input className="input" placeholder="Enter your city" />
             </Form.Item>
             <Form.Item
               label="State/Province"
               className="input-heading"
+              name="billstate"
               rules={[
                 {
                   required: true,
-                  message: "Please enter your state or province!",
+                  message: "Please select your state or province!",
                 },
               ]}
             >
-              <Select placeholder="Select your state/province" required>
+              <Select placeholder="Select your state/province">
                 <Option value="california">California</Option>
                 <Option value="ontario">Ontario</Option>
                 <Option value="london">London</Option>
                 <Option value="new-south-wales">New South Wales</Option>
               </Select>
             </Form.Item>
-          </Form>
-        </Col>
-
-        {/* Column 2: Shipping and Payment Method */}
-        <Col xs={24} sm={12} md={8}>
-          <div className="shipping-method">
-            <div className="ship-address">
-              <p className="shipping-txt">Shipping Method</p>
-            </div>{" "}
-            <p className="enter-txt">
-              Enter a valid shipping address to calculate shipping options.
-              Ensure zip code and country are correct.
-            </p>
-            <div className="ship-address">
-              <p className="shipping-txt">Payment Method</p>
-            </div>{" "}
-            <Radio.Group onChange={handlePaymentChange} value={paymentMethod}>
-              <Card className="card1" hoverable>
-                <Radio value="credit-card">
-                  Credit Card (Authorize.Net CIM)
-                </Radio>
-                {paymentMethod === "credit-card" && (
-                  <div className="payment-details">
-                    <img
-                      src="../../images/visacard.png"
-                      alt="Visa Card"
-                      className="card-image"
-                    />
-                    <Form.Item
-                      label="Card Number"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please enter your card number!",
-                        },
-                      ]}
-                    >
-                      <Input placeholder="Enter your card number" />
-                    </Form.Item>
-                    <Form.Item label="Expiry Date">
-                      <div
-                        style={{
-                          display: "flex",
-                          justifyContent: "space-between",
-                        }}
-                      >
-                        <Select placeholder="MM" className="expiry-select">
-                          {[...Array(12)].map((_, index) => (
-                            <Option key={index} value={index + 1}>
-                              {(index + 1).toString().padStart(2, "0")}
-                            </Option>
-                          ))}
-                        </Select>
-                        <Select placeholder="YY" className="expiry-select">
-                          {years.map((year) => (
-                            <Option key={year} value={year}>
-                              {year.toString().slice(-2)}
-                            </Option>
-                          ))}
-                        </Select>
-                      </div>
-                    </Form.Item>
-                    <Form.Item
-                      label="CVV"
-                      rules={[{ required: true, message: "Please enter CVV!" }]}
-                    >
-                      <Input placeholder="Enter CVV" />
-                    </Form.Item>
-                  </div>
-                )}
-              </Card>
-              <Card className="card2" hoverable>
-                <Radio value="paypal">
-                  <img
-                    src="../../images/paypal.png"
-                    alt="PayPal"
-                    className="paypal-image"
-                  />
-                  PayPal Express
-                </Radio>
-                {paymentMethod === "paypal" && (
-                  <p>You will be redirected to the PayPal website.</p>
-                )}
-              </Card>
-            </Radio.Group>
-          </div>
-        </Col>
-
-        {/* Column 3: Order Summary */}
-        <Col xs={24} sm={12} md={8}>
-          <div className="summary-main">
-            <p className="order-summary-txt">Order Summary</p>
-            <p
-              className="cart-txt"
-              onClick={toggleDropdown}
-              style={{ cursor: "pointer" }}
+            <Form.Item
+              label="Zip/Postal Code"
+              name="billzipcode"
+              className="input-heading"
+              rules={[
+                { required: true, message: "Please enter your zip code!" },
+              ]}
             >
-              2 Items in Cart <DownOutlined />
-            </p>
-            <hr style={{ border: "1px solid gray", margin: "10px 0" }} />
-            {dropdownVisible && (
-              <div className="dropdown-content">
-                <Row>
-                  <Col>
-                    <img
-                      src="../../images/paypal.png"
-                      alt="PayPal"
-                      className="img-item-cart"
-                    />
-                  </Col>
-                  <Col className="cart-dropdown">
-                    <p>Custom Woven Labels</p>
-                    <p>Qty: 5</p>
-                    <p onClick={toggleDropdown1} style={{ cursor: "pointer" }}>
-                      View Details <DownOutlined />
-                    </p>
-                  </Col>
-                  <Col className="amount-cart">
-                    <p className="amount-cart-txt">$46.00</p>
-                  </Col>
+              <Input className="input" placeholder="Enter your zip code" />
+            </Form.Item>
+            <Form.Item
+              label="Country"
+              name="billcountry"
+              className="input-heading"
+              rules={[
+                { required: true, message: "Please select your country!" },
+              ]}
+            >
+              <Select placeholder="Select your country">
+                <Option value="usa">United States</Option>
+                <Option value="canada">Canada</Option>
+                <Option value="uk">United Kingdom</Option>
+                <Option value="australia">Australia</Option>
+              </Select>
+            </Form.Item>
+          </Col>
 
-                  {dropdownVisible1 && (
-                    <div className="dropdown-content2">
-                      {/* Order details wrapped in <p> tags */}
-                      {[
-                        "Area",
-                        "Style",
-                        "Size",
-                        "Backing Options",
-                        "Metallic Thread",
-                        "Size Symbols or Color Versions?",
-                        "Proof Options",
-                        "Turnaround Options",
-                        "Quantity",
-                      ].map((label, index) => (
-                        <div key={index}>
-                          <p>
-                            <strong>{label}</strong>
-                          </p>
-                          <p>
-                            5 x{" "}
-                            {label === "Area"
-                              ? "1 +$40.00"
-                              : label === "Style"
-                              ? "Straight Cut (Flat)"
-                              : "None"}
-                          </p>
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </Row>
-                <hr style={{ border: "1px solid gray", margin: "10px 0" }} />
+          {/* Column 2: Shipping and Payment */}
+          <Col xs={24} sm={12} md={8} className="border-column">
+            <div className="shipping-method">
+              <div className="ship-address">
+                <p className="shipping-txt">Shipping Method</p>
               </div>
-            )}
-            <div className="total-details">
-              <div className="total-item">
-                <p>Cart Subtotal:</p>
-                <p>$100.00</p>
-              </div>
-              <div className="total-item">
-                <p>Shipping Fee:</p>
-                <p>$5.00</p>
-              </div>
-              <div className="total-item">
-                <p>Total:</p>
-                <p>$105.00</p>
-              </div>
+              <Form.Item
+                label="First Name"
+                name="shipFirstName"
+                className="input-heading"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter your first name!",
+                  },
+                ]}
+              >
+                <Input className="input" placeholder="Enter your first name" />
+              </Form.Item>
+              <Form.Item
+                label="Middle Name"
+                name="shipMiddleName"
+                className="input-heading"
+              >
+                <Input
+                  className="input"
+                  placeholder="Enter your middle name (optional)"
+                />
+              </Form.Item>
+              <Form.Item
+                label="Last Name"
+                name="shipLastName"
+                className="input-heading"
+                rules={[
+                  { required: true, message: "Please enter your last name!" },
+                ]}
+              >
+                <Input className="input" placeholder="Enter your last name" />
+              </Form.Item>
+              <Form.Item
+                label="Company Name"
+                name="shipCompanyName"
+                className="input-heading"
+              >
+                <Input
+                  className="input"
+                  placeholder="Enter your company name (optional)"
+                />
+              </Form.Item>
+              <Form.Item
+                label="Phone Number"
+                name="shipPhoneNumber"
+                className="input-heading"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please enter your phone number!",
+                  },
+                ]}
+              >
+                <Input
+                  className="input"
+                  placeholder="Enter your phone number"
+                />
+              </Form.Item>
+              <Form.Item
+                label="Street Address"
+                name="shipStreetAddress"
+                className="input-heading"
+                rules={[
+                  { required: true, message: "Please enter your address!" },
+                ]}
+              >
+                <Input className="input" placeholder="Enter your address" />
+              </Form.Item>
+              <Form.Item
+                label="City"
+                name="shipCity"
+                className="input-heading"
+                rules={[{ required: true, message: "Please enter your city!" }]}
+              >
+                <Input className="input" placeholder="Enter your city" />
+              </Form.Item>
+              <Form.Item
+                label="State/Province"
+                name="shipState"
+                className="input-heading"
+                rules={[
+                  {
+                    required: true,
+                    message: "Please select your state or province!",
+                  },
+                ]}
+              >
+                <Select placeholder="Select your state/province">
+                  <Option value="california">California</Option>
+                  <Option value="ontario">Ontario</Option>
+                  <Option value="london">London</Option>
+                  <Option value="new-south-wales">New South Wales</Option>
+                </Select>
+              </Form.Item>
+              <Form.Item
+                label="Zip/Postal Code"
+                name="shipZipCode"
+                className="input-heading"
+                rules={[
+                  { required: true, message: "Please enter your zip code!" },
+                ]}
+              >
+                <Input className="input" placeholder="Enter your zip code" />
+              </Form.Item>
+              <Form.Item
+                label="Country"
+                name="shipCountry"
+                className="input-heading"
+                rules={[
+                  { required: true, message: "Please select your country!" },
+                ]}
+              >
+                <Select placeholder="Select your country">
+                  <Option value="usa">United States</Option>
+                  <Option value="canada">Canada</Option>
+                  <Option value="uk">United Kingdom</Option>
+                  <Option value="australia">Australia</Option>
+                </Select>
+              </Form.Item>
             </div>
-            <div className="btn-main">
-              <Button type="primary" className="place-button">
-                Place Order
+          </Col>
+
+          {/* Column 3: Order Summary */}
+          <Col xs={24} sm={12} md={8}>
+            <div className="summary-main">
+              {/* Payment Button */}
+              <div className="ship-address" style={{ marginTop: "20px" }}>
+                <p className="shipping-txt">Payment Method</p>
+              </div>
+              <Button
+                type="primary"
+                style={{
+                  backgroundColor: "#808080",
+                  borderColor: "#808080",
+                  color: "#fff",
+                  width: "100%",
+                  padding: "10px",
+                  fontSize: "16px",
+                  marginTop: "20px",
+                  marginBottom: "3rem",
+                }}
+                onClick={redirectToPayPal}
+              >
+                Proceed to Pay
               </Button>
+              <p className="order-summary-txt">Order Summary</p>
+              <p
+                className="cart-txt"
+                onClick={toggleDropdown}
+                style={{ cursor: "pointer" }}
+              >
+                {cart.length} Items in Cart <DownOutlined />
+              </p>
+              <hr style={{ border: "1px solid gray", margin: "10px 0" }} />
+              {dropdownVisible && (
+                <div className="dropdown-content">
+                  {cart.map((item, index) => {
+                    console.log("Cart Item:", item); // Log the current item in the cart
+                    return (
+                      <Row key={index} style={{ marginBottom: "10px" }}>
+                        <p className="custom-viewedit">{item.name}</p>
+
+                        <Col>
+                          <img
+                            src={item.artwork} // Assuming item has an image property
+                            alt={item.name}
+                            className="img-item-cart"
+                          />
+                        </Col>
+                        <Col className="cart-dropdown">
+                          <p>
+                            Options:
+                            {Array.isArray(item.options)
+                              ? item.options.map((option) => (
+                                  <span key={option._id}>
+                                    {option.title || ""}
+                                  </span>
+                                ))
+                              : "No options"}
+                          </p>{" "}
+                          <p>Size: {item.size}</p>
+                          <p>Style: {item.style}</p>
+                          <p>Comments: {item.comments}</p>
+                          <p>Qty: {item.quantity}</p>
+                        </Col>
+                        <Col className="amount-cart">
+                          <p className="amount-cart-txt">
+                            ${(item.price * item.quantity).toFixed(2)}
+                          </p>
+                        </Col>
+                        <Col>
+                          <Button
+                            type="danger"
+                            onClick={() => removeFromCart(item)}
+                            style={{ marginLeft: "10px" }}
+                          >
+                            Remove
+                          </Button>
+                        </Col>
+                      </Row>
+                    );
+                  })}
+                </div>
+              )}
+              <div className="total-details">
+                <div className="total-item">
+                  <p>Cart Subtotal:</p>
+                  <p>${calculateTotal()}</p>
+                </div>
+                <div className="total-item">
+                  <p>Shipping Fee:</p>
+                  <p></p>
+                </div>
+                <div className="total-item">
+                  <p>Total:</p>
+                  <p>${parseFloat(calculateTotal()).toFixed(2)}</p>
+                </div>
+              </div>
+              <div className="btn-main">
+                <Button
+                  type="primary"
+                  htmlType="submit"
+                  style={{ width: "100%", padding: "20px", marginTop: "20px" }}
+                >
+                  Place Order
+                </Button>
+              </div>
             </div>
-          </div>
-        </Col>
-      </Row>
+          </Col>
+        </Row>
+      </Form>
     </div>
   );
 }

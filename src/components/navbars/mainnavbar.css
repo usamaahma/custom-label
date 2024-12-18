@@ -61,8 +61,9 @@
 }
 
 .mainnav-link {
-  margin-left: 2rem; /* Gap between tabs */
-  color: #231f20;
+  font-size: 0.9rem;
+  margin-left: 1rem; /* Gap between tabs */
+   color: #231f20;
   font-weight: bold !important;
 }
 .mainnav-quote-button1 {

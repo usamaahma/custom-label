@@ -4,65 +4,30 @@ import {
   Input,
   Button,
   InputNumber,
-  Upload,
   Select,
   message,
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
-import { Zoom } from "react-awesome-reveal";
-import { getquote } from "../utils/axios";
-import { Storage } from "../firebaseConfig";
+import { Storage } from "../../firebaseConfig";
 import {
   uploadBytes,
   ref,
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirecting
+import { getquote } from "../../utils/axios";
 
-import "./getaquote.css";
+import "./beatquote.css";
 
 const { TextArea } = Input;
 const { Option } = Select;
 
-function Getaquote1() {
-  const navigate = useNavigate(); // Initialize navigate hook for redirection
+function Beatquote() {
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+
   const date = new Date();
-
-  const onFinish = (values) => {
-    console.log("Success:", values);
-
-    const data1 = {
-      name: values.name,
-      email: values.email,
-      product: values.products,
-      artwork: [url],
-      width: String(values.width), // Convert to string
-      height: String(values.height), // Convert to string
-      quantity: String(values.quantity), // Convert to string
-      phonenumber: values.contactNumber,
-      comments: values.comments,
-    };
-
-    getquote({
-      method: "post",
-      data: data1,
-    })
-      .then((res) => {
-        console.log("success", res);
-        message.success("Thank you for considering us!");
-        
-        // Redirect to the thank-you page after successful submission
-        navigate("/thank-you"); 
-      })
-      .catch(() => {
-        message.error("something went wrong, please try again!");
-      });
-  };
-
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   const handlesubmit = (e) => {
@@ -98,35 +63,54 @@ function Getaquote1() {
         });
     }
   };
+  const onFinish = (values) => {
+    console.log("Success:", values);
+
+    const data1 = {
+      name: values.name,
+      email: values.email,
+      product: values.products,
+      artwork: [url],
+      width: String(values.width),
+      height: String(values.height),
+      quantity: String(values.quantity),
+      phonenumber: values.contactNumber,
+      comments: values.comments,
+    };
+    getquote({
+      method: "post",
+      data: data1,
+    })
+      .then((res) => {
+        console.log("success", res);
+        message.success("Thank you for considering us!");
+      })
+      .catch(() => {
+        message.error("Something went wrong, please try again!");
+      });
+  };
 
   return (
-    <div className="customform-wrapper">
-      <div className="customform-container">
-        <h2 className="customform-heading">Get a Quote</h2>
-        <p className="customform-quote-text">
+    <div className="beatquote-customform-wrapper">
+      <h2 className="beatquote-customform-heading">Get a Quote</h2>
+      <div className="beatquote-customform-container">
+        <p className="beatquote-customform-quote-text">
           Receive the lowest pricing & work with a team of experts.
         </p>
 
-        <Zoom cascade>
-          <img
-            src="../../images/uploadform.png"
-            alt="Approve"
-            className="customform-upload-image"
-          />
-        </Zoom>
-        <p className="customform-upload">Upload Artwork</p>
-        <p className="customform-upload">
-          Acceptable file types: png, jpg, jpeg, gif, pdf, ai, psd, svg
-        </p>
         <Form layout="vertical" onFinish={onFinish}>
           <Form.Item
-            label={<span className="customform-label">Select Products</span>}
+            label={
+              <span className="beatquote-customform-label">
+                Select Products
+              </span>
+            }
             name="products"
             rules={[{ required: true, message: "Please select a product!" }]}
           >
             <Select
               placeholder="Select a product"
-              className="customform-select"
+              className="beatquote-customform-select"
             >
               <Option value="Express Clothing Labels">
                 Express Clothing Labels
@@ -139,47 +123,54 @@ function Getaquote1() {
           </Form.Item>
 
           <input type="file" onChange={handlesubmit} />
-          <img src={url} alt="image" style={{ width: "5rem", height: "5rem" }} />
+          <img src={url} alt="image" style={{width:"5rem",height:"5rem"}}/>
 
-          <div className="customform-item-row">
+          <div className="beatquote-customform-item-row">
             <Form.Item
-              label={<span className="customform-label">Width (inches)</span>}
+              label={<span className="beatquote-customform-label">Width</span>}
               name="width"
               rules={[{ required: true, message: "Please enter the width!" }]}
             >
               <InputNumber
                 placeholder="Enter width"
-                className="customform-input-number"
+                className="beatquote-customform-input-number"
                 min={1}
               />
             </Form.Item>
 
             <Form.Item
-              label={<span className="customform-label">Height (inches)</span>}
+              label={<span className="beatquote-customform-label">Height</span>}
               name="height"
               rules={[{ required: true, message: "Please enter the height!" }]}
             >
               <InputNumber
                 placeholder="Enter height"
-                className="customform-input-number"
+                className="beatquote-customform-input-number"
+                min={1}
+              />
+            </Form.Item>
+
+            <Form.Item
+              label={
+                <span className="beatquote-customform-label">Quantity</span>
+              }
+              name="quantity"
+              rules={[
+                { required: true, message: "Please enter the quantity!" },
+              ]}
+            >
+              <InputNumber
+                placeholder="Enter quantity"
+                className="beatquote-customform-input-number"
                 min={1}
               />
             </Form.Item>
           </div>
 
           <Form.Item
-            label={<span className="customform-label">Quantity</span>}
-            name="quantity"
-            rules={[{ required: true, message: "Please enter the quantity!" }]}
-          >
-            <InputNumber
-              placeholder="Enter quantity"
-              className="customform-input-number"
-              min={1}
-            />
-          </Form.Item>
-          <Form.Item
-            label={<span className="customform-label">Contact Number</span>}
+            label={
+              <span className="beatquote-customform-label">Contact Number</span>
+            }
             name="contactNumber"
             rules={[
               { required: true, message: "Please enter your contact number!" },
@@ -187,32 +178,37 @@ function Getaquote1() {
               {
                 pattern: /^[0-9]+$/,
                 message: "Contact number must be numeric!",
-              }, // Ensures only digits are allowed
+              },
             ]}
           >
             <Input
               placeholder="Enter Your Contact Number"
-              className="customform-input-number"
-              type="tel" // Use 'tel' to open numeric keypad
-              maxLength={11} // Limit input to 11 characters
+              className="beatquote-customform-input-number"
+              type="tel"
+              maxLength={11}
               onKeyPress={(event) => {
                 if (!/[0-9]/.test(event.key)) {
-                  event.preventDefault(); // Prevent non-numeric input
+                  event.preventDefault();
                 }
               }}
             />
           </Form.Item>
 
           <Form.Item
-            label={<span className="customform-label">Name</span>}
+            label={<span className="beatquote-customform-label">Name</span>}
             name="name"
             rules={[{ required: true, message: "Please enter your name!" }]}
           >
-            <Input placeholder="Enter your name" className="customform-input" />
+            <Input
+              placeholder="Enter your name"
+              className="beatquote-customform-input"
+            />
           </Form.Item>
 
           <Form.Item
-            label={<span className="customform-label">Email Address</span>}
+            label={
+              <span className="beatquote-customform-label">Email Address</span>
+            }
             name="email"
             rules={[
               { required: true, message: "Please enter your email!" },
@@ -221,19 +217,19 @@ function Getaquote1() {
           >
             <Input
               placeholder="Enter your email address"
-              className="customform-input"
+              className="beatquote-customform-input"
             />
           </Form.Item>
 
           <Form.Item
-            label={<span className="customform-label">Comments</span>}
+            label={<span className="beatquote-customform-label">Comments</span>}
             name="comments"
             rules={[{ required: true, message: "Please add your comments!" }]}
           >
             <TextArea
               placeholder="Your comments"
               rows={4}
-              className="customform-textarea"
+              className="beatquote-customform-textarea"
             />
           </Form.Item>
 
@@ -241,23 +237,24 @@ function Getaquote1() {
             <Button
               htmlType="submit"
               block
-              className="customform-submit-button"
+              className="beatquote-customform-submit-button"
             >
               Submit
             </Button>
           </Form.Item>
         </Form>
 
-        <h6 className="customform-h6-form">
+        <h6 className="beatquote-customform-h6-form">
           In a Hurry? Give us a call at{" "}
-          <a href="tel:+1234567890" className="customform-call-link">
+          <a href="tel:+1234567890" className="beatquote-customform-call-link">
             +123-456-7890
           </a>
         </h6>
+
         <hr />
       </div>
     </div>
   );
 }
 
-export default Getaquote1;
+export default Beatquote;

@@ -1,23 +1,25 @@
 import React, { useState, useEffect } from "react";
-import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
 import {
   Button,
   Card,
-  Col,
   Breadcrumb,
   Select,
-  Row,
   Slider,
-  Progress,
   message,
   Upload,
+  Form,
 } from "antd";
+import { designquote } from "../../utils/axios";
 import { SketchPicker } from "react-color";
 import "../expressclothing/expressmain.css";
 import { Slide } from "react-awesome-reveal";
-import { GiCloudUpload } from "react-icons/gi";
 import "../expressclothing/tablescart.css";
+import html2canvas from "html2canvas";
+import { Storage } from "../../firebaseConfig";
+import { ref, getDownloadURL, uploadBytesResumable } from "firebase/storage";
+import { useAuth } from "../../context/authcontext";
+import { useNavigate } from "react-router-dom"; // Import the useNavigate hook
 
 const { Dragger } = Upload;
 const props = {
@@ -63,7 +65,10 @@ const imagesData = [
 const { Option } = Select;
 
 function Wovenlabeldesc() {
+  const { isLoggedIn } = useAuth(); // Access the login state and user info
+  const navigate = useNavigate(); // Initialize the navigation hook
   const { addToCart } = useCart();
+  const [form] = Form.useForm();
   useEffect(() => {
     const stickyDiv = document.querySelector(".sticky-div");
 
@@ -95,6 +100,12 @@ function Wovenlabeldesc() {
   const [fontSize1, setFontSize1] = useState(16); // Default font size for text2
   const [fontFamily, setFontFamily] = useState("Arial"); // Default font family
   const defaultText1 = "Your Company"; // Default text for the first input
+  const [selectedBorder, setSelectedBorder] = useState("None"); // Default border type is "None"
+  const [image, setImage] = useState("");
+  // Handle image click to change border style
+  const handleImageClick = (borderType) => {
+    setSelectedBorder(borderType); // Change border based on the clicked image
+  };
 
   const handleChangeComplete = (color) => {
     setColor(color.hex);
@@ -175,8 +186,116 @@ function Wovenlabeldesc() {
     e.target.style.transform = "scale(1)";
     e.target.style.transformOrigin = "center center";
   };
-  const handleAddToCart = (item) => {
-    addToCart(item);
+  const handleAddToCart = async (item) => {
+    return new Promise((resolve, reject) => {
+      // Select the .sticky-blue-inside div
+      const targetElement = document.querySelector(".sticky-blue-inside");
+
+      if (targetElement) {
+        // Capture the selected element as an image
+        html2canvas(targetElement).then((canvas) => {
+          // Convert the canvas to a Blob
+          canvas.toBlob((blob) => {
+            if (blob) {
+              const date = new Date();
+              const timestamp =
+                date.getHours() +
+                ":" +
+                date.getMinutes() +
+                ":" +
+                date.getSeconds();
+
+              const imageRef = ref(
+                Storage,
+                `images/${item.name}_${timestamp}.png`
+              ); // Create a unique reference for the image
+
+              // Upload the Blob to Firebase Storage
+              const uploadTask = uploadBytesResumable(imageRef, blob);
+
+              uploadTask.on(
+                "state_changed",
+                (snapshot) => {
+                  const progress = Math.round(
+                    (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+                  );
+                  console.log("Upload progress:", progress, "%");
+                },
+                (error) => {
+                  console.error("Upload error:", error);
+                  reject(error); // Reject the promise on error
+                },
+                async () => {
+                  // Get the download URL after upload completes
+                  try {
+                    const downloadUrl = await getDownloadURL(imageRef);
+                    console.log("Image URL:", downloadUrl);
+                    resolve(downloadUrl); // Resolve with the image URL
+                  } catch (error) {
+                    console.error("Error getting download URL:", error);
+                    reject(error); // Reject the promise on error
+                  }
+                }
+              );
+            } else {
+              console.error("Failed to create blob from canvas.");
+              reject(new Error("Failed to create blob from canvas."));
+            }
+          }, "image/png");
+        });
+      } else {
+        console.error("Element '.sticky-blue-inside' not found.");
+        reject(new Error("Element '.sticky-blue-inside' not found."));
+      }
+    });
+  };
+
+  const onFinish = async (values) => {
+    if (!isLoggedIn) {
+      message.error("Please log in or register to proceed.");
+      setTimeout(() => {
+        navigate("/login"); // Redirect to the login page
+      }, 1000); // Add a slight delay to allow the message to display
+      return; // Stop further execution of this function
+    }
+
+    const loggeduser = JSON.parse(localStorage.getItem("user") || "{}");
+    try {
+      // Wait for the image URL to be ready (if needed)
+      const image = await handleAddToCart({
+        id: 1,
+        name: values.wovenLabel,
+      });
+
+      console.log("Image ready:", values.wovenLabel);
+
+      const data1 = {
+        user: [
+          {
+            userId: loggeduser.id,
+            name: loggeduser.name,
+            email: loggeduser.email,
+            phonenumber: loggeduser.phonenumber,
+          },
+        ],
+        productName: values.wovenLabel, // Ensure this value is dynamic, not a static string
+        image: image, // Use the resolved image URL
+        size: selectedData.size,
+        turnaround: selectedData.turnaroundOptions,
+      };
+
+      // Call the API with the data
+      const res = await designquote({
+        method: "post",
+        data: data1,
+      });
+
+      console.log("API success response:", res);
+      message.success("Thank you for considering us!");
+    } catch (error) {
+      console.error("Error:", error);
+      message.error("Something went wrong, please try again!");
+    }
   };
 
   return (
@@ -274,7 +393,6 @@ function Wovenlabeldesc() {
               We provide a free digital proof and photo sample for approval
               before production, ensuring 100% satisfaction.
             </p>
-
             <div className="image-row">
               <div className="image-item">
                 <img
@@ -441,31 +559,34 @@ function Wovenlabeldesc() {
                 disableAlpha // Optional: Disable alpha (transparency) slider
               />
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Border?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              {cardData.map((card) => (
-                <div key={card.id} className="card-container">
-                  <Card
-                    bordered={false}
-                    style={{
-                      width: "11rem",
-                      height: "12rem",
-                      background: "#FAFAFA",
-                    }}
-                  >
-                    <img
-                      alt={card.title}
-                      src={card.imgSrc}
-                      className="image-card-express"
-                    />
-                    <p>
-                      {card.title} <br /> {card.subtitle}
-                    </p>
-                  </Card>
-                </div>
-              ))}
+            <div>
+              <div className="size-txt">
+                <h3 className="simpletable-heading">Border?</h3>
+              </div>
+
+              <div className="divs-tableexpress">
+                {cardData.map((card) => (
+                  <div key={card.id} className="card-container">
+                    <Card
+                      bordered={false}
+                      style={{
+                        width: "11rem",
+                        height: "12rem",
+                        background: "#FAFAFA",
+                      }}
+                    >
+                      <img
+                        alt={card.title}
+                        src={card.imgSrc}
+                        className="image-card-express"
+                        style={{ width: "100%", height: "auto" }}
+                        onClick={() => handleImageClick(card.title)} // Trigger border change on image click
+                      />
+                      <p>{card.title}</p>
+                    </Card>
+                  </div>
+                ))}
+              </div>
             </div>
             <div className="size-txt">
               <h3 className="simpletable-heading">Turnaround Options?</h3>
@@ -494,12 +615,6 @@ function Wovenlabeldesc() {
                 <p>Business Days</p>
               </Card>
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Quantity?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <LastTable1 />
-            </div>
           </div>
         </div>
 
@@ -511,70 +626,88 @@ function Wovenlabeldesc() {
             <div className="sticky-first">
               <p>Your Instant Quote</p>
             </div>
-            <div className="sticky-blue-1">
-              <p className="marg-bot">Woven Text Labels</p>
-              <div className="sticky-blue-inside">
-                <div
-                  className="dynamic-label-text"
-                  style={{
-                    fontFamily: fontFamily,
-                    backgroundColor: color, // Set the background color to the selected color for the entire div
-                    padding: "10px", // Optional: Add padding for better spacing
-                  }}
-                >
-                  <p
-                    style={{
-                      fontSize: fontSize, // Apply fontSize1 to text1
-                      margin: "0", // Remove margin for consistent spacing
-                    }}
-                  >
-                    {text1 || defaultText1}
-                  </p>
-                  <p
-                    style={{
-                      fontSize: fontSize1, // Apply fontSize2 to text2
-                      margin: "0", // Remove margin for consistent spacing
-                    }}
-                  >
-                    {text2}
-                  </p>
+            <Form form={form} onFinish={onFinish} layout="vertical">
+              <Form.Item name="wovenLabel" initialValue="Woven Text Labels">
+                <div className="sticky-blue-1">
+                  <p className="marg-bot">Woven Text Labels</p>
+                  <div className="sticky-blue-inside">
+                    <div
+                      className="dynamic-label-text"
+                      style={{
+                        fontFamily: fontFamily,
+                        backgroundColor: color, // Set the background color to the selected color for the entire div
+                        padding: "10px", // Optional: Add padding for better spacing
+                        borderRadius:
+                          selectedBorder === "Rounded" ? "1rem" : "0", // Apply rounded or square border
+                        border:
+                          selectedBorder !== "None"
+                            ? "2px solid white"
+                            : "none", // Apply border if not "None"
+                      }}
+                    >
+                      <p
+                        style={{
+                          fontSize: fontSize, // Apply fontSize1 to text1
+                          margin: "0", // Remove margin for consistent spacing
+                        }}
+                      >
+                        {text1 || defaultText1}
+                      </p>
+                      <p
+                        style={{
+                          fontSize: fontSize1, // Apply fontSize2 to text2
+                          margin: "0", // Remove margin for consistent spacing
+                        }}
+                      >
+                        {text2}
+                      </p>
+                    </div>
+                  </div>{" "}
                 </div>
-              </div>{" "}
-            </div>
-
-            <div className="sticky-blue">
-              <div className="sticky-blue-inside">
-                <p>Size:</p>
-                <p>{selectedData.size}</p>
-              </div>
-            </div>
-            <div className="sticky-blue">
-              <div className="sticky-blue-inside">
-                <p>Turnaround Options:</p>
-                <p>{selectedData.turnaroundOptions}</p>
-              </div>
-            </div>
-
-            <div className="sticky-blue">
-              <div className="sticky-blue-inside">
-                <p>{selectedData.quantity}</p>
-                <p>{selectedData.price}</p>
-                <p>{selectedData.totalPrice}</p>
-              </div>
-            </div>
-            <div className="sticky-blue">
-              <div style={{ display: "flex", justifyContent: "center" }}>
-                <Button
-                  onClick={() =>
-                    handleAddToCart({ id: 1, name: "Product 1", price: 10.1 })
-                  }
-                  className="button-tablecart"
-                >
-                  <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}
-                  ADD TO CART
-                </Button>
-              </div>
-            </div>
+              </Form.Item>
+              <Form.Item name="size" initialValue={selectedData?.size}>
+                <div className="sticky-blue">
+                  <div className="sticky-blue-inside">
+                    <p>Size:</p>
+                    <p>{selectedData.size}</p>
+                  </div>
+                </div>
+              </Form.Item>
+              <Form.Item
+                name="turnaroundOptions"
+                initialValue={selectedData?.turnaroundOptions}
+              >
+                <div className="sticky-blue">
+                  <div className="sticky-blue-inside">
+                    <p>Turnaround Options:</p>
+                    <p>{selectedData.turnaroundOptions}</p>
+                  </div>
+                </div>
+              </Form.Item>
+              <Form.Item>
+                <div className="sticky-blue">
+                  <div style={{ display: "flex", justifyContent: "center" }}>
+                    <Button
+                      htmlType="submit"
+                      onClick={() =>
+                        handleAddToCart({
+                          id: 1,
+                          name: "Product 1",
+                          price: 10.1,
+                        })
+                      }
+                      className="button-tablecart"
+                    >
+                      <i
+                        className="fa fa-cart-arrow-down"
+                        aria-hidden="true"
+                      ></i>{" "}
+                      Get Pricing
+                    </Button>
+                  </div>
+                </div>
+              </Form.Item>
+            </Form>
             <div>
               <div className="sticky-help">
                 <p>Need Help?</p>

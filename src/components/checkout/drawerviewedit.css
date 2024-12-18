@@ -1,0 +1,96 @@
+/* Overall Drawer Styles */
+.main-view-cart {
+    display: flex;
+    flex-direction: column; /* Make everything in a single column */
+    padding: 20px;
+  }
+  
+  .cart-item-column {
+    text-align: center;
+    margin-bottom: 20px; /* Add some spacing between item and other sections */
+  }
+  
+  .item-header {
+    font-weight: bold;
+    font-size: 1.2rem;
+  }
+  
+  .image-viewcart {
+    width: 40%; /* Limit image size */
+    height: auto;
+  }
+  
+  .cart-other-columns {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .cart-details-column,
+  .cart-price-column,
+  .cart-summary-column {
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .cart-details-column {
+    background-color: #f9f9f9;
+  }
+  
+  .cart-price-column,
+  .cart-summary-column {
+    background-color: #fafafa;
+  }
+  
+  .cart-item-detail {
+    margin-bottom: 10px;
+  }
+  
+  .qty-input {
+    width: 60px;
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  .subtotal-value,
+  .price-value {
+    font-weight: bold;
+    color: #000;
+  }
+  
+  .summary-viewedit {
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 10px;
+  }
+  
+  .estimated-view {
+    font-size: 14px;
+  }
+  
+  .sub-viewed,
+  .order-viewed {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .sub-viewed p,
+  .order-viewed p {
+    margin: 5px 0;
+  }
+  
+  .Button1-viewed {
+    padding: 10px;
+    background-color: rgb(95,111,101);
+    color: white;
+    border-radius: 5px;
+    border-color: #6b6a6a;
+    cursor: pointer;
+  }
+  
+  .Button1-viewed:hover {
+    background-color: #40a9ff;
+    border-color: #000;
+  }
+  

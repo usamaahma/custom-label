@@ -2,22 +2,30 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "antd";
 import { Button } from "react-bootstrap";
 import { FaFire } from "react-icons/fa";
+import { products } from "../utils/axios"; // Alias the imported products to avoid naming conflicts
 import "./custompatches.css";
 
 function Customclothing() {
-  const images = [
-    { src: "../../images/x-small.jpg", title: "Custom Woven Labels" },
-    { src: "../../images/x-label.jpg", title: "Heat Transfer Labels" },
-    { src: "../../images/x-small.jpg", title: "Cotton Labels" },
-    { src: "../../images/x-label.jpg", title: "Custom Woven Labels" },
-    { src: "../../images/x-small.jpg", title: "Heat Transfer Labels" },
-    { src: "../../images/x-label.jpg", title: "Cotton Labels" },
-    { src: "../../images/x-small.jpg", title: "Custom Woven Labels" },
-  ];
+  const [cardsData, setCardsData] = useState([]); // Store fetched product data
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
   const [slidesToShow, setSlidesToShow] = useState(3);
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await products.get("/"); // Use the alias to call the API
+        const data = response.data.results || response.data; // Check the API response structure
+        console.log("Cards data:", data); // Debug API response
+        setCardsData(data); // Update state with fetched data
+      } catch (error) {
+        setError(error.message); // Handle errors
+      } finally {
+        setLoading(false); // Stop loading indicator
+      }
+    };
+    fetchData();
     const updateMedia = () => {
       if (window.innerWidth < 576) {
         setSlidesToShow(1);
@@ -42,19 +50,19 @@ function Customclothing() {
         Custom Clothing Labels
       </Button>
       <Carousel dots={false} slidesToShow={slidesToShow} arrows={true}>
-        {images.map((image, index) => (
+        {cardsData.map((card, index) => (
           <div key={index} className="carousel-slide">
             <div className="image-container">
               <img
-                src={image.src}
+                src={card.image}
                 alt={`Slide ${index}`}
                 className="carousel-image"
               />
               <h3 className="carousel-title-1">
-                {image.title === "express clothing label" && (
+                {card.title === "express clothing label" && (
                   <FaFire style={{ color: "red", marginRight: "8px" }} />
                 )}
-                {image.title}
+                {card.title}
               </h3>
             </div>
           </div>

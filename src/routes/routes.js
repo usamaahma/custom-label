@@ -19,8 +19,7 @@ import Expressclothing from "../pages/expressclothing.js";
 import Checkoutbelow1 from "../components/checkout/checkoutbelow.js";
 import CustomWovenPage from "../pages/customwovenpage.js";
 import Vieweditcart from "../components/checkout/vieweditcart.js";
-import Hang1 from "../components/hantagsection/hang.js";
-import Simplehangtagspage from "../pages/simplehangtagspage.js";
+ import Simplehangtagspage from "../pages/simplehangtagspage.js";
 import Wovenlabelpage from "../pages/wovenlabel.js";
 import Satinwovenpage from "../pages/satinwovenpage.js";
 import Fancyhangtagspage from "../pages/fancyhangtagspage.js";
@@ -44,6 +43,15 @@ import NewsletterSubscriptions from "../components/myaccount/newslettersub.js";
 import AccountDetails from "../components/myaccount/accountdetails.js";
 import PaymentOptions from "../components/myaccount/paymentoption.js";
 import "./routes.css"; // Import the CSS file for margin styles
+import ProductDetail from "../components/productdetail/productDetail.js";
+import ThankYouPage from "../components/thankyou/thankyou.js";
+import Blog from "../components/blog/blog.js";
+import Customblog from "../components/blog/customwoven.js";
+import Blogdetail1 from "../components/blog/blogdetail.js";
+import Drawerviewedit from "../components/checkout/drawerviewedit.js";
+import Hangtags from "../components/clothingsection/Hangtags.js";
+import HangtagDetail from "../components/productdetail/hangtagDetail.js";
+import Thankyou1 from "../components/thankyou.js";
 
 const AppRoutes = () => {
   return (
@@ -55,7 +63,6 @@ const AppRoutes = () => {
         <div className="routes-margin">
           {" "}
           {/* Add margin top here */}
-          
           <Routes>
             <Route
               path="/my-account"
@@ -70,7 +77,7 @@ const AppRoutes = () => {
                 path="account-dashboard"
                 element={
                   <PrivateRoute>
-                    <Dashboard />
+                     <Dashboard />
                   </PrivateRoute>
                 }
               />
@@ -123,7 +130,6 @@ const AppRoutes = () => {
                 }
               />
             </Route>
-
             {/* Public Routes: Accessible to everyone */}
             <Route path="/" element={<Landingpage />} />
             <Route path="/login" element={<Login />} />
@@ -143,12 +149,13 @@ const AppRoutes = () => {
             <Route path="/checkout" element={<Checkoutbelow1 />} />
             <Route path="/customwoven" element={<CustomWovenPage />} />
             <Route path="/view-and-edit-cart" element={<Vieweditcart />} />
-            <Route path="/custom-hangtags" element={<Hang1 />} />
+            <Route path="/custom-hangtags" element={<Hangtags />} />
             <Route path="/simple-hangtags" element={<Simplehangtagspage />} />
             <Route path="/woven-text-label" element={<Wovenlabelpage />} />
             <Route path="/satin-woven" element={<Satinwovenpage />} />
             <Route path="/fancy-hangtags" element={<Fancyhangtagspage />} />
             <Route path="/about-us" element={<Aboutpage />} />
+            <Route path="/thank-you" element={<Thankyou1 />} />
             <Route
               path="/custom-care-label"
               element={<CustomCareLabelPage />}
@@ -165,9 +172,16 @@ const AppRoutes = () => {
             <Route path="/custom-tyvek-label" element={<Customtyvekpage />} />
             <Route path="/tpu-labels" element={<Tpulabelspage1 />} />
             <Route path="/faqs" element={<Faq1 />} />
-            <Route path="/custom-heat-labels" element={<Customheatpage />} />
+            <Route path="/custom-heat-labels" element={<Customheatpage />} />   
             <Route path="/privacy-policy" element={<Privacypolicy1 />} />
-
+            <Route path="/thank-you" element={<ThankYouPage />} /> 
+            <Route path="/blogs" element={<Blog />} />     
+            <Route path="/custom-blogs" element={<Customblog />} />        
+            <Route path="/product/:productName" element={<ProductDetail />} />
+            <Route path="/drawer-view-edit" element={<Drawerviewedit />} />
+            <Route path="/hangtag/:productName" element={<HangtagDetail />} />
+            <Route path="/blog/:blogname" element={<Blogdetail1 />} />
+            {/* This will display the product detail based on the ID */}
             {/* Catch all route for 404 - redirect to home */}
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>

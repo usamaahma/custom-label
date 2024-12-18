@@ -1,0 +1,50 @@
+.ten-container{
+    padding: 50px;
+  }
+  
+  .ten-foodpack {
+      display: flex; /* Use flexbox to align items in a row */
+      align-items: center; /* Center items vertically */
+    }
+    
+    .food-icon {
+      margin-right: 0.5rem; /* Space between icon and text */
+    }
+    
+    .food-txt {
+      margin: 0; /* Remove default margin */
+    }
+    .ten-title {
+      font-weight: bold; /* Make the title bold */
+      font-size: 1.5em; /* Increase font size */
+      padding: 10px 0; /* Add padding above and below */
+      margin: 0; /* Remove default margin */
+    }
+    
+    .ten-des {
+      font-size: 1em; /* Default font size for description */
+      padding: 5px 0; /* Add padding above and below */
+      margin: 0; /* Remove default margin */
+    }
+    
+    /* Responsive Styles */
+    @media (max-width: 768px) {
+      .ten-title {
+        font-size: 1.2em; /* Adjust font size for smaller screens */
+      }
+    
+      .ten-des {
+        font-size: 0.9em; /* Adjust font size for smaller screens */
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .ten-title {
+        font-size: 1.1em; /* Further adjust font size for very small screens */
+      }
+    
+      .ten-des {
+        font-size: 0.85em; /* Further adjust font size for very small screens */
+      }
+    }
+    
