@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import ReCAPTCHA from "react-google-recaptcha";
 import { Form, Input, Button, notification } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { register } from "../../utils/axios";
@@ -9,16 +8,11 @@ import { jwtDecode } from "jwt-decode";
 import "./createaccount.css";
 
 function Create() {
-  const [captchaValue, setCaptchaValue] = useState(null);
   const [form] = Form.useForm();
 
   const validatePassword = (password) => {
     const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
     return password.length >= 8 && specialCharacterRegex.test(password);
-  };
-
-  const onCaptchaChange = (value) => {  
-    setCaptchaValue(value);
   };
 
   const onFinish = async (values) => {
@@ -37,14 +31,6 @@ function Create() {
       notification.error({
         message: "Password Error",
         description: "Passwords do not match.",
-      });
-      return;
-    }
-
-    if (!captchaValue) {
-      notification.error({
-        message: "Captcha Error",
-        description: "Please verify that you are not a robot.",
       });
       return;
     }
@@ -175,12 +161,6 @@ function Create() {
               <Input.Password
                 placeholder="Confirm Password"
                 className="create-input"
-              />
-            </Form.Item>
-            <Form.Item>
-              <ReCAPTCHA
-                sitekey="6LchFVQqAAAAAGiEtOkCRUt6e1z6oZiy4Uoh5DfI" // Use your actual reCAPTCHA v3 site key here
-                onChange={onCaptchaChange}
               />
             </Form.Item>
 
