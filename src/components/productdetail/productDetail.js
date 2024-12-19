@@ -39,6 +39,7 @@ function ProductDetail() {
   const [image, setImage] = useState(null);
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
+  const [description, setDescription] = useState([]);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const date = new Date();
 
@@ -172,7 +173,7 @@ function ProductDetail() {
       comments: selectedData.comments || "",
       id: selectedData.id,
       name: selectedData.name,
-      options: options.map(option => ({
+      options: options.map((option) => ({
         title: option.type || "",
         cardTitle: option.cards ? option.cards[0]?.title || "" : "", // Direct cardTitle from nested cards
       })),
@@ -467,22 +468,29 @@ function ProductDetail() {
         // Ensure the ID is present in localStorage before making the API call
         if (selectedProductId) {
           const response = await products.get(`/${selectedProductId}`);
-          console.log(response.data.descriptions[0]);
-          setProductImages(response.data.descriptions[0].images);
-          setSelectedImage(response.data.descriptions[0].images[0]);
-          setProductDescription(response.data.descriptions[0]); // Set the product description in state
-          setDescriptionText(response.data.descriptions[0].text); // Set the product description in state
-          setDescriptionTitle(response.data.descriptions[0].descriptionTitle);
-          setStyles(response.data.descriptions[0].styles);
+          console.log(response.data._doc);
+          setProductImages(response.data._doc.descriptions[0].images);
+          setSelectedImage(response.data._doc.descriptions[0].images[0]);
+          setProductDescription(response.data._doc.descriptions[0]); // Set the product description in state
+          setDescriptionText(response.data._doc.descriptions[0].text); // Set the product description in state
+          setDescriptionTitle(
+            response.data._doc.descriptions[0].descriptionTitle
+          );
+          setStyles(response.data._doc.descriptions[0].styles);
           const collectedQuantityPrices =
-            response.data.descriptions[0].styles.flatMap((style) =>
+            response.data._doc.descriptions[0].styles.flatMap((style) =>
               style.sizes.flatMap((size) => size.quantityPrice)
             );
 
           // Set the collected data to state
           setAllQuantityPrices(collectedQuantityPrices);
           console.log(collectedQuantityPrices, "All Quantity Prices");
-          setOptions(response.data.descriptions[0].options);
+          setOptions(response.data._doc.descriptions[0].options);
+          setDescription(response.data._doc.productDescription);
+          console.log(
+            response.data._doc.productDescription,
+            "response.data.descriptions[0].productDescription"
+          );
         } else {
           setError("Product ID not found");
         }
@@ -660,6 +668,16 @@ function ProductDetail() {
                 </Button>
               )}
             </div>
+          </div>
+
+          <div>
+            {description.map((desc, index) => (
+              <div key={index}>
+                <h3>{desc.title}</h3>
+                <p>{desc.descriptions}</p>
+                <img src={desc.image} alt="description image" />
+              </div>
+            ))}{" "}
           </div>
         </div>
 
