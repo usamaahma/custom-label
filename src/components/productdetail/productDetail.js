@@ -2,6 +2,19 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Breadcrumb, message, Steps, theme } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
+import { IoMdCloudUpload } from "react-icons/io";
+import { SiStyleshare } from "react-icons/si";
+import { SiZedindustries } from "react-icons/si";
+import { IoOptionsSharp } from "react-icons/io5";
+import { MdProductionQuantityLimits } from "react-icons/md";
+
+import {
+  UserOutlined,
+  PictureOutlined,
+  SettingOutlined,
+  NumberOutlined,
+} from "@ant-design/icons"; // Example icons
+
 import ImageUploader from "../expressclothing/imagedragger";
 import { pendingcheckout, products } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
@@ -172,7 +185,7 @@ function ProductDetail() {
       comments: selectedData.comments || "",
       id: selectedData.id,
       name: selectedData.name,
-      options: options.map(option => ({
+      options: options.map((option) => ({
         title: option.type || "",
         cardTitle: option.cards ? option.cards[0]?.title || "" : "", // Direct cardTitle from nested cards
       })),
@@ -228,6 +241,7 @@ function ProductDetail() {
   const steps = [
     {
       title: "Upload Artwork",
+      icon: <IoMdCloudUpload />,
       content: (
         <>
           <div className="size-txt">
@@ -247,6 +261,7 @@ function ProductDetail() {
     },
     {
       title: "Style",
+      icon: <SiStyleshare/>,
       content: (
         <>
           <div className="size-txt">
@@ -282,6 +297,7 @@ function ProductDetail() {
     },
     {
       title: "Size",
+      icon: <SiZedindustries />,
       content: (
         <>
           <div className="size-txt">
@@ -321,6 +337,7 @@ function ProductDetail() {
     },
     {
       title: "Other Options?",
+      icon:<IoOptionsSharp />,
       content: (
         <>
           <div className="size-txt">
@@ -372,6 +389,7 @@ function ProductDetail() {
 
     {
       title: "quantity ",
+      icon:<MdProductionQuantityLimits />,
       content: (
         <>
           <div className="size-txt">
@@ -584,51 +602,9 @@ function ProductDetail() {
               We provide a free digital proof and photo sample for approval
               before production, ensuring 100% satisfaction.
             </p>
-
-            {/* <div className="image-row">
-              <div className="image-item">
-                <img
-                  src="../../images/upload.png"
-                  alt="Upload"
-                  className="step-image-express"
-                />
-                <p className="image-text">Upload Artwork</p>
-              </div>
-              <div className="image-item">
-                {" "}
-                <img
-                  src="../../images/arrow.svg"
-                  alt="Arrow"
-                  className="step-image1"
-                />{" "}
-              </div>
-              <div className="image-item">
-                <img
-                  src="../../images/approve.png"
-                  alt="Approve"
-                  className="step-image-express"
-                />
-                <p className="image-text">Approve Digital Proof</p>
-              </div>
-              <div className="image-item">
-                <img
-                  src="../../images/arrow.svg"
-                  alt="Approve"
-                  className="step-image1"
-                />
-              </div>
-              <div className="image-item">
-                <img
-                  src="../../images/receive.png"
-                  alt="Approve"
-                  className="step-image-express"
-                />
-                <p className="image-text">Receive Order</p>
-              </div>
-            </div> */}
           </div>
           <div style={{ marginTop: "2rem" }}>
-            <Steps
+          <Steps
               style={{ marginBottom: "2rem" }}
               current={current}
               items={items}
