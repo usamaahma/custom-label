@@ -39,6 +39,7 @@ function HangtagDetail() {
   const [image, setImage] = useState(null);
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
+  const [description, setDescription] = useState([]);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const date = new Date();
 
@@ -467,7 +468,6 @@ function HangtagDetail() {
         // Ensure the ID is present in localStorage before making the API call
         if (selectedHangtagId) {
           const response = await hangtag.get(`/${selectedHangtagId}`);
-          console.log(response.data.descriptions[0]);
           setProductImages(response.data.descriptions[0].images);
           setSelectedImage(response.data.descriptions[0].images[0]);
           setProductDescription(response.data.descriptions[0]); // Set the product description in state
@@ -483,6 +483,7 @@ function HangtagDetail() {
           setAllQuantityPrices(collectedQuantityPrices);
           console.log(collectedQuantityPrices, "All Quantity Prices");
           setOptions(response.data.descriptions[0].options);
+          setDescription(response.data.hangtagDescription);
         } else {
           setError("Product ID not found");
         }
@@ -660,6 +661,15 @@ function HangtagDetail() {
                 </Button>
               )}
             </div>
+          </div>
+          <div>
+            {description.map((desc, index) => (
+              <div key={index}>
+                <h3>{desc.title}</h3>
+                <p>{desc.descriptions}</p>
+                <img src={desc.image} alt="description image" />
+              </div>
+            ))}{" "}
           </div>
         </div>
 
