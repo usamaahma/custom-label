@@ -37,6 +37,11 @@ function Blogdetail1() {
   if (error) {
     return <p>{error}</p>; // Display error message if an error occurred
   }
+  function decodeHtml(html) {
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = html;
+    return textArea.value;
+  }
 
   return (
     <div>
@@ -91,7 +96,8 @@ function Blogdetail1() {
           {descriptionData.map((desc, index) => (
             <div key={index}>
               <h2>{desc.descriptionTitle}</h2>
-              <p>{desc.text}</p>
+              {console.log(desc.text)}
+              <p dangerouslySetInnerHTML={{ __html: decodeHtml(desc.text) }} />
               {desc.image && (
                 <img
                   src={desc.image}
@@ -101,13 +107,6 @@ function Blogdetail1() {
               )}
             </div>
           ))}
-          {/* Additional content dynamically fetched */}
-          {/* {blogData?.sections?.map((section, index) => (
-            <div key={index}>
-              <p className="ten-title">{section.title}</p>
-              <p className="ten-des">{section.content}</p>
-            </div>
-          ))} */}
         </div>
       </div>
     </div>

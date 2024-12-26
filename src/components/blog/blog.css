@@ -10,7 +10,7 @@
   }
   
   .blog-card {
-    width: 100%; /* Card takes full width of column */
+    width: 90%; /* Card takes full width of column */
     height: auto; /* Set height to auto */
   }
   

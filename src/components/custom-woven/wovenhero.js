@@ -208,7 +208,6 @@ function Wovenhero() {
             {
               title: <a href="/all-clothing-labels">Clothing Labels</a>,
             },
-
             {
               title: "Custom Woven Labels",
             },
@@ -241,7 +240,6 @@ function Wovenhero() {
                     onMouseMove={handleMouseMove}
                     onMouseLeave={handleMouseLeave}
                     style={{ borderRadius: "1rem" }}
-
                   />
                 </div>
                 <div className="thumbnail-carousel">
