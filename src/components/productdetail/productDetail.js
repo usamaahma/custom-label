@@ -1,5 +1,15 @@
 import React, { useState, useEffect } from "react";
-import { Button, Card, Breadcrumb, message, Steps, theme } from "antd";
+import "./productdetail.css";
+import {
+  Button,
+  Card,
+  Breadcrumb,
+  message,
+  Steps,
+  theme,
+  Row,
+  Col,
+} from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
 import { IoMdCloudUpload } from "react-icons/io";
@@ -7,15 +17,6 @@ import { SiStyleshare } from "react-icons/si";
 import { SiZedindustries } from "react-icons/si";
 import { IoOptionsSharp } from "react-icons/io5";
 import { MdProductionQuantityLimits } from "react-icons/md";
-
-import {
-  UserOutlined,
-  PictureOutlined,
-  SettingOutlined,
-  NumberOutlined,
-} from "@ant-design/icons"; // Example icons
-
-import ImageUploader from "../expressclothing/imagedragger";
 import { pendingcheckout, products } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
 import { Storage } from "../../firebaseConfig";
@@ -52,6 +53,7 @@ function ProductDetail() {
   const [image, setImage] = useState(null);
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
+  const [description, setDescription] = useState([]);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const date = new Date();
 
@@ -240,104 +242,291 @@ function ProductDetail() {
 
   const steps = [
     {
-      title: "Upload Artwork",
-      icon: <IoMdCloudUpload />,
+      title: (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "80px",
+            height: "80px",
+            borderRadius: "50%",
+            backgroundColor: "rgb(250, 244, 235)",
+            border: "5px solid rgb(95, 111, 101)",
+            textAlign: "center",
+            margin: "auto",
+          }}
+        >
+          <IoMdCloudUpload
+            style={{ fontSize: "28px", color: "rgb(95, 111, 101)" }}
+          />
+          <span style={{ fontSize: "12px" }}>Upload</span>
+        </div>
+      ),
       content: (
         <>
           <div className="size-txt">
             <h3 className="simpletable-heading">Upload Artwork</h3>
           </div>
-          <div className="divs-tableexpress">
-            {/* <ImageUploader /> */}
-            <input type="file" onChange={handlesubmit} />
-            <img
-              src={url}
-              alt="image"
-              style={{ width: "5rem", height: "5rem" }}
-            />
+          <div className="divs-tableexpress" style={{ padding: "20px" }}>
+            <Row gutter={16} justify="center" style={{ marginTop: "20px" }}>
+              {/* First row: Uploaded image preview (Full width) */}
+              <Col xs={24} sm={24} md={24} lg={24}>
+                {url ? (
+                  <Card
+                    hoverable
+                    style={{
+                      width: "100%",
+                      textAlign: "center",
+                      marginBottom: "20px",
+                    }}
+                  >
+                    <img
+                      src={url}
+                      alt="Uploaded Artwork"
+                      style={{
+                        width: "20%",
+
+                        height: "auto",
+                        borderRadius: "5px", // Rounded corners for the image
+                      }}
+                    />
+                  </Card>
+                ) : (
+                  <p>No image uploaded yet</p>
+                )}
+              </Col>
+
+              {/* Second row: File input (Centered) */}
+              <Col xs={24} sm={24} md={24} lg={24}>
+                <input
+                  type="file"
+                  onChange={handlesubmit}
+                  style={{
+                    width: "100%",
+                    padding: "10px",
+                    borderRadius: "5px",
+                    border: "1px solid #5F6F65",
+                    marginBottom: "20px",
+                    display: "block",
+                    marginLeft: "auto",
+                    marginRight: "auto", // Center the file input
+                  }}
+                />
+              </Col>
+
+              {/* Third row: Text message (Centered) */}
+              <Col xs={24} sm={24} md={24} lg={24}>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please choose the file and upload your artwork
+                </h3>
+              </Col>
+            </Row>
           </div>
         </>
       ),
     },
+
     {
-      title: "Style",
-      icon: <SiStyleshare/>,
+      title: (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "80px",
+            height: "80px",
+            borderRadius: "50%",
+            backgroundColor: "rgb(250, 244, 235)",
+            border: "5px solid rgb(95, 111, 101)",
+            textAlign: "center",
+            margin: "auto",
+          }}
+        >
+          <SiStyleshare
+            style={{ fontSize: "28px", color: "rgb(95, 111, 101)" }}
+          />
+          <span style={{ fontSize: "12px" }}>Style</span>
+        </div>
+      ),
       content: (
         <>
           <div className="size-txt">
             <h3 className="simpletable-heading">Style?</h3>
           </div>
-          <div className="divs-tableexpress">
-            {styles.map((style, index) => (
-              <Card
-                key={style._id}
-                bordered={false}
-                style={{
-                  background: "#FAF4EB", // Customize background color if needed
-                  marginBottom: "20px", // Add some margin between cards
-                }}
-                onClick={() => {
-                  handleStyleClick("style", style); // Pass only the sizes array
-                  handleCardClick("style", style.name);
-                }}
-              >
-                <img
-                  alt={style.name}
-                  src={style.image || "../images/default-style.jpg"} // Default image if style has no image
-                  className="image-card-express"
-                />
-                <p>
-                  {style.name} <br />
-                </p>
-              </Card>
-            ))}
+          <div className="divs-tableexpress" style={{ padding: "20px" }}>
+            {/* Main Column */}
+            <Col xs={24} sm={24} md={24} lg={24}>
+              {/* First Row: Text (Centered) */}
+              <Row justify="center" style={{ marginBottom: "20px" }}>
+                <Col>
+                  <h3
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      color: "#5F6F65", // Optional: Adjust color if needed
+                      marginTop: "10px",
+                    }}
+                  >
+                    Please choose the style from the following
+                  </h3>
+                </Col>
+              </Row>
+
+              {/* Second Row: Style Images (Centered) */}
+              <Row justify="center" gutter={[16, 16]}>
+                {styles.map((style, index) => (
+                  <Col xs={24} sm={12} md={8} lg={6} key={style._id}>
+                    <Card
+                      bordered={false}
+                      style={{
+                        background: "#FAF4EB", // Customize background color if needed
+                        textAlign: "center",
+                      }}
+                      onClick={() => {
+                        handleStyleClick("style", style); // Pass style data
+                        handleCardClick("style", style.name);
+                      }}
+                    >
+                      <img
+                        alt={style.name}
+                        src={style.image || "../images/default-style.jpg"} // Default image if style has no image
+                        style={{
+                          width: "100%",
+                          height: "auto",
+                          borderRadius: "8px", // Optional: rounded corners for images
+                        }}
+                      />
+                      <p>{style.name}</p>
+                    </Card>
+                  </Col>
+                ))}
+              </Row>
+            </Col>
           </div>
         </>
       ),
     },
     {
-      title: "Size",
-      icon: <SiZedindustries />,
+      title: (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "80px",
+            height: "80px",
+            borderRadius: "50%",
+            backgroundColor: "rgb(250, 244, 235)",
+            border: "5px solid rgb(95, 111, 101)",
+            textAlign: "center",
+            margin: "auto",
+          }}
+        >
+          <SiZedindustries
+            style={{ fontSize: "28px", color: "rgb(95, 111, 101)" }}
+          />
+          <span style={{ fontSize: "12px" }}>Size</span>
+        </div>
+      ),
+
       content: (
         <>
           <div className="size-txt">
             <h3 className="simpletable-heading">Size?</h3>
           </div>
-          <div className="divs-tableexpress">
-            <div className="card-grid">
-              {selectedStyle &&
-                selectedStyle.sizes && // Make sure selectedStyle and sizes exist
-                selectedStyle.sizes.map((size, index) => {
-                  return (
-                    <Card
-                      key={size._id}
-                      bordered={false}
-                      style={{
-                        background: "#FAF4EB",
-                        marginBottom: "20px",
-                      }}
-                      onClick={() => {
-                        handleSizeClick("size", size); // Pass only the sizes array
-                        handleCardClick("size", size.name);
-                      }}
-                    >
-                      <img
-                        alt={size.name}
-                        src={size.image || "../images/default.jpg"} // Fallback image if no image is provided
-                        className="image-card-express"
-                      />
-                      <p>{size.name}</p>
-                    </Card>
-                  );
-                })}
-            </div>
+          <div className="divs-tableexpress" style={{ padding: "20px" }}>
+            {/* Main Column */}
+            <Col xs={24} sm={24} md={24} lg={24}>
+              {/* First Row: Text (Centered) */}
+              <Row justify="center" style={{ marginBottom: "20px" }}>
+                <Col>
+                  <h3
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      color: "#5F6F65", // Optional: Adjust color if needed
+                      marginTop: "10px",
+                    }}
+                  >
+                    Please choose the size from the following
+                  </h3>
+                </Col>
+              </Row>
+
+              {/* Second Row: Size Images (Centered) */}
+              <Row justify="center" gutter={[16, 16]}>
+                {selectedStyle &&
+                  selectedStyle.sizes && // Make sure selectedStyle and sizes exist
+                  selectedStyle.sizes.map((size, index) => (
+                    <Col xs={24} sm={12} md={8} lg={6} key={size._id}>
+                      <Card
+                        bordered={false}
+                        style={{
+                          background: "#FAF4EB", // Customize background color if needed
+                          textAlign: "center",
+                          marginBottom: "20px", // Add spacing between cards
+                        }}
+                        onClick={() => {
+                          handleSizeClick("size", size); // Pass only the sizes array
+                          handleCardClick("size", size.name);
+                        }}
+                      >
+                        <img
+                          alt={size.name}
+                          src={size.image || "../images/default.jpg"} // Fallback image if no image is provided
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            borderRadius: "8px", // Optional: rounded corners for images
+                          }}
+                        />
+                        <p>{size.name}</p>
+                      </Card>
+                    </Col>
+                  ))}
+              </Row>
+            </Col>
           </div>
         </>
       ),
     },
     {
-      title: "Other Options?",
-      icon:<IoOptionsSharp />,
+      title: (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "80px",
+            height: "80px",
+            borderRadius: "50%",
+            backgroundColor: "rgb(250, 244, 235)",
+            border: "5px solid rgb(95, 111, 101)",
+            textAlign: "center",
+            margin: "auto",
+          }}
+        >
+          <IoOptionsSharp
+            style={{ fontSize: "22px", color: "rgb(95, 111, 101)" }}
+          />
+          <span style={{ fontSize: "12px" }}>Other Options?</span>
+        </div>
+      ),
       content: (
         <>
           <div className="size-txt">
@@ -388,8 +577,28 @@ function ProductDetail() {
     },
 
     {
-      title: "quantity ",
-      icon:<MdProductionQuantityLimits />,
+      title: (
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "80px",
+            height: "80px",
+            borderRadius: "50%",
+            backgroundColor: "rgb(250, 244, 235)",
+            border: "5px solid rgb(95, 111, 101)",
+            textAlign: "center",
+            margin: "auto",
+          }}
+        >
+          <MdProductionQuantityLimits
+            style={{ fontSize: "28px", color: "rgb(95, 111, 101)" }}
+          />
+          <span style={{ fontSize: "12px" }}>Quantity</span>
+        </div>
+      ),
       content: (
         <>
           <div className="size-txt">
@@ -419,7 +628,6 @@ function ProductDetail() {
     setIsExpanded(!isExpanded);
   };
 
-  // Function to handle mouse movement over the image
   const handleMouseMove = (e) => {
     // Get the dimensions of the image container
     const { left, top, width, height } = e.target.getBoundingClientRect();
@@ -430,7 +638,7 @@ function ProductDetail() {
 
     // Set the transform origin based on mouse position
     e.target.style.transformOrigin = `${x}% ${y}%`;
-    e.target.style.transform = "scale(2)"; // Scale the image when hovering
+    e.target.style.transform = "scale(1.5)"; // Reduced the zoom level to 1.5
   };
 
   // Function to reset image scale when the mouse leaves
@@ -485,22 +693,29 @@ function ProductDetail() {
         // Ensure the ID is present in localStorage before making the API call
         if (selectedProductId) {
           const response = await products.get(`/${selectedProductId}`);
-          console.log(response.data.descriptions[0]);
-          setProductImages(response.data.descriptions[0].images);
-          setSelectedImage(response.data.descriptions[0].images[0]);
-          setProductDescription(response.data.descriptions[0]); // Set the product description in state
-          setDescriptionText(response.data.descriptions[0].text); // Set the product description in state
-          setDescriptionTitle(response.data.descriptions[0].descriptionTitle);
-          setStyles(response.data.descriptions[0].styles);
+          console.log(response.data._doc);
+          setProductImages(response.data._doc.descriptions[0].images);
+          setSelectedImage(response.data._doc.descriptions[0].images[0]);
+          setProductDescription(response.data._doc.descriptions[0]); // Set the product description in state
+          setDescriptionText(response.data._doc.descriptions[0].text); // Set the product description in state
+          setDescriptionTitle(
+            response.data._doc.descriptions[0].descriptionTitle
+          );
+          setStyles(response.data._doc.descriptions[0].styles);
           const collectedQuantityPrices =
-            response.data.descriptions[0].styles.flatMap((style) =>
+            response.data._doc.descriptions[0].styles.flatMap((style) =>
               style.sizes.flatMap((size) => size.quantityPrice)
             );
 
           // Set the collected data to state
           setAllQuantityPrices(collectedQuantityPrices);
           console.log(collectedQuantityPrices, "All Quantity Prices");
-          setOptions(response.data.descriptions[0].options);
+          setOptions(response.data._doc.descriptions[0].options);
+          setDescription(response.data._doc.productDescription);
+          console.log(
+            response.data._doc.productDescription,
+            "response.data.descriptions[0].productDescription"
+          );
         } else {
           setError("Product ID not found");
         }
@@ -544,10 +759,11 @@ function ProductDetail() {
                 style={{
                   margin: "0 auto",
                   borderRadius: "1rem",
-                  border: "solid 1px #5f6f65",
+                   
                   width: "100%",
                   maxWidth: "30rem",
                   height: "100vh",
+                  overflow: "hidden", // Prevents image from overflowing outside div
                 }}
               >
                 <img
@@ -556,7 +772,10 @@ function ProductDetail() {
                   className="img-fluid main-image"
                   onMouseMove={handleMouseMove}
                   onMouseLeave={handleMouseLeave}
-                  style={{ borderRadius: "1rem" }}
+                  style={{
+                    borderRadius: "1rem",
+                    transition: "transform 0.3s ease",
+                  }} // Add transition for smooth zoom effect
                 />
                 <div className="thumbnail-carousel">
                   {productImages.map((image, index) => (
@@ -603,11 +822,12 @@ function ProductDetail() {
               before production, ensuring 100% satisfaction.
             </p>
           </div>
-          <div style={{ marginTop: "2rem" }}>
-          <Steps
+          <div style={{ marginTop: "2rem" }} className="stepss">
+            <Steps
               style={{ marginBottom: "2rem" }}
               current={current}
-              items={items}
+              progressDot
+              items={steps.map(({ title, icon }) => ({ title, icon }))} // Map steps to items
             />
             <div style={contentStyle}>{steps[current].content}</div>
             <div
@@ -721,6 +941,53 @@ function ProductDetail() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="desc-express-main">
+        <h1>
+          Build Long-Lasting Brand Recognition with Fully Customizable Cannabis
+          Box Packaging
+        </h1>
+        <p className="text-desc-express">
+          Nearly 75% of American consumers say their purchases are influenced by
+          the product's packaging box. Amid the fierce competition among brands,
+          here’s how Refine Packaging's customized cannabis packaging products
+          can help you stand out from the crowd with unforgettable packaging.
+        </p>
+        <div className="description-all-content">
+          {description.map((desc, index) => (
+            <Row key={index} gutter={[24, 24]}>
+              {" "}
+              {/* Increased gutter value */}
+              <Col xs={24} sm={24} md={24} lg={24}>
+                <div className="description-card-container">
+                  {" "}
+                  {/* Applied the description-card-container class */}
+                  {/* Inner Row with 2 Columns */}
+                  <Row gutter={[16, 16]}>
+                    {/* Text Column (70%) */}
+                    <Col xs={24} sm={24} md={16} lg={16}>
+                      <h3 className="description-title">{desc.title}</h3>{" "}
+                      {/* Applied the description-title class */}
+                      <p className="description-description">
+                        {desc.descriptions}
+                      </p>{" "}
+                      {/* Applied the description-description class */}
+                    </Col>
+
+                    {/* Image Column (30%) */}
+                    <Col xs={24} sm={24} md={8} lg={8}>
+                      <img
+                        src={desc.image || "../images/default.jpg"} // Fallback image
+                        alt="description image"
+                        className="description-image" // Applied the description-image class
+                      />
+                    </Col>
+                  </Row>
+                </div>
+              </Col>
+            </Row>
+          ))}
         </div>
       </div>
     </div>

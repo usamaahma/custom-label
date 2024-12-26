@@ -1,0 +1,114 @@
+.ant-steps-item-title {
+  display: none; /* Hide the step numbers or titles */
+}
+/* Change color of active dot to #5F6F65 */
+.ant-steps-item-process .ant-steps-item-icon {
+  background-color: #5f6f65 !important; /* Active dot color */
+  border-color: #5f6f65 !important; /* Active dot border color */
+}
+
+/* Change color of the finished dots */
+.ant-steps-item-finish .ant-steps-item-icon {
+  background-color: #5f6f65 !important; /* Finished dot color */
+  border-color: #5f6f65 !important; /* Finished dot border color */
+}
+
+/* Change color of the inactive dots */
+.ant-steps-item .ant-steps-item-icon {
+  background-color: #dcdcdc !important; /* Grey color for inactive dots */
+  border-color: #dcdcdc !important; /* Grey color for inactive dots */
+}
+
+/* Change color of the connecting line for active steps */
+.ant-steps-item-process .ant-steps-item-tail {
+  border-color: #5f6f65 !important; /* Active step line color */
+}
+
+/* Change color of the connecting line for finished steps */
+.ant-steps-item-finish .ant-steps-item-tail {
+  border-color: #5f6f65 !important; /* Finished step line color */
+}
+
+/* Change color of the connecting line for all other steps */
+.ant-steps-item .ant-steps-item-tail {
+  border-color: #dcdcdc !important; /* Grey color for inactive lines */
+}
+.description-all-content {
+    align-items: center;
+    gap: 2rem;
+    padding: 2rem;
+    flex-wrap: wrap; /* Allows content to wrap on smaller screens */
+  }
+  .desc-express-main {
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(95, 111, 101, 0.5);
+    margin: 3rem;
+  }
+  .text-desc-express {
+    width: 100%;
+    max-width: 70%;
+    margin: 0 auto;
+  }
+  .row-desc-express {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    background-color: rgba(95, 111, 101, 0.9);
+    border-radius: 1rem;
+    color: #faf4eb;
+    padding: 2rem;
+    text-align: left;
+  }
+  .image-desc-express {
+    border-radius: 1rem;
+    max-width: 10rem;
+    height: auto;
+  }
+
+
+ /* Style for the card container */
+.description-card-container {
+    background-color: #6F7C72; /* Card background color */
+    padding: 16px; /* Padding for spacing */
+    border-radius: 8px; /* Rounded corners */
+    margin-bottom: 24px; /* Space between each card */
+  }
+  
+  /* Style for the title text color */
+  .description-title,
+  .description-description {
+    color: white; /* Text color white */
+    text-align: left;
+  }
+  
+  /* Optional: Style for the image to make it responsive */
+  .description-image {
+    width: 40%; 
+    height: auto;
+    border-radius: 8px; /* Optional: rounded corners */
+  }
+ .ant-steps .ant-steps-item-container {
+    width: fit-content;
+    outline: none;
+}
+  
+  @media (max-width: 1024px) {
+    .description-all-content {
+      flex-wrap: wrap;
+    }
+    .image-desc-express {
+      width: 100%;
+      max-width: 25rem;
+    }
+  }
+  @media (max-width: 768px) {
+    .description-all-content {
+      flex-direction: column;
+    }
+  }
+  @media (max-width: 425px) {
+    .ant-steps.ant-steps-vertical{
+        display: none;
+    }
+  }

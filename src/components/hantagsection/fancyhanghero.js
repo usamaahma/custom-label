@@ -98,13 +98,13 @@ function Fancyhanghero1() {
 
     // Set the transform origin based on mouse position
     e.target.style.transformOrigin = `${x}% ${y}%`;
-    e.target.style.transform = "scale(2)"; // Scale the image when hovering
+    e.target.style.transform = "scale(1.5)"; // Reduced zoom factor
   };
 
   // Function to reset image scale when the mouse leaves
   const handleMouseLeave = (e) => {
     e.target.style.transform = "scale(1)";
-    e.target.style.transformOrigin = "center center";
+    e.target.style.transformOrigin = "center center"; // Reset to center
   };
 
   return (
@@ -136,15 +136,29 @@ function Fancyhanghero1() {
               {" "}
               <div style={{ margin: "0 auto" }}>
                 {" "}
-                <div className="main-image-container">
-                  <img
-                    alt="Fancy Hang Tags"
-                    src={selectedImage}
-                    className="img-fluid main-image"
-                    onMouseMove={handleMouseMove}
-                    onMouseLeave={handleMouseLeave}
-                  />
-                </div>
+                <div
+      className="main-image-container"
+      style={{
+        position: 'relative',
+        overflow: 'hidden', // Prevent image from going outside the container
+        width: '100%', // Set width as per your requirement
+        height: 'auto', // Maintain the height relative to width
+      }}
+    >
+      <img
+        alt="Fancy Hang Tags"
+        src={selectedImage}
+        className="img-fluid main-image"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          borderRadius: '1rem',
+          transition: 'transform 0.2s ease-out', // Smooth transition
+          width: '100%', // Make image responsive within the container
+          height: 'auto', // Maintain the aspect ratio
+        }}
+      />
+    </div>
                 <div className="thumbnail-carousel">
                   {thumbnailImages.map((image, index) => (
                     <img
