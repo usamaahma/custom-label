@@ -509,7 +509,7 @@ function ProductDetail() {
   return (
     <div className="first-main-express">
       <div className="headingbread">
-        <p className="express-clothing-heading"> {title}</p>
+        <p className="express-clothing-heading"> {title}</p>  
         <Breadcrumb
           items={[
             {
