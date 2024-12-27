@@ -96,7 +96,6 @@ function Blogdetail1() {
           {descriptionData.map((desc, index) => (
             <div key={index}>
               <h2>{desc.descriptionTitle}</h2>
-              {console.log(desc.text)}
               <p dangerouslySetInnerHTML={{ __html: decodeHtml(desc.text) }} />
               {desc.image && (
                 <img
