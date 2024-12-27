@@ -54,6 +54,7 @@ function HangtagDetail() {
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState([]);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [selectedCard, setSelectedCard] = useState(null); // Track selected card
   const date = new Date();
 
   const showTime =
@@ -221,11 +222,22 @@ function HangtagDetail() {
   };
 
   // Function to handle card clicks
-  const handleCardClick = (key, value) => {
+  const handleCardClick = (key, value, id, option_id) => {
+    // Update the selected data
     setSelectedData((prevData) => ({
       ...prevData,
       [key]: value,
     }));
+
+    // Set selected card ID
+    setSelectedCard(id);
+
+    // Update the current step only till 'Size'
+    if (key === "style" || key === "size") {
+      setCurrent((prevCurrent) => prevCurrent + 1);
+    } else if (key === "comments") {
+      console.log("Comment saved:", value); // Optional: Handle comments separately
+    }
   };
   const handleCardOptionClick = (key, value) => {
     setSelectedData((prevData) => ({
@@ -390,12 +402,27 @@ function HangtagDetail() {
                     <Card
                       bordered={false}
                       style={{
-                        background: "#FAF4EB", // Customize background color if needed
+                        background:
+                          selectedCard === style._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
                         textAlign: "center",
+                        boxShadow:
+                          selectedCard === style._id
+                            ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                            : "none",
+                        transform:
+                          selectedCard === style._id
+                            ? "scale(1.05)"
+                            : "scale(1)", // Slight zoom for selected card
+                        transition: "all 0.3s ease", // Smooth transition
+                        border:
+                          selectedCard === style._id
+                            ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                            : "none",
                       }}
                       onClick={() => {
+                        setSelectedCard(style._id); // Highlight clicked card
                         handleStyleClick("style", style); // Pass style data
-                        handleCardClick("style", style.name);
+                        handleCardClick("style", style.name, style._id);
                       }}
                     >
                       <img
@@ -475,13 +502,26 @@ function HangtagDetail() {
                       <Card
                         bordered={false}
                         style={{
-                          background: "#FAF4EB", // Customize background color if needed
+                          background:
+                            selectedCard === size._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
                           textAlign: "center",
-                          marginBottom: "20px", // Add spacing between cards
+                          boxShadow:
+                            selectedCard === size._id
+                              ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                              : "none",
+                          transform:
+                            selectedCard === size._id
+                              ? "scale(1.05)"
+                              : "scale(1)", // Slight zoom for selected card
+                          transition: "all 0.3s ease", // Smooth transition
+                          border:
+                            selectedCard === size._id
+                              ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                              : "none",
                         }}
                         onClick={() => {
                           handleSizeClick("size", size); // Pass only the sizes array
-                          handleCardClick("size", size.name);
+                          handleCardClick("size", size.name, size._id);
                         }}
                       >
                         <img
@@ -539,9 +579,26 @@ function HangtagDetail() {
                   <div key={cardIndex} className="card-container">
                     <Card
                       bordered={false}
-                      onClick={() => handleCardClick(option.type, card.title)} // Pass option type and card title
+                      onClick={() =>
+                        handleCardClick(option.type, card.title, card._id)
+                      } // Pass option type and card title
                       style={{
-                        background: "#FAF4EB",
+                        background:
+                          selectedCard === card._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                        textAlign: "center",
+                        boxShadow:
+                          selectedCard === card._id
+                            ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                            : "none",
+                        transform:
+                          selectedCard === card._id
+                            ? "scale(1.05)"
+                            : "scale(1)", // Slight zoom for selected card
+                        transition: "all 0.3s ease", // Smooth transition
+                        border:
+                          selectedCard === card._id
+                            ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                            : "none",
                       }}
                     >
                       <img
@@ -693,6 +750,7 @@ function HangtagDetail() {
         // Ensure the ID is present in localStorage before making the API call
         if (selectedHangtagId) {
           const response = await hangtag.get(`/${selectedHangtagId}`);
+          console.log("data from api",response)
           setProductImages(response.data.descriptions[0].images);
           setSelectedImage(response.data.descriptions[0].images[0]);
           setProductDescription(response.data.descriptions[0]); // Set the product description in state
@@ -723,7 +781,11 @@ function HangtagDetail() {
       fetchProductDescription();
     }
   }, [selectedHangtagId]);
-
+  useEffect(() => {
+    if (url) {
+      setCurrent((prev) => prev + 1); // Move to the next step
+    }
+  }, [url, setCurrent]);
   return (
     <div className="first-main-express">
       <div className="headingbread">
