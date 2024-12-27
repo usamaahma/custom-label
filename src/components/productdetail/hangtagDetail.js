@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import { Button, Card, Breadcrumb, message, Steps, theme } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
-import ImageUploader from "../expressclothing/imagedragger";
 import { pendingcheckout, hangtag } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
 import { Storage } from "../../firebaseConfig";
@@ -413,13 +412,13 @@ function HangtagDetail() {
 
     // Set the transform origin based on mouse position
     e.target.style.transformOrigin = `${x}% ${y}%`;
-    e.target.style.transform = "scale(2)"; // Scale the image when hovering
+    e.target.style.transform = "scale(1.5)"; // Reduced zoom factor to 1.5
   };
 
   // Function to reset image scale when the mouse leaves
   const handleMouseLeave = (e) => {
-    e.target.style.transform = "scale(1)";
-    e.target.style.transformOrigin = "center center";
+    e.target.style.transform = "scale(1)"; // Reset zoom to normal scale
+    e.target.style.transformOrigin = "center center"; // Reset to center
   };
 
   useEffect(() => {
@@ -526,11 +525,10 @@ function HangtagDetail() {
               <div
                 style={{
                   margin: "0 auto",
-                  borderRadius: "1rem",
-                  border: "solid 1px #5f6f65",
                   width: "100%",
                   maxWidth: "30rem",
                   height: "100vh",
+                  overflow: "hidden", // Ensure the image stays inside the container
                 }}
               >
                 <img
@@ -539,7 +537,12 @@ function HangtagDetail() {
                   className="img-fluid main-image"
                   onMouseMove={handleMouseMove}
                   onMouseLeave={handleMouseLeave}
-                  style={{ borderRadius: "1rem" }}
+                  style={{
+                    borderRadius: "1rem",
+                    transition: "transform 0.3s ease-out", // Smooth transition for zoom
+                    width: "100%", // Make image responsive within the container
+                    height: "auto", // Maintain the aspect ratio of the image
+                  }}
                 />
                 <div className="thumbnail-carousel">
                   {productImages.map((image, index) => (
@@ -549,6 +552,14 @@ function HangtagDetail() {
                       src={image}
                       className="thumbnail-image"
                       onClick={() => setSelectedImage(image)}
+                      style={{
+                        cursor: "pointer",
+                        margin: "5px",
+                        borderRadius: "5px",
+                        width: "60px",
+                        height: "60px",
+                        objectFit: "cover",
+                      }}
                     />
                   ))}
                 </div>

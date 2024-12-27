@@ -178,13 +178,13 @@ function Wovenlabeldesc() {
 
     // Set the transform origin based on mouse position
     e.target.style.transformOrigin = `${x}% ${y}%`;
-    e.target.style.transform = "scale(2)"; // Scale the image when hovering
+    e.target.style.transform = "scale(2)"; // Zoom image on hover
   };
 
   // Function to reset image scale when the mouse leaves
   const handleMouseLeave = (e) => {
     e.target.style.transform = "scale(1)";
-    e.target.style.transformOrigin = "center center";
+    e.target.style.transformOrigin = "center center"; // Reset to center
   };
   const handleAddToCart = async (item) => {
     return new Promise((resolve, reject) => {
@@ -328,23 +328,34 @@ function Wovenlabeldesc() {
               <div
                 style={{
                   margin: "0 auto",
-                  borderRadius: "1rem",
-                  border: "solid 1px #5f6f65",
                   width: "100%", // Make it full width within the container
                   maxWidth: "30rem",
                 }}
               >
                 {" "}
-                <div className="main-image-container">
-                  <img
-                    alt="Express Clothing Labels"
-                    src={selectedImage}
-                    className="img-fluid main-image"
-                    onMouseMove={handleMouseMove}
-                    onMouseLeave={handleMouseLeave}
-                    style={{ borderRadius: "1rem" }}
-                  />
-                </div>
+                <div
+      className="main-image-container"
+      style={{
+        position: 'relative',
+        overflow: 'hidden', // Prevent image from going outside the container
+        width: '100%', // Set width as per your requirement
+        height: 'auto', // Maintain the height relative to width
+      }}
+    >
+      <img
+        alt="Express Clothing Labels"
+        src={selectedImage}
+        className="img-fluid main-image"
+        onMouseMove={handleMouseMove}
+        onMouseLeave={handleMouseLeave}
+        style={{
+          borderRadius: '1rem',
+          transition: 'transform 0.2s ease-out', // Smooth transition
+          width: '100%', // Make image responsive within the container
+          height: 'auto', // Maintain the aspect ratio
+        }}
+      />
+    </div>
                 <div className="thumbnail-carousel">
                   {thumbnailImages.map((image, index) => (
                     <img
