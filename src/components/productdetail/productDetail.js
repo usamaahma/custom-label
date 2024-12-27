@@ -734,7 +734,7 @@ function ProductDetail() {
   return (
     <div className="first-main-express">
       <div className="headingbread">
-        <p className="express-clothing-heading"> {title}</p>  
+        <p className="express-clothing-heading"> {title}</p>
         <Breadcrumb
           items={[
             {
@@ -759,7 +759,7 @@ function ProductDetail() {
                 style={{
                   margin: "0 auto",
                   borderRadius: "1rem",
-                   
+
                   width: "100%",
                   maxWidth: "30rem",
                   height: "100vh",
@@ -967,7 +967,7 @@ function ProductDetail() {
                   <Row gutter={[16, 16]}>
                     {/* Text Column (70%) */}
                     <Col xs={24} sm={24} md={16} lg={16}>
-                      <h3 className="description-title">{desc.title}</h3>{" "}
+                      <h2 className="description-title">{desc.title}</h2>{" "}
                       {/* Applied the description-title class */}
                       <p className="description-description">
                         {desc.descriptions}
@@ -976,11 +976,26 @@ function ProductDetail() {
                     </Col>
 
                     {/* Image Column (30%) */}
-                    <Col xs={24} sm={24} md={8} lg={8}>
+                    <Col
+                      xs={24}
+                      sm={24}
+                      md={8}
+                      lg={8}
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <img
                         src={desc.image || "../images/default.jpg"} // Fallback image
                         alt="description image"
                         className="description-image" // Applied the description-image class
+                        style={{
+                          maxWidth: "100%",
+                          maxHeight: "100%",
+                          objectFit: "contain",
+                        }} // Ensures the image stays centered and well-sized
                       />
                     </Col>
                   </Row>
