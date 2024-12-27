@@ -122,7 +122,6 @@ function ProductDetail() {
     };
   }, []);
 
-
   // State for selected data
   const handlePending = async (selectedData) => {
     const userdataString = localStorage.getItem("user");
@@ -230,10 +229,10 @@ function ProductDetail() {
       ...prevData,
       [key]: value,
     }));
-  
+
     // Set selected card ID
     setSelectedCard(id);
-  
+
     // Update the current step only till 'Size'
     if (key === "style" || key === "size") {
       setCurrent((prevCurrent) => prevCurrent + 1);
@@ -793,6 +792,11 @@ function ProductDetail() {
       setCurrent((prev) => prev + 1); // Move to the next step
     }
   }, [url, setCurrent]);
+  function decodeHtml(html) {
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = html;
+    return textArea.value;
+  }
 
   return (
     <div className="first-main-express">
@@ -1030,20 +1034,38 @@ function ProductDetail() {
                   <Row gutter={[16, 16]}>
                     {/* Text Column (70%) */}
                     <Col xs={24} sm={24} md={16} lg={16}>
-                      <h3 className="description-title">{desc.title}</h3>{" "}
+                      <h2 className="description-title">{desc.title}</h2>{" "}
                       {/* Applied the description-title class */}
-                      <p className="description-description">
-                        {desc.descriptions}
-                      </p>{" "}
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: decodeHtml(desc.descriptions),
+                        }}
+                        className="description-description"
+                      />
                       {/* Applied the description-description class */}
                     </Col>
 
                     {/* Image Column (30%) */}
-                    <Col xs={24} sm={24} md={8} lg={8}>
+                    <Col
+                      xs={24}
+                      sm={24}
+                      md={8}
+                      lg={8}
+                      style={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
                       <img
                         src={desc.image || "../images/default.jpg"} // Fallback image
                         alt="description image"
                         className="description-image" // Applied the description-image class
+                        style={{
+                          maxWidth: "100%",
+                          maxHeight: "100%",
+                          objectFit: "contain",
+                        }} // Ensures the image stays centered and well-sized
                       />
                     </Col>
                   </Row>

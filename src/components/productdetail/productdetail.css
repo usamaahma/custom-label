@@ -74,7 +74,7 @@
 
  /* Style for the card container */
 .description-card-container {
-    background-color: #6F7C72; /* Card background color */
+    background-color: rgba(111, 124, 114, 0.3); /* Card background color */
     padding: 16px; /* Padding for spacing */
     border-radius: 8px; /* Rounded corners */
     margin-bottom: 24px; /* Space between each card */
@@ -83,15 +83,16 @@
   /* Style for the title text color */
   .description-title,
   .description-description {
-    color: white; /* Text color white */
+    color: black; /* Text color white */
     text-align: left;
   }
   
   /* Optional: Style for the image to make it responsive */
   .description-image {
-    width: 40%; 
+    width: 80%; 
     height: auto;
     border-radius: 8px; /* Optional: rounded corners */
+    
   }
  .ant-steps .ant-steps-item-container {
     width: fit-content;
