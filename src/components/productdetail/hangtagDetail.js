@@ -277,10 +277,33 @@ function HangtagDetail() {
       ),
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Upload Artwork</h3>
-          </div>
-          <div className="divs-tableexpress" style={{ padding: "20px" }}>
+          <div
+            className="divs-tableexpress"
+            style={{ padding: "20px", display: "block" }}
+          >
+            <div
+              style={{
+                textAlign: "left", // Parent container aligns content to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Upload Artwork?
+              </h3>
+            </div>
             <Row gutter={16} justify="center" style={{ marginTop: "20px" }}>
               {/* First row: Uploaded image preview (Full width) */}
               <Col xs={24} sm={24} md={24} lg={24}>
@@ -298,7 +321,6 @@ function HangtagDetail() {
                       alt="Uploaded Artwork"
                       style={{
                         width: "20%",
-
                         height: "auto",
                         borderRadius: "5px", // Rounded corners for the image
                       }}
@@ -372,10 +394,33 @@ function HangtagDetail() {
       ),
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Style?</h3>
-          </div>
-          <div className="divs-tableexpress" style={{ padding: "20px" }}>
+          <div
+            className="divs-tableexpress"
+            style={{ padding: "20px", display: "block" }}
+          >
+            <div
+              style={{
+                textAlign: "left", // Parent container aligns content to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Style?
+              </h3>
+            </div>
             {/* Main Column */}
             <Col xs={24} sm={24} md={24} lg={24}>
               {/* First Row: Text (Centered) */}
@@ -470,11 +515,34 @@ function HangtagDetail() {
 
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Size?</h3>
-          </div>
-          <div className="divs-tableexpress" style={{ padding: "20px" }}>
+          <div
+            className="divs-tableexpress"
+            style={{ padding: "20px", display: "block" }}
+          >
             {/* Main Column */}
+            <div
+              style={{
+                textAlign: "left", // Parent container aligns content to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Size?
+              </h3>
+            </div>
             <Col xs={24} sm={24} md={24} lg={24}>
               {/* First Row: Text (Centered) */}
               <Row justify="center" style={{ marginBottom: "20px" }}>
@@ -568,13 +636,32 @@ function HangtagDetail() {
       ),
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Other Options?</h3>
-          </div>
           {options.map((option, index) => (
             <div className="divs-tableexpress" key={index}>
               <div className="card-grid">
-                <h3>{option.type}</h3> {/* Display the type of option */}
+                <div
+                  style={{
+                    textAlign: "left", // Parent container aligns content to the left
+                  }}
+                >
+                  <h3
+                    className="simpletable-heading"
+                    style={{
+                      textAlign: "left", // Align heading to top-left
+                      padding: "10px 15px", // Space inside the border
+                      fontSize: "20px", // Font size
+                      color: "#5F6F65", // Text color
+                      fontWeight: "bold", // Bold text
+                      border: "1px solid #5F6F65", // Elegant border
+                      borderRadius: "10px", // Smooth rounded corners
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                      display: "inline-block", // Wraps text tightly
+                      backgroundColor: "#ffffff", // Optional: White background for better contrast
+                    }}
+                  >
+                    {option.type}
+                  </h3>
+                </div>{" "}
                 {option.cards.map((card, cardIndex) => (
                   <div key={cardIndex} className="card-container">
                     <Card
@@ -613,10 +700,31 @@ function HangtagDetail() {
               </div>
             </div>
           ))}
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Comments?</h3>
-          </div>
-          <div className="divs-tableexpress">
+
+          <div className="divs-tableexpress" style={{ display: "block" }}>
+            <div
+              style={{
+                textAlign: "left", // Parent container aligns content to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Comments?
+              </h3>
+            </div>
             <textarea
               rows={4} // Set the number of rows to 4
               style={{
@@ -657,10 +765,30 @@ function HangtagDetail() {
       ),
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Quantity?</h3>
-          </div>
-          <div className="divs-tableexpress">
+          <div className="divs-tableexpress" style={{ display: "block" }}>
+            <div
+              style={{
+                textAlign: "left", // Parent container aligns content to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Quantity?
+              </h3>
+            </div>
             <LastTable1
               allQuantityPrices={allQuantityPrices}
               onRowClick={handleRowClick}
@@ -755,7 +883,7 @@ function HangtagDetail() {
         // Ensure the ID is present in localStorage before making the API call
         if (selectedHangtagId) {
           const response = await hangtag.get(`/${selectedHangtagId}`);
-          console.log("data from api",response)
+          console.log("data from api", response);
           setProductImages(response.data.descriptions[0].images);
           setSelectedImage(response.data.descriptions[0].images[0]);
           setProductDescription(response.data.descriptions[0]); // Set the product description in state
@@ -791,6 +919,11 @@ function HangtagDetail() {
       setCurrent((prev) => prev + 1); // Move to the next step
     }
   }, [url, setCurrent]);
+  function decodeHtml(html) {
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = html;
+    return textArea.value;
+  }
   return (
     <div className="first-main-express">
       <div className="headingbread">
@@ -936,6 +1069,7 @@ function HangtagDetail() {
             <Steps
               style={{ marginBottom: "2rem" }}
               current={current}
+              onChange={setCurrent}
               progressDot
               items={steps.map(({ title, icon }) => ({ title, icon }))} // Map steps to items
             />
@@ -947,7 +1081,7 @@ function HangtagDetail() {
                 justifyContent: "center",
               }}
             >
-              {current < steps.length - 1 && (
+              {current > 0 && current < steps.length - 1 && (
                 <Button onClick={() => next()}>Next</Button>
               )}
               {current === steps.length - 1 && (

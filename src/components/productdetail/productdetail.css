@@ -1,3 +1,8 @@
+
+:where(.css-dev-only-do-not-override-14qglws).ant-steps .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after {
+  background-color: #5F6F65 !important;
+}
+
 .ant-steps-item-title {
   display: none; /* Hide the step numbers or titles */
 }

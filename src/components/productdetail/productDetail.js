@@ -122,7 +122,6 @@ function ProductDetail() {
     };
   }, []);
 
-
   // State for selected data
   const handlePending = async (selectedData) => {
     const userdataString = localStorage.getItem("user");
@@ -230,10 +229,10 @@ function ProductDetail() {
       ...prevData,
       [key]: value,
     }));
-  
+
     // Set selected card ID
     setSelectedCard(id);
-  
+
     // Update the current step only till 'Size'
     if (key === "style" || key === "size") {
       setCurrent((prevCurrent) => prevCurrent + 1);
@@ -279,10 +278,39 @@ function ProductDetail() {
       ),
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Upload Artwork</h3>
-          </div>
-          <div className="divs-tableexpress" style={{ padding: "20px" }}>
+          <div
+            className="divs-tableexpress"
+            style={{
+              padding: "20px",
+              display: "block", // Ensures vertical stacking
+            }}
+          >
+            {/* Heading */}
+            <div
+              style={{
+                textAlign: "left", // Parent container aligns content to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Upload Artwork
+              </h3>
+            </div>
+
+            {/* Content */}
             <Row gutter={16} justify="center" style={{ marginTop: "20px" }}>
               {/* First row: Uploaded image preview (Full width) */}
               <Col xs={24} sm={24} md={24} lg={24}>
@@ -300,7 +328,6 @@ function ProductDetail() {
                       alt="Uploaded Artwork"
                       style={{
                         width: "20%",
-
                         height: "auto",
                         borderRadius: "5px", // Rounded corners for the image
                       }}
@@ -374,11 +401,36 @@ function ProductDetail() {
       ),
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Style?</h3>
-          </div>
-          <div className="divs-tableexpress" style={{ padding: "20px" }}>
-            {/* Main Column */}
+          <div
+            className="divs-tableexpress"
+            style={{ padding: "20px", display: "block" }}
+          >
+            {/* Heading */}
+            <div
+              style={{
+                textAlign: "left", // Parent container aligns content to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Style?
+              </h3>
+            </div>
+
+            {/* Content */}
             <Col xs={24} sm={24} md={24} lg={24}>
               {/* First Row: Text (Centered) */}
               <Row justify="center" style={{ marginBottom: "20px" }}>
@@ -472,11 +524,34 @@ function ProductDetail() {
 
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Size?</h3>
-          </div>
-          <div className="divs-tableexpress" style={{ padding: "20px" }}>
+          <div
+            className="divs-tableexpress"
+            style={{ padding: "20px", display: "block" }}
+          >
             {/* Main Column */}
+            <div
+              style={{
+                textAlign: "left", // Parent container aligns content to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Size?
+              </h3>
+            </div>
             <Col xs={24} sm={24} md={24} lg={24}>
               {/* First Row: Text (Centered) */}
               <Row justify="center" style={{ marginBottom: "20px" }}>
@@ -570,61 +645,132 @@ function ProductDetail() {
       ),
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Other Options?</h3>
-          </div>
           {options.map((option, index) => (
             <div className="divs-tableexpress" key={index}>
-              <div className="card-grid">
-                <h3>{option.type}</h3> {/* Display the type of option */}
-                {option.cards.map((card, cardIndex) => (
-                  <div key={cardIndex} className="card-container">
-                    <Card
-                      bordered={false}
-                      onClick={() =>
-                        handleCardClick(option.type, card.title, card._id)
-                      } // Pass option type and card title
+              <div
+                style={{
+                  padding: "20px",
+                  display: "block",
+                }}
+              >
+                <div
+                  style={{
+                    textAlign: "left", // Align container to the left
+                  }}
+                >
+                  <h3
+                    className="simpletable-heading"
+                    style={{
+                      textAlign: "left", // Align heading to top-left
+                      padding: "10px 15px", // Space inside the border
+                      fontSize: "20px", // Font size
+                      color: "#5F6F65", // Text color
+                      fontWeight: "bold", // Bold text
+                      border: "1px solid #5F6F65", // Elegant border
+                      borderRadius: "10px", // Smooth rounded corners
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                      display: "inline-block", // Wraps text tightly
+                      backgroundColor: "#ffffff", // Optional: White background for better contrast
+                    }}
+                  >
+                    {option.type}
+                  </h3>
+                </div>
+    
+                {/* Instructions */}
+                <Row justify="center" style={{ marginBottom: "20px" }}>
+                  <Col>
+                    <h3
                       style={{
-                        background:
-                          selectedCard === card._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                        fontSize: "18px",
+                        fontWeight: "bold",
                         textAlign: "center",
-                        boxShadow:
-                          selectedCard === card._id
-                            ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
-                            : "none",
-                        transform:
-                          selectedCard === card._id
-                            ? "scale(1.05)"
-                            : "scale(1)", // Slight zoom for selected card
-                        transition: "all 0.3s ease", // Smooth transition
-                        border:
-                          selectedCard === card._id
-                            ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
-                            : "none",
+                        color: "#5F6F65", // Adjust color if needed
+                        marginTop: "10px",
                       }}
                     >
-                      <img
-                        alt={card.title}
-                        src={card.image}
-                        className="image-card-express"
-                      />
-                      <p>{card.title}</p>
-                    </Card>
-                  </div>
-                ))}
+                      Please choose {option.type} from the following
+                    </h3>
+                  </Col>
+                </Row>
+    
+                {/* Cards */}
+                <Row justify="center" gutter={[16, 16]}>
+                  {option.cards.map((card, cardIndex) => (
+                    <Col xs={24} sm={12} md={8} lg={6} key={cardIndex}>
+                      <Card
+                        bordered={false}
+                        onClick={() =>
+                          handleCardClick(option.type, card.title, card._id)
+                        }
+                        style={{
+                          background:
+                            selectedCard === card._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                          textAlign: "center",
+                          boxShadow:
+                            selectedCard === card._id
+                              ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                              : "none",
+                          transform:
+                            selectedCard === card._id
+                              ? "scale(1.05)"
+                              : "scale(1)", // Slight zoom for selected card
+                          transition: "all 0.3s ease", // Smooth transition
+                          border:
+                            selectedCard === card._id
+                              ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                              : "none",
+                        }}
+                      >
+                        <img
+                          alt={card.title}
+                          src={card.image}
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            borderRadius: "8px", // Rounded corners for images
+                          }}
+                        />
+                        <p>{card.title}</p>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
               </div>
             </div>
           ))}
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Comments?</h3>
-          </div>
-          <div className="divs-tableexpress">
+    
+          {/* Comments Section */}
+          <div className="divs-tableexpress" style={{ display: "block" }}>
+            <div
+              style={{
+                textAlign: "left", // Align to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Comments?
+              </h3>
+            </div>
             <textarea
               rows={4} // Set the number of rows to 4
               style={{
-                width: "100%", // Make it full width or adjust as needed
+                width: "100%", // Full width
                 resize: "vertical", // Allow vertical resizing
-                padding: "10px", // Add some padding for aesthetics
+                padding: "10px", // Padding for aesthetics
               }}
               onChange={(e) => handleCardClick("comments", e.target.value)} // Pass the value to handleCardClick
               placeholder="Enter your text here..."
@@ -633,6 +779,7 @@ function ProductDetail() {
         </>
       ),
     },
+    
 
     {
       title: (
@@ -659,10 +806,30 @@ function ProductDetail() {
       ),
       content: (
         <>
-          <div className="size-txt">
-            <h3 className="simpletable-heading">Quantity?</h3>
-          </div>
-          <div className="divs-tableexpress">
+          <div className="divs-tableexpress" style={{ display: "block" }}>
+            <div
+              style={{
+                textAlign: "left", // Parent container aligns content to the left
+              }}
+            >
+              <h3
+                className="simpletable-heading"
+                style={{
+                  textAlign: "left", // Align heading to top-left
+                  padding: "10px 15px", // Space inside the border
+                  fontSize: "20px", // Font size
+                  color: "#5F6F65", // Text color
+                  fontWeight: "bold", // Bold text
+                  border: "1px solid #5F6F65", // Elegant border
+                  borderRadius: "10px", // Smooth rounded corners
+                  boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                  display: "inline-block", // Wraps text tightly
+                  backgroundColor: "#ffffff", // Optional: White background for better contrast
+                }}
+              >
+                Quantity?
+              </h3>
+            </div>
             <LastTable1
               allQuantityPrices={allQuantityPrices}
               onRowClick={handleRowClick}
@@ -798,6 +965,11 @@ function ProductDetail() {
       setCurrent((prev) => prev + 1); // Move to the next step
     }
   }, [url, setCurrent]);
+  function decodeHtml(html) {
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = html;
+    return textArea.value;
+  }
 
   return (
     <div className="first-main-express">
@@ -894,6 +1066,7 @@ function ProductDetail() {
             <Steps
               style={{ marginBottom: "2rem" }}
               current={current}
+              onChange={setCurrent}
               progressDot
               items={steps.map(({ title, icon }) => ({ title, icon }))} // Map steps to items
             />
@@ -905,7 +1078,7 @@ function ProductDetail() {
                 justifyContent: "center",
               }}
             >
-              {current < steps.length - 1 && (
+              {current > 0 && current < steps.length - 1 && (
                 <Button onClick={() => next()}>Next</Button>
               )}
               {current === steps.length - 1 && (
