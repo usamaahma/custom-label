@@ -731,6 +731,11 @@ function ProductDetail() {
     borderRadius: token.borderRadiusLG,
     marginTop: 16,
   };
+  function decodeHtml(html) {
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = html;
+    return textArea.value;
+  }
   const selectedProductId = localStorage.getItem("selectedProductId");
   const title = localStorage.getItem("selectedProductTitle");
   const [selectedData, setSelectedData] = useState({
@@ -1032,9 +1037,12 @@ function ProductDetail() {
                     <Col xs={24} sm={24} md={16} lg={16}>
                       <h2 className="description-title">{desc.title}</h2>{" "}
                       {/* Applied the description-title class */}
-                      <p className="description-description">
-                        {desc.descriptions}
-                      </p>{" "}
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: decodeHtml(desc.descriptions),
+                        }}
+                        className="description-description"
+                      />{" "}
                       {/* Applied the description-description class */}
                     </Col>
 

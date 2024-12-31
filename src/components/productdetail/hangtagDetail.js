@@ -703,6 +703,11 @@ function HangtagDetail() {
     e.target.style.transform = "scale(1)"; // Reset zoom to normal scale
     e.target.style.transformOrigin = "center center"; // Reset to center
   };
+  function decodeHtml(html) {
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = html;
+    return textArea.value;
+  }
 
   useEffect(() => {
     // Get the uploaded image from local storage
@@ -1074,9 +1079,12 @@ function HangtagDetail() {
                     <Col xs={24} sm={24} md={16} lg={16}>
                       <h2 className="description-title">{desc.title}</h2>{" "}
                       {/* Applied the description-title class */}
-                      <p className="description-description">
-                        {desc.descriptions}
-                      </p>{" "}
+                      <p
+                        dangerouslySetInnerHTML={{
+                          __html: decodeHtml(desc.descriptions),
+                        }}
+                        className="description-description"
+                      />{" "}
                       {/* Applied the description-description class */}
                     </Col>
 
