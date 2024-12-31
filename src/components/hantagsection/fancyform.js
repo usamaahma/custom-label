@@ -3,6 +3,7 @@ import "./fancyform.css";
 import { Row, Col, Input, Select, Button, Form, message } from "antd";
 import { requestquote } from "../../utils/axios";
 import { Storage } from "../../firebaseConfig";
+import { useNavigate } from "react-router-dom";
 import {
   uploadBytes,
   ref,
@@ -12,6 +13,7 @@ import {
 const { Option } = Select;
 
 const FancyForm1 = () => {
+  const navigate = useNavigate();
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
@@ -87,6 +89,7 @@ const FancyForm1 = () => {
       .then((res) => {
         console.log("Success:", res);
         message.success("Thank you for considering us!");
+        navigate("/thank-you"); 
       })
       .catch((error) => {
         console.error("Error during the request:", error);
