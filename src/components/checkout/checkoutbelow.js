@@ -236,23 +236,23 @@ function CheckoutBelow1() {
               </Select>
             </Form.Item>
             <Form.Item
-  label="Zip/Postal Code"
-  name="billzipcode"
-  className="input-heading"
-  rules={[
-    { required: true, message: "Please enter your zip code!" },
-    {
-      pattern: /^[0-9]+$/, // Ensures that only numeric characters are allowed
-      message: "Zip code must be numeric!",
-    },
-  ]}
->
-  <Input
-    className="input"
-    placeholder="Enter your zip code"
-    maxLength={6} // Optional: Restrict the maximum length for the zip code (adjust as per your requirement)
-  />
-</Form.Item>
+              label="Zip/Postal Code"
+              name="billzipcode"
+              className="input-heading"
+              rules={[
+                { required: true, message: "Please enter your zip code!" },
+                {
+                  pattern: /^[0-9]+$/, // Ensures that only numeric characters are allowed
+                  message: "Zip code must be numeric!",
+                },
+              ]}
+            >
+              <Input
+                className="input"
+                placeholder="Enter your zip code"
+                maxLength={6} // Optional: Restrict the maximum length for the zip code (adjust as per your requirement)
+              />
+            </Form.Item>
 
             <Form.Item
               label="Country"

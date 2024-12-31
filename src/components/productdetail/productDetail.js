@@ -866,6 +866,11 @@ function ProductDetail() {
     borderRadius: token.borderRadiusLG,
     marginTop: 16,
   };
+  function decodeHtml(html) {
+    const textArea = document.createElement("textarea");
+    textArea.innerHTML = html;
+    return textArea.value;
+  }
   const selectedProductId = localStorage.getItem("selectedProductId");
   const title = localStorage.getItem("selectedProductTitle");
   const [selectedData, setSelectedData] = useState({
@@ -1178,7 +1183,7 @@ function ProductDetail() {
                           __html: decodeHtml(desc.descriptions),
                         }}
                         className="description-description"
-                      />
+                      />{" "}
                       {/* Applied the description-description class */}
                     </Col>
 

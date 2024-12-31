@@ -43,6 +43,20 @@
       padding: 5px 0; /* Add padding above and below */
       margin: 0; /* Remove default margin */
     }
+    .ql-align-center {
+      text-align: center !important;
+    }
+    .ql-align-right {
+      text-align: right !important;
+       
+    }
+    .ql-align-left {
+      text-align: left !important;
+    }
+    .ql-align-justify {
+      text-align: justify !important;
+    }
+    
     
     /* Responsive Styles */
     @media (max-width: 768px) {
