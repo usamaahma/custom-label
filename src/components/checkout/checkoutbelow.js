@@ -424,10 +424,10 @@ function CheckoutBelow1() {
           <Col xs={24} sm={12} md={8}>
             <div className="summary-main">
               {/* Payment Button */}
-              <div className="ship-address" style={{ marginTop: "20px" }}>
-                <p className="shipping-txt">Payment Method</p>
+              <div className="ship-address" style={{ marginTop: "" }}>
+                <p className="shipping-txt">Order Summary</p>
               </div>
-              <Button
+              {/* <Button
                 type="primary"
                 style={{
                   backgroundColor: "#808080",
@@ -442,8 +442,8 @@ function CheckoutBelow1() {
                 onClick={redirectToPayPal}
               >
                 Proceed to Pay
-              </Button>
-              <p className="order-summary-txt">Order Summary</p>
+              </Button> */}
+              <p className="order-summary-txt">Summary</p>
               <p
                 className="cart-txt"
                 onClick={toggleDropdown}
