@@ -11,12 +11,12 @@ const Accdash = () => {
 
   const tabs = [
     { key: "account-dashboard", label: "Account Dashboard" },
-    { key: "pending-approvals", label: "Pending Approvals" },
+    // { key: "pending-approvals", label: "Pending Approvals" },
     { key: "order-history", label: "Order History" },
-    { key: "addresses", label: "Addresses" },
-    { key: "newsletter", label: "Newsletter Subscriptions" },
+    // { key: "addresses", label: "Addresses" },
+    // { key: "newsletter", label: "Newsletter Subscriptions" },
     { key: "account-details", label: "Account Details & Password Change" },
-    { key: "payment-options", label: "My Payment Options" },
+    // { key: "payment-options", label: "My Payment Options" },
   ];
 
   // Get the active key from the current location

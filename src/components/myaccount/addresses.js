@@ -2,194 +2,227 @@ import "./addresses.css";
 import { Col, Row, Button, Form, Input, Select } from "antd";
 
 const { Option } = Select;
-const country = [
-  "Alberta",
-  "British Columbia",
-  "California",
-  "New York",
-  "Ontario",
-  "Texas",
-  // Add more as needed
-];
-
-const style = {
-  padding: "8px 0",
-};
-
-const onFinish = (values) => {
-  console.log("Success:", values);
-};
-
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
 
 function Addresses() {
   return (
     <div className="addresses-container">
-      <h2>Shipping Address</h2>
-      <Row gutter={[16, 16]}>
-        <Col xs={24} md={12} className="gutter-row">
-          <div style={style}>
-            <p className="form-title">Contact Information</p>
-            <Form
-              name="contact"
-              labelCol={{ span: 24 }}
-              wrapperCol={{ span: 24 }}
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
-            >
-              <Form.Item
-                className="formitem-address"
-                label="User Name"
-                name="username"
-                rules={[
-                  { required: true, message: "Please input your User name!" },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                className="formitem-address"
-                label="Email"
-                name="email"
-                rules={[
-                  { required: true, message: "Please input your email!" },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                className="formitem-address"
-                label="Company"
-                name="company"
-                rules={[
-                  { required: true, message: "Please input your Company!" },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                className="formitem-address"
-                label="Phone Number"
-                name="phonenumber"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your Phone Number!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
+      {/* Billing Address Section */}
+      <div className="address-section">
+        <p className="section-title" style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>Billing Address</p>
+        <Form layout="vertical">
+          {/* Billing First Name */}
+          <Form.Item
+            label="First Name"
+            name="billfirstname"
+            rules={[{ required: true, message: "Please enter your first name!" }]}
+          >
+            <Input placeholder="Enter your first name" />
+          </Form.Item>
 
-              <Form.Item wrapperCol={{ span: 24 }}>
-                <Button htmlType="submit" className="submit-button">
-                  Submit
-                </Button>
-              </Form.Item>
-            </Form>
+          {/* Billing Middle Name */}
+          <Form.Item
+            label="Middle Name"
+            name="billmiddlename"
+            rules={[{ required: false }]} // Not required
+          >
+            <Input placeholder="Enter your middle name" />
+          </Form.Item>
+
+          {/* Billing Last Name */}
+          <Form.Item
+            label="Last Name"
+            name="billlastname"
+            rules={[{ required: true, message: "Please enter your last name!" }]}
+          >
+            <Input placeholder="Enter your last name" />
+          </Form.Item>
+
+          {/* Billing Phone Number */}
+          <Form.Item
+            label="Phone Number"
+            name="billphonenumber"
+            rules={[{ required: true, message: "Please enter your phone number!" }]}
+          >
+            <Input placeholder="Enter your phone number" />
+          </Form.Item>
+
+          {/* Billing Company Name */}
+          <Form.Item
+            label="Company Name"
+            name="billcompanyname"
+            rules={[{ required: false }]} // Not required
+          >
+            <Input placeholder="Enter your company name" />
+          </Form.Item>
+
+          {/* Billing Street Address */}
+          <Form.Item
+            label="Street Address"
+            name="billaddress"
+            rules={[{ required: true, message: "Please enter your street address!" }]}
+          >
+            <Input placeholder="Enter your street address" />
+          </Form.Item>
+
+          {/* Billing City */}
+          <Form.Item
+            label="City"
+            name="billcity"
+            rules={[{ required: true, message: "Please enter your city!" }]}
+          >
+            <Input placeholder="Enter your city" />
+          </Form.Item>
+
+          {/* Billing State/Province */}
+          <Form.Item
+            label="State/Province"
+            name="billstate"
+            rules={[{ required: true, message: "Please select your state/province!" }]}
+          >
+            <Select placeholder="Select your state/province">
+              <Option value="california">California</Option>
+              <Option value="ontario">Ontario</Option>
+              <Option value="london">London</Option>
+              <Option value="new-south-wales">New South Wales</Option>
+            </Select>
+          </Form.Item>
+
+          {/* Billing Zip/Postal Code */}
+          <Form.Item
+            label="Zip/Postal Code"
+            name="billzipcode"
+            rules={[{ required: true, message: "Please enter your zip code!" }]}
+          >
+            <Input placeholder="Enter your zip code" />
+          </Form.Item>
+
+          {/* Billing Country */}
+          <Form.Item
+            label="Country"
+            name="billcountry"
+            rules={[{ required: true, message: "Please select your country!" }]}
+          >
+            <Select placeholder="Select your country">
+              <Option value="usa">United States</Option>
+              <Option value="canada">Canada</Option>
+              <Option value="uk">United Kingdom</Option>
+              <Option value="australia">Australia</Option>
+            </Select>
+          </Form.Item>
+        </Form>
+      </div>
+
+      {/* Shipping Address Section */}
+      <div className="address-section">
+        <p className="section-title" style={{ fontWeight: 'bold', fontSize: '1.3rem' }}>Shipping Method</p>
+        <Form layout="vertical">
+          {/* Shipping First Name */}
+          <Form.Item
+            label="First Name"
+            name="shipFirstName"
+            rules={[{ required: true, message: "Please enter your first name!" }]}
+          >
+            <Input placeholder="Enter your first name" />
+          </Form.Item>
+
+          {/* Shipping Middle Name */}
+          <Form.Item
+            label="Middle Name"
+            name="shipMiddleName"
+            rules={[{ required: false }]} // Not required
+          >
+            <Input placeholder="Enter your middle name" />
+          </Form.Item>
+
+          {/* Shipping Last Name */}
+          <Form.Item
+            label="Last Name"
+            name="shipLastName"
+            rules={[{ required: true, message: "Please enter your last name!" }]}
+          >
+            <Input placeholder="Enter your last name" />
+          </Form.Item>
+
+          {/* Shipping Phone Number */}
+          <Form.Item
+            label="Phone Number"
+            name="shipPhoneNumber"
+            rules={[{ required: true, message: "Please enter your phone number!" }]}
+          >
+            <Input placeholder="Enter your phone number" />
+          </Form.Item>
+
+          {/* Shipping Company Name */}
+          <Form.Item
+            label="Company Name"
+            name="shipCompanyName"
+            rules={[{ required: false }]} // Not required
+          >
+            <Input placeholder="Enter your company name" />
+          </Form.Item>
+
+          {/* Shipping Street Address */}
+          <Form.Item
+            label="Street Address"
+            name="shipStreetAddress"
+            rules={[{ required: true, message: "Please enter your street address!" }]}
+          >
+            <Input placeholder="Enter your street address" />
+          </Form.Item>
+
+          {/* Shipping City */}
+          <Form.Item
+            label="City"
+            name="shipCity"
+            rules={[{ required: true, message: "Please enter your city!" }]}
+          >
+            <Input placeholder="Enter your city" />
+          </Form.Item>
+
+          {/* Shipping State/Province */}
+          <Form.Item
+            label="State/Province"
+            name="shipState"
+            rules={[{ required: true, message: "Please select your state/province!" }]}
+          >
+            <Select placeholder="Select your state/province">
+              <Option value="california">California</Option>
+              <Option value="ontario">Ontario</Option>
+              <Option value="london">London</Option>
+              <Option value="new-south-wales">New South Wales</Option>
+            </Select>
+          </Form.Item>
+
+          {/* Shipping Zip/Postal Code */}
+          <Form.Item
+            label="Zip/Postal Code"
+            name="shipZipCode"
+            rules={[{ required: true, message: "Please enter your zip code!" }]}
+          >
+            <Input placeholder="Enter your zip code" />
+          </Form.Item>
+
+          {/* Shipping Country */}
+          <Form.Item
+            label="Country"
+            name="shipCountry"
+            rules={[{ required: true, message: "Please select your country!" }]}
+          >
+            <Select placeholder="Select your country">
+              <Option value="usa">United States</Option>
+              <Option value="canada">Canada</Option>
+              <Option value="uk">United Kingdom</Option>
+              <Option value="australia">Australia</Option>
+            </Select>
+          </Form.Item>
+
+          <div className="form-actions">
+            <Button type="primary" htmlType="submit" style={{ width: "100%" }}>
+              Save Address
+            </Button>
           </div>
-        </Col>
-
-        <Col xs={24} md={12} className="gutter-row">
-          <div style={style}>
-            <p className="form-title">Address</p>
-            <Form
-              name="address"
-              labelCol={{ span: 24 }}
-              wrapperCol={{ span: 24 }}
-              style={{ maxWidth: 600 }}
-              initialValues={{ remember: true }}
-              onFinish={onFinish}
-              onFinishFailed={onFinishFailed}
-              autoComplete="off"
-            >
-              <Form.Item
-                className="formitem-address"
-                label="Street Address"
-                name="streetAddress"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your street address!",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                className="formitem-address"
-                label="City"
-                name="city"
-                rules={[{ required: true, message: "Please input your city!" }]}
-              >
-                <Input />
-              </Form.Item>
-              <Form.Item
-                className="formitem-address"
-                label="State/Province "
-                name="state"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please input your State/Province !",
-                  },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                className="formitem-address"
-                label="Postal Code"
-                name="postalCode"
-                rules={[
-                  { required: true, message: "Please input your postal code!" },
-                ]}
-              >
-                <Input />
-              </Form.Item>
-
-              <Form.Item
-                className="formitem-address"
-                label="Country"
-                name="country"
-                rules={[
-                  {
-                    required: true,
-                    message: "Please select your Country!",
-                  },
-                ]}
-              >
-                <Select
-                  placeholder="Select your country"
-                  allowClear
-                  showSearch
-                  filterOption={(input, option) =>
-                    option.children.toLowerCase().includes(input.toLowerCase())
-                  }
-                >
-                  {country.map((state) => (
-                    <Option key={state} value={state}>
-                      {state}
-                    </Option>
-                  ))}
-                </Select>
-              </Form.Item>
-
-              <Form.Item wrapperCol={{ span: 24 }}>
-                <Button htmlType="submit" className="submit-button">
-                  Submit
-                </Button>
-              </Form.Item>
-            </Form>
-          </div>
-        </Col>
-      </Row>
+        </Form>
+      </div>
     </div>
   );
 }

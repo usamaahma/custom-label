@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Breadcrumb } from "antd";
+import { Breadcrumb, Row, Col } from "antd";
 import { blog } from "../../utils/axios";
 import "./blogdetail.css";
 
@@ -91,20 +91,44 @@ function Blogdetail1() {
             marginTop: "2rem",
           }}
         />
-        <h1>{blogData?.title}</h1>
+        <h1 className="first-head">{blogData?.title}</h1>
         <div className="ten-container">
           {descriptionData.map((desc, index) => (
-            <div key={index}>
-              <h2>{desc.descriptionTitle}</h2>
-              <p dangerouslySetInnerHTML={{ __html: decodeHtml(desc.text) }} />
-              {desc.image && (
-                <img
-                  src={desc.image}
-                  alt={desc.descriptionTitle}
-                  style={{ width: "4rem", height: "auto", marginTop: "1rem" }}
+            <Row key={index} gutter={[24, 24]} style={{ marginBottom: "24px" }}>
+              {/* Column for Title and Description */}
+              <Col xs={24} sm={24} md={16} lg={16}>
+                <h2 className="title-head">{desc.descriptionTitle}</h2>
+                <p
+                  dangerouslySetInnerHTML={{ __html: decodeHtml(desc.text) }}
                 />
-              )}
-            </div>
+              </Col>
+
+              {/* Column for Image, Centered */}
+              <Col
+                xs={24}
+                sm={24}
+                md={8}
+                lg={8}
+                style={{
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                {desc.image && (
+                  <img
+                    src={desc.image}
+                    alt={desc.descriptionTitle}
+                    style={{
+                      maxWidth: "100%",
+                      height: "15rem",
+                      objectFit: "contain",
+                      marginTop: "1rem",
+                    }}
+                  />
+                )}
+              </Col>
+            </Row>
           ))}
         </div>
       </div>

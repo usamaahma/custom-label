@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { Row, Col, Form, Input, Button, Select } from "antd";
+import { Row, Col, Form, Input, Button, Select, message } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useCart } from "../../context/cartcontext"; // Import Cart Context
 import "./checkoutbelow.css";
 import IconMessage from "./iconmessage";
+import { useNavigate } from "react-router-dom";
 import { checkout } from "../../utils/axios";
 
 const { Option } = Select;
 
 function CheckoutBelow1() {
+  const navigate = useNavigate();
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownVisible1, setDropdownVisible1] = useState(false);
 
@@ -109,8 +111,11 @@ function CheckoutBelow1() {
         payment: paymentDetails,
       });
       console.log("Checkout Successful:", response.data);
+      message.success("your order is placed!");
+      navigate("/thank-you");
     } catch (error) {
       console.error("Error during checkout:", error);
+      message.error("your order is not completed!");
     }
   };
 
@@ -176,10 +181,24 @@ function CheckoutBelow1() {
                   required: true,
                   message: "Please enter your phone number!",
                 },
+                {
+                  len: 11, // Ensures the phone number is exactly 11 digits
+                  message: "Phone number must be exactly 11 digits!",
+                },
+                {
+                  pattern: /^[0-9]{11}$/, // Ensures the phone number is numeric
+                  message: "Phone number must be numeric!",
+                },
               ]}
             >
-              <Input className="input" placeholder="Enter your phone number" />
+              <Input
+                className="input"
+                placeholder="Enter your phone number"
+                maxLength={11} // Limits input to 11 characters
+                type="tel" // Open numeric keypad on mobile devices
+              />
             </Form.Item>
+
             <Form.Item
               label="Street Address"
               className="input-heading"
@@ -222,10 +241,19 @@ function CheckoutBelow1() {
               className="input-heading"
               rules={[
                 { required: true, message: "Please enter your zip code!" },
+                {
+                  pattern: /^[0-9]+$/, // Ensures that only numeric characters are allowed
+                  message: "Zip code must be numeric!",
+                },
               ]}
             >
-              <Input className="input" placeholder="Enter your zip code" />
+              <Input
+                className="input"
+                placeholder="Enter your zip code"
+                maxLength={6} // Optional: Restrict the maximum length for the zip code (adjust as per your requirement)
+              />
             </Form.Item>
+
             <Form.Item
               label="Country"
               name="billcountry"
@@ -301,13 +329,24 @@ function CheckoutBelow1() {
                     required: true,
                     message: "Please enter your phone number!",
                   },
+                  {
+                    len: 11, // Ensures the phone number is exactly 11 digits
+                    message: "Phone number must be exactly 11 digits!",
+                  },
+                  {
+                    pattern: /^[0-9]{11}$/, // Ensures the phone number is numeric
+                    message: "Phone number must be numeric!",
+                  },
                 ]}
               >
                 <Input
                   className="input"
                   placeholder="Enter your phone number"
+                  maxLength={11} // Limits input to 11 characters
+                  type="tel" // Open numeric keypad on mobile devices
                 />
               </Form.Item>
+
               <Form.Item
                 label="Street Address"
                 name="shipStreetAddress"
@@ -350,10 +389,19 @@ function CheckoutBelow1() {
                 className="input-heading"
                 rules={[
                   { required: true, message: "Please enter your zip code!" },
+                  {
+                    pattern: /^[0-9]+$/, // Ensures that only numeric characters are allowed
+                    message: "Zip code must be numeric!",
+                  },
                 ]}
               >
-                <Input className="input" placeholder="Enter your zip code" />
+                <Input
+                  className="input"
+                  placeholder="Enter your zip code"
+                  maxLength={6} // Restrict the maximum length for the zip code (adjust as per your requirement)
+                />
               </Form.Item>
+
               <Form.Item
                 label="Country"
                 name="shipCountry"
@@ -376,10 +424,10 @@ function CheckoutBelow1() {
           <Col xs={24} sm={12} md={8}>
             <div className="summary-main">
               {/* Payment Button */}
-              <div className="ship-address" style={{ marginTop: "20px" }}>
-                <p className="shipping-txt">Payment Method</p>
+              <div className="ship-address" style={{ marginTop: "" }}>
+                <p className="shipping-txt">Order Summary</p>
               </div>
-              <Button
+              {/* <Button
                 type="primary"
                 style={{
                   backgroundColor: "#808080",
@@ -394,8 +442,8 @@ function CheckoutBelow1() {
                 onClick={redirectToPayPal}
               >
                 Proceed to Pay
-              </Button>
-              <p className="order-summary-txt">Order Summary</p>
+              </Button> */}
+              <p className="order-summary-txt">Summary</p>
               <p
                 className="cart-txt"
                 onClick={toggleDropdown}

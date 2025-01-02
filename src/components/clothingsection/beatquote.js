@@ -9,6 +9,8 @@ import {
 } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Storage } from "../../firebaseConfig";
+import { useNavigate } from "react-router-dom";
+
 import {
   uploadBytes,
   ref,
@@ -23,6 +25,7 @@ const { TextArea } = Input;
 const { Option } = Select;
 
 function Beatquote() {
+  const navigate = useNavigate();
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
@@ -84,6 +87,7 @@ function Beatquote() {
       .then((res) => {
         console.log("success", res);
         message.success("Thank you for considering us!");
+        navigate("/thank-you"); 
       })
       .catch(() => {
         message.error("Something went wrong, please try again!");
