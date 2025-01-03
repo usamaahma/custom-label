@@ -647,10 +647,15 @@ function ProductDetail() {
         <>
           {options.map((option, index) => (
             <div className="divs-tableexpress" key={index}>
-              <div className="card-grid">
+              <div
+                style={{
+                  padding: "20px",
+                  display: "block",
+                }}
+              >
                 <div
                   style={{
-                    textAlign: "left", // Parent container aligns content to the left
+                    textAlign: "left", // Align container to the left
                   }}
                 >
                   <h3
@@ -671,49 +676,75 @@ function ProductDetail() {
                     {option.type}
                   </h3>
                 </div>
-                {option.cards.map((card, cardIndex) => (
-                  <div key={cardIndex} className="card-container">
-                    <Card
-                      bordered={false}
-                      onClick={() =>
-                        handleCardClick(option.type, card.title, card._id)
-                      } // Pass option type and card title
+    
+                {/* Instructions */}
+                <Row justify="center" style={{ marginBottom: "20px" }}>
+                  <Col>
+                    <h3
                       style={{
-                        background:
-                          selectedCard === card._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                        fontSize: "18px",
+                        fontWeight: "bold",
                         textAlign: "center",
-                        boxShadow:
-                          selectedCard === card._id
-                            ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
-                            : "none",
-                        transform:
-                          selectedCard === card._id
-                            ? "scale(1.05)"
-                            : "scale(1)", // Slight zoom for selected card
-                        transition: "all 0.3s ease", // Smooth transition
-                        border:
-                          selectedCard === card._id
-                            ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
-                            : "none",
+                        color: "#5F6F65", // Adjust color if needed
+                        marginTop: "10px",
                       }}
                     >
-                      <img
-                        alt={card.title}
-                        src={card.image}
-                        className="image-card-express"
-                      />
-                      <p>{card.title}</p>
-                    </Card>
-                  </div>
-                ))}
+                      Please choose {option.type} from the following
+                    </h3>
+                  </Col>
+                </Row>
+    
+                {/* Cards */}
+                <Row justify="center" gutter={[16, 16]}>
+                  {option.cards.map((card, cardIndex) => (
+                    <Col xs={24} sm={12} md={8} lg={6} key={cardIndex}>
+                      <Card
+                        bordered={false}
+                        onClick={() =>
+                          handleCardClick(option.type, card.title, card._id)
+                        }
+                        style={{
+                          background:
+                            selectedCard === card._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                          textAlign: "center",
+                          boxShadow:
+                            selectedCard === card._id
+                              ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                              : "none",
+                          transform:
+                            selectedCard === card._id
+                              ? "scale(1.05)"
+                              : "scale(1)", // Slight zoom for selected card
+                          transition: "all 0.3s ease", // Smooth transition
+                          border:
+                            selectedCard === card._id
+                              ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                              : "none",
+                        }}
+                      >
+                        <img
+                          alt={card.title}
+                          src={card.image}
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            borderRadius: "8px", // Rounded corners for images
+                          }}
+                        />
+                        <p>{card.title}</p>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
               </div>
             </div>
           ))}
-
+    
+          {/* Comments Section */}
           <div className="divs-tableexpress" style={{ display: "block" }}>
             <div
               style={{
-                textAlign: "left", // Parent container aligns content to the left
+                textAlign: "left", // Align to the left
               }}
             >
               <h3
@@ -737,9 +768,9 @@ function ProductDetail() {
             <textarea
               rows={4} // Set the number of rows to 4
               style={{
-                width: "100%", // Make it full width or adjust as needed
+                width: "100%", // Full width
                 resize: "vertical", // Allow vertical resizing
-                padding: "10px", // Add some padding for aesthetics
+                padding: "10px", // Padding for aesthetics
               }}
               onChange={(e) => handleCardClick("comments", e.target.value)} // Pass the value to handleCardClick
               placeholder="Enter your text here..."
@@ -748,6 +779,7 @@ function ProductDetail() {
         </>
       ),
     },
+    
 
     {
       title: (

@@ -9,6 +9,8 @@ import {
   message,
   Upload,
   Form,
+  Row,
+  Col,
 } from "antd";
 import { designquote } from "../../utils/axios";
 import { SketchPicker } from "react-color";
@@ -101,6 +103,7 @@ function Wovenlabeldesc() {
   const [fontFamily, setFontFamily] = useState("Arial"); // Default font family
   const defaultText1 = "Your Company"; // Default text for the first input
   const [selectedBorder, setSelectedBorder] = useState("None"); // Default border type is "None"
+  const [selectedCard, setSelectedCard] = useState("None"); // Default border type is "None"
   const [image, setImage] = useState("");
   // Handle image click to change border style
   const handleImageClick = (borderType) => {
@@ -334,28 +337,28 @@ function Wovenlabeldesc() {
               >
                 {" "}
                 <div
-      className="main-image-container"
-      style={{
-        position: 'relative',
-        overflow: 'hidden', // Prevent image from going outside the container
-        width: '100%', // Set width as per your requirement
-        height: 'auto', // Maintain the height relative to width
-      }}
-    >
-      <img
-        alt="Express Clothing Labels"
-        src={selectedImage}
-        className="img-fluid main-image"
-        onMouseMove={handleMouseMove}
-        onMouseLeave={handleMouseLeave}
-        style={{
-          borderRadius: '1rem',
-          transition: 'transform 0.2s ease-out', // Smooth transition
-          width: '100%', // Make image responsive within the container
-          height: 'auto', // Maintain the aspect ratio
-        }}
-      />
-    </div>
+                  className="main-image-container"
+                  style={{
+                    position: "relative",
+                    overflow: "hidden", // Prevent image from going outside the container
+                    width: "100%", // Set width as per your requirement
+                    height: "auto", // Maintain the height relative to width
+                  }}
+                >
+                  <img
+                    alt="Express Clothing Labels"
+                    src={selectedImage}
+                    className="img-fluid main-image"
+                    onMouseMove={handleMouseMove}
+                    onMouseLeave={handleMouseLeave}
+                    style={{
+                      borderRadius: "1rem",
+                      transition: "transform 0.2s ease-out", // Smooth transition
+                      width: "100%", // Make image responsive within the container
+                      height: "auto", // Maintain the aspect ratio
+                    }}
+                  />
+                </div>
                 <div className="thumbnail-carousel">
                   {thumbnailImages.map((image, index) => (
                     <img
@@ -451,34 +454,126 @@ function Wovenlabeldesc() {
             </div>
           </div>
           <div style={{ marginTop: "2rem" }}>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Size?</h3>
-            </div>
-            <div className="divs-tableexpress">
+            <div className="divs-tableexpress" style={{ display: "block" }}>
+              <div
+                style={{
+                  textAlign: "left", // Parent container aligns content to the left
+                }}
+              >
+                <h3
+                  className="simpletable-heading"
+                  style={{
+                    textAlign: "left", // Align heading to top-left
+                    padding: "10px 15px", // Space inside the border
+                    fontSize: "20px", // Font size
+                    color: "#5F6F65", // Text color
+                    fontWeight: "bold", // Bold text
+                    border: "1px solid #5F6F65", // Elegant border
+                    borderRadius: "10px", // Smooth rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    display: "inline-block", // Wraps text tightly
+                    backgroundColor: "#ffffff", // Optional: White background for better contrast
+                  }}
+                >
+                  Size?
+                </h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please Choose size from following:
+                </h3>
+              </div>
               <div className="card-container">
                 {card1.map((card) => (
                   <Card
                     key={card.id}
-                    onClick={() => handleCardClick("size", card.title)}
+                    onClick={() => {
+                      setSelectedCard(card.id); // Sirf ek card ko select karega
+                      console.log(card.id);
+                      handleCardClick("size", card.title); // Additional logic handle karega
+                    }}
                     bordered={false}
                     style={{
-                      background: "#FAFAFA",
+                      marginLeft:"1rem",
+                      backgroundColor:
+                        selectedCard === card.id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                      textAlign: "center",
+                      boxShadow:
+                        selectedCard === card.id
+                          ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Shadow for selected card
+                          : "none",
+                      transform:
+                        selectedCard === card.id ? "scale(1.05)" : "scale(1)", // Zoom effect for selected card
+                      transition: "all 0.3s ease", // Smooth transition
+                      border:
+                        selectedCard === card.id
+                          ? "2px solid rgba(0, 0, 0, 0.2)" // Border for selected card
+                          : "1px solid transparent", // Default border
+                      cursor: "pointer", // Pointer cursor for better UX
                     }}
                   >
                     <img
-                      alt={card.alt}
+                      alt={card.alt || "Card Image"}
                       src={card.imgSrc}
                       className="image-card-express"
                     />
-                    <p>{card.title}</p>
+                    <p
+                      style={{
+                        fontWeight:
+                          selectedCard === card._id ? "bold" : "normal",
+                      }}
+                    >
+                      {card.title}
+                    </p>
                   </Card>
                 ))}
               </div>
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Text Line #1?</h3>
-            </div>
-            <div className="divs-tableexpress">
+
+            <div
+              className="divs-tableexpress"
+              style={{ padding: "20px", display: "block" }}
+            >
+              <div
+                style={{
+                  textAlign: "left", // Parent container aligns content to the left
+                }}
+              >
+                <h3
+                  className="simpletable-heading"
+                  style={{
+                    textAlign: "left", // Align heading to top-left
+                    padding: "10px 15px", // Space inside the border
+                    fontSize: "20px", // Font size
+                    color: "#5F6F65", // Text color
+                    fontWeight: "bold", // Bold text
+                    border: "1px solid #5F6F65", // Elegant border
+                    borderRadius: "10px", // Smooth rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    display: "inline-block", // Wraps text tightly
+                    backgroundColor: "#ffffff", // Optional: White background for better contrast
+                  }}
+                >
+                  Text Line#1?
+                </h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please Enter Text 1
+                </h3>
+              </div>
               <div className="card-grid-input">
                 <input
                   type="text"
@@ -490,10 +585,41 @@ function Wovenlabeldesc() {
               </div>
             </div>
 
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Text Line #1 Font?</h3>
-            </div>
-            <div className="divs-tableexpress">
+            <div className="divs-tableexpress" style={{ display: "block" }}>
+              <div
+                style={{
+                  textAlign: "left", // Parent container aligns content to the left
+                }}
+              >
+                <h3
+                  className="simpletable-heading"
+                  style={{
+                    textAlign: "left", // Align heading to top-left
+                    padding: "10px 15px", // Space inside the border
+                    fontSize: "20px", // Font size
+                    color: "#5F6F65", // Text color
+                    fontWeight: "bold", // Bold text
+                    border: "1px solid #5F6F65", // Elegant border
+                    borderRadius: "10px", // Smooth rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    display: "inline-block", // Wraps text tightly
+                    backgroundColor: "#ffffff", // Optional: White background for better contrast
+                  }}
+                >
+                  Text Line#1 Font?
+                </h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please Select Text 1 Font
+                </h3>
+              </div>
               <Select
                 className="font-selector"
                 placeholder="Select a font"
@@ -506,10 +632,42 @@ function Wovenlabeldesc() {
                 <Option value="Georgia">Georgia</Option>
               </Select>
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Text Line #1 Size?</h3>
-            </div>
-            <div className="divs-tableexpress">
+
+            <div className="divs-tableexpress" style={{ display: "block" }}>
+              <div
+                style={{
+                  textAlign: "left", // Parent container aligns content to the left
+                }}
+              >
+                <h3
+                  className="simpletable-heading"
+                  style={{
+                    textAlign: "left", // Align heading to top-left
+                    padding: "10px 15px", // Space inside the border
+                    fontSize: "20px", // Font size
+                    color: "#5F6F65", // Text color
+                    fontWeight: "bold", // Bold text
+                    border: "1px solid #5F6F65", // Elegant border
+                    borderRadius: "10px", // Smooth rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    display: "inline-block", // Wraps text tightly
+                    backgroundColor: "#ffffff", // Optional: White background for better contrast
+                  }}
+                >
+                  Text Line#1 Size?
+                </h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please choose font size for Text 1.
+                </h3>
+              </div>
               <Slider
                 min={10}
                 max={100}
@@ -519,10 +677,42 @@ function Wovenlabeldesc() {
                 className="custom-slider"
               />
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Text Line 2?</h3>
-            </div>
-            <div className="divs-tableexpress">
+
+            <div className="divs-tableexpress" style={{ display: "block" }}>
+              <div
+                style={{
+                  textAlign: "left", // Parent container aligns content to the left
+                }}
+              >
+                <h3
+                  className="simpletable-heading"
+                  style={{
+                    textAlign: "left", // Align heading to top-left
+                    padding: "10px 15px", // Space inside the border
+                    fontSize: "20px", // Font size
+                    color: "#5F6F65", // Text color
+                    fontWeight: "bold", // Bold text
+                    border: "1px solid #5F6F65", // Elegant border
+                    borderRadius: "10px", // Smooth rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    display: "inline-block", // Wraps text tightly
+                    backgroundColor: "#ffffff", // Optional: White background for better contrast
+                  }}
+                >
+                  Text Line#2?
+                </h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please Enter Text 2
+                </h3>
+              </div>
               <input
                 type="text"
                 className="full-width-input"
@@ -531,10 +721,42 @@ function Wovenlabeldesc() {
                 onChange={handleText2Change}
               />
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Text Line #2 Font?</h3>
-            </div>
-            <div className="divs-tableexpress">
+
+            <div className="divs-tableexpress" style={{ display: "block" }}>
+              <div
+                style={{
+                  textAlign: "left", // Parent container aligns content to the left
+                }}
+              >
+                <h3
+                  className="simpletable-heading"
+                  style={{
+                    textAlign: "left", // Align heading to top-left
+                    padding: "10px 15px", // Space inside the border
+                    fontSize: "20px", // Font size
+                    color: "#5F6F65", // Text color
+                    fontWeight: "bold", // Bold text
+                    border: "1px solid #5F6F65", // Elegant border
+                    borderRadius: "10px", // Smooth rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    display: "inline-block", // Wraps text tightly
+                    backgroundColor: "#ffffff", // Optional: White background for better contrast
+                  }}
+                >
+                  Text Line#2 Font?
+                </h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please Select Text 2 Font
+                </h3>
+              </div>
               <Select
                 className="font-selector"
                 placeholder="Select a font"
@@ -547,10 +769,42 @@ function Wovenlabeldesc() {
                 <Option value="Georgia">Georgia</Option>
               </Select>
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Text Line #2 Size?</h3>
-            </div>
-            <div className="divs-tableexpress">
+
+            <div className="divs-tableexpress" style={{ display: "block" }}>
+              <div
+                style={{
+                  textAlign: "left", // Parent container aligns content to the left
+                }}
+              >
+                <h3
+                  className="simpletable-heading"
+                  style={{
+                    textAlign: "left", // Align heading to top-left
+                    padding: "10px 15px", // Space inside the border
+                    fontSize: "20px", // Font size
+                    color: "#5F6F65", // Text color
+                    fontWeight: "bold", // Bold text
+                    border: "1px solid #5F6F65", // Elegant border
+                    borderRadius: "10px", // Smooth rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    display: "inline-block", // Wraps text tightly
+                    backgroundColor: "#ffffff", // Optional: White background for better contrast
+                  }}
+                >
+                  Text Line#2 Size?
+                </h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please choose font size for Text 2
+                </h3>
+              </div>
               <Slider
                 min={10}
                 max={100}
@@ -560,10 +814,42 @@ function Wovenlabeldesc() {
                 className="custom-slider"
               />
             </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Background Color?</h3>
-            </div>
-            <div className="divs-tableexpress">
+
+            <div className="divs-tableexpress" style={{ display: "block" }}>
+              <div
+                style={{
+                  textAlign: "left", // Parent container aligns content to the left
+                }}
+              >
+                <h3
+                  className="simpletable-heading"
+                  style={{
+                    textAlign: "left", // Align heading to top-left
+                    padding: "10px 15px", // Space inside the border
+                    fontSize: "20px", // Font size
+                    color: "#5F6F65", // Text color
+                    fontWeight: "bold", // Bold text
+                    border: "1px solid #5F6F65", // Elegant border
+                    borderRadius: "10px", // Smooth rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    display: "inline-block", // Wraps text tightly
+                    backgroundColor: "#ffffff", // Optional: White background for better contrast
+                  }}
+                >
+                  Background Color?
+                </h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please Select Background color
+                </h3>
+              </div>
               <SketchPicker
                 color={color}
                 onChangeComplete={handleChangeComplete}
@@ -571,60 +857,144 @@ function Wovenlabeldesc() {
               />
             </div>
             <div>
-              <div className="size-txt">
-                <h3 className="simpletable-heading">Border?</h3>
+              <div className="divs-tableexpress" style={{ display: "block" }}>
+                <div
+                  style={{
+                    textAlign: "left", // Parent container aligns content to the left
+                  }}
+                >
+                  <h3
+                    className="simpletable-heading"
+                    style={{
+                      textAlign: "left", // Align heading to top-left
+                      padding: "10px 15px", // Space inside the border
+                      fontSize: "20px", // Font size
+                      color: "#5F6F65", // Text color
+                      fontWeight: "bold", // Bold text
+                      border: "1px solid #5F6F65", // Elegant border
+                      borderRadius: "10px", // Smooth rounded corners
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                      display: "inline-block", // Wraps text tightly
+                      backgroundColor: "#ffffff", // Optional: White background for better contrast
+                    }}
+                  >
+                    Border?
+                  </h3>
+                  <h3
+                    style={{
+                      fontSize: "18px",
+                      fontWeight: "bold",
+                      textAlign: "center",
+                      color: "#5F6F65", // Optional: Adjust color if needed
+                      marginTop: "10px",
+                    }}
+                  >
+                    Please Choose Border from following:
+                  </h3>
+                </div>
+                <div className="card-container">
+                  {cardData.map((card) => (
+                    <div key={card.id} className="card-container">
+                      <Card
+                        bordered={false}
+                        onClick={() => {
+                          setSelectedCard(card.id); // Update state with selected card's ID
+                        }}
+                        style={{
+                          width: "11rem",
+                          height: "12rem",
+                          background:
+                            selectedCard === card.id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                          textAlign: "center",
+                          boxShadow:
+                            selectedCard === card.id
+                              ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                              : "none",
+                          transform:
+                            selectedCard === card.id
+                              ? "scale(1.05)"
+                              : "scale(1)", // Slight zoom for selected card
+                          transition: "all 0.3s ease", // Smooth transition
+                          border:
+                            selectedCard === card.id
+                              ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                              : "1px solid transparent", // Transparent border for consistency
+                        }}
+                      >
+                        <img
+                          alt={card.title}
+                          src={card.imgSrc}
+                          className="image-card-express"
+                          style={{ width: "100%", height: "auto" }}
+                          onClick={() => handleImageClick(card.title)} // Trigger border change on image click
+                        />
+                        <p>{card.title}</p>
+                      </Card>
+                    </div>
+                  ))}
+                </div>
               </div>
+            </div>
 
-              <div className="divs-tableexpress">
-                {cardData.map((card) => (
-                  <div key={card.id} className="card-container">
-                    <Card
-                      bordered={false}
-                      style={{
-                        width: "11rem",
-                        height: "12rem",
-                        background: "#FAFAFA",
-                      }}
-                    >
-                      <img
-                        alt={card.title}
-                        src={card.imgSrc}
-                        className="image-card-express"
-                        style={{ width: "100%", height: "auto" }}
-                        onClick={() => handleImageClick(card.title)} // Trigger border change on image click
-                      />
-                      <p>{card.title}</p>
-                    </Card>
-                  </div>
-                ))}
-              </div>
-            </div>
-            <div className="size-txt">
-              <h3 className="simpletable-heading">Turnaround Options?</h3>
-            </div>
-            <div className="divs-tableexpress">
-              <Card
-                bordered={false}
-                onClick={() =>
-                  handleCardClick(
-                    "turnaroundOptions",
-                    "Standard: 15 Business Days"
-                  )
-                }
+            <div className="divs-tableexpress" style={{ display: "block" }}>
+              <div
                 style={{
-                  width: "11rem",
-                  height: "12rem",
-                  background: "#FAFAFA",
+                  textAlign: "left", // Parent container aligns content to the left
                 }}
               >
-                <img
-                  alt="abc"
-                  src="../images/sizes/rush3.png"
-                  className="image-card-express"
-                />
-                <p>Standard: 15</p>
-                <p>Business Days</p>
-              </Card>
+                <h3
+                  className="simpletable-heading"
+                  style={{
+                    textAlign: "left", // Align heading to top-left
+                    padding: "10px 15px", // Space inside the border
+                    fontSize: "20px", // Font size
+                    color: "#5F6F65", // Text color
+                    fontWeight: "bold", // Bold text
+                    border: "1px solid #5F6F65", // Elegant border
+                    borderRadius: "10px", // Smooth rounded corners
+                    boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                    display: "inline-block", // Wraps text tightly
+                    backgroundColor: "#ffffff", // Optional: White background for better contrast
+                  }}
+                >
+                  Turnaround option?
+                </h3>
+                <h3
+                  style={{
+                    fontSize: "18px",
+                    fontWeight: "bold",
+                    textAlign: "center",
+                    color: "#5F6F65", // Optional: Adjust color if needed
+                    marginTop: "10px",
+                  }}
+                >
+                  Please Choose Turnaround option from following:
+                </h3>
+              </div>
+              <div className="card-container">
+                <Card
+                  bordered={false}
+                  onClick={() =>
+                    handleCardClick(
+                      "turnaroundOptions",
+                      "Standard: 15 Business Days"
+                    )
+                  }
+                  style={{
+                    width: "11rem",
+                    height: "12rem",
+                    background: "#FAFAFA",
+                  }}
+                >
+                  <img
+                    alt="abc"
+                    src="../images/sizes/rush3.png"
+                    className="image-card-express"
+                  />
+                  <p>Standard: 15</p>
+                  <p>Business Days</p>
+                </Card>
+              </div>
             </div>
           </div>
         </div>
@@ -652,7 +1022,7 @@ function Wovenlabeldesc() {
                           selectedBorder === "Rounded" ? "1rem" : "0", // Apply rounded or square border
                         border:
                           selectedBorder !== "None"
-                            ? "2px solid white"
+                            ? "2px solid black"
                             : "none", // Apply border if not "None"
                       }}
                     >
