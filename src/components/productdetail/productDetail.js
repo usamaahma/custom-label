@@ -26,6 +26,9 @@ import {
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
+import Faq1 from "../faq";
+import GoogleReviews from "../expressclothing/googlereviews";
+import Finalprocess from "../expressclothing/finalprocess";
 
 // Card data
 
@@ -1249,6 +1252,9 @@ function ProductDetail() {
           ))}
         </div>
       </div>
+      <Finalprocess/>
+      <Faq1/>
+      <GoogleReviews/>
     </div>
   );
 }

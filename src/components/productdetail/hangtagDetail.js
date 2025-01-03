@@ -25,6 +25,9 @@ import {
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
+import Finalprocess from "../expressclothing/finalprocess";
+import Faq1 from "../faq";
+import GoogleReviews from "../expressclothing/googlereviews";
 
 // Card data
 
@@ -1282,6 +1285,9 @@ function HangtagDetail() {
           ))}
         </div>
       </div>
+      <Finalprocess/>
+      <Faq1/>
+      <GoogleReviews/>
     </div>
   );
 }
