@@ -4,6 +4,7 @@ import { products } from "../../utils/axios"; // Adjust the import path as neces
 import Beatquote from "./beatquote"; // Import your Beatquote component
 import "./clothingcard.css"; // Import your CSS file
 import { SearchOutlined } from "@ant-design/icons";
+import CustomLoader from "./loader";
 
 const Clothingcard = () => {
   const [cardsData, setCardsData] = useState([]); // Store fetched product data
@@ -52,7 +53,7 @@ const Clothingcard = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>; // Show loading state while fetching data
+    return <CustomLoader />; // Show loading state while fetching data
   }
 
   if (error) {

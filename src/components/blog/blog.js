@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col, Breadcrumb } from "antd";
 import { Link } from "react-router-dom";
-import {blog} from "../../utils/axios" 
+import { blog } from "../../utils/axios";
 import "./blog.css";
+import CustomLoader from "../clothingsection/loader";
 
 const { Meta } = Card;
 
@@ -17,7 +18,7 @@ function Blog() {
       try {
         const response = await blog.get("/"); // Replace with your API URL
         setBlogData(response.data); // Assuming the response contains an array of blogs
-        console.log(response.data)
+        console.log(response.data);
       } catch (err) {
         setError("Failed to load blogs."); // Set error if request fails
       } finally {
@@ -29,7 +30,7 @@ function Blog() {
   }, []); // Empty dependency array ensures this only runs once when the component mounts
 
   if (loading) {
-    return <p>Loading...</p>; // Display loading message while the data is being fetched
+    return <CustomLoader />; // Display loading message while the data is being fetched
   }
 
   if (error) {
@@ -39,9 +40,12 @@ function Blog() {
     localStorage.setItem("selectedBlogId", id);
     localStorage.setItem("selectedBlogTitle", title);
   };
+  const title = localStorage.getItem("selectedBlogTitle");
+
   return (
     <div>
-      <div className="breadcrumb-container">
+      <div className="headingbread" style={{ marginTop: "5rem" }}>
+        <p className="express-clothing-heading"> {title}</p>
         <Breadcrumb
           items={[
             {
@@ -52,9 +56,17 @@ function Blog() {
               ),
             },
             {
-              title: <span className="breadcrumb-link">Blogs</span>,
+              title: (
+                <a href="/blogs" className="breadcrumb-link">
+                  Blogs
+                </a>
+              ),
+            },
+            {
+              title: title,
             },
           ]}
+          className="breadcrumb"
         />
       </div>
       <div>
@@ -74,14 +86,26 @@ function Blog() {
           <Row gutter={[16, 16]} justify="center">
             {blogData.map((blog, index) => (
               <Col key={index} xs={24} sm={12} md={12} lg={12}>
-                <Card className="blog-card" cover={<img className="blog-img" alt="example" src={blog.image} />}>
-                  <div className="card-txt-blog" onClick={() => {
-                    StoreBlogId(blog.id, blog.title);
-                    window.location.href = `/blog/${blog.title}`;
-                  }}>
+                <Card
+                  className="blog-card"
+                  cover={
+                    <img className="blog-img" alt="example" src={blog.image} />
+                  }
+                >
+                  <div
+                    className="card-txt-blog"
+                    onClick={() => {
+                      StoreBlogId(blog.id, blog.title);
+                      window.location.href = `/blog/${blog.title}`;
+                    }}
+                  >
                     <Meta
                       className="blog-cardtxt"
-                      title={<Link to="/blogdetail" className="blog-links">{blog.title}</Link>}
+                      title={
+                        <Link to="/blogdetail" className="blog-links">
+                          {blog.title}
+                        </Link>
+                      }
                       description={blog.description}
                     />
                   </div>
@@ -92,7 +116,7 @@ function Blog() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 export default Blog;
