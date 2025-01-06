@@ -4,6 +4,7 @@ import { hangtag } from "../../utils/axios"; // Adjust the import path as necess
 import Beatquote from "./beatquote"; // Import your Beatquote component
 import "./clothingcard.css"; // Import your CSS file
 import { SearchOutlined } from "@ant-design/icons";
+import CustomLoader from "./loader";
 
 const Hangtags = () => {
   const [cardsData, setCardsData] = useState([]);
@@ -59,7 +60,7 @@ const Hangtags = () => {
   };
 
   if (loading) {
-    return <p>Loading...</p>;
+    return <CustomLoader/> ;
   }
 
   if (error) {

@@ -454,47 +454,53 @@ function ProductDetail() {
 
               {/* Second Row: Style Images (Centered) */}
               <Row justify="center" gutter={[16, 16]}>
-                {styles.map((style, index) => (
-                  <Col xs={24} sm={12} md={8} lg={6} key={style._id}>
-                    <Card
-                      bordered={false}
-                      style={{
-                        background:
-                          selectedCard === style._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
-                        textAlign: "center",
-                        boxShadow:
-                          selectedCard === style._id
-                            ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
-                            : "none",
-                        transform:
-                          selectedCard === style._id
-                            ? "scale(1.05)"
-                            : "scale(1)", // Slight zoom for selected card
-                        transition: "all 0.3s ease", // Smooth transition
-                        border:
-                          selectedCard === style._id
-                            ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
-                            : "none",
-                      }}
-                      onClick={() => {
-                        setSelectedCard(style._id); // Highlight clicked card
-                        handleStyleClick("style", style); // Pass style data
-                        handleCardClick("style", style.name, style._id);
-                      }}
-                    >
-                      <img
-                        alt={style.name}
-                        src={style.image || "../images/default-style.jpg"} // Default image if style has no image
+                {styles && styles.length > 0 ? (
+                  styles.map((style, index) => (
+                    <Col xs={24} sm={12} md={8} lg={6} key={style._id}>
+                      <Card
+                        bordered={false}
                         style={{
-                          width: "100%",
-                          height: "auto",
-                          borderRadius: "8px", // Optional: rounded corners for images
+                          background:
+                            selectedCard === style._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                          textAlign: "center",
+                          boxShadow:
+                            selectedCard === style._id
+                              ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                              : "none",
+                          transform:
+                            selectedCard === style._id
+                              ? "scale(1.05)"
+                              : "scale(1)", // Slight zoom for selected card
+                          transition: "all 0.3s ease", // Smooth transition
+                          border:
+                            selectedCard === style._id
+                              ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                              : "none",
                         }}
-                      />
-                      <p>{style.name}</p>
-                    </Card>
-                  </Col>
-                ))}
+                        onClick={() => {
+                          setSelectedCard(style._id); // Highlight clicked card
+                          handleStyleClick("style", style); // Pass style data
+                          handleCardClick("style", style.name, style._id);
+                        }}
+                      >
+                        <img
+                          alt={style.name}
+                          src={style.image || "../images/default-style.jpg"} // Default image if style has no image
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            borderRadius: "8px", // Optional: rounded corners for images
+                          }}
+                        />
+                        <p>{style.name}</p>
+                      </Card>
+                    </Col>
+                  ))
+                ) : (
+                  <div style={{ textAlign: "center", margin: "20px 0" }}>
+                    <h3 style={{ color: "#888" }}>No styles available</h3>
+                  </div>
+                )}
               </Row>
             </Col>
           </div>
@@ -576,7 +582,8 @@ function ProductDetail() {
               {/* Second Row: Size Images (Centered) */}
               <Row justify="center" gutter={[16, 16]}>
                 {selectedStyle &&
-                  selectedStyle.sizes && // Make sure selectedStyle and sizes exist
+                selectedStyle.sizes &&
+                selectedStyle.sizes.length > 0 ? (
                   selectedStyle.sizes.map((size, index) => (
                     <Col xs={24} sm={12} md={8} lg={6} key={size._id}>
                       <Card
@@ -616,7 +623,14 @@ function ProductDetail() {
                         <p>{size.name}</p>
                       </Card>
                     </Col>
-                  ))}
+                  ))
+                ) : (
+                  <div style={{ textAlign: "center", margin: "20px 0" }}>
+                    <h3 style={{ color: "#888" }}>
+                      No sizes found. Please select a style.
+                    </h3>
+                  </div>
+                )}
               </Row>
             </Col>
           </div>
@@ -679,7 +693,7 @@ function ProductDetail() {
                     {option.type}
                   </h3>
                 </div>
-    
+
                 {/* Instructions */}
                 <Row justify="center" style={{ marginBottom: "20px" }}>
                   <Col>
@@ -696,7 +710,7 @@ function ProductDetail() {
                     </h3>
                   </Col>
                 </Row>
-    
+
                 {/* Cards */}
                 <Row justify="center" gutter={[16, 16]}>
                   {option.cards.map((card, cardIndex) => (
@@ -742,7 +756,7 @@ function ProductDetail() {
               </div>
             </div>
           ))}
-    
+
           {/* Comments Section */}
           <div className="divs-tableexpress" style={{ display: "block" }}>
             <div
@@ -782,7 +796,6 @@ function ProductDetail() {
         </>
       ),
     },
-    
 
     {
       title: (
@@ -941,7 +954,6 @@ function ProductDetail() {
             );
 
           // Set the collected data to state
-          setAllQuantityPrices(collectedQuantityPrices);
           console.log(collectedQuantityPrices, "All Quantity Prices");
           setOptions(response.data._doc.descriptions[0].options);
           setDescription(response.data._doc.productDescription);

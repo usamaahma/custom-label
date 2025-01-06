@@ -566,48 +566,58 @@ function HangtagDetail() {
 
               {/* Second Row: Size Images (Centered) */}
               <Row justify="center" gutter={[16, 16]}>
-                {selectedStyle &&
-                  selectedStyle.sizes && // Make sure selectedStyle and sizes exist
-                  selectedStyle.sizes.map((size, index) => (
-                    <Col xs={24} sm={12} md={8} lg={6} key={size._id}>
-                      <Card
-                        bordered={false}
-                        style={{
-                          background:
-                            selectedCard === size._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
-                          textAlign: "center",
-                          boxShadow:
-                            selectedCard === size._id
-                              ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
-                              : "none",
-                          transform:
-                            selectedCard === size._id
-                              ? "scale(1.05)"
-                              : "scale(1)", // Slight zoom for selected card
-                          transition: "all 0.3s ease", // Smooth transition
-                          border:
-                            selectedCard === size._id
-                              ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
-                              : "none",
-                        }}
-                        onClick={() => {
-                          handleSizeClick("size", size); // Pass only the sizes array
-                          handleCardClick("size", size.name, size._id);
-                        }}
-                      >
-                        <img
-                          alt={size.name}
-                          src={size.image || "../images/default.jpg"} // Fallback image if no image is provided
+                <Row justify="center" gutter={[16, 16]}>
+                  {selectedStyle &&
+                  selectedStyle.sizes &&
+                  selectedStyle.sizes.length > 0 ? (
+                    selectedStyle.sizes.map((size, index) => (
+                      <Col xs={24} sm={12} md={8} lg={6} key={size._id}>
+                        <Card
+                          bordered={false}
                           style={{
-                            width: "100%",
-                            height: "auto",
-                            borderRadius: "8px", // Optional: rounded corners for images
+                            background:
+                              selectedCard === size._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                            textAlign: "center",
+                            boxShadow:
+                              selectedCard === size._id
+                                ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                                : "none",
+                            transform:
+                              selectedCard === size._id
+                                ? "scale(1.05)"
+                                : "scale(1)", // Slight zoom for selected card
+                            transition: "all 0.3s ease", // Smooth transition
+                            border:
+                              selectedCard === size._id
+                                ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                                : "none",
                           }}
-                        />
-                        <p>{size.name}</p>
-                      </Card>
-                    </Col>
-                  ))}
+                          onClick={() => {
+                            handleSizeClick("size", size); // Pass only the sizes array
+                            handleCardClick("size", size.name, size._id);
+                          }}
+                        >
+                          <img
+                            alt={size.name}
+                            src={size.image || "../images/default.jpg"} // Fallback image if no image is provided
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                              borderRadius: "8px", // Optional: rounded corners for images
+                            }}
+                          />
+                          <p>{size.name}</p>
+                        </Card>
+                      </Col>
+                    ))
+                  ) : (
+                    <div style={{ textAlign: "center", margin: "20px 0" }}>
+                      <h3 style={{ color: "#888" }}>
+                        No sizes found. Please select a style.
+                      </h3>
+                    </div>
+                  )}
+                </Row>
               </Row>
             </Col>
           </div>
@@ -640,99 +650,99 @@ function HangtagDetail() {
       content: (
         <>
           {options.map((option, index) => (
-                     <div className="divs-tableexpress" key={index}>
-                       <div
-                         style={{
-                           padding: "20px",
-                           display: "block",
-                         }}
-                       >
-                         <div
-                           style={{
-                             textAlign: "left", // Align container to the left
-                           }}
-                         >
-                           <h3
-                             className="simpletable-heading"
-                             style={{
-                               textAlign: "left", // Align heading to top-left
-                               padding: "10px 15px", // Space inside the border
-                               fontSize: "20px", // Font size
-                               color: "#5F6F65", // Text color
-                               fontWeight: "bold", // Bold text
-                               border: "1px solid #5F6F65", // Elegant border
-                               borderRadius: "10px", // Smooth rounded corners
-                               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
-                               display: "inline-block", // Wraps text tightly
-                               backgroundColor: "#ffffff", // Optional: White background for better contrast
-                             }}
-                           >
-                             {option.type}
-                           </h3>
-                         </div>
-             
-                         {/* Instructions */}
-                         <Row justify="center" style={{ marginBottom: "20px" }}>
-                           <Col>
-                             <h3
-                               style={{
-                                 fontSize: "18px",
-                                 fontWeight: "bold",
-                                 textAlign: "center",
-                                 color: "#5F6F65", // Adjust color if needed
-                                 marginTop: "10px",
-                               }}
-                             >
-                               Please choose {option.type} from the following
-                             </h3>
-                           </Col>
-                         </Row>
-             
-                         {/* Cards */}
-                         <Row justify="center" gutter={[16, 16]}>
-                           {option.cards.map((card, cardIndex) => (
-                             <Col xs={24} sm={12} md={8} lg={6} key={cardIndex}>
-                               <Card
-                                 bordered={false}
-                                 onClick={() =>
-                                   handleCardClick(option.type, card.title, card._id)
-                                 }
-                                 style={{
-                                   background:
-                                     selectedCard === card._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
-                                   textAlign: "center",
-                                   boxShadow:
-                                     selectedCard === card._id
-                                       ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
-                                       : "none",
-                                   transform:
-                                     selectedCard === card._id
-                                       ? "scale(1.05)"
-                                       : "scale(1)", // Slight zoom for selected card
-                                   transition: "all 0.3s ease", // Smooth transition
-                                   border:
-                                     selectedCard === card._id
-                                       ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
-                                       : "none",
-                                 }}
-                               >
-                                 <img
-                                   alt={card.title}
-                                   src={card.image}
-                                   style={{
-                                     width: "100%",
-                                     height: "auto",
-                                     borderRadius: "8px", // Rounded corners for images
-                                   }}
-                                 />
-                                 <p>{card.title}</p>
-                               </Card>
-                             </Col>
-                           ))}
-                         </Row>
-                       </div>
-                     </div>
-                   ))}
+            <div className="divs-tableexpress" key={index}>
+              <div
+                style={{
+                  padding: "20px",
+                  display: "block",
+                }}
+              >
+                <div
+                  style={{
+                    textAlign: "left", // Align container to the left
+                  }}
+                >
+                  <h3
+                    className="simpletable-heading"
+                    style={{
+                      textAlign: "left", // Align heading to top-left
+                      padding: "10px 15px", // Space inside the border
+                      fontSize: "20px", // Font size
+                      color: "#5F6F65", // Text color
+                      fontWeight: "bold", // Bold text
+                      border: "1px solid #5F6F65", // Elegant border
+                      borderRadius: "10px", // Smooth rounded corners
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                      display: "inline-block", // Wraps text tightly
+                      backgroundColor: "#ffffff", // Optional: White background for better contrast
+                    }}
+                  >
+                    {option.type}
+                  </h3>
+                </div>
+
+                {/* Instructions */}
+                <Row justify="center" style={{ marginBottom: "20px" }}>
+                  <Col>
+                    <h3
+                      style={{
+                        fontSize: "18px",
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        color: "#5F6F65", // Adjust color if needed
+                        marginTop: "10px",
+                      }}
+                    >
+                      Please choose {option.type} from the following
+                    </h3>
+                  </Col>
+                </Row>
+
+                {/* Cards */}
+                <Row justify="center" gutter={[16, 16]}>
+                  {option.cards.map((card, cardIndex) => (
+                    <Col xs={24} sm={12} md={8} lg={6} key={cardIndex}>
+                      <Card
+                        bordered={false}
+                        onClick={() =>
+                          handleCardClick(option.type, card.title, card._id)
+                        }
+                        style={{
+                          background:
+                            selectedCard === card._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                          textAlign: "center",
+                          boxShadow:
+                            selectedCard === card._id
+                              ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                              : "none",
+                          transform:
+                            selectedCard === card._id
+                              ? "scale(1.05)"
+                              : "scale(1)", // Slight zoom for selected card
+                          transition: "all 0.3s ease", // Smooth transition
+                          border:
+                            selectedCard === card._id
+                              ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                              : "none",
+                        }}
+                      >
+                        <img
+                          alt={card.title}
+                          src={card.image}
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            borderRadius: "8px", // Rounded corners for images
+                          }}
+                        />
+                        <p>{card.title}</p>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+            </div>
+          ))}
 
           <div className="divs-tableexpress" style={{ display: "block" }}>
             <div
@@ -929,7 +939,6 @@ function HangtagDetail() {
             );
 
           // Set the collected data to state
-          setAllQuantityPrices(collectedQuantityPrices);
           console.log(collectedQuantityPrices, "All Quantity Prices");
           setOptions(response.data.descriptions[0].options);
           setDescription(response.data.hangtagDescription);
