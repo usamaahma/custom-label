@@ -28,6 +28,7 @@ import {
 import Finalprocess from "../expressclothing/finalprocess";
 import Faq1 from "../faq";
 import GoogleReviews from "../expressclothing/googlereviews";
+import RelatedProduct from "../relatedProduct/relatedproduct";
 
 // Card data
 
@@ -1294,9 +1295,10 @@ function HangtagDetail() {
           ))}
         </div>
       </div>
-      <Finalprocess/>
-      <Faq1/>
-      <GoogleReviews/>
+      <RelatedProduct/>
+      <Finalprocess />
+      <Faq1 />
+      <GoogleReviews />
     </div>
   );
 }
