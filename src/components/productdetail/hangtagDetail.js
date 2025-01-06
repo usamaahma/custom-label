@@ -28,6 +28,7 @@ import {
 import Finalprocess from "../expressclothing/finalprocess";
 import Faq1 from "../faq";
 import GoogleReviews from "../expressclothing/googlereviews";
+import RelatedProduct from "../relatedProduct/relatedproduct";
 
 // Card data
 
@@ -640,99 +641,99 @@ function HangtagDetail() {
       content: (
         <>
           {options.map((option, index) => (
-                     <div className="divs-tableexpress" key={index}>
-                       <div
-                         style={{
-                           padding: "20px",
-                           display: "block",
-                         }}
-                       >
-                         <div
-                           style={{
-                             textAlign: "left", // Align container to the left
-                           }}
-                         >
-                           <h3
-                             className="simpletable-heading"
-                             style={{
-                               textAlign: "left", // Align heading to top-left
-                               padding: "10px 15px", // Space inside the border
-                               fontSize: "20px", // Font size
-                               color: "#5F6F65", // Text color
-                               fontWeight: "bold", // Bold text
-                               border: "1px solid #5F6F65", // Elegant border
-                               borderRadius: "10px", // Smooth rounded corners
-                               boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
-                               display: "inline-block", // Wraps text tightly
-                               backgroundColor: "#ffffff", // Optional: White background for better contrast
-                             }}
-                           >
-                             {option.type}
-                           </h3>
-                         </div>
-             
-                         {/* Instructions */}
-                         <Row justify="center" style={{ marginBottom: "20px" }}>
-                           <Col>
-                             <h3
-                               style={{
-                                 fontSize: "18px",
-                                 fontWeight: "bold",
-                                 textAlign: "center",
-                                 color: "#5F6F65", // Adjust color if needed
-                                 marginTop: "10px",
-                               }}
-                             >
-                               Please choose {option.type} from the following
-                             </h3>
-                           </Col>
-                         </Row>
-             
-                         {/* Cards */}
-                         <Row justify="center" gutter={[16, 16]}>
-                           {option.cards.map((card, cardIndex) => (
-                             <Col xs={24} sm={12} md={8} lg={6} key={cardIndex}>
-                               <Card
-                                 bordered={false}
-                                 onClick={() =>
-                                   handleCardClick(option.type, card.title, card._id)
-                                 }
-                                 style={{
-                                   background:
-                                     selectedCard === card._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
-                                   textAlign: "center",
-                                   boxShadow:
-                                     selectedCard === card._id
-                                       ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
-                                       : "none",
-                                   transform:
-                                     selectedCard === card._id
-                                       ? "scale(1.05)"
-                                       : "scale(1)", // Slight zoom for selected card
-                                   transition: "all 0.3s ease", // Smooth transition
-                                   border:
-                                     selectedCard === card._id
-                                       ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
-                                       : "none",
-                                 }}
-                               >
-                                 <img
-                                   alt={card.title}
-                                   src={card.image}
-                                   style={{
-                                     width: "100%",
-                                     height: "auto",
-                                     borderRadius: "8px", // Rounded corners for images
-                                   }}
-                                 />
-                                 <p>{card.title}</p>
-                               </Card>
-                             </Col>
-                           ))}
-                         </Row>
-                       </div>
-                     </div>
-                   ))}
+            <div className="divs-tableexpress" key={index}>
+              <div
+                style={{
+                  padding: "20px",
+                  display: "block",
+                }}
+              >
+                <div
+                  style={{
+                    textAlign: "left", // Align container to the left
+                  }}
+                >
+                  <h3
+                    className="simpletable-heading"
+                    style={{
+                      textAlign: "left", // Align heading to top-left
+                      padding: "10px 15px", // Space inside the border
+                      fontSize: "20px", // Font size
+                      color: "#5F6F65", // Text color
+                      fontWeight: "bold", // Bold text
+                      border: "1px solid #5F6F65", // Elegant border
+                      borderRadius: "10px", // Smooth rounded corners
+                      boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)", // Subtle shadow for depth
+                      display: "inline-block", // Wraps text tightly
+                      backgroundColor: "#ffffff", // Optional: White background for better contrast
+                    }}
+                  >
+                    {option.type}
+                  </h3>
+                </div>
+
+                {/* Instructions */}
+                <Row justify="center" style={{ marginBottom: "20px" }}>
+                  <Col>
+                    <h3
+                      style={{
+                        fontSize: "18px",
+                        fontWeight: "bold",
+                        textAlign: "center",
+                        color: "#5F6F65", // Adjust color if needed
+                        marginTop: "10px",
+                      }}
+                    >
+                      Please choose {option.type} from the following
+                    </h3>
+                  </Col>
+                </Row>
+
+                {/* Cards */}
+                <Row justify="center" gutter={[16, 16]}>
+                  {option.cards.map((card, cardIndex) => (
+                    <Col xs={24} sm={12} md={8} lg={6} key={cardIndex}>
+                      <Card
+                        bordered={false}
+                        onClick={() =>
+                          handleCardClick(option.type, card.title, card._id)
+                        }
+                        style={{
+                          background:
+                            selectedCard === card._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                          textAlign: "center",
+                          boxShadow:
+                            selectedCard === card._id
+                              ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                              : "none",
+                          transform:
+                            selectedCard === card._id
+                              ? "scale(1.05)"
+                              : "scale(1)", // Slight zoom for selected card
+                          transition: "all 0.3s ease", // Smooth transition
+                          border:
+                            selectedCard === card._id
+                              ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                              : "none",
+                        }}
+                      >
+                        <img
+                          alt={card.title}
+                          src={card.image}
+                          style={{
+                            width: "100%",
+                            height: "auto",
+                            borderRadius: "8px", // Rounded corners for images
+                          }}
+                        />
+                        <p>{card.title}</p>
+                      </Card>
+                    </Col>
+                  ))}
+                </Row>
+              </div>
+            </div>
+          ))}
 
           <div className="divs-tableexpress" style={{ display: "block" }}>
             <div
@@ -1285,9 +1286,10 @@ function HangtagDetail() {
           ))}
         </div>
       </div>
-      <Finalprocess/>
-      <Faq1/>
-      <GoogleReviews/>
+      <RelatedProduct/>
+      <Finalprocess />
+      <Faq1 />
+      <GoogleReviews />
     </div>
   );
 }

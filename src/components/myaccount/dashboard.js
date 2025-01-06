@@ -1,8 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./dashboard.css";
-import { Card, Button, Modal, Typography, Row, Col } from "antd";
+import {
+  Card,
+  Button,
+  Modal,
+  Typography,
+  Row,
+  Col,
+  Form,
+  Input,
+  message,
+} from "antd";
 import Addresses from "../myaccount/addresses"; // Ensure you have the Addresses component imported
 import { FaEnvelope, FaUserAlt, FaBox, FaEye } from "react-icons/fa"; // Add the FaEye icon for View
+import { manageaddresses } from "../../utils/axios";
+import axios from "axios";
 
 const { Title, Paragraph } = Typography;
 
@@ -11,6 +23,11 @@ function AccountDashboard() {
   const [isManageModalVisible, setIsManageModalVisible] = useState(false); // State to control manage modal visibility
   const [isViewModalVisible, setIsViewModalVisible] = useState(false); // State to control view modal visibility
   const [viewAddressData, setViewAddressData] = useState(null); // State for storing the address data for view modal
+  const [addressData, setAddressData] = useState({}); // State to manage the address data input
+  const [billAdd, setBillAdd] = useState(null); // To store API response
+  const [shipAdd, setShipAdd] = useState(null); // To store API response
+  const [loading, setLoading] = useState(true); // Loading state
+  const [error, setError] = useState(null); // Error state
 
   // Function to show the manage modal
   const showManageModal = () => {
@@ -59,16 +76,171 @@ function AccountDashboard() {
     setIsViewModalVisible(false);
   };
 
+  // Handle form input changes
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setAddressData({
+      ...addressData,
+      [name]: value,
+    });
+  };
+
+  // Handle form submission
+  // const handleSubmit = async () => {
+  //   try {
+  //     const response = await axios.post("/api/address", addressData); // Replace with your actual API endpoint
+  //     console.log("Address submitted successfully:", response.data);
+  //     setIsManageModalVisible(false); // Close the modal after successful submission
+  //   } catch (error) {
+  //     console.error("Error submitting address:", error);
+  //   }
+  // };
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const userid = userData?.id;
+
+  const onFinish = (values) => {
+    console.log("Form Values:", values);
+
+    // Retrieve the user data from localStorage
+    const data1 = {
+      userId: userData.id, // Ensure userId is passed as a string
+      shippingAddress: {
+        firstName: values.shippingFirstName,
+        middleName: values.shippingMiddleName,
+        lastName: values.shippingLastName,
+        streetAddress: values.shippingStreetAddress,
+        city: values.shippingCity,
+        stateOrProvince: values.shippingState,
+        zipOrPostalCode: values.shippingZipCode,
+        country: values.shippingCountry,
+        phoneNumber: values.shippingPhoneNumber,
+        companyName: values.shippingCompanyName,
+      },
+      billingAddress: {
+        firstName: values.billingFirstName,
+        middleName: values.billingMiddleName,
+        lastName: values.billingLastName,
+        streetAddress: values.billingStreetAddress,
+        city: values.billingCity,
+        stateOrProvince: values.billingState,
+        zipOrPostalCode: values.billingZipCode,
+        country: values.billingCountry,
+        phoneNumber: values.billingPhoneNumber,
+        companyName: values.billingCompanyName,
+      },
+    };
+
+    // Check if the address already exists for this user
+    const existingData =
+      JSON.parse(localStorage.getItem("userAddresses")) || [];
+
+    const isAddressExist = existingData.some((address) => {
+      return (
+        address.userId === data1.userId &&
+        (JSON.stringify(address.shippingAddress) ===
+          JSON.stringify(data1.shippingAddress) ||
+          JSON.stringify(address.billingAddress) ===
+            JSON.stringify(data1.billingAddress))
+      );
+    });
+
+    if (isAddressExist) {
+      message.error("Address already exists for this user.");
+      return;
+    }
+
+    // If the address does not exist, make the API call
+    manageaddresses({
+      method: "post",
+      data: data1,
+    })
+      .then((res) => {
+        console.log("API Response:", res);
+        message.success("Thank you for considering us!");
+
+        // Optionally, store the new address in localStorage
+        existingData.push(data1);
+        localStorage.setItem("userAddresses", JSON.stringify(existingData));
+
+        // Redirect to the thank-you page after successful submission
+        // navigate("/thank-you");
+      })
+      .catch(() => {
+        message.error("Something went wrong, please try again!");
+      });
+  };
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      try {
+        // Ensure userId is available
+        if (userid) {
+          setLoading(true); // Start loading
+          const response = await manageaddresses.get("", {
+            params: { userid }, // Passing userId as query parameter
+          });
+
+          // Ensure that there are addresses in the response
+          if (
+            response.data &&
+            response.data.addresses &&
+            response.data.addresses.length > 0
+          ) {
+            // Loop through each address and extract both billingAddress and shippingAddress
+            const billingAddresses = response.data.addresses.map(
+              (address) => address.billingAddress
+            );
+            const shippingAddresses = response.data.addresses.map(
+              (address) => address.shippingAddress
+            );
+
+            // Set both billing and shipping addresses in the state
+            setBillAdd(billingAddresses); // Set all billing addresses
+            setShipAdd(shippingAddresses); // Set all shipping addresses
+            console.log(billAdd);
+          } else {
+            setError("No addresses found for the user");
+          }
+        } else {
+          setError("User ID not found");
+        }
+      } catch (err) {
+        setError("Error fetching data: " + err.message); // Handle any errors
+      } finally {
+        setLoading(false); // Stop loading
+      }
+    };
+
+    fetchAddresses();
+  }, [userid]);
+
+  // Handling loading, error, and displaying addresses
+  if (loading) {
+    return <div>Loading...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
   return (
     <div className="dashboard-container">
       <div className="header">
-        <Title level={2} className="header-title">Account Information</Title>
+        <Title level={2} className="header-title">
+          Account Information
+        </Title>
       </div>
 
       <Row gutter={[16, 24]} justify="space-between">
         {/* Contact Information Card */}
         <Col xs={24} sm={12} md={8}>
-          <Card className="user-card" title={<div className="card-title"><FaUserAlt /> Contact Information</div>}>
+          <Card
+            className="user-card"
+            title={
+              <div className="card-title">
+                <FaUserAlt /> Contact Information
+              </div>
+            }
+          >
             <Paragraph>Name: {user?.name || "No Username"}</Paragraph>
             <Paragraph>Email: {user?.email || "No Email"}</Paragraph>
           </Card>
@@ -76,14 +248,28 @@ function AccountDashboard() {
 
         {/* Newsletter Subscription Card */}
         <Col xs={24} sm={12} md={8}>
-          <Card className="newsletter-card" title={<div className="card-title"><FaEnvelope /> Newsletters</div>}>
+          <Card
+            className="newsletter-card"
+            title={
+              <div className="card-title">
+                <FaEnvelope /> Newsletters
+              </div>
+            }
+          >
             <Paragraph>You aren't subscribed to our newsletter.</Paragraph>
           </Card>
         </Col>
 
         {/* Manage Addresses Card */}
         <Col xs={24} sm={12} md={8}>
-          <Card className="manage-addresses-card" title={<div className="card-title"><FaBox /> Manage Addresses</div>}>
+          <Card
+            className="manage-addresses-card"
+            title={
+              <div className="card-title">
+                <FaBox /> Manage Addresses
+              </div>
+            }
+          >
             <Button
               type="primary"
               className="manage-addresses-btn"
@@ -106,14 +292,194 @@ function AccountDashboard() {
 
       {/* Modal for Managing Addresses */}
       <Modal
-        title="Manage Addresses"
+        title={<span style={{ fontSize: '28px', width: '100%', fontFamily: "Space Grotesk" }}>Please Enter a Shipping & Billing Addresses</span>}
         visible={isManageModalVisible}
         onCancel={handleManageCancel}
-        footer={null}
-        width={600}
+        footer={[]}
+        width={800} // Increased width to accommodate both sections
         className="address-modal"
       >
-        <Addresses />
+        <Form layout="vertical" onFinish={onFinish}>
+          {/* Shipping Address Section */}
+          <Title level={4}>Shipping Address</Title>
+          {/* First Name */}
+          <Form.Item
+            label="First Name"
+            name="shippingFirstName"
+            rules={[
+              { required: true, message: "Please enter your first name!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Middle Name */}
+          <Form.Item label="Middle Name" name="shippingMiddleName">
+            <Input />
+          </Form.Item>
+          {/* Last Name */}
+          <Form.Item
+            label="Last Name"
+            name="shippingLastName"
+            rules={[
+              { required: true, message: "Please enter your last name!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Street Address */}
+          <Form.Item
+            label="Street Address"
+            name="shippingStreetAddress"
+            rules={[
+              { required: true, message: "Please enter your street address!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* City */}
+          <Form.Item
+            label="City"
+            name="shippingCity"
+            rules={[{ required: true, message: "Please enter your city!" }]}
+          >
+            <Input />
+          </Form.Item>
+          {/* State/Province */}
+          <Form.Item label="State/Province" name="shippingState">
+            <Input />
+          </Form.Item>
+          {/* Zip/Postal Code */}
+          <Form.Item
+            label="Zip/Postal Code"
+            name="shippingZipCode"
+            rules={[
+              { required: true, message: "Please enter your zip/postal code!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Country */}
+          <Form.Item
+            label="Country"
+            name="shippingCountry"
+            rules={[{ required: true, message: "Please enter your country!" }]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Phone Number */}
+          <Form.Item
+            label="Phone Number"
+            name="shippingPhoneNumber"
+            rules={[
+              { required: true, message: "Please enter your phone number!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Company Name */}
+          <Form.Item label="Company Name" name="shippingCompanyName">
+            <Input />
+          </Form.Item>
+          <hr /> {/* Separator between Shipping and Billing */}
+          {/* Billing Address Section */}
+          <Title level={4}>Billing Address</Title>
+          {/* First Name */}
+          <Form.Item
+            label="First Name"
+            name="billingFirstName"
+            rules={[
+              { required: true, message: "Please enter your first name!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Middle Name */}
+          <Form.Item label="Middle Name" name="billingMiddleName">
+            <Input />
+          </Form.Item>
+          {/* Last Name */}
+          <Form.Item
+            label="Last Name"
+            name="billingLastName"
+            rules={[
+              { required: true, message: "Please enter your last name!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Street Address */}
+          <Form.Item
+            label="Street Address"
+            name="billingStreetAddress"
+            rules={[
+              { required: true, message: "Please enter your street address!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* City */}
+          <Form.Item
+            label="City"
+            name="billingCity"
+            rules={[{ required: true, message: "Please enter your city!" }]}
+          >
+            <Input />
+          </Form.Item>
+          {/* State/Province */}
+          <Form.Item label="State/Province" name="billingState">
+            <Input />
+          </Form.Item>
+          {/* Zip/Postal Code */}
+          <Form.Item
+            label="Zip/Postal Code"
+            name="billingZipCode"
+            rules={[
+              { required: true, message: "Please enter your zip/postal code!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Country */}
+          <Form.Item
+            label="Country"
+            name="billingCountry"
+            rules={[{ required: true, message: "Please enter your country!" }]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Phone Number */}
+          <Form.Item
+            label="Phone Number"
+            name="billingPhoneNumber"
+            rules={[
+              { required: true, message: "Please enter your phone number!" },
+            ]}
+          >
+            <Input />
+          </Form.Item>
+          {/* Company Name */}
+          <Form.Item label="Company Name" name="billingCompanyName">
+            <Input />
+          </Form.Item>
+          <Form.Item>
+  <Button
+    key="cancel"
+    onClick={handleManageCancel}
+    style={{ marginRight: '8px' }} // Optional: Add space between buttons
+  >
+    Cancel
+  </Button>
+  <Button
+    key="submit"
+    type="primary"
+    htmlType="submit"
+    style={{ marginTop: '10px' }} // Adding margin-top to the Submit button
+  >
+    Submit
+  </Button>
+</Form.Item>
+
+        </Form>
       </Modal>
 
       {/* Modal for Viewing Address */}
@@ -122,7 +488,7 @@ function AccountDashboard() {
         visible={isViewModalVisible}
         onCancel={handleViewCancel}
         footer={null}
-        width={800}  // Increase width for better view of two columns
+        width={800}
         className="view-address-modal"
       >
         {viewAddressData && (
@@ -131,33 +497,95 @@ function AccountDashboard() {
             <Col span={12}>
               <div className="address-column">
                 <Title level={4}>Billing Address</Title>
-                <Paragraph><strong>First Name:</strong> {viewAddressData.billing.firstName}</Paragraph>
-                <Paragraph><strong>Middle Name:</strong> {viewAddressData.billing.middleName}</Paragraph> {/* Added Middle Name */}
-                <Paragraph><strong>Last Name:</strong> {viewAddressData.billing.lastName}</Paragraph>
-                <Paragraph><strong>Street Address:</strong> {viewAddressData.billing.streetAddress}</Paragraph>
-                <Paragraph><strong>City:</strong> {viewAddressData.billing.city}</Paragraph>
-                <Paragraph><strong>State/Province:</strong> {viewAddressData.billing.state}</Paragraph>
-                <Paragraph><strong>Zip/Postal Code:</strong> {viewAddressData.billing.zipCode}</Paragraph>
-                <Paragraph><strong>Country:</strong> {viewAddressData.billing.country}</Paragraph>
-                <Paragraph><strong>Phone Number:</strong> {viewAddressData.billing.phoneNumber}</Paragraph> {/* Added phone number */}
-                <Paragraph><strong>Company Name:</strong> {viewAddressData.billing.companyName}</Paragraph> {/* Added company name */}
+                {/* Loop through billAdd array and display each address */}
+                {billAdd && billAdd.length > 0 ? (
+                  billAdd.map((address, index) => (
+                    <div key={index}>
+                      <Paragraph>
+                        <strong>First Name:</strong> {address.firstName}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Middle Name:</strong> {address.middleName}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Last Name:</strong> {address.lastName}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Street Address:</strong> {address.streetAddress}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>City:</strong> {address.city}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>State/Province:</strong>{" "}
+                        {address.stateOrProvince}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Zip/Postal Code:</strong>{" "}
+                        {address.zipOrPostalCode}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Country:</strong> {address.country}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Phone Number:</strong> {address.phoneNumber}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Company Name:</strong> {address.companyName}
+                      </Paragraph>
+                    </div>
+                  ))
+                ) : (
+                  <p>No billing address available.</p>
+                )}
               </div>
             </Col>
 
             {/* Shipping Address Column */}
             <Col span={12}>
               <div className="address-column">
-                <Title level={4}>Shipping Method</Title>
-                <Paragraph><strong>First Name:</strong> {viewAddressData.shipping.firstName}</Paragraph>
-                <Paragraph><strong>Middle Name:</strong> {viewAddressData.shipping.middleName}</Paragraph> {/* Added Middle Name */}
-                <Paragraph><strong>Last Name:</strong> {viewAddressData.shipping.lastName}</Paragraph>
-                <Paragraph><strong>Street Address:</strong> {viewAddressData.shipping.streetAddress}</Paragraph>
-                <Paragraph><strong>City:</strong> {viewAddressData.shipping.city}</Paragraph>
-                <Paragraph><strong>State/Province:</strong> {viewAddressData.shipping.state}</Paragraph>
-                <Paragraph><strong>Zip/Postal Code:</strong> {viewAddressData.shipping.zipCode}</Paragraph>
-                <Paragraph><strong>Country:</strong> {viewAddressData.shipping.country}</Paragraph>
-                <Paragraph><strong>Phone Number:</strong> {viewAddressData.shipping.phoneNumber}</Paragraph> {/* Added phone number for shipping */}
-                <Paragraph><strong>Company Name:</strong> {viewAddressData.shipping.companyName}</Paragraph> {/* Added company name for shipping */}
+                <Title level={4}>Shipping Address</Title>
+                {/* Loop through billAdd array and display each address */}
+                {shipAdd && shipAdd.length > 0 ? (
+                  shipAdd.map((address, index) => (
+                    <div key={index}>
+                      <Paragraph>
+                        <strong>First Name:</strong> {address.firstName}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Middle Name:</strong> {address.middleName}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Last Name:</strong> {address.lastName}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Street Address:</strong> {address.streetAddress}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>City:</strong> {address.city}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>State/Province:</strong>{" "}
+                        {address.stateOrProvince}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Zip/Postal Code:</strong>{" "}
+                        {address.zipOrPostalCode}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Country:</strong> {address.country}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Phone Number:</strong> {address.phoneNumber}
+                      </Paragraph>
+                      <Paragraph>
+                        <strong>Company Name:</strong> {address.companyName}
+                      </Paragraph>
+                    </div>
+                  ))
+                ) : (
+                  <p>No shipping address available.</p>
+                )}
               </div>
             </Col>
           </Row>

@@ -29,6 +29,7 @@ import {
 import Faq1 from "../faq";
 import GoogleReviews from "../expressclothing/googlereviews";
 import Finalprocess from "../expressclothing/finalprocess";
+import RelatedProduct from "../relatedProduct/relatedproduct";
 
 // Card data
 
@@ -1252,6 +1253,7 @@ function ProductDetail() {
           ))}
         </div>
       </div>
+      <RelatedProduct/>
       <Finalprocess/>
       <Faq1/>
       <GoogleReviews/>
