@@ -56,7 +56,6 @@ function Footer1() {
         }
       });
   };
-
   return (
     <footer className="footer">
       <div className="footer-container">
