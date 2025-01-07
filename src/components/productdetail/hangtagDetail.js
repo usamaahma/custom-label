@@ -567,48 +567,58 @@ function HangtagDetail() {
 
               {/* Second Row: Size Images (Centered) */}
               <Row justify="center" gutter={[16, 16]}>
-                {selectedStyle &&
-                  selectedStyle.sizes && // Make sure selectedStyle and sizes exist
-                  selectedStyle.sizes.map((size, index) => (
-                    <Col xs={24} sm={12} md={8} lg={6} key={size._id}>
-                      <Card
-                        bordered={false}
-                        style={{
-                          background:
-                            selectedCard === size._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
-                          textAlign: "center",
-                          boxShadow:
-                            selectedCard === size._id
-                              ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
-                              : "none",
-                          transform:
-                            selectedCard === size._id
-                              ? "scale(1.05)"
-                              : "scale(1)", // Slight zoom for selected card
-                          transition: "all 0.3s ease", // Smooth transition
-                          border:
-                            selectedCard === size._id
-                              ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
-                              : "none",
-                        }}
-                        onClick={() => {
-                          handleSizeClick("size", size); // Pass only the sizes array
-                          handleCardClick("size", size.name, size._id);
-                        }}
-                      >
-                        <img
-                          alt={size.name}
-                          src={size.image || "../images/default.jpg"} // Fallback image if no image is provided
+                <Row justify="center" gutter={[16, 16]}>
+                  {selectedStyle &&
+                  selectedStyle.sizes &&
+                  selectedStyle.sizes.length > 0 ? (
+                    selectedStyle.sizes.map((size, index) => (
+                      <Col xs={24} sm={12} md={8} lg={6} key={size._id}>
+                        <Card
+                          bordered={false}
                           style={{
-                            width: "100%",
-                            height: "auto",
-                            borderRadius: "8px", // Optional: rounded corners for images
+                            background:
+                              selectedCard === size._id ? "#FFD700" : "#FAF4EB", // Highlight selected card
+                            textAlign: "center",
+                            boxShadow:
+                              selectedCard === size._id
+                                ? "0 4px 8px rgba(0, 0, 0, 0.2)" // Add shadow for selected card
+                                : "none",
+                            transform:
+                              selectedCard === size._id
+                                ? "scale(1.05)"
+                                : "scale(1)", // Slight zoom for selected card
+                            transition: "all 0.3s ease", // Smooth transition
+                            border:
+                              selectedCard === size._id
+                                ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                                : "none",
                           }}
-                        />
-                        <p>{size.name}</p>
-                      </Card>
-                    </Col>
-                  ))}
+                          onClick={() => {
+                            handleSizeClick("size", size); // Pass only the sizes array
+                            handleCardClick("size", size.name, size._id);
+                          }}
+                        >
+                          <img
+                            alt={size.name}
+                            src={size.image || "../images/default.jpg"} // Fallback image if no image is provided
+                            style={{
+                              width: "100%",
+                              height: "auto",
+                              borderRadius: "8px", // Optional: rounded corners for images
+                            }}
+                          />
+                          <p>{size.name}</p>
+                        </Card>
+                      </Col>
+                    ))
+                  ) : (
+                    <div style={{ textAlign: "center", margin: "20px 0" }}>
+                      <h3 style={{ color: "#888" }}>
+                        No sizes found. Please select a style.
+                      </h3>
+                    </div>
+                  )}
+                </Row>
               </Row>
             </Col>
           </div>
@@ -930,7 +940,6 @@ function HangtagDetail() {
             );
 
           // Set the collected data to state
-          setAllQuantityPrices(collectedQuantityPrices);
           console.log(collectedQuantityPrices, "All Quantity Prices");
           setOptions(response.data.descriptions[0].options);
           setDescription(response.data.hangtagDescription);

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Input, Button, notification } from "antd";
+import { Form, Input, Button, notification,message } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { register } from "../../utils/axios";
+import { register,newsletteremail } from "../../utils/axios";
 import { google } from "../../utils/axios";
 import { jwtDecode } from "jwt-decode";
 import "./createaccount.css";
@@ -58,8 +58,32 @@ function Create() {
         description: "Error creating your account. Please try again.",
       });
     }
+    const data1 = {
+      email: values.email,
+    };
+  
+    newsletteremail({
+      method: "post",
+      data: data1,
+    })
+      .then((response) => {
+        console.log("API Response:", response);  // Log API response for debugging
+  
+        // Check for specific API response
+        if (response.data.message === "Email already subscribed") {
+          message.info("You already subscribed, thank you!");
+        } else {
+          message.success("You have successfully subscribed!");
+        }
+      })
+      .catch((error) => {
+        console.log("API Error:", error);  // Log any API error for debugging
+        message.error("Something went wrong, please try again!");
+      });
+  
   };
 
+  
   const handleGoogleSuccess = async (credentialResponse) => {
     const token = credentialResponse.credential;
     const userInfo = jwtDecode(token); // Decode JWT to get user info

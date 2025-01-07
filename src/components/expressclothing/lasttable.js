@@ -23,6 +23,18 @@ const columns = [
 ];
 
 const LastTable1 = ({ allQuantityPrices, onRowClick }) => {
+  // Check if allQuantityPrices has data
+  const hasData = Array.isArray(allQuantityPrices) && allQuantityPrices.length > 0;
+
+  if (!hasData) {
+    // Show message if no size is selected or data is empty
+    return (
+      <div style={{ textAlign: "center", margin: "20px 0" }}>
+        <h3 style={{ color: "#888" }}>Please select any size to get its pricing</h3>
+      </div>
+    );
+  }
+
   // Map allQuantityPrices to create the data array for the table
   const data = allQuantityPrices.map((item, index) => ({
     key: index,
@@ -44,9 +56,11 @@ const LastTable1 = ({ allQuantityPrices, onRowClick }) => {
       </Link>
     ),
   });
+
   const handleRowClick = (record) => {
     onRowClick(record); // Send the clicked row data to the parent
   };
+
   return (
     <div className="height-table">
       <Table
