@@ -42,10 +42,12 @@ function Blogdetail1() {
     textArea.innerHTML = html;
     return textArea.value;
   }
+  const title = localStorage.getItem("selectedBlogTitle");
 
   return (
     <div>
-      <div className="breadcrumb-container">
+      <div className="headingbread" style={{ marginTop: "5rem" }}>
+        <p className="express-clothing-heading"> {title}</p>
         <Breadcrumb
           items={[
             {
@@ -57,26 +59,16 @@ function Blogdetail1() {
             },
             {
               title: (
-                <a href="/blogs" className="breadcrumb-title">
+                <a href="/blogs" className="breadcrumb-link">
                   Blogs
                 </a>
               ),
             },
             {
-              title: (
-                <a href="/food-packaging" className="breadcrumb-title">
-                  Food Packaging
-                </a>
-              ),
-            },
-            {
-              title: (
-                <span className="breadcrumb-link">
-                  10 Reasons To Love Custom Cereal Boxes
-                </span>
-              ),
+              title: title,
             },
           ]}
+          className="breadcrumb"
         />
       </div>
       <div>
