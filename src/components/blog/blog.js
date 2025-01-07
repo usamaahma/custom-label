@@ -40,35 +40,10 @@ function Blog() {
     localStorage.setItem("selectedBlogId", id);
     localStorage.setItem("selectedBlogTitle", title);
   };
-  const title = localStorage.getItem("selectedBlogTitle");
 
   return (
     <div>
-      <div className="headingbread" style={{ marginTop: "5rem" }}>
-        <p className="express-clothing-heading"> {title}</p>
-        <Breadcrumb
-          items={[
-            {
-              title: (
-                <a href="/" className="breadcrumb-title">
-                  Home
-                </a>
-              ),
-            },
-            {
-              title: (
-                <a href="/blogs" className="breadcrumb-link">
-                  Blogs
-                </a>
-              ),
-            },
-            {
-              title: title,
-            },
-          ]}
-          className="breadcrumb"
-        />
-      </div>
+      
       <div>
         <img
           className="img-cbdmain"

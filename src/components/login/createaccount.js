@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Input, Button, notification } from "antd";
+import { Form, Input, Button, notification,message } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { register } from "../../utils/axios";
+import { register,newsletteremail } from "../../utils/axios";
 import { google } from "../../utils/axios";
 import { jwtDecode } from "jwt-decode";
 import "./createaccount.css";
@@ -58,8 +58,54 @@ function Create() {
         description: "Error creating your account. Please try again.",
       });
     }
+    const data1 = {
+      email: values.email,
+    };
+
+    newsletteremail({
+      method: "post",
+      data: data1,
+    })
+      .then((response) => {
+        console.log("API Response:", response); // Log the entire response to inspect it
+
+        if (
+          response.data &&
+          response.data.message === "Email already subscribed"
+        ) {
+          message.info("You already subscribed, thank you!");
+        } else {
+          message.success("You have successfully subscribed!");
+        }
+      })
+      .catch((error) => {
+        console.log("API Error:", error); // Log the API error to the console
+
+        if (error.response) {
+          // Handle error based on server response status
+          if (error.response.status === 400) {
+            if (error.response.data.message === "Email already subscribed") {
+              message.warning("You already subscribed, thank you!");
+            } else {
+              message.error("Something went wrong, please try again!");
+            }
+          } else {
+            // Handle other error statuses
+            message.error("Something went wrong, please try again!");
+          }
+        } else if (error.request) {
+          // Handle network error
+          console.log("No response received from the API");
+          message.error("Network error, please try again later.");
+        } else {
+          // General error
+          console.log("Error during request setup", error.message);
+          message.error("Something went wrong, please try again!");
+        }
+      });
   };
 
+  
   const handleGoogleSuccess = async (credentialResponse) => {
     const token = credentialResponse.credential;
     const userInfo = jwtDecode(token); // Decode JWT to get user info

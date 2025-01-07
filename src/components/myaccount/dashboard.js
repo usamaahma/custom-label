@@ -15,6 +15,7 @@ import Addresses from "../myaccount/addresses"; // Ensure you have the Addresses
 import { FaEnvelope, FaUserAlt, FaBox, FaEye } from "react-icons/fa"; // Add the FaEye icon for View
 import { manageaddresses } from "../../utils/axios";
 import axios from "axios";
+import CustomLoader from "../clothingsection/loader";
 
 const { Title, Paragraph } = Typography;
 
@@ -28,6 +29,9 @@ function AccountDashboard() {
   const [shipAdd, setShipAdd] = useState(null); // To store API response
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
+  const [reload, setReload] = useState(false); // Error state
+
+  const [form] = Form.useForm(); // Initialize the form instance here
 
   // Function to show the manage modal
   const showManageModal = () => {
@@ -102,6 +106,20 @@ function AccountDashboard() {
     console.log("Form Values:", values);
 
     // Retrieve the user data from localStorage
+    const userData = JSON.parse(localStorage.getItem("user"));
+
+    // Check if the user has already submitted an address
+    const addressSubmitted = localStorage.getItem(
+      `addressSubmitted_${userData.id}`
+    );
+
+    if (addressSubmitted) {
+      message.warning(
+        "You have already updated your address. You cannot update it again."
+      );
+      return; // Prevent further execution
+    }
+
     const data1 = {
       userId: userData.id, // Ensure userId is passed as a string
       shippingAddress: {
@@ -130,7 +148,7 @@ function AccountDashboard() {
       },
     };
 
-    // Check if the address already exists for this user
+    // Check if the address already exists for this user in localStorage
     const existingData =
       JSON.parse(localStorage.getItem("userAddresses")) || [];
 
@@ -145,25 +163,33 @@ function AccountDashboard() {
     });
 
     if (isAddressExist) {
-      message.error("Address already exists for this user.");
+      // If address already exists for the user, show a message and don't proceed
+      message.warning("You have already updated your address.");
       return;
     }
 
-    // If the address does not exist, make the API call
+    // If the address does not exist, make the API call to update
     manageaddresses({
       method: "post",
       data: data1,
     })
       .then((res) => {
         console.log("API Response:", res);
-        message.success("Thank you for considering us!");
+        message.success("Thank you for updating your address!");
 
         // Optionally, store the new address in localStorage
         existingData.push(data1);
         localStorage.setItem("userAddresses", JSON.stringify(existingData));
 
-        // Redirect to the thank-you page after successful submission
-        // navigate("/thank-you");
+        // Set a flag that the user has submitted their address
+        localStorage.setItem(`addressSubmitted_${userData.id}`, true);
+
+        // Reset the form and close the modal
+        form.resetFields(); // This will reset all form fields to their initial state
+        setIsManageModalVisible(false);
+
+        // Reload the page to fetch the new data
+        window.location.reload();
       })
       .catch(() => {
         message.error("Something went wrong, please try again!");
@@ -175,9 +201,7 @@ function AccountDashboard() {
         // Ensure userId is available
         if (userid) {
           setLoading(true); // Start loading
-          const response = await manageaddresses.get("", {
-            params: { userid }, // Passing userId as query parameter
-          });
+          const response = await manageaddresses.get(`?userId=${userid}`);
 
           // Ensure that there are addresses in the response
           if (
@@ -215,11 +239,7 @@ function AccountDashboard() {
 
   // Handling loading, error, and displaying addresses
   if (loading) {
-    return <div>Loading...</div>;
-  }
-
-  if (error) {
-    return <div>Error: {error}</div>;
+    return <CustomLoader />;
   }
 
   return (
@@ -292,14 +312,24 @@ function AccountDashboard() {
 
       {/* Modal for Managing Addresses */}
       <Modal
-        title={<span style={{ fontSize: '28px', width: '100%', fontFamily: "Space Grotesk" }}>Please Enter a Shipping & Billing Addresses</span>}
+        title={
+          <span
+            style={{
+              fontSize: "28px",
+              width: "100%",
+              fontFamily: "Space Grotesk",
+            }}
+          >
+            Please Enter a Shipping & Billing Addresses
+          </span>
+        }
         visible={isManageModalVisible}
         onCancel={handleManageCancel}
         footer={[]}
         width={800} // Increased width to accommodate both sections
         className="address-modal"
       >
-        <Form layout="vertical" onFinish={onFinish}>
+        <Form form={form} layout="vertical" onFinish={onFinish}>
           {/* Shipping Address Section */}
           <Title level={4}>Shipping Address</Title>
           {/* First Name */}
@@ -462,23 +492,22 @@ function AccountDashboard() {
             <Input />
           </Form.Item>
           <Form.Item>
-  <Button
-    key="cancel"
-    onClick={handleManageCancel}
-    style={{ marginRight: '8px' }} // Optional: Add space between buttons
-  >
-    Cancel
-  </Button>
-  <Button
-    key="submit"
-    type="primary"
-    htmlType="submit"
-    style={{ marginTop: '10px' }} // Adding margin-top to the Submit button
-  >
-    Submit
-  </Button>
-</Form.Item>
-
+            <Button
+              key="cancel"
+              onClick={handleManageCancel}
+              style={{ marginRight: "8px" }} // Optional: Add space between buttons
+            >
+              Cancel
+            </Button>
+            <Button
+              key="submit"
+              type="primary"
+              htmlType="submit"
+              style={{ marginTop: "10px" }} // Adding margin-top to the Submit button
+            >
+              Submit
+            </Button>
+          </Form.Item>
         </Form>
       </Modal>
 

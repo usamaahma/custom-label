@@ -1,8 +1,62 @@
-import React from "react";
+import React, { useState } from "react";
+import { Form, Input, Button, message } from "antd";
+import { newsletteremail } from "../utils/axios";
 import { Link } from "react-router-dom";
 import "./footer.css";
 
 function Footer1() {
+  const [email, setEmail] = useState("");
+
+  const onFinish = (values) => {
+    console.log("Form Submitted with values:", values);  // This will show the form values
+    
+    const data1 = {
+      email: values.email,
+    };
+
+    newsletteremail({
+      method: "post",
+      data: data1,
+    })
+      .then((response) => {
+        console.log("API Response:", response); // Log the entire response to inspect it
+
+        if (
+          response.data &&
+          response.data.message === "Email already subscribed"
+        ) {
+          message.info("You already subscribed, thank you!");
+        } else {
+          message.success("You have successfully subscribed!");
+        }
+      })
+      .catch((error) => {
+        console.log("API Error:", error); // Log the API error to the console
+
+        if (error.response) {
+          // Handle error based on server response status
+          if (error.response.status === 400) {
+            if (error.response.data.message === "Email already subscribed") {
+              message.warning("You already subscribed, thank you!");
+            } else {
+              message.error("Something went wrong, please try again!");
+            }
+          } else {
+            // Handle other error statuses
+            message.error("Something went wrong, please try again!");
+          }
+        } else if (error.request) {
+          // Handle network error
+          console.log("No response received from the API");
+          message.error("Network error, please try again later.");
+        } else {
+          // General error
+          console.log("Error during request setup", error.message);
+          message.error("Something went wrong, please try again!");
+        }
+      });
+  };
+  
   return (
     <footer className="footer">
       <div className="footer-container">
@@ -116,12 +170,39 @@ function Footer1() {
             Get all the latest information on events, sales, and offers. Sign up
             for our newsletter today.
           </p>
-          <input
-            type="email"
-            placeholder="Your Email"
-            className="footer-input"
-          />
-          <button className="btn-signup">Subscribe</button>
+
+          {/* Ant Design Form */}
+          <Form layout="vertical" onFinish={onFinish}>
+            <Form.Item
+              name="email"
+              rules={[
+                {
+                  required: true,
+                  type: "email",
+                  message: "Please enter a valid email!",
+                },
+              ]}
+            >
+              <Input
+                type="email"
+                placeholder="Your Email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="footer-input"
+              />
+            </Form.Item>
+
+            <Form.Item>
+              <Button
+                type="primary"
+                htmlType="submit"
+                className="btn-signup"
+                style={{ width: "100%" }} // Full width for button
+              >
+                Subscribe
+              </Button>
+            </Form.Item>
+          </Form>
 
           <h3>We Accept</h3>
           <div className="footer-image">
