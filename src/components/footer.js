@@ -6,6 +6,7 @@ import "./footer.css";
 
 function Footer1() {
   const [email, setEmail] = useState("");
+  const [form] = Form.useForm(); // Initialize the form instance here
 
   const onFinish = (values) => {
     console.log("Form Submitted with values:", values); // Log form values
@@ -20,6 +21,7 @@ function Footer1() {
     })
       .then((response) => {
         console.log("API Response:", response); // Log the entire response to inspect it
+        form.resetFields(); // This will reset all form fields to their initial state
 
         if (
           response.data &&
@@ -171,7 +173,7 @@ function Footer1() {
           </p>
 
           {/* Ant Design Form */}
-          <Form layout="vertical" onFinish={onFinish}>
+          <Form form={form} layout="vertical" onFinish={onFinish}>
             <Form.Item
               name="email"
               rules={[
