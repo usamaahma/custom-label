@@ -1,11 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Col, Form, Input, Button, Select, message } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useCart } from "../../context/cartcontext"; // Import Cart Context
 import "./checkoutbelow.css";
-import IconMessage from "./iconmessage";
 import { useNavigate } from "react-router-dom";
 import { checkout } from "../../utils/axios";
+import { manageaddresses } from "../../utils/axios";
 
 const { Option } = Select;
 
@@ -13,8 +13,17 @@ function CheckoutBelow1() {
   const navigate = useNavigate();
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownVisible1, setDropdownVisible1] = useState(false);
+  const [form] = Form.useForm(); // Use Ant Design's form instance
+  const [addresses, setAddresses] = useState(null); // State to store address data
+  const [sameAsBilling, setSameAsBilling] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [billAdd, setBillAdd] = useState(null); // To store API response
+  const [shipAdd, setShipAdd] = useState(null); // To store API response
 
   const { cart, removeFromCart } = useCart(); // Get cart data from context
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const userid = userData?.id;
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -33,6 +42,82 @@ function CheckoutBelow1() {
     return cart
       .reduce((total, item) => total + item.price * item.quantity, 0)
       .toFixed(2);
+  };
+  useEffect(() => {
+    const fetchAddresses = async () => {
+      try {
+        if (userid) {
+          setLoading(true);
+          const response = await manageaddresses.get(`?userId=${userid}`);
+          console.log(response);
+
+          if (response.data && response.data.addresses && response.data.addresses.length > 0) {
+            const billingAddresses = response.data.addresses[0]?.billingAddress;
+            const shippingAddresses = response.data.addresses[0]?.shippingAddress;
+
+            // Set state for billing and shipping
+            setBillAdd(billingAddresses);
+            setShipAdd(shippingAddresses);
+
+            // Fill the form fields
+            form.setFieldsValue({
+              billfirstname: billingAddresses?.firstName,
+              billmiddlename: billingAddresses?.middleName,
+              billlastname: billingAddresses?.lastName,
+              billcompanyname: billingAddresses?.companyName,
+              billphonenumber: billingAddresses?.phoneNumber,
+              billaddress: billingAddresses?.streetAddress,
+              billcity: billingAddresses?.city,
+              billstate: billingAddresses?.stateOrProvince,
+              billzipcode: billingAddresses?.zipOrPostalCode,
+              billcountry: billingAddresses?.country,
+
+              shipFirstName: shippingAddresses?.firstName,
+              shipMiddleName: shippingAddresses?.middleName,
+              shipLastName: shippingAddresses?.lastName,
+              shipCompanyName: shippingAddresses?.companyName,
+              shipPhoneNumber: shippingAddresses?.phoneNumber,
+              shipStreetAddress: shippingAddresses?.streetAddress,
+              shipCity: shippingAddresses?.city,
+              shipState: shippingAddresses?.stateOrProvince,
+              shipZipCode: shippingAddresses?.zipOrPostalCode,
+              shipCountry: shippingAddresses?.country,
+            });
+          } else {
+            setError("No addresses found for the user");
+          }
+        } else {
+          setError("User ID not found");
+        }
+      } catch (err) {
+        setError("Error fetching data: " + err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchAddresses();
+  }, [userid]);
+
+  // Create the Form instance
+  // Runs on mount, ensures we fetch the data when the component is first rendered
+
+  // Handle "Same as billing" checkbox
+  const handleSameAsBillingChange = (e) => {
+    setSameAsBilling(e.target.checked);
+    if (e.target.checked && addresses) {
+      // If checked, copy the billing address to the shipping fields
+      form.setFieldsValue({
+        shipFirstName: form.getFieldValue("billfirstname"),
+        shipLastName: form.getFieldValue("billlastname"),
+        shipStreetAddress: form.getFieldValue("billaddress"),
+        shipCity: form.getFieldValue("billcity"),
+        shipState: form.getFieldValue("billstate"),
+        shipZipCode: form.getFieldValue("billzipcode"),
+        shipCountry: form.getFieldValue("billcountry"),
+        shipPhoneNumber: form.getFieldValue("billphonenumber"),
+      });
+    }
   };
   const onFinish = async (values) => {
     const userData = JSON.parse(localStorage.getItem("user"));
@@ -125,7 +210,7 @@ function CheckoutBelow1() {
       <div className="check-below">
         <p className="check-txt">CHECKOUT</p>
       </div>
-      <Form layout="vertical" onFinish={onFinish}>
+      <Form form={form} name="checkout-form" layout="vertical" onFinish={onFinish}>
         <Row flex justify={"space-evenly"}>
           {/* Column 1: Billing Address */}
           <Col xs={24} sm={12} md={7} className="border-column">
