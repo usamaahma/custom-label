@@ -43,6 +43,10 @@ function Customclothing() {
 
     return () => window.removeEventListener("resize", updateMedia);
   }, []);
+  const StoreProductId = (id, title) => {
+    localStorage.setItem("selectedProductId", id);
+    localStorage.setItem("selectedProductTitle", title);
+  };
 
   return (
     <div className="carousel-main">
@@ -52,7 +56,14 @@ function Customclothing() {
       <Carousel dots={false} slidesToShow={slidesToShow} arrows={true}>
         {cardsData.map((card, index) => (
           <div key={index} className="carousel-slide">
-            <div className="image-container">
+           
+            <div
+              className="image-container"
+              onClick={() => {
+                StoreProductId(card._id, card.title);
+                window.location.href = `/product/${card.title}`;
+              }}
+            >
               <img
                 src={card.image}
                 alt={`Slide ${index}`}

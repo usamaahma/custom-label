@@ -11,10 +11,10 @@ import {
   Input,
   message,
 } from "antd";
-import Addresses from "../myaccount/addresses"; // Ensure you have the Addresses component imported
+
 import { FaEnvelope, FaUserAlt, FaBox, FaEye } from "react-icons/fa"; // Add the FaEye icon for View
 import { manageaddresses } from "../../utils/axios";
-import axios from "axios";
+ 
 import CustomLoader from "../clothingsection/loader";
 
 const { Title, Paragraph } = Typography;
