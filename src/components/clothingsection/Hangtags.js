@@ -45,22 +45,38 @@ const Hangtags = () => {
     fetchData();
   }, []);
   const handleSearchChange = (e) => {
-    const query = e.target.value;
+    const query = e.target.value.trim().toLowerCase();
     setSearchQuery(query);
 
-    // Filter products based on the search query
+    const deepSearch = (obj, searchTerm) => {
+      // Recursive function to search within objects and arrays
+      if (typeof obj === "string") {
+        return obj.toLowerCase().includes(searchTerm); // Check if the full phrase is included
+      } else if (typeof obj === "object" && obj !== null) {
+        return Object.values(obj).some((value) =>
+          deepSearch(value, searchTerm)
+        );
+      }
+      return false;
+    };
+
     if (query) {
-      const filtered = cardsData.filter((card) =>
-        card.title.toLowerCase().includes(query.toLowerCase())
-      );
-      setFilteredData(filtered);
+      const searchTerms = query.split(" "); // Split query into words by spaces
+      const filtered = cardsData.filter((card) => {
+        // Check for either exact phrase or all words in the query
+        return (
+          deepSearch(card, query) ||
+          searchTerms.every((term) => deepSearch(card, term))
+        );
+      });
+      setFilteredData(filtered.length > 0 ? filtered : []);
     } else {
       setFilteredData(cardsData); // Show all products if no search query
     }
   };
 
   if (loading) {
-    return <CustomLoader/> ;
+    return <CustomLoader />;
   }
 
   if (error) {

@@ -1,15 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { Form, Input, Button, notification,message } from "antd";
+import { Form, Input, Button, notification, message } from "antd";
 import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
-import { register,newsletteremail } from "../../utils/axios";
+import { register, newsletteremail } from "../../utils/axios";
 import { google } from "../../utils/axios";
 import { jwtDecode } from "jwt-decode";
+import PhoneInput from "react-phone-input-2";
+import "react-phone-input-2/lib/style.css";
 import "./createaccount.css";
 
 function Create() {
   const [form] = Form.useForm();
+  const [countryCode, setCountryCode] = useState("+1"); // Default to USA
 
+  const handlePhoneChange = (phone) => {
+    console.log("Phone Number:", phone); // Phone number with country code
+  };
   const validatePassword = (password) => {
     const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
     return password.length >= 8 && specialCharacterRegex.test(password);
@@ -51,6 +57,7 @@ function Create() {
           description: "Your account has been created successfully.",
         });
         form.resetFields();
+        window.location.href = `/login`;
       }
     } catch (error) {
       notification.error({
@@ -105,18 +112,17 @@ function Create() {
       });
   };
 
-  
   const handleGoogleSuccess = async (credentialResponse) => {
     const token = credentialResponse.credential;
     const userInfo = jwtDecode(token); // Decode JWT to get user info
-  
+
     const requestData = {
       email: userInfo.email,
       name: userInfo.name,
       googleId: userInfo.sub,
       role: "user",
     };
-  
+
     try {
       const response = await google.post("/register/google", requestData);
       if (response.status === 201) {
@@ -132,7 +138,23 @@ function Create() {
       });
     }
   };
-  
+
+  useEffect(() => {
+    const fetchCountryCode = async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        console.log("Fetched Data:", data); // Check the full response
+        setCountryCode(`+${data.country_calling_code || "1"}`); // Default to USA if undefined
+      } catch (error) {
+        console.error("Error fetching country code:", error);
+        setCountryCode("+92"); // Fallback to Pakistan's code
+      }
+    };
+
+    fetchCountryCode();
+  }, []);
+
   return (
     <GoogleOAuthProvider clientId="421180583946-i2gkvkdsg8pptarbune4p29hssqckq1g.apps.googleusercontent.com">
       <div className="create-container">
@@ -158,10 +180,16 @@ function Create() {
                 { required: true, message: "Please input your phone number!" },
               ]}
             >
-              <Input
-                placeholder="Phone Number"
+              <input
+                placeholder={`${countryCode} Phone Number`}
                 className="create-input"
-                maxLength="11"
+                type="tel"
+                maxLength={10}
+                onKeyPress={(event) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault(); // Prevent non-numeric input
+                  }
+                }}
               />
             </Form.Item>
 
@@ -180,6 +208,12 @@ function Create() {
               rules={[
                 { required: true, message: "Please input your password!" },
                 { min: 8, message: "Password must be at least 8 characters." },
+                {
+                  pattern:
+                    /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>]).+$/,
+                  message:
+                    "Password must contain at least one uppercase letter, one number, and one special character.",
+                },
               ]}
               hasFeedback
             >
