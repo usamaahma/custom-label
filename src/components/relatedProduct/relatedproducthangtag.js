@@ -2,9 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Carousel } from "antd";
 import { Button } from "react-bootstrap";
 import { FaFire } from "react-icons/fa";
-import { products } from "../../utils/axios"; // Alias the imported products to avoid naming conflicts
+import { hangtag } from "../../utils/axios"; // Alias the imported products to avoid naming conflicts
 
-function RelatedProduct() {
+function RelatedProducthang() {
   const [cardsData, setCardsData] = useState([]); // Store fetched product data
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
@@ -14,7 +14,7 @@ function RelatedProduct() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await products.get("/"); // Use the alias to call the API
+        const response = await hangtag.get("/"); // Use the alias to call the API
         const data = response.data.results || response.data; // Check the API response structure
         console.log("Cards data:", data); // Debug API response
         setCardsData(data); // Update state with fetched data
@@ -43,14 +43,14 @@ function RelatedProduct() {
     return () => window.removeEventListener("resize", updateMedia);
   }, []);
   const StoreProductId = (id, title) => {
-    localStorage.setItem("selectedProductId", id);
-    localStorage.setItem("selectedProductTitle", title);
+    localStorage.setItem("selectedHangtagtId", id);
+    localStorage.setItem("selectedHangtagTitle", title);
   };
 
   return (
     <div className="carousel-main">
       <Button variant="primary" className="customclothing-button1">
-        Related Products
+        Related Products hang
       </Button>
       <Carousel dots={false} slidesToShow={slidesToShow} arrows={true}>
         {cardsData.map((card, index) => (
@@ -59,7 +59,7 @@ function RelatedProduct() {
               className="image-container"
               onClick={() => {
                 StoreProductId(card._id, card.title);
-                window.location.href = `/product/${card.title}`;
+                window.location.href = `/hangtag/${card.title}`;
               }}
             >
               <img
@@ -81,4 +81,4 @@ function RelatedProduct() {
   );
 }
 
-export default RelatedProduct;
+export default RelatedProducthang;

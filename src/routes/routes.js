@@ -117,7 +117,7 @@ const AppRoutes = () => {
                 path="account-details"
                 element={
                   <PrivateRoute>
-                    <AccountDetails />
+                  <AccountDetails />
                   </PrivateRoute>
                 }
               />
@@ -125,7 +125,7 @@ const AppRoutes = () => {
                 path="payment-options"
                 element={
                   <PrivateRoute>
-                    <PaymentOptions />
+                  <PaymentOptions />
                   </PrivateRoute>
                 }
               />
