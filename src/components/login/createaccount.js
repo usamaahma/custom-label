@@ -5,17 +5,13 @@ import { GoogleOAuthProvider, GoogleLogin } from "@react-oauth/google";
 import { register, newsletteremail } from "../../utils/axios";
 import { google } from "../../utils/axios";
 import { jwtDecode } from "jwt-decode";
-import PhoneInput from "react-phone-input-2";
 import "react-phone-input-2/lib/style.css";
 import "./createaccount.css";
 
 function Create() {
   const [form] = Form.useForm();
-  const [countryCode, setCountryCode] = useState("+1"); // Default to USA
+  const [countryCode, setCountryCode] = useState("+1");
 
-  const handlePhoneChange = (phone) => {
-    console.log("Phone Number:", phone); // Phone number with country code
-  };
   const validatePassword = (password) => {
     const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
     return password.length >= 8 && specialCharacterRegex.test(password);
@@ -45,7 +41,7 @@ function Create() {
       email,
       password,
       name,
-      phonenumber: phone,
+      phonenumber: countryCode + phone,
       role: "user",
     };
 
@@ -74,7 +70,7 @@ function Create() {
       data: data1,
     })
       .then((response) => {
-        console.log("API Response:", response); // Log the entire response to inspect it
+        console.log("API Response:", response);
 
         if (
           response.data &&
@@ -86,10 +82,8 @@ function Create() {
         }
       })
       .catch((error) => {
-        console.log("API Error:", error); // Log the API error to the console
-
+        console.log("API Error:", error);
         if (error.response) {
-          // Handle error based on server response status
           if (error.response.status === 400) {
             if (error.response.data.message === "Email already subscribed") {
               message.warning("You already subscribed, thank you!");
@@ -97,15 +91,12 @@ function Create() {
               message.error("Something went wrong, please try again!");
             }
           } else {
-            // Handle other error statuses
             message.error("Something went wrong, please try again!");
           }
         } else if (error.request) {
-          // Handle network error
           console.log("No response received from the API");
           message.error("Network error, please try again later.");
         } else {
-          // General error
           console.log("Error during request setup", error.message);
           message.error("Something went wrong, please try again!");
         }
@@ -144,11 +135,11 @@ function Create() {
       try {
         const response = await fetch("https://ipapi.co/json/");
         const data = await response.json();
-        console.log("Fetched Data:", data); // Check the full response
-        setCountryCode(`+${data.country_calling_code || "1"}`); // Default to USA if undefined
+        console.log("Fetched Data:", data);
+        setCountryCode(`${data.country_calling_code || "1"}`);
       } catch (error) {
         console.error("Error fetching country code:", error);
-        setCountryCode("+92"); // Fallback to Pakistan's code
+        setCountryCode("+92");
       }
     };
 
