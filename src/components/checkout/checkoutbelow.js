@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Form, Input, Button, Select, message } from "antd";
+import { Row, Col, Form, Input, Button, Select, message, Modal } from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useCart } from "../../context/cartcontext"; // Import Cart Context
 import "./checkoutbelow.css";
@@ -20,6 +20,8 @@ function CheckoutBelow1() {
   const [error, setError] = useState(null);
   const [billAdd, setBillAdd] = useState(null); // To store API response
   const [shipAdd, setShipAdd] = useState(null); // To store API response
+  const [countryCode, setCountryCode] = useState("+1");
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { cart, removeFromCart } = useCart(); // Get cart data from context
   const userData = JSON.parse(localStorage.getItem("user"));
@@ -51,9 +53,14 @@ function CheckoutBelow1() {
           const response = await manageaddresses.get(`?userId=${userid}`);
           console.log(response);
 
-          if (response.data && response.data.addresses && response.data.addresses.length > 0) {
+          if (
+            response.data &&
+            response.data.addresses &&
+            response.data.addresses.length > 0
+          ) {
             const billingAddresses = response.data.addresses[0]?.billingAddress;
-            const shippingAddresses = response.data.addresses[0]?.shippingAddress;
+            const shippingAddresses =
+              response.data.addresses[0]?.shippingAddress;
 
             // Set state for billing and shipping
             setBillAdd(billingAddresses);
@@ -119,6 +126,29 @@ function CheckoutBelow1() {
       });
     }
   };
+  const showModal = () => {
+    setIsModalVisible(true);
+  };
+
+  // Function to hide the modal
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
+  useEffect(() => {
+    const fetchCountryCode = async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        console.log("Fetched Data:", data);
+        setCountryCode(`${data.country_calling_code || "1"}`);
+      } catch (error) {
+        console.error("Error fetching country code:", error);
+        setCountryCode("+1");
+      }
+    };
+
+    fetchCountryCode();
+  }, []);
   const onFinish = async (values) => {
     const userData = JSON.parse(localStorage.getItem("user"));
     console.log(userData, "userdata");
@@ -210,7 +240,12 @@ function CheckoutBelow1() {
       <div className="check-below">
         <p className="check-txt">CHECKOUT</p>
       </div>
-      <Form form={form} name="checkout-form" layout="vertical" onFinish={onFinish}>
+      <Form
+        form={form}
+        name="checkout-form"
+        layout="vertical"
+        onFinish={onFinish}
+      >
         <Row flex justify={"space-evenly"}>
           {/* Column 1: Billing Address */}
           <Col xs={24} sm={12} md={7} className="border-column">
@@ -258,29 +293,22 @@ function CheckoutBelow1() {
               />
             </Form.Item>
             <Form.Item
-              label="Phone Number"
-              className="input-heading"
               name="billphonenumber"
+              label="Phone Number"
               rules={[
-                {
-                  required: true,
-                  message: "Please enter your phone number!",
-                },
-                {
-                  len: 11, // Ensures the phone number is exactly 11 digits
-                  message: "Phone number must be exactly 11 digits!",
-                },
-                {
-                  pattern: /^[0-9]{11}$/, // Ensures the phone number is numeric
-                  message: "Phone number must be numeric!",
-                },
+                { required: true, message: "Please input your phone number!" },
               ]}
             >
-              <Input
-                className="input"
-                placeholder="Enter your phone number"
-                maxLength={11} // Limits input to 11 characters
-                type="tel" // Open numeric keypad on mobile devices
+              <input
+                placeholder={`${countryCode} Phone Number`}
+                className="create-input"
+                type="tel"
+                maxLength={10}
+                onKeyPress={(event) => {
+                  if (!/[0-9]/.test(event.key)) {
+                    event.preventDefault(); // Prevent non-numeric input
+                  }
+                }}
               />
             </Form.Item>
 
@@ -406,29 +434,25 @@ function CheckoutBelow1() {
                 />
               </Form.Item>
               <Form.Item
-                label="Phone Number"
                 name="shipPhoneNumber"
-                className="input-heading"
+                label="Phone Number"
                 rules={[
                   {
                     required: true,
-                    message: "Please enter your phone number!",
-                  },
-                  {
-                    len: 11, // Ensures the phone number is exactly 11 digits
-                    message: "Phone number must be exactly 11 digits!",
-                  },
-                  {
-                    pattern: /^[0-9]{11}$/, // Ensures the phone number is numeric
-                    message: "Phone number must be numeric!",
+                    message: "Please input your phone number!",
                   },
                 ]}
               >
-                <Input
-                  className="input"
-                  placeholder="Enter your phone number"
-                  maxLength={11} // Limits input to 11 characters
-                  type="tel" // Open numeric keypad on mobile devices
+                <input
+                  placeholder={`${countryCode} Phone Number`}
+                  className="create-input"
+                  type="tel"
+                  maxLength={10}
+                  onKeyPress={(event) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault(); // Prevent non-numeric input
+                    }
+                  }}
                 />
               </Form.Item>
 
@@ -512,22 +536,7 @@ function CheckoutBelow1() {
               <div className="ship-address" style={{ marginTop: "" }}>
                 <p className="shipping-txt">Order Summary</p>
               </div>
-              {/* <Button
-                type="primary"
-                style={{
-                  backgroundColor: "#808080",
-                  borderColor: "#808080",
-                  color: "#fff",
-                  width: "100%",
-                  padding: "10px",
-                  fontSize: "16px",
-                  marginTop: "20px",
-                  marginBottom: "3rem",
-                }}
-                onClick={redirectToPayPal}
-              >
-                Proceed to Pay
-              </Button> */}
+
               <p className="order-summary-txt">Summary</p>
               <p
                 className="cart-txt"
@@ -602,13 +611,78 @@ function CheckoutBelow1() {
                 </div>
               </div>
               <div className="btn-main">
+                {/* Price Match Button above Place Order Button */}
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "flex-end",
+                    marginBottom: "2px",
+                  }}
+                >
+                  <Button
+                    type="dashed" // dashed type for a subtle button
+                    style={{
+                      width: "50%",
+                      padding: "15px",
+                      marginBottom: "2px", // Space between Price Match and Place Order button
+                    }}
+                    onClick={showModal}
+                  >
+                    We Price Match
+                  </Button>
+                </div>
+
+                {/* Place Order Button */}
                 <Button
                   type="primary"
                   htmlType="submit"
-                  style={{ width: "100%", padding: "20px", marginTop: "20px" }}
+                  style={{
+                    width: "100%",
+                    padding: "20px",
+                    marginTop: "20px",
+                  }}
                 >
                   Place Order
                 </Button>
+
+                {/* Modal for Price Match */}
+                <Modal
+                  visible={isModalVisible}
+                  onCancel={handleCancel}
+                  footer={null}
+                  bodyStyle={{ padding: "20px" }} // Optional: Adjust body padding
+                  width={500} // Optional: Adjust modal width
+                  style={{ top: 20 }} // Optional: Adjust position if needed
+                >
+                  {/* Modal Header Customization */}
+                  <div
+                    style={{
+                      backgroundColor: "#5F5B5B",
+                      marginBottom: "10px",
+                      padding: "10px",
+                      color: "white",
+                    }}
+                  >
+                    <h2 style={{ margin: 0 }}>Price Match Policy</h2>
+                  </div>
+
+                  <p>
+                    If you have a lower quote from a competitor for the same
+                    product and specifications,
+                    <a
+                      href="mailto:sales@theclothinglabels.com"
+                      style={{ color: "blue", textDecoration: "underline" }}
+                    >
+                      &nbsp;email us&nbsp;
+                    </a>
+                    the quote and we will do our best to match the price for
+                    you. Make sure you include tax and shipping in your quote.
+                  </p>
+
+                  <Button style={{ marginTop: "7px" }} onClick={handleCancel}>
+                    Ok
+                  </Button>
+                </Modal>
               </div>
             </div>
           </Col>
