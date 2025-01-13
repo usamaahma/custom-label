@@ -14,8 +14,9 @@ import {
 
 import { FaEnvelope, FaUserAlt, FaBox, FaEye } from "react-icons/fa"; // Add the FaEye icon for View
 import { manageaddresses } from "../../utils/axios";
- 
+
 import CustomLoader from "../clothingsection/loader";
+import Updatemodal1 from "./updatemodal";
 
 const { Title, Paragraph } = Typography;
 
@@ -30,10 +31,17 @@ function AccountDashboard() {
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
   const [reload, setReload] = useState(false); // Error state
-
+  const [countryCode, setCountryCode] = useState("+1");
   const [form] = Form.useForm(); // Initialize the form instance here
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   // Function to show the manage modal
+  const showUpdateModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleCancel = () => {
+    setIsModalVisible(false);
+  };
   const showManageModal = () => {
     setIsManageModalVisible(true);
   };
@@ -196,13 +204,27 @@ function AccountDashboard() {
       });
   };
   useEffect(() => {
+    const fetchCountryCode = async () => {
+      try {
+        const response = await fetch("https://ipapi.co/json/");
+        const data = await response.json();
+        console.log("Fetched Data:", data);
+        setCountryCode(`${data.country_calling_code || "1"}`);
+      } catch (error) {
+        console.error("Error fetching country code:", error);
+        setCountryCode("+1");
+      }
+    };
+
+    fetchCountryCode();
+  }, []);
+  useEffect(() => {
     const fetchAddresses = async () => {
       try {
         // Ensure userId is available
         if (userid) {
           setLoading(true); // Start loading
           const response = await manageaddresses.get(`?userId=${userid}`);
-
           // Ensure that there are addresses in the response
           if (
             response.data &&
@@ -220,7 +242,7 @@ function AccountDashboard() {
             // Set both billing and shipping addresses in the state
             setBillAdd(billingAddresses); // Set all billing addresses
             setShipAdd(shippingAddresses); // Set all shipping addresses
-            console.log(billAdd);
+            localStorage.setItem("addressid", response.data.addresses[0]._id);
           } else {
             setError("No addresses found for the user");
           }
@@ -296,17 +318,36 @@ function AccountDashboard() {
               onClick={showManageModal}
               style={{ width: "100%", marginBottom: "10px" }}
             >
-              <FaBox /> Manage
+              <FaBox /> Add Address
             </Button>
             <Button
               type="default"
               className="view-addresses-btn"
               onClick={showViewModal}
-              style={{ width: "100%" }}
+              style={{ width: "100%", marginBottom: "10px" }}
             >
               <FaEye /> View
             </Button>
+            {/* Update Address Button */}
+            <Button
+              type="dashed"
+              className="update-address-btn"
+              onClick={showUpdateModal}
+              style={{ width: "100%" }}
+            >
+              <FaBox /> Update Address
+            </Button>
           </Card>
+
+          {/* Update Address Modal */}
+          <Modal
+            title="Update Address"
+            visible={isModalVisible}
+            onCancel={handleCancel}
+          >
+            <Updatemodal1 />
+            {/* You can add a form here for updating the address */}
+          </Modal>
         </Col>
       </Row>
 
@@ -317,6 +358,7 @@ function AccountDashboard() {
             style={{
               fontSize: "28px",
               width: "100%",
+
               fontFamily: "Space Grotesk",
             }}
           >
@@ -401,10 +443,20 @@ function AccountDashboard() {
             label="Phone Number"
             name="shippingPhoneNumber"
             rules={[
-              { required: true, message: "Please enter your phone number!" },
+              { required: true, message: "Please input your phone number!" },
             ]}
           >
-            <Input />
+            <input
+              placeholder={`${countryCode} Phone Number`}
+              className="create-input"
+              type="tel"
+              maxLength={10}
+              onKeyPress={(event) => {
+                if (!/[0-9]/.test(event.key)) {
+                  event.preventDefault(); // Prevent non-numeric input
+                }
+              }}
+            />
           </Form.Item>
           {/* Company Name */}
           <Form.Item label="Company Name" name="shippingCompanyName">
@@ -482,10 +534,20 @@ function AccountDashboard() {
             label="Phone Number"
             name="billingPhoneNumber"
             rules={[
-              { required: true, message: "Please enter your phone number!" },
+              { required: true, message: "Please input your phone number!" },
             ]}
           >
-            <Input />
+            <input
+              placeholder={`${countryCode} Phone Number`}
+              className="create-input"
+              type="tel"
+              maxLength={10}
+              onKeyPress={(event) => {
+                if (!/[0-9]/.test(event.key)) {
+                  event.preventDefault(); // Prevent non-numeric input
+                }
+              }}
+            />
           </Form.Item>
           {/* Company Name */}
           <Form.Item label="Company Name" name="billingCompanyName">
@@ -513,111 +575,220 @@ function AccountDashboard() {
 
       {/* Modal for Viewing Address */}
       <Modal
-        title="View Address"
         visible={isViewModalVisible}
         onCancel={handleViewCancel}
         footer={null}
         width={800}
         className="view-address-modal"
       >
-        {viewAddressData && (
-          <Row gutter={16}>
-            {/* Billing Address Column */}
-            <Col span={12}>
-              <div className="address-column">
-                <Title level={4}>Billing Address</Title>
-                {/* Loop through billAdd array and display each address */}
-                {billAdd && billAdd.length > 0 ? (
-                  billAdd.map((address, index) => (
-                    <div key={index}>
-                      <Paragraph>
-                        <strong>First Name:</strong> {address.firstName}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Middle Name:</strong> {address.middleName}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Last Name:</strong> {address.lastName}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Street Address:</strong> {address.streetAddress}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>City:</strong> {address.city}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>State/Province:</strong>{" "}
-                        {address.stateOrProvince}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Zip/Postal Code:</strong>{" "}
-                        {address.zipOrPostalCode}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Country:</strong> {address.country}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Phone Number:</strong> {address.phoneNumber}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Company Name:</strong> {address.companyName}
-                      </Paragraph>
-                    </div>
-                  ))
-                ) : (
-                  <p>No billing address available.</p>
-                )}
-              </div>
-            </Col>
+        {billAdd && shipAdd && (
+          <div>
+            <div
+              style={{
+                textAlign: "center",
+                backgroundColor: "#5F5B5B",
+                padding: "10px",
+                marginTop: "25px",
+                marginBottom: "5px",
+              }}
+            >
+              <p style={{ fontSize: "24px", color: "white" }}>View Address</p>
+            </div>
 
-            {/* Shipping Address Column */}
-            <Col span={12}>
-              <div className="address-column">
-                <Title level={4}>Shipping Address</Title>
-                {/* Loop through billAdd array and display each address */}
-                {shipAdd && shipAdd.length > 0 ? (
-                  shipAdd.map((address, index) => (
-                    <div key={index}>
-                      <Paragraph>
-                        <strong>First Name:</strong> {address.firstName}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Middle Name:</strong> {address.middleName}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Last Name:</strong> {address.lastName}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Street Address:</strong> {address.streetAddress}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>City:</strong> {address.city}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>State/Province:</strong>{" "}
-                        {address.stateOrProvince}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Zip/Postal Code:</strong>{" "}
-                        {address.zipOrPostalCode}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Country:</strong> {address.country}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Phone Number:</strong> {address.phoneNumber}
-                      </Paragraph>
-                      <Paragraph>
-                        <strong>Company Name:</strong> {address.companyName}
-                      </Paragraph>
-                    </div>
-                  ))
-                ) : (
-                  <p>No shipping address available.</p>
-                )}
-              </div>
-            </Col>
-          </Row>
+            <Row gutter={16}>
+              {/* Billing Address Column */}
+              <Col span={12}>
+                <div className="address-column">
+                  <Title level={4}>Billing Address</Title>
+                  {/* Loop through billAdd array and display each address */}
+                  {billAdd.length > 0 ? (
+                    billAdd.map((address, index) => (
+                      <div key={index}>
+                        <Paragraph>
+                          <strong>First Name:</strong>
+                          <Input
+                            value={address.firstName}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Middle Name:</strong>
+                          <Input
+                            value={address.middleName}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Last Name:</strong>
+                          <Input
+                            value={address.lastName}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Street Address:</strong>
+                          <Input
+                            value={address.streetAddress}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>City:</strong>
+                          <Input
+                            value={address.city}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>State/Province:</strong>
+                          <Input
+                            value={address.stateOrProvince}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Zip/Postal Code:</strong>
+                          <Input
+                            value={address.zipOrPostalCode}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Country:</strong>
+                          <Input
+                            value={address.country}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Phone Number:</strong>
+                          <Input
+                            value={address.phoneNumber}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Company Name:</strong>
+                          <Input
+                            value={address.companyName}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No billing address available.</p>
+                  )}
+                </div>
+              </Col>
+
+              {/* Shipping Address Column */}
+              <Col span={12}>
+                <div className="address-column">
+                  <Title level={4}>Shipping Address</Title>
+                  {/* Loop through shipAdd array and display each address */}
+                  {shipAdd.length > 0 ? (
+                    shipAdd.map((address, index) => (
+                      <div key={index}>
+                        <Paragraph>
+                          <strong>First Name:</strong>
+                          <Input
+                            value={address.firstName}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Middle Name:</strong>
+                          <Input
+                            value={address.middleName}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Last Name:</strong>
+                          <Input
+                            value={address.lastName}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Street Address:</strong>
+                          <Input
+                            value={address.streetAddress}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>City:</strong>
+                          <Input
+                            value={address.city}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>State/Province:</strong>
+                          <Input
+                            value={address.stateOrProvince}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Zip/Postal Code:</strong>
+                          <Input
+                            value={address.zipOrPostalCode}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Country:</strong>
+                          <Input
+                            value={address.country}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Phone Number:</strong>
+                          <Input
+                            value={address.phoneNumber}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                        <Paragraph>
+                          <strong>Company Name:</strong>
+                          <Input
+                            value={address.companyName}
+                            disabled
+                            className="input-txt-dark"
+                          />
+                        </Paragraph>
+                      </div>
+                    ))
+                  ) : (
+                    <p>No shipping address available.</p>
+                  )}
+                </div>
+              </Col>
+            </Row>
+          </div>
         )}
       </Modal>
     </div>
