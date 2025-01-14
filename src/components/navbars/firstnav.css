@@ -3,7 +3,7 @@
 .firstnavbar-navbar {
   padding: 10px 20px;
   background-color: #5f6f65;
- }
+}
 
 .firstnavbar-logo {
   width: 11rem;
@@ -34,15 +34,15 @@
 
 .firstnavbar-link {
   margin-left: 5px; /* Gap between links */
-  color: #FAF4EB;
+  color: #faf4eb;
 }
 .cart-strong {
-  color: #FAF4EB;
+  color: #faf4eb;
 }
 .social-icon-first {
   width: 2rem;
   height: 2rem;
-  background: #FAF4EB ;
+  background: #faf4eb;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -63,18 +63,18 @@
 }
 .code-text {
   font-weight: 800;
-  color: #231F20;
+  color: #231f20;
 }
 .code-off {
   font-weight: bold;
-  color: #231F20;
+  color: #231f20;
 }
 .button-show {
   display: none;
 }
 .mainnav-quote-button {
   margin-left: 20px;
-  background-color: #5F6F65;
+  background-color: #5f6f65;
   color: white; /* Text color */
   border: none; /* Remove border */
   transition: background-color 0.3s; /* Smooth transition */
@@ -83,7 +83,7 @@
 
 .mainnav-quote-button:hover {
   background-color: white; /* Change background to white on hover */
-   border: 1px solid rgb(3, 28, 29); /* Add border on hover */
+  border: 1px solid rgb(3, 28, 29); /* Add border on hover */
 }
 
 .mainnav-image {
@@ -91,28 +91,28 @@
   width: 8rem;
 }
 @media (max-width: 768px) {
-  .navbar>.container{
+  .navbar > .container {
     display: flex;
     justify-content: center;
   }
-  
+
   .button-show {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .phone-number-div-show{
+  .phone-number-div-show {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: #FAF4EB;
+    color: #faf4eb;
     text-decoration: none;
   }
-  .mobile-icon-show{
+  .mobile-icon-show {
     font-size: 2rem;
   }
-  .text-phone-show p{
-    font-size:x-small ;
+  .text-phone-show p {
+    font-size: x-small;
   }
   .firstnavbar-logo {
     display: none; /* Hide the logo on smaller screens */
@@ -129,7 +129,6 @@
 }
 /* Media Queries for responsive design */
 @media (max-width: 991px) {
-  
   .firstnavbar-nav {
     display: flex !important;
     align-items: center; /* Vertically center items */

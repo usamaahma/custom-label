@@ -1,28 +1,28 @@
 import React, { useState } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle, FaShoppingCart, FaTiktok } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./firstnav.css"; // Import your CSS file
+import "./firstnav.css";
 import Cartmodal1 from "../checkout/cartmodal";
 import { FaFacebookF } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import { CiMobile3 } from "react-icons/ci";
 import { Slide } from "react-awesome-reveal";
-import { useAuth } from "../../context/authcontext"; // Assuming this contains auth methods
+import { useAuth } from "../../context/authcontext";
 
 const Firstnavbar = () => {
   const [visible, setVisible] = useState(false);
-  const { user, logout } = useAuth(); // Get user and logout from context
-  const navigate = useNavigate(); // Hook for navigation
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await logout(); // Wait for the logout process to complete
-      navigate("/"); // Redirect to the home page
+      await logout();
+      navigate("/");
     } catch (error) {
-      console.error("Error during logout:", error); // Log any errors for debugging
+      console.error("Error during logout:", error);
     }
   };
 
@@ -50,7 +50,6 @@ const Firstnavbar = () => {
           </div>
         </Slide>
 
-        {/* Centered text */}
         <Slide direction="down">
           <Nav className="firstnavbar-nav mx-auto">
             <Nav.Link>
@@ -73,11 +72,8 @@ const Firstnavbar = () => {
             </Nav.Link>
           </Nav>
         </Slide>
-
-        {/* Right side: User info, Cart, and Logout button */}
         <Slide direction="right">
           <Nav className="firstnavbar-nav ml-auto">
-            {/* Display user name if logged in, otherwise show Login/Register */}
             {user ? (
               <Nav.Link as={Link} to="/my-account" className="firstnavbar-link">
                 <span className="cart-strong">{user.name}</span>
@@ -105,12 +101,10 @@ const Firstnavbar = () => {
               </button>
               <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
             </Nav.Link>
-
-            {/* Logout Button */}
             {user && (
               <Nav.Link className="firstnavbar-link">
                 <button
-                  onClick={handleLogout} // Use handleLogout to log out and redirect
+                  onClick={handleLogout}
                   style={{
                     background: "none",
                     border: "none",
@@ -119,7 +113,6 @@ const Firstnavbar = () => {
                   }}
                 >
                   <strong className="cart-strong">Logout</strong>
-                  {/* <FaUserCircle style={{ color: "#FAF4EB" }} /> */}
                 </button>
               </Nav.Link>
             )}

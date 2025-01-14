@@ -1,0 +1,93 @@
+/* AccountDetails.css */
+
+.account-details-container {
+  background-color: #faf4eb;
+  padding: 40px;
+  border-radius: 12px;
+  max-width: 450px;
+  margin: 50px auto;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.1);
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  transition: all 0.3s ease;
+}
+
+.account-details-container:hover {
+  box-shadow: 0 16px 32px rgba(0, 0, 0, 0.2);
+}
+
+.account-title {
+  color: #606f66;
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 24px;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.message {
+  text-align: center;
+  color: #ff6347;
+  margin-bottom: 16px;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.account-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  color: #606f66;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+  letter-spacing: 0.5px;
+}
+
+.input-field {
+  padding: 14px;
+  font-size: 16px;
+  border: 1px solid #b0b9b5;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: #fff;
+  color: #333;
+}
+
+.input-field:focus {
+  border-color: #606f66;
+  box-shadow: 0 0 6px rgba(96, 111, 102, 0.3);
+}
+
+.submit-btn {
+  background-color: #606f66;
+  color: #faf4eb;
+  font-size: 18px;
+  padding: 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  letter-spacing: 1px;
+}
+
+.submit-btn:hover {
+  background-color: #4e5a50;
+  transform: scale(1.05);
+}
+
+.submit-btn:disabled {
+  background-color: #b0b9b5;
+  cursor: not-allowed;
+}
+
+.submit-btn:active {
+  transform: scale(0.98);
+}
