@@ -1,11 +1,12 @@
-import React, { useState,useEffect } from "react";
-import { Form, Input, Button, message } from "antd";
+import React, { useState, useEffect } from "react";
+import { Form, Input, Button, message, Row, Col } from "antd";
 import { manageaddresses } from "../../utils/axios"; // Make sure you have a correct API call in this utility
 import "./updatemodal.css";
 
-function Updatemodal1() {
+function Updatemodal1({ setModalVisible }) {
   const [form] = Form.useForm();
   const [countryCode, setCountryCode] = useState("+1");
+   
 
   const onFinish = async (values) => {
     console.log("Form Values:", values);
@@ -34,7 +35,7 @@ function Updatemodal1() {
         stateOrProvince: values.shippingState,
         zipOrPostalCode: values.shippingZipCode,
         country: values.shippingCountry,
-        phoneNumber:  values.shippingPhoneNumber,
+        phoneNumber: values.shippingPhoneNumber,
         companyName: values.shippingCompanyName,
       },
       billingAddress: {
@@ -46,7 +47,7 @@ function Updatemodal1() {
         stateOrProvince: values.billingState,
         zipOrPostalCode: values.billingZipCode,
         country: values.billingCountry,
-        phoneNumber:  values.billingPhoneNumber,
+        phoneNumber: values.billingPhoneNumber,
         companyName: values.billingCompanyName,
       },
     };
@@ -71,23 +72,29 @@ function Updatemodal1() {
         data1, // The data to update the address with
         { headers } // Send the headers as part of the request
       );
-
+    
       console.log("API Response:", response);
       message.success("Thank you for updating your address!");
-
+    
       // Store the updated addresses in localStorage
       localStorage.setItem("userAddresses", JSON.stringify(updatedAddresses));
-
+    
       // Set a flag that the user has submitted their address
       localStorage.setItem(`addressSubmitted_${userData.id}`, true);
-
+    
       // Reset the form
       form.resetFields();
+    
+      // Close the modal after successful update
+      setModalVisible(false);  // Close the modal here
+      
     } catch (error) {
       console.error("Error updating address:", error);
       message.error("Something went wrong, please try again!");
     }
+    
   };
+
   useEffect(() => {
     const fetchCountryCode = async () => {
       try {
@@ -105,54 +112,99 @@ function Updatemodal1() {
   }, []);
 
   return (
-    <div>
+    <div style={{ width: "100%", maxWidth: "2400px", margin: "0 auto" }}>
       {/* Directly display the form without modal */}
       <Form form={form} onFinish={onFinish} layout="vertical">
-        {/* Shipping Address Fields */}
-        <h3>Shipping Address</h3>
-        <Form.Item
-          name="shippingFirstName"
-          label="First Name"
-          rules={[{ required: true, message: "Please input your first name!" }]}
+        <div
+          style={{
+            textAlign: "center",
+            backgroundColor: "#5F5B5B",
+            padding: "10px",
+            marginTop: "25px",
+            marginBottom: "10px",
+          }}
         >
-          <Input />
-        </Form.Item>
-        <Form.Item name="shippingMiddleName" label="Middle Name">
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="shippingLastName"
-          label="Last Name"
-          rules={[{ required: true, message: "Please input your last name!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="shippingStreetAddress"
-          label="Street Address"
-          rules={[
-            { required: true, message: "Please input your street address!" },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item name="shippingCity" label="City">
-          <Input />
-        </Form.Item>
-        <Form.Item name="shippingState" label="State/Province">
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="shippingZipCode"
-          label="Zip/Postal Code"
-          rules={[{ required: true, message: "Please input your zip code!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item name="shippingCountry" label="Country">
-          <Input />
-        </Form.Item>
-        <Form.Item
+          <p style={{ fontSize: "24px", color: "white" }}>
+            Please Update Your Addresses
+          </p>
+        </div>
+
+        {/* Row for Shipping and Billing Address */}
+        <Row gutter={24}>
+          {/* Shipping Address Column */}
+          <Col span={12}>
+            <h3 style={{ fontWeight: "bold" }}>Shipping Address</h3>
+            <Form.Item
+              name="shippingFirstName"
+              label="First Name"
+              rules={[
+                { required: true, message: "Please input your first name!" },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item name="shippingMiddleName" label="Middle Name">
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="shippingLastName"
+              label="Last Name"
+              rules={[
+                { required: true, message: "Please input your last name!" },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="shippingStreetAddress"
+              label="Street Address"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your street address!",
+                },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="shippingCity"
+              label="City"
+              rules={[{ required: true, message: "Please input your city!" }]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="shippingState"
+              label="State/Province"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your state or province!",
+                },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="shippingZipCode"
+              label="Zip/Postal Code"
+              rules={[
+                { required: true, message: "Please input your zip code!" },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="shippingCountry"
+              label="Country"
+              rules={[
+                { required: true, message: "Please input your country!" },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
               name="shippingPhoneNumber"
               label="Phone Number"
               rules={[
@@ -161,7 +213,7 @@ function Updatemodal1() {
             >
               <input
                 placeholder={`${countryCode} Phone Number`}
-                className="create-input"
+                className="create-input input-txt-dark"
                 type="tel"
                 maxLength={10}
                 onKeyPress={(event) => {
@@ -171,55 +223,85 @@ function Updatemodal1() {
                 }}
               />
             </Form.Item>
-        <Form.Item name="shippingCompanyName" label="Company Name">
-          <Input />
-        </Form.Item>
+            <Form.Item name="shippingCompanyName" label="Company Name">
+              <Input className="input-txt-dark" />
+            </Form.Item>
+          </Col>
 
-        {/* Billing Address Fields */}
-        <h3>Billing Address</h3>
-        <Form.Item
-          name="billingFirstName"
-          label="First Name"
-          rules={[{ required: true, message: "Please input your first name!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item name="billingMiddleName" label="Middle Name">
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="billingLastName"
-          label="Last Name"
-          rules={[{ required: true, message: "Please input your last name!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="billingStreetAddress"
-          label="Street Address"
-          rules={[
-            { required: true, message: "Please input your street address!" },
-          ]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item name="billingCity" label="City">
-          <Input />
-        </Form.Item>
-        <Form.Item name="billingState" label="State/Province">
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name="billingZipCode"
-          label="Zip/Postal Code"
-          rules={[{ required: true, message: "Please input your zip code!" }]}
-        >
-          <Input />
-        </Form.Item>
-        <Form.Item name="billingCountry" label="Country">
-          <Input />
-        </Form.Item>
-        <Form.Item
+          {/* Billing Address Column */}
+          <Col span={12}>
+            <h3 style={{ fontWeight: "bold" }}>Billing Address</h3>
+            <Form.Item
+              name="billingFirstName"
+              label="First Name"
+              rules={[
+                { required: true, message: "Please input your first name!" },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item name="billingMiddleName" label="Middle Name">
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="billingLastName"
+              label="Last Name"
+              rules={[
+                { required: true, message: "Please input your last name!" },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="billingStreetAddress"
+              label="Street Address"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your street address!",
+                },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="billingCity"
+              label="City"
+              rules={[{ required: true, message: "Please input your city!" }]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="billingState"
+              label="State/Province"
+              rules={[
+                {
+                  required: true,
+                  message: "Please input your state or province!",
+                },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="billingZipCode"
+              label="Zip/Postal Code"
+              rules={[
+                { required: true, message: "Please input your zip code!" },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
+              name="billingCountry"
+              label="Country"
+              rules={[
+                { required: true, message: "Please input your country!" },
+              ]}
+            >
+              <Input className="input-txt-dark" />
+            </Form.Item>
+            <Form.Item
               name="billingPhoneNumber"
               label="Phone Number"
               rules={[
@@ -228,7 +310,7 @@ function Updatemodal1() {
             >
               <input
                 placeholder={`${countryCode} Phone Number`}
-                className="create-input"
+                className="create-input input-txt-dark"
                 type="tel"
                 maxLength={10}
                 onKeyPress={(event) => {
@@ -238,19 +320,23 @@ function Updatemodal1() {
                 }}
               />
             </Form.Item>
-        <Form.Item name="billingCompanyName" label="Company Name">
-          <Input />
-        </Form.Item>
+            <Form.Item name="billingCompanyName" label="Company Name">
+              <Input className="input-txt-dark" />
+            </Form.Item>
+          </Col>
+        </Row>
 
         {/* Submit button */}
         <Form.Item>
-          <Button
-            type="primary"
-            htmlType="submit"
-            style={{ marginTop: "1rem" }}
-          >
-            Update Address
-          </Button>
+          <div style={{ textAlign: "center" }}>
+            <Button
+              type="primary"
+              htmlType="submit"
+              style={{ marginTop: "1rem" }}
+            >
+              Update Address
+            </Button>
+          </div>
         </Form.Item>
       </Form>
     </div>

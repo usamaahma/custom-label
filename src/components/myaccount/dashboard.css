@@ -66,6 +66,7 @@
 .input-txt-dark {
   font-size: 14px;  /* Adjust the font size as needed */
   color: #333 !important;  /* Dark text color */
+  background-color: rgba(0, 0, 0, 0.04);
 }
 /* Add these styles to your CSS file */
 .modal-title-center {

@@ -340,238 +340,217 @@ function AccountDashboard() {
           </Card>
 
           {/* Update Address Modal */}
-          <Modal
-            title="Update Address"
-            visible={isModalVisible}
-            onCancel={handleCancel}
-          >
-            <Updatemodal1 />
-            {/* You can add a form here for updating the address */}
+          <Modal visible={isModalVisible} footer={null} onCancel={handleCancel}>
+            <Updatemodal1 setModalVisible={setIsModalVisible} />
           </Modal>
         </Col>
       </Row>
 
-      {/* Modal for Managing Addresses */}
+      {/* Modal for add Addresses */}
       <Modal
-        title={
-          <span
-            style={{
-              fontSize: "28px",
-              width: "100%",
+  visible={isManageModalVisible}
+  onCancel={handleManageCancel}
+  footer={[]}
+  width={1000} // Increased width to accommodate both sections in one row
+  className="address-modal"
+>
+  <Form form={form} layout="vertical" onFinish={onFinish}>
+    <div
+      style={{
+        textAlign: "center",
+        backgroundColor: "#5F5B5B",
+        padding: "10px",
+        marginTop: "25px",
+        marginBottom: "10px",
+      }}
+    >
+      <p style={{ fontSize: "24px", color: "white" }}>
+        Please Add the Addresses
+      </p>
+    </div>
 
-              fontFamily: "Space Grotesk",
+    {/* Row for Shipping and Billing Address */}
+    <Row gutter={24}>
+      {/* Shipping Address Column */}
+      <Col span={12}>
+        <Title level={4} style={{ fontWeight: "bold" }}>
+          Shipping Address
+        </Title>
+        <Form.Item
+          label="First Name"
+          name="shippingFirstName"
+          rules={[{ required: true, message: "Please enter your first name!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item label="Middle Name" name="shippingMiddleName">
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Last Name"
+          name="shippingLastName"
+          rules={[{ required: true, message: "Please enter your last name!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Street Address"
+          name="shippingStreetAddress"
+          rules={[{ required: true, message: "Please enter your street address!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="City"
+          name="shippingCity"
+          rules={[{ required: true, message: "Please enter your city!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="State/Province"
+          name="shippingState"
+          rules={[{ required: true, message: "Please enter your state/province!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Zip/Postal Code"
+          name="shippingZipCode"
+          rules={[{ required: true, message: "Please enter your zip/postal code!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Country"
+          name="shippingCountry"
+          rules={[{ required: true, message: "Please enter your country!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Phone Number"
+          name="shippingPhoneNumber"
+          rules={[{ required: true, message: "Please input your phone number!" }]}
+        >
+          <input
+            placeholder={`${countryCode} Phone Number`}
+            className="create-input input-txt-dark"
+            type="tel"
+            maxLength={10}
+            onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault(); // Prevent non-numeric input
+              }
             }}
-          >
-            Please Enter a Shipping & Billing Addresses
-          </span>
-        }
-        visible={isManageModalVisible}
-        onCancel={handleManageCancel}
-        footer={[]}
-        width={800} // Increased width to accommodate both sections
-        className="address-modal"
+          />
+        </Form.Item>
+        <Form.Item label="Company Name" name="shippingCompanyName">
+          <Input className="input-txt-dark" />
+        </Form.Item>
+      </Col>
+
+      {/* Billing Address Column */}
+      <Col span={12}>
+        <Title level={4} style={{ fontWeight: "bold" }}>
+          Billing Address
+        </Title>
+        <Form.Item
+          label="First Name"
+          name="billingFirstName"
+          rules={[{ required: true, message: "Please enter your first name!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item label="Middle Name" name="billingMiddleName">
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Last Name"
+          name="billingLastName"
+          rules={[{ required: true, message: "Please enter your last name!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Street Address"
+          name="billingStreetAddress"
+          rules={[{ required: true, message: "Please enter your street address!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="City"
+          name="billingCity"
+          rules={[{ required: true, message: "Please enter your city!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="State/Province"
+          name="billingState"
+          rules={[{ required: true, message: "Please enter your state/province!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Zip/Postal Code"
+          name="billingZipCode"
+          rules={[{ required: true, message: "Please enter your zip/postal code!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Country"
+          name="billingCountry"
+          rules={[{ required: true, message: "Please enter your country!" }]}
+        >
+          <Input className="input-txt-dark" />
+        </Form.Item>
+        <Form.Item
+          label="Phone Number"
+          name="billingPhoneNumber"
+          rules={[{ required: true, message: "Please input your phone number!" }]}
+        >
+          <input
+            placeholder={`${countryCode} Phone Number`}
+            className="create-input input-txt-dark"
+            type="tel"
+            maxLength={10}
+            onKeyPress={(event) => {
+              if (!/[0-9]/.test(event.key)) {
+                event.preventDefault(); // Prevent non-numeric input
+              }
+            }}
+          />
+        </Form.Item>
+        <Form.Item label="Company Name" name="billingCompanyName">
+          <Input className="input-txt-dark" />
+        </Form.Item>
+      </Col>
+    </Row>
+
+    {/* Submit and Cancel Buttons */}
+    <Form.Item>
+      <Button
+        key="cancel"
+        onClick={handleManageCancel}
+        style={{ marginRight: "8px" }} // Optional: Add space between buttons
       >
-        <Form form={form} layout="vertical" onFinish={onFinish}>
-          {/* Shipping Address Section */}
-          <Title level={4}>Shipping Address</Title>
-          {/* First Name */}
-          <Form.Item
-            label="First Name"
-            name="shippingFirstName"
-            rules={[
-              { required: true, message: "Please enter your first name!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          {/* Middle Name */}
-          <Form.Item label="Middle Name" name="shippingMiddleName">
-            <Input />
-          </Form.Item>
-          {/* Last Name */}
-          <Form.Item
-            label="Last Name"
-            name="shippingLastName"
-            rules={[
-              { required: true, message: "Please enter your last name!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          {/* Street Address */}
-          <Form.Item
-            label="Street Address"
-            name="shippingStreetAddress"
-            rules={[
-              { required: true, message: "Please enter your street address!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          {/* City */}
-          <Form.Item
-            label="City"
-            name="shippingCity"
-            rules={[{ required: true, message: "Please enter your city!" }]}
-          >
-            <Input />
-          </Form.Item>
-          {/* State/Province */}
-          <Form.Item label="State/Province" name="shippingState">
-            <Input />
-          </Form.Item>
-          {/* Zip/Postal Code */}
-          <Form.Item
-            label="Zip/Postal Code"
-            name="shippingZipCode"
-            rules={[
-              { required: true, message: "Please enter your zip/postal code!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          {/* Country */}
-          <Form.Item
-            label="Country"
-            name="shippingCountry"
-            rules={[{ required: true, message: "Please enter your country!" }]}
-          >
-            <Input />
-          </Form.Item>
-          {/* Phone Number */}
-          <Form.Item
-            label="Phone Number"
-            name="shippingPhoneNumber"
-            rules={[
-              { required: true, message: "Please input your phone number!" },
-            ]}
-          >
-            <input
-              placeholder={`${countryCode} Phone Number`}
-              className="create-input"
-              type="tel"
-              maxLength={10}
-              onKeyPress={(event) => {
-                if (!/[0-9]/.test(event.key)) {
-                  event.preventDefault(); // Prevent non-numeric input
-                }
-              }}
-            />
-          </Form.Item>
-          {/* Company Name */}
-          <Form.Item label="Company Name" name="shippingCompanyName">
-            <Input />
-          </Form.Item>
-          <hr /> {/* Separator between Shipping and Billing */}
-          {/* Billing Address Section */}
-          <Title level={4}>Billing Address</Title>
-          {/* First Name */}
-          <Form.Item
-            label="First Name"
-            name="billingFirstName"
-            rules={[
-              { required: true, message: "Please enter your first name!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          {/* Middle Name */}
-          <Form.Item label="Middle Name" name="billingMiddleName">
-            <Input />
-          </Form.Item>
-          {/* Last Name */}
-          <Form.Item
-            label="Last Name"
-            name="billingLastName"
-            rules={[
-              { required: true, message: "Please enter your last name!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          {/* Street Address */}
-          <Form.Item
-            label="Street Address"
-            name="billingStreetAddress"
-            rules={[
-              { required: true, message: "Please enter your street address!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          {/* City */}
-          <Form.Item
-            label="City"
-            name="billingCity"
-            rules={[{ required: true, message: "Please enter your city!" }]}
-          >
-            <Input />
-          </Form.Item>
-          {/* State/Province */}
-          <Form.Item label="State/Province" name="billingState">
-            <Input />
-          </Form.Item>
-          {/* Zip/Postal Code */}
-          <Form.Item
-            label="Zip/Postal Code"
-            name="billingZipCode"
-            rules={[
-              { required: true, message: "Please enter your zip/postal code!" },
-            ]}
-          >
-            <Input />
-          </Form.Item>
-          {/* Country */}
-          <Form.Item
-            label="Country"
-            name="billingCountry"
-            rules={[{ required: true, message: "Please enter your country!" }]}
-          >
-            <Input />
-          </Form.Item>
-          {/* Phone Number */}
-          <Form.Item
-            label="Phone Number"
-            name="billingPhoneNumber"
-            rules={[
-              { required: true, message: "Please input your phone number!" },
-            ]}
-          >
-            <input
-              placeholder={`${countryCode} Phone Number`}
-              className="create-input"
-              type="tel"
-              maxLength={10}
-              onKeyPress={(event) => {
-                if (!/[0-9]/.test(event.key)) {
-                  event.preventDefault(); // Prevent non-numeric input
-                }
-              }}
-            />
-          </Form.Item>
-          {/* Company Name */}
-          <Form.Item label="Company Name" name="billingCompanyName">
-            <Input />
-          </Form.Item>
-          <Form.Item>
-            <Button
-              key="cancel"
-              onClick={handleManageCancel}
-              style={{ marginRight: "8px" }} // Optional: Add space between buttons
-            >
-              Cancel
-            </Button>
-            <Button
-              key="submit"
-              type="primary"
-              htmlType="submit"
-              style={{ marginTop: "10px" }} // Adding margin-top to the Submit button
-            >
-              Submit
-            </Button>
-          </Form.Item>
-        </Form>
-      </Modal>
+        Cancel
+      </Button>
+      <Button
+        key="submit"
+        type="primary"
+        htmlType="submit"
+        style={{ marginTop: "10px" }} // Adding margin-top to the Submit button
+      >
+        Submit
+      </Button>
+    </Form.Item>
+  </Form>
+</Modal>
+
 
       {/* Modal for Viewing Address */}
       <Modal
@@ -589,17 +568,26 @@ function AccountDashboard() {
                 backgroundColor: "#5F5B5B",
                 padding: "10px",
                 marginTop: "25px",
-                marginBottom: "5px",
+                marginBottom: "10px",
               }}
             >
               <p style={{ fontSize: "24px", color: "white" }}>View Address</p>
             </div>
 
-            <Row gutter={16}>
+            <Row
+              gutter={16}
+              style={{
+                marginTop: "20px",
+                marginBottom: "10px",
+                fontWeight: "bold",
+              }}
+            >
               {/* Billing Address Column */}
               <Col span={12}>
                 <div className="address-column">
-                  <Title level={4}>Billing Address</Title>
+                  <Title level={4} style={{ fontWeight: "bold" }}>
+                    Billing Address
+                  </Title>
                   {/* Loop through billAdd array and display each address */}
                   {billAdd.length > 0 ? (
                     billAdd.map((address, index) => (
@@ -695,7 +683,9 @@ function AccountDashboard() {
               {/* Shipping Address Column */}
               <Col span={12}>
                 <div className="address-column">
-                  <Title level={4}>Shipping Address</Title>
+                  <Title level={4} style={{ fontWeight: "bold" }}>
+                    Shipping Address
+                  </Title>
                   {/* Loop through shipAdd array and display each address */}
                   {shipAdd.length > 0 ? (
                     shipAdd.map((address, index) => (
