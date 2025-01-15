@@ -53,6 +53,15 @@ const newsletteremail = axios.create({
   baseURL: `${baseURL}/newsletter`, // Ensure this is the correct endpoint for order descriptions
 });
 
+const resetpassword = axios.create({
+  baseURL: `${baseURL}/auth/reset-password`, // Ensure this is the correct endpoint for order descriptions
+});
+
+const forgetPassword = axios.create({
+  baseURL: `${baseURL}/auth/forgot-password`, // Correct the baseURL to point to `/auth`
+});
+
+
 // Generic request interceptor for all instances
 const requestInterceptor = (req) => {
   // Optionally add authorization headers or custom logic
@@ -80,6 +89,8 @@ checkout.interceptors.request.use(requestInterceptor, errorInterceptor);
 designquote.interceptors.request.use(requestInterceptor, errorInterceptor);
 manageaddresses.interceptors.request.use(requestInterceptor, errorInterceptor);
 newsletteremail.interceptors.request.use(requestInterceptor, errorInterceptor);
+resetpassword.interceptors.request.use(requestInterceptor, errorInterceptor);
+forgetPassword.interceptors.request.use(requestInterceptor, errorInterceptor);
 
 export {
   register,
@@ -96,4 +107,6 @@ export {
   designquote,
   manageaddresses,
   newsletteremail,
+  resetpassword,
+  forgetPassword,
 };

@@ -87,7 +87,8 @@ function Updatemodal1({ setModalVisible }) {
     
       // Close the modal after successful update
       setModalVisible(false);  // Close the modal here
-      
+      window.location.reload();  // This will reload the page
+
     } catch (error) {
       console.error("Error updating address:", error);
       message.error("Something went wrong, please try again!");
@@ -122,6 +123,8 @@ function Updatemodal1({ setModalVisible }) {
             padding: "10px",
             marginTop: "25px",
             marginBottom: "10px",
+            borderRadius:"0.5rem",
+            border:"dotted 0.1rem white"
           }}
         >
           <p style={{ fontSize: "24px", color: "white" }}>
