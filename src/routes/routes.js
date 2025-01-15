@@ -19,7 +19,7 @@ import Expressclothing from "../pages/expressclothing.js";
 import Checkoutbelow1 from "../components/checkout/checkoutbelow.js";
 import CustomWovenPage from "../pages/customwovenpage.js";
 import Vieweditcart from "../components/checkout/vieweditcart.js";
- import Simplehangtagspage from "../pages/simplehangtagspage.js";
+import Simplehangtagspage from "../pages/simplehangtagspage.js";
 import Wovenlabelpage from "../pages/wovenlabel.js";
 import Satinwovenpage from "../pages/satinwovenpage.js";
 import Fancyhangtagspage from "../pages/fancyhangtagspage.js";
@@ -52,6 +52,7 @@ import Drawerviewedit from "../components/checkout/drawerviewedit.js";
 import Hangtags from "../components/clothingsection/Hangtags.js";
 import HangtagDetail from "../components/productdetail/hangtagDetail.js";
 import Thankyou1 from "../components/thankyou.js";
+import MainSearch from "../components/mainsearch/mainsearch.js";
 import ForgotPassword1 from "../components/login/forgetpassword.js";
 
 const AppRoutes = () => {
@@ -78,7 +79,7 @@ const AppRoutes = () => {
                 path="account-dashboard"
                 element={
                   <PrivateRoute>
-                     <Dashboard />
+                    <Dashboard />
                   </PrivateRoute>
                 }
               />
@@ -118,7 +119,7 @@ const AppRoutes = () => {
                 path="account-details"
                 element={
                   <PrivateRoute>
-                  <AccountDetails />
+                    <AccountDetails />
                   </PrivateRoute>
                 }
               />
@@ -126,7 +127,7 @@ const AppRoutes = () => {
                 path="payment-options"
                 element={
                   <PrivateRoute>
-                  <PaymentOptions />
+                    <PaymentOptions />
                   </PrivateRoute>
                 }
               />
@@ -174,15 +175,17 @@ const AppRoutes = () => {
             <Route path="/custom-tyvek-label" element={<Customtyvekpage />} />
             <Route path="/tpu-labels" element={<Tpulabelspage1 />} />
             <Route path="/faqs" element={<Faq1 />} />
-            <Route path="/custom-heat-labels" element={<Customheatpage />} />   
+            <Route path="/custom-heat-labels" element={<Customheatpage />} />
             <Route path="/privacy-policy" element={<Privacypolicy1 />} />
-            <Route path="/thank-you" element={<ThankYouPage />} /> 
-            <Route path="/blogs" element={<Blog />} />     
-            <Route path="/custom-blogs" element={<Customblog />} />        
+            <Route path="/thank-you" element={<ThankYouPage />} />
+            <Route path="/blogs" element={<Blog />} />
+            <Route path="/mainsearch" element={<MainSearch />} />
+            <Route path="/custom-blogs" element={<Customblog />} />
             <Route path="/product/:productName" element={<ProductDetail />} />
             <Route path="/drawer-view-edit" element={<Drawerviewedit />} />
             <Route path="/hangtag/:productName" element={<HangtagDetail />} />
             <Route path="/blog/:blogname" element={<Blogdetail1 />} />
+
             {/* This will display the product detail based on the ID */}
             {/* Catch all route for 404 - redirect to home */}
             <Route path="*" element={<Navigate to="/" />} />

@@ -39,6 +39,10 @@
 
 .form-group {
   margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
 }
 
 .form-group label {
@@ -50,7 +54,7 @@
 }
 
 .input-field {
-  padding: 14px;
+  padding: 4px;
   font-size: 16px;
   border: 1px solid #b0b9b5;
   border-radius: 8px;
@@ -68,9 +72,11 @@
 .submit-btn {
   background-color: #606f66;
   color: #faf4eb;
-  font-size: 18px;
-  padding: 16px;
+  font-size: 16px;
+  padding: 6px;
   border: none;
+  margin: 0% auto;
+  width: fit-content;
   border-radius: 8px;
   cursor: pointer;
   font-weight: 600;
