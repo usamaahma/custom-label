@@ -40,11 +40,11 @@ const AccountDetails = () => {
           <label htmlFor="currentPassword">Current Password</label>
           <input
             type="password"
-            id="currentPassword"
+            id="currentPassword"  
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             required
-            className="input-field"
+            className="input-field" 
           />
         </div>
 
