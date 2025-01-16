@@ -6,6 +6,7 @@ import "./checkoutbelow.css";
 import { useNavigate } from "react-router-dom";
 import { checkout } from "../../utils/axios";
 import { manageaddresses } from "../../utils/axios";
+import PayPalCheckoutButton from "./paypalcheckoutbutton";
 
 const { Option } = Select;
 
@@ -20,10 +21,13 @@ function CheckoutBelow1() {
   const [error, setError] = useState(null);
   const [billAdd, setBillAdd] = useState(null); // To store API response
   const [shipAdd, setShipAdd] = useState(null); // To store API response
+  const [paymentApproved, setPaymentApproved] = useState(false);
 
   const { cart, removeFromCart } = useCart(); // Get cart data from context
   const userData = JSON.parse(localStorage.getItem("user"));
   const userid = userData?.id;
+
+  const totalPrice = cart.reduce((acc, item) => acc + item.totalPrice, 0);
 
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
@@ -35,6 +39,10 @@ function CheckoutBelow1() {
 
   const redirectToPayPal = () => {
     window.location.href = "https://www.paypal.com"; // Redirect to PayPal website
+  };
+  const handlePlaceOrder = () => {
+    // Pass totalPrice and initiate PayPal Checkout
+    setPaymentApproved(false); // Reset the payment status before starting
   };
 
   // Calculate Total Price
@@ -51,9 +59,14 @@ function CheckoutBelow1() {
           const response = await manageaddresses.get(`?userId=${userid}`);
           console.log(response);
 
-          if (response.data && response.data.addresses && response.data.addresses.length > 0) {
+          if (
+            response.data &&
+            response.data.addresses &&
+            response.data.addresses.length > 0
+          ) {
             const billingAddresses = response.data.addresses[0]?.billingAddress;
-            const shippingAddresses = response.data.addresses[0]?.shippingAddress;
+            const shippingAddresses =
+              response.data.addresses[0]?.shippingAddress;
 
             // Set state for billing and shipping
             setBillAdd(billingAddresses);
@@ -210,7 +223,12 @@ function CheckoutBelow1() {
       <div className="check-below">
         <p className="check-txt">CHECKOUT</p>
       </div>
-      <Form form={form} name="checkout-form" layout="vertical" onFinish={onFinish}>
+      <Form
+        form={form}
+        name="checkout-form"
+        layout="vertical"
+        onFinish={onFinish}
+      >
         <Row flex justify={"space-evenly"}>
           {/* Column 1: Billing Address */}
           <Col xs={24} sm={12} md={7} className="border-column">
@@ -267,8 +285,8 @@ function CheckoutBelow1() {
                   message: "Please enter your phone number!",
                 },
                 {
-                  len: 11, // Ensures the phone number is exactly 11 digits
-                  message: "Phone number must be exactly 11 digits!",
+                  len: 10, // Ensures the phone number is exactly 11 digits
+                  message: "Phone number must be exactly 10 digits!",
                 },
                 {
                   pattern: /^[0-9]{11}$/, // Ensures the phone number is numeric
@@ -415,8 +433,8 @@ function CheckoutBelow1() {
                     message: "Please enter your phone number!",
                   },
                   {
-                    len: 11, // Ensures the phone number is exactly 11 digits
-                    message: "Phone number must be exactly 11 digits!",
+                    len: 10, // Ensures the phone number is exactly 11 digits
+                    message: "Phone number must be exactly 10 digits!",
                   },
                   {
                     pattern: /^[0-9]{11}$/, // Ensures the phone number is numeric
@@ -606,9 +624,25 @@ function CheckoutBelow1() {
                   type="primary"
                   htmlType="submit"
                   style={{ width: "100%", padding: "20px", marginTop: "20px" }}
+                  onClick={handlePlaceOrder} // Trigger the PayPal process
                 >
                   Place Order
                 </Button>
+
+                {/* Conditionally render PayPal button after clicking Place Order */}
+                {totalPrice > 0 && !paymentApproved && (
+                  <PayPalCheckoutButton
+                    amount={totalPrice}
+                    onPaymentApproved={(status) => setPaymentApproved(status)} // Update state with payment status
+                  />
+                )}
+
+                {/* Display the payment status */}
+                {paymentApproved ? (
+                  <div>Payment was successful!</div>
+                ) : (
+                  <div>Payment failed or pending.</div>
+                )}
               </div>
             </div>
           </Col>
