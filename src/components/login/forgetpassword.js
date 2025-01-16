@@ -13,14 +13,25 @@ function ForgotPassword1() {
     try {
       const response = await forgetPassword.post("/", { email });
       console.log(response); 
-      message.success(response.data.message); 
+      message.success(  " Please check your email address.");
     } catch (err) {
-      message.error("Failed to send password reset email. Please try again.");
+      // Check if it's an API call error or another issue
+      if (err.response) {
+        // Specific error from the server (e.g., 4xx, 5xx status code)
+        message.error("Failed to send password reset email. Please register with us.");
+      } else if (err.request) {
+        // No response from the server (e.g., network issues)
+        message.error("Unable to send email. Please check your internet connection.");
+      } else {
+        // Other errors (e.g., issues in setting up the request)
+        message.error("Failed to send password. Please try again later.");
+      }
       console.error(err); 
     } finally {
       setLoading(false);
     }
   };
+  
   
   return (
     <div className="forgot-password-wrapper">
