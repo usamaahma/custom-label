@@ -1,11 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Row, Col, Form, Input, Button, Select, message, Modal } from "antd";
+import {
+  Row,
+  Col,
+  Form,
+  Input,
+  Button,
+  Select,
+  message,
+  Modal,
+  notification,
+} from "antd";
 import { DownOutlined } from "@ant-design/icons";
 import { useCart } from "../../context/cartcontext"; // Import Cart Context
 import "./checkoutbelow.css";
 import { useNavigate } from "react-router-dom";
 import { checkout } from "../../utils/axios";
 import { manageaddresses } from "../../utils/axios";
+import PayPalCheckoutButton from "./paypalcheckoutbutton";
 
 const { Option } = Select;
 
@@ -20,23 +31,18 @@ function CheckoutBelow1() {
   const [error, setError] = useState(null);
   const [billAdd, setBillAdd] = useState(null); // To store API response
   const [shipAdd, setShipAdd] = useState(null); // To store API response
-  const [countryCode, setCountryCode] = useState("+1");
+  const [paymentApproved, setPaymentApproved] = useState(false);
+  const [countryCode, setCountryCode] = useState("1");
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { cart, removeFromCart } = useCart(); // Get cart data from context
   const userData = JSON.parse(localStorage.getItem("user"));
   const userid = userData?.id;
 
+  const totalPrice = cart.reduce((acc, item) => acc + item.totalPrice, 0);
+
   const toggleDropdown = () => {
     setDropdownVisible((prev) => !prev);
-  };
-
-  const toggleDropdown1 = () => {
-    setDropdownVisible1(!dropdownVisible1);
-  };
-
-  const redirectToPayPal = () => {
-    window.location.href = "https://www.paypal.com"; // Redirect to PayPal website
   };
 
   // Calculate Total Price
@@ -203,12 +209,7 @@ function CheckoutBelow1() {
     );
 
     const paymentDetails = {
-      method: "PayPal",
-      totalAmount: totalAmount,
-      currency: "USD",
-      transactionId: "dw", // Optional, will be set after PayPal response
-      payerEmail: "usa@gmail.com", // Optional
-      status: "Pending", // Default status
+      status: paymentApproved, // Default status
     };
     console.log("Billing Values:", billingvalues);
     console.log("Shipping Values:", shippingvalues);
@@ -217,7 +218,16 @@ function CheckoutBelow1() {
     console.log("Userdata:", userDataCheckout);
 
     try {
-      // Call the Checkout API with both cart data and payment details
+      if (!paymentApproved) {
+        // If payment is not approved, display a message and don't proceed with checkout
+        notification.error({
+          message: "Payment is Pending",
+          description: "Please Pay first by clicking PayPal button.",
+        });
+        return; // Stop further execution if payment is not approved
+      }
+
+      // If payment is approved, proceed with the checkout API call
       const response = await checkout.post("/", {
         user: userDataCheckout,
         checkoutProducts: cartdata,
@@ -225,12 +235,13 @@ function CheckoutBelow1() {
         shippingAddress: shippingvalues,
         payment: paymentDetails,
       });
+
       console.log("Checkout Successful:", response.data);
-      message.success("your order is placed!");
-      navigate("/thank-you");
+      message.success("Your order is placed!");
+      navigate("/thank-you"); // Redirect to the thank-you page
     } catch (error) {
       console.error("Error during checkout:", error);
-      message.error("your order is not completed!");
+      message.error("Your order is not completed!"); // Display error message if checkout fails
     }
   };
 
@@ -636,16 +647,25 @@ function CheckoutBelow1() {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  style={{
-                    width: "100%",
-                    padding: "20px",
-                    marginTop: "20px",
-                  }}
+                  style={{ width: "100%", padding: "20px", marginTop: "20px" }}
                 >
                   Place Order
                 </Button>
 
-                {/* Modal for Price Match */}
+                {/* Conditionally render PayPal button after clicking Place Order */}
+                {totalPrice > 0 && !paymentApproved && (
+                  <PayPalCheckoutButton
+                    amount={totalPrice}
+                    onPaymentApproved={(status) => setPaymentApproved(status)} // Update state with payment status
+                  />
+                )}
+
+                {/* Display the payment status */}
+                {paymentApproved ? (
+                  <div>Payment was successful!</div>
+                ) : (
+                  <div>Payment is Pending.</div>
+                )}
                 <Modal
                   visible={isModalVisible}
                   onCancel={handleCancel}
