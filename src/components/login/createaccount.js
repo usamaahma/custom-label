@@ -10,7 +10,7 @@ import "./createaccount.css";
 
 function Create() {
   const [form] = Form.useForm();
-  const [countryCode, setCountryCode] = useState("+1");
+  const [countryCode, setCountryCode] = useState("1");
 
   const validatePassword = (password) => {
     const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
@@ -139,7 +139,7 @@ function Create() {
         setCountryCode(`${data.country_calling_code || "1"}`); // Default to USA if undefined
       } catch (error) {
         console.error("Error fetching country code:", error);
-        setCountryCode("+1"); // Fallback to Pakistan's code
+        setCountryCode("1"); // Fallback to Pakistan's code
       }
     };
 

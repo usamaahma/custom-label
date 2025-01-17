@@ -5,7 +5,7 @@ import "./updatemodal.css";
 
 function Updatemodal1({ setModalVisible }) {
   const [form] = Form.useForm();
-  const [countryCode, setCountryCode] = useState("+1");
+  const [countryCode, setCountryCode] = useState("1");
    
 
   const onFinish = async (values) => {
@@ -105,7 +105,7 @@ function Updatemodal1({ setModalVisible }) {
         setCountryCode(`${data.country_calling_code || "1"}`);
       } catch (error) {
         console.error("Error fetching country code:", error);
-        setCountryCode("+1");
+        setCountryCode("1");
       }
     };
 
