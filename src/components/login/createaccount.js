@@ -10,7 +10,7 @@ import "./createaccount.css";
 
 function Create() {
   const [form] = Form.useForm();
-  const [countryCode, setCountryCode] = useState("+1");
+  const [countryCode, setCountryCode] = useState("1");
 
   const validatePassword = (password) => {
     const specialCharacterRegex = /[!@#$%^&*(),.?":{}|<>]/;
@@ -135,11 +135,11 @@ function Create() {
       try {
         const response = await fetch("https://ipapi.co/json/");
         const data = await response.json();
-        console.log("Fetched Data:", data);
-        setCountryCode(`${data.country_calling_code || "1"}`);
+        console.log("Fetched Data:", data); // Check the full response
+        setCountryCode(`${data.country_calling_code || "1"}`); // Default to USA if undefined
       } catch (error) {
         console.error("Error fetching country code:", error);
-        setCountryCode("+92");
+        setCountryCode("1"); // Fallback to Pakistan's code
       }
     };
 

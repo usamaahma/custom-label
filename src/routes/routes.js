@@ -53,6 +53,7 @@ import Hangtags from "../components/clothingsection/Hangtags.js";
 import HangtagDetail from "../components/productdetail/hangtagDetail.js";
 import Thankyou1 from "../components/thankyou.js";
 import MainSearch from "../components/mainsearch/mainsearch.js";
+import ForgotPassword1 from "../components/login/forgetpassword.js";
 
 const AppRoutes = () => {
   return (
@@ -134,6 +135,7 @@ const AppRoutes = () => {
             {/* Public Routes: Accessible to everyone */}
             <Route path="/" element={<Landingpage />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword1 />} />
             <Route path="/create-account" element={<Create />} />
             <Route path="/home" element={<Landingpage />} />
             <Route path="/all-clothing-labels" element={<Allclothingpage />} />

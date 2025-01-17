@@ -62,6 +62,21 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
+/* view modal classes */
+.input-txt-dark {
+  font-size: 14px;  /* Adjust the font size as needed */
+  color: #333 !important;  /* Dark text color */
+  background-color: rgba(0, 0, 0, 0.04);
+}
+/* Add these styles to your CSS file */
+.modal-title-center {
+  font-size: 24px; /* Increase the font size */
+  background-color: #5f5b5b; /* Background color for title */
+  color: #fff; /* Make the title text color white */
+  padding: 10px; /* Padding to create space around the title */
+  border-radius: 5px; /* Optional: Add border radius to round corners */
+}
+
 /* Responsive layout with Row and Col */
 @media (max-width: 1024px) {
   .card-container {

@@ -30,7 +30,8 @@ function Login() {
 
     try {
       const response = await login.post("/login", { email, password });
-      loginUser(response.data.user); // Use the login function from AuthContext to set the user
+      localStorage.setItem("token", response.data.tokens.access.token);
+       loginUser(response.data.user); // Use the login function from AuthContext to set the user
       toast.success("Logged in successfully!");
       setTimeout(() => {
         setRedirect(true);
