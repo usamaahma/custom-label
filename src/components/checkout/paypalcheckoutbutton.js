@@ -1,10 +1,8 @@
 import React, { useEffect } from "react";
-import ReactDOM from "react-dom";
 
-const PayPalCheckoutButton = ({ amount, onPaymentApproved }) => {
+const PayPalCheckoutButton = ({ cart, onPaymentApproved }) => {
   useEffect(() => {
     const loadPayPalScript = async () => {
-      // Check if PayPal script is already loaded
       if (!window.paypal) {
         const script = document.createElement("script");
         script.src =
@@ -12,41 +10,69 @@ const PayPalCheckoutButton = ({ amount, onPaymentApproved }) => {
         script.async = true;
         document.body.appendChild(script);
 
-        // Handle script load event
         script.onload = () => {
           if (window.paypal) {
-            // Render PayPal button only after script has loaded
-            window.paypal.Buttons({
-              createOrder: (data, actions) => {
-                return actions.order.create({
-                  purchase_units: [
-                    {
-                      amount: {
-                        value: amount, // Amount for payment
-                      },
+            window.paypal
+              .Buttons({
+                fundingSource: window.paypal.FUNDING.PAYPAL, // Only PayPal button
+                style: {
+                  layout: "horizontal", // Horizontal layout
+                  background: "black",
+                  label: "paypal", // PayPal button
+                },
+                createOrder: (data, actions) => {
+                  // Calculate total amount
+                  const totalAmount = cart
+                    .reduce((sum, item) => sum + item.totalPrice, 0)
+                    .toFixed(2);
+
+                  // Map cart items to PayPal item format
+                  const items = cart.map((item) => ({
+                    name: item.name, // Item name
+                    sku: item.id, // Unique item ID
+                    unit_amount: {
+                      value: item.price.toFixed(2), // Single item price
+                      currency_code: "USD",
                     },
-                  ],
-                });
-              },
-              onApprove: (data, actions) => {
-                return actions.order.capture().then((details) => {
-                  alert(
-                    `Transaction completed by ${details.payer.name.given_name}`
-                  );
-                  onPaymentApproved(true); // Payment successful
-                });
-              },
-              onError: (err) => {
-                console.error("Error during PayPal transaction", err);
-                onPaymentApproved(false); // Payment failed
-              },
-            }).render("#paypal-button-container"); // Render PayPal button here
+                    quantity: item.quantity, // Quantity of the item
+                  }));
+
+                  return actions.order.create({
+                    purchase_units: [
+                      {
+                        amount: {
+                          value: totalAmount, // Total cart amount
+                          breakdown: {
+                            item_total: {
+                              value: totalAmount, // Total item price
+                              currency_code: "USD",
+                            },
+                          },
+                        },
+                        items: items, // Pass items to PayPal
+                      },
+                    ],
+                  });
+                },
+                onApprove: (data, actions) => {
+                  return actions.order.capture().then((details) => {
+                    alert(
+                      `Transaction completed by ${details.payer.name.given_name}`
+                    );
+                    onPaymentApproved(true); // Payment successful
+                  });
+                },
+                onError: (err) => {
+                  console.error("Error during PayPal transaction", err);
+                  onPaymentApproved(false); // Payment failed
+                },
+              })
+              .render("#paypal-button-container"); // Render PayPal button
           } else {
             console.error("PayPal SDK not loaded correctly");
           }
         };
 
-        // Handle script load error
         script.onerror = (err) => {
           console.error("Error loading PayPal script:", err);
         };
@@ -54,7 +80,7 @@ const PayPalCheckoutButton = ({ amount, onPaymentApproved }) => {
     };
 
     loadPayPalScript();
-  }, [amount, onPaymentApproved]);
+  }, [cart, onPaymentApproved]);
 
   return <div id="paypal-button-container" />; // PayPal button will be rendered here
 };

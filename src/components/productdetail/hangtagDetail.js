@@ -1205,6 +1205,7 @@ function HangtagDetail() {
                   onClick={() => {
                     handleAddToCart(selectedData); // First function
                     handlePending(selectedData); // Second function
+                    window.location.reload();
                   }}
                   className="button-tablecart"
                 >
