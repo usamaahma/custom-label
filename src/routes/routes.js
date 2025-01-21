@@ -54,6 +54,7 @@ import HangtagDetail from "../components/productdetail/hangtagDetail.js";
 import Thankyou1 from "../components/thankyou.js";
 import MainSearch from "../components/mainsearch/mainsearch.js";
 import ForgotPassword1 from "../components/login/forgetpassword.js";
+import ResetPassword from "../components/login/resetpassword.js";
 
 const AppRoutes = () => {
   return (
@@ -178,6 +179,7 @@ const AppRoutes = () => {
             <Route path="/custom-heat-labels" element={<Customheatpage />} />
             <Route path="/privacy-policy" element={<Privacypolicy1 />} />
             <Route path="/thank-you" element={<ThankYouPage />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             <Route path="/blogs" element={<Blog />} />
             <Route path="/mainsearch" element={<MainSearch />} />
             <Route path="/custom-blogs" element={<Customblog />} />

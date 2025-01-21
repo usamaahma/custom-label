@@ -157,6 +157,14 @@ function CheckoutBelow1() {
   }, []);
   const onFinish = async (values) => {
     const userData = JSON.parse(localStorage.getItem("user"));
+    // Check if the user is logged in
+    if (!userData) {
+      notification.error({
+        message: "Login Required",
+        description: "Please log in or sign up to place your order.",
+      });
+      return; // Stop further execution if the user is not logged in
+    }
     console.log(userData, "userdata");
     const userDataCheckout = {
       id: userData.id,

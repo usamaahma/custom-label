@@ -7,6 +7,7 @@ import {
   message,
   Steps,
   theme,
+  notification,
   Row,
   Col,
 } from "antd";
@@ -130,6 +131,23 @@ function ProductDetail() {
   const handlePending = async (selectedData) => {
     const userdataString = localStorage.getItem("user");
     const userdata = JSON.parse(userdataString); // Convert string to object
+    // Check if the user is logged in
+  if (!userdata) {
+    notification.error({
+      message: "Login Required",
+      description: "Please log in or sign up to add items to the cart.",
+    });
+    return; // Stop further execution if the user is not logged in
+  }
+   // Check if the selectedData contains valid product information
+   if (!selectedData || !selectedData.id || !selectedData.name) {
+    notification.error({
+      message: "Product Selection Required",
+      description: "Please select a product or complete the order process before adding to cart.",
+    });
+    return; // Stop further execution if no product is selected
+  }
+    
     const data = {
       user: [
         {
@@ -176,6 +194,18 @@ function ProductDetail() {
   };
   const handleAddToCart = (selectedData) => {
     console.log(selectedData, "data that is selected");
+     // Check if the user is logged in
+  const userdataString = localStorage.getItem("user");
+  const userdata = JSON.parse(userdataString); // Parse the stored user data
+
+  if (!userdata) {
+    notification.error({
+      message: "Login Required",
+      description: "Please log in or sign up to add items to the cart.",
+    });
+    return; // Stop further execution if the user is not logged in
+  }
+ 
 
     // Function to filter empty or undefined fields
     const filterEmptyFields = (data) => {

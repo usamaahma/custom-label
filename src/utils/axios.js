@@ -54,7 +54,7 @@ const newsletteremail = axios.create({
 });
 
 const resetpassword = axios.create({
-  baseURL: `${baseURL}/auth/reset-password`, // Ensure this is the correct endpoint for order descriptions
+  baseURL: `${baseURL}/auth/res-password`, // Ensure this is the correct endpoint for order descriptions
 });
 
 const forgetPassword = axios.create({
