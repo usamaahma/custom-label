@@ -1,32 +1,53 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Navbar, Nav, Container, Button } from "react-bootstrap";
-import { Link, useNavigate } from "react-router-dom"; // Import useNavigate
+import { Badge } from "antd";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle, FaShoppingCart, FaTiktok } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./firstnav.css"; // Import your CSS file
+import "./firstnav.css"; 
 import Cartmodal1 from "../checkout/cartmodal";
 import { FaFacebookF } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import { CiMobile3 } from "react-icons/ci";
 import { FaSearch } from "react-icons/fa";
 import { Slide } from "react-awesome-reveal";
-import { useAuth } from "../../context/authcontext"; // Assuming this contains auth methods
+import { useAuth } from "../../context/authcontext"; 
 
 const Firstnavbar = () => {
+  const [cartCount, setCartCount] = useState(0); // For badge count
   const [visible, setVisible] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
-  const { user, logout } = useAuth(); // Get user and logout from context
-  const navigate = useNavigate(); // Hook for navigation
+  const { user, logout } = useAuth(); 
+  const navigate = useNavigate(); 
 
+  // Function to handle logout
   const handleLogout = async () => {
     try {
-      await logout(); // Wait for the logout process to complete
-      navigate("/"); // Redirect to the home page
+      await logout(); 
+      navigate("/"); 
     } catch (error) {
-      console.error("Error during logout:", error); // Log any errors for debugging
+      console.error("Error during logout:", error); 
     }
   };
+
+  // Fetch cart count from sessionStorage
+  useEffect(() => {
+    const updateCartCount = () => {
+      const cart = JSON.parse(sessionStorage.getItem("cart")) || []; // Get cart data from sessionStorage
+      setCartCount(cart.length); // Set total number of items in the cart
+    };
+  
+    updateCartCount(); // Initial fetch
+  
+    // Listen for changes in sessionStorage
+    window.addEventListener("storage", updateCartCount);
+  
+    // Cleanup event listener
+    return () => {
+      window.removeEventListener("storage", updateCartCount);
+    };
+  }, []);
+  
 
   return (
     <Navbar className="firstnavbar-navbar" expand="lg">
@@ -79,7 +100,6 @@ const Firstnavbar = () => {
         {/* Right side: User info, Cart, and Logout button */}
         <Slide direction="right">
           <Nav className="firstnavbar-nav ml-auto">
-            {/* Display user name if logged in, otherwise show Login/Register */}
             {user ? (
               <Nav.Link as={Link} to="/my-account" className="firstnavbar-link">
                 <span className="cart-strong">{user.name}</span>
@@ -92,6 +112,7 @@ const Firstnavbar = () => {
               </Nav.Link>
             )}
 
+            {/* Cart with badge */}
             <Nav.Link className="firstnavbar-link">
               <button
                 onClick={() => setVisible(true)}
@@ -102,8 +123,12 @@ const Firstnavbar = () => {
                   cursor: "pointer",
                 }}
               >
-                <strong className="cart-strong">Cart</strong>
-                <FaShoppingCart style={{ color: "#FAF4EB" }} />
+                <Badge count={cartCount} offset={[10, 0]} showZero>
+                  <strong className="cart-strong">Cart</strong>
+                  <FaShoppingCart
+                    style={{ color: "#FAF4EB", fontSize: "24px" }}
+                  />
+                </Badge>
               </button>
               <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
             </Nav.Link>
@@ -112,7 +137,7 @@ const Firstnavbar = () => {
             {user && (
               <Nav.Link className="firstnavbar-link">
                 <button
-                  onClick={handleLogout} // Use handleLogout to log out and redirect
+                  onClick={handleLogout}
                   style={{
                     background: "none",
                     border: "none",
@@ -121,7 +146,6 @@ const Firstnavbar = () => {
                   }}
                 >
                   <strong className="cart-strong">Logout</strong>
-                  {/* <FaUserCircle style={{ color: "#FAF4EB" }} /> */}
                 </button>
               </Nav.Link>
             )}

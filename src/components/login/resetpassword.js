@@ -1,32 +1,28 @@
 import React, { useState, useEffect } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom'; // useLocation to read query params and useNavigate for redirecting
+import { useParams } from 'react-router-dom'; // to extract token from URL
 import { message, Input, Button, Row, Col, Space } from 'antd'; // Ant Design components
 import { resetpassword } from "../../utils/axios";
 import './resetpassword.css';
+import { useLocation } from 'react-router-dom';
+
+
+
 
 const ResetPassword = () => {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [loading, setLoading] = useState(false);
-  const { search } = useLocation(); // Get the query string from the URL
-  const navigate = useNavigate(); // To navigate to another page
-
-  // Extract token and redirectTo from URL query string
-  const params = new URLSearchParams(search);
-  const token = params.get('token');
-  const redirectTo = params.get('redirectTo') || '/reset-password'; // Default to /reset-password if no redirectTo
+//   const { resetPasswordToken } = useParams(); // Get token from URL
+  const location = useLocation();
+const searchParams = new URLSearchParams(location.search);
+const resetPasswordToken = searchParams.get('token');
 
   useEffect(() => {
-    if (!token) {
+    console.log(resetPasswordToken,'tokemr')
+    if (!resetPasswordToken) {
       message.error('Invalid reset link');
-      return;
     }
-
-    // Navigate to the reset password page if necessary
-    if (redirectTo) {
-      navigate(redirectTo); // This will redirect to the correct page
-    }
-  }, [token, redirectTo, navigate]);
+  }, [resetPasswordToken]);
 
   const handleResetPassword = async () => {
     if (password !== confirmPassword) {
@@ -35,16 +31,10 @@ const ResetPassword = () => {
     }
 
     setLoading(true);
-
     try {
       // Call the resetPassword API using the post method
-      const response = await resetpassword.post('/', { token, password });
+      const response = await resetpassword.post('/', { resetPasswordToken, newPassword:password });
       message.success(response.data.message);
-      
-      // After successful password reset, navigate to another page if needed
-      if (redirectTo) {
-        navigate(redirectTo); // Redirect to the specified page (e.g., login page or home)
-      }
     } catch (error) {
       message.error('Failed to reset password. Please try again.');
     } finally {

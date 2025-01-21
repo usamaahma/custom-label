@@ -157,6 +157,14 @@ function CheckoutBelow1() {
   }, []);
   const onFinish = async (values) => {
     const userData = JSON.parse(localStorage.getItem("user"));
+    // Check if the user is logged in
+    if (!userData) {
+      notification.error({
+        message: "Login Required",
+        description: "Please log in or sign up to place your order.",
+      });
+      return; // Stop further execution if the user is not logged in
+    }
     console.log(userData, "userdata");
     const userDataCheckout = {
       id: userData.id,
@@ -203,13 +211,9 @@ function CheckoutBelow1() {
       totalPrice: item.totalPrice,
       qty: 1,
     }));
-    const totalAmount = cart.reduce(
-      (sum, item) => sum + item.price * item.quantity,
-      0
-    );
-
+    const status = paymentApproved ? "Completed" : "Pending";
     const paymentDetails = {
-      status: paymentApproved, // Default status
+      status: status, // Default status
     };
     console.log("Billing Values:", billingvalues);
     console.log("Shipping Values:", shippingvalues);
@@ -647,17 +651,32 @@ function CheckoutBelow1() {
                 <Button
                   type="primary"
                   htmlType="submit"
-                  style={{ width: "100%", padding: "20px", marginTop: "20px" }}
+                  style={{
+                    width: "100%",
+                    padding: "20px",
+                    marginTop: "20px",
+                    marginBottom: "1rem",
+                  }}
                 >
                   Place Order
                 </Button>
 
                 {/* Conditionally render PayPal button after clicking Place Order */}
                 {totalPrice > 0 && !paymentApproved && (
-                  <PayPalCheckoutButton
-                    amount={totalPrice}
-                    onPaymentApproved={(status) => setPaymentApproved(status)} // Update state with payment status
-                  />
+                  <>
+                    {console.log("Rendering PayPalCheckoutButton", {
+                      totalPrice,
+                      paymentApproved,
+                    })}
+                    <PayPalCheckoutButton
+                      amount={totalPrice}
+                      cart={cart}
+                      onPaymentApproved={(status) => {
+                        console.log("Payment approved:", status);
+                        setPaymentApproved(status);
+                      }}
+                    />
+                  </>
                 )}
 
                 {/* Display the payment status */}
