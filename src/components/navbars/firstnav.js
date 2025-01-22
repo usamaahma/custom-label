@@ -5,28 +5,27 @@ import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle, FaShoppingCart, FaTiktok } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "./firstnav.css"; 
+import "./firstnav.css";
 import Cartmodal1 from "../checkout/cartmodal";
 import { FaFacebookF } from "react-icons/fa6";
 import { RiInstagramFill } from "react-icons/ri";
 import { CiMobile3 } from "react-icons/ci";
 import { FaSearch } from "react-icons/fa";
 import { Slide } from "react-awesome-reveal";
-import { useAuth } from "../../context/authcontext"; 
-
+import { useAuth } from "../../context/authcontext";
 const Firstnavbar = () => {
   const [cartCount, setCartCount] = useState(0); // For badge count
   const [visible, setVisible] = useState(false);
-  const { user, logout } = useAuth(); 
-  const navigate = useNavigate(); 
+  const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   // Function to handle logout
   const handleLogout = async () => {
     try {
-      await logout(); 
-      navigate("/"); 
+      await logout();
+      navigate("/");
     } catch (error) {
-      console.error("Error during logout:", error); 
+      console.error("Error during logout:", error);
     }
   };
 
@@ -36,18 +35,17 @@ const Firstnavbar = () => {
       const cart = JSON.parse(sessionStorage.getItem("cart")) || []; // Get cart data from sessionStorage
       setCartCount(cart.length); // Set total number of items in the cart
     };
-  
+
     updateCartCount(); // Initial fetch
-  
+
     // Listen for changes in sessionStorage
     window.addEventListener("storage", updateCartCount);
-  
+
     // Cleanup event listener
     return () => {
       window.removeEventListener("storage", updateCartCount);
     };
   }, []);
-  
 
   return (
     <Navbar className="firstnavbar-navbar" expand="lg">
@@ -123,7 +121,7 @@ const Firstnavbar = () => {
                   cursor: "pointer",
                 }}
               >
-                <Badge count={cartCount} offset={[10, 0]} showZero>
+                <Badge count={cartCount} offset={[10, 0]} showZero size="small">
                   <strong className="cart-strong">Cart</strong>
                   <FaShoppingCart
                     style={{ color: "#FAF4EB", fontSize: "24px" }}

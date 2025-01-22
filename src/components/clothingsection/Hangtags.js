@@ -11,6 +11,7 @@ const Hangtags = () => {
   const [filteredData, setFilteredData] = useState([]); // Store filtered product data
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
   const [loading, setLoading] = useState(true);
+  const [titles, setTitles] = useState([]); // Store filtered product data
   const [error, setError] = useState(null);
   const [form] = Form.useForm();
 
@@ -34,6 +35,7 @@ const Hangtags = () => {
         const data = response.data.results || response.data; // Adjust as per actual API response
         setCardsData(response.data.results); // Assuming data is an array in `results`
         setFilteredData(data);
+        setTitles(data.map((item) => item.title));
         form.resetFields();
         console.log(response.data.results);
       } catch (error) {
@@ -143,7 +145,7 @@ const Hangtags = () => {
           <div className="card-grid"></div>
         </Col>
         <Col xs={24} md={8} className="right-column">
-          <Beatquote />
+          <Beatquote titles={titles} />
         </Col>
       </Row>
     </div>
