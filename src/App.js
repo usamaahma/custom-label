@@ -14,12 +14,11 @@ function App() {
     <AuthProvider>
       <CartProvider>
         <div className="App">
-          {/* {isVerified ? (
+          {isVerified ? (
             <AppRoutes /> // Show the main app routes if the user is verified
           ) : (
             <Login onVerified={setIsVerified} /> // Show login if not verified
-          )} */}
-          <AppRoutes />
+          )}
         </div>
       </CartProvider>
     </AuthProvider>
