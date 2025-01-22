@@ -242,6 +242,7 @@ function CheckoutBelow1() {
 
       console.log("Checkout Successful:", response.data);
       message.success("Your order is placed!");
+      sessionStorage.removeItem("cart");
       navigate("/thank-you"); // Redirect to the thank-you page
     } catch (error) {
       console.error("Error during checkout:", error);
