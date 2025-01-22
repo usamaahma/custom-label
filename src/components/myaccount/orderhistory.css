@@ -1,0 +1,31 @@
+/* OrderHistory.css */
+
+.orderhistory-container {
+    margin: 20px;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .orderhistory-container h2 {
+    text-align: center;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .orderhistory-table {
+    background-color: white;
+    border-radius: 8px;
+  }
+  
+  .orderhistory-loading {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .orderhistory-empty {
+    text-align: center;
+    padding: 50px;
+  }
+  
