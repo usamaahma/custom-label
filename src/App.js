@@ -8,7 +8,7 @@ import "slick-carousel/slick/slick-theme.css";
 import Login from "./components/loginMainVerification/LoginMainVerify"; // Import the Login component
 
 function App() {
-  // const [isVerified, setIsVerified] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
 
   return (
     <AuthProvider>
