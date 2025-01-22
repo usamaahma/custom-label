@@ -1,12 +1,5 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  InputNumber,
-  Select,
-  message,
-} from "antd";
+import { Form, Input, Button, InputNumber, Select, message } from "antd";
 import { UploadOutlined } from "@ant-design/icons";
 import { Storage } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
@@ -24,7 +17,7 @@ import "./beatquote.css";
 const { TextArea } = Input;
 const { Option } = Select;
 
-function Beatquote() {
+function Beatquote({ titles }) {
   const navigate = useNavigate();
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
@@ -87,13 +80,12 @@ function Beatquote() {
       .then((res) => {
         console.log("success", res);
         message.success("Thank you for considering us!");
-        navigate("/thank-you"); 
+        navigate("/thank-you");
       })
       .catch(() => {
         message.error("Something went wrong, please try again!");
       });
   };
-
   return (
     <div className="beatquote-customform-wrapper">
       <h2 className="beatquote-customform-heading">Get a Quote</h2>
@@ -116,18 +108,20 @@ function Beatquote() {
               placeholder="Select a product"
               className="beatquote-customform-select"
             >
-              <Option value="Express Clothing Labels">
-                Express Clothing Labels
-              </Option>
-              <Option value="Custom Heat Transfer Labels">
-                Custom Heat Transfer Labels
-              </Option>
-              <Option value="Custom Cotton Labels">Custom Cotton Labels</Option>
+              {titles.map((title, index) => (
+                <Option key={index} value={title}>
+                  {title}
+                </Option>
+              ))}
             </Select>
           </Form.Item>
 
           <input type="file" onChange={handlesubmit} />
-          <img src={url} alt="image" style={{width:"5rem",height:"5rem"}}/>
+          <img
+            src={url}
+            alt="image"
+            style={{ width: "5rem", height: "5rem" }}
+          />
 
           <div className="beatquote-customform-item-row">
             <Form.Item

@@ -38,7 +38,6 @@ export const CartProvider = ({ children }) => {
   const initialCart = JSON.parse(sessionStorage.getItem("cart")) || [];
 
   const [cart, dispatch] = useReducer(cartReducer, initialCart);
-
   const addToCart = (item) => {
     dispatch({ type: ADD_TO_CART, payload: item });
   };

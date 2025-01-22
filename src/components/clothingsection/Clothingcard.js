@@ -9,6 +9,7 @@ import CustomLoader from "./loader";
 const Clothingcard = () => {
   const [cardsData, setCardsData] = useState([]); // Store fetched product data
   const [filteredData, setFilteredData] = useState([]); // Store filtered product data
+  const [titles, setTitles] = useState([]); // Store filtered product data
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
   const [searchQuery, setSearchQuery] = useState(""); // State for search query
@@ -20,6 +21,7 @@ const Clothingcard = () => {
         const data = response.data.results || response.data; // Adjust as per actual API response
         setCardsData(data);
         setFilteredData(data);
+        setTitles(data.map((item) => item.title));
         form.resetFields();
       } catch (error) {
         setError(error.message);
@@ -38,6 +40,7 @@ const Clothingcard = () => {
 
   // Handle changes in the search input
   const handleSearchChange = (e) => {
+    console.log(titles);
     const query = e.target.value.trim().toLowerCase();
     setSearchQuery(query);
 
@@ -126,7 +129,7 @@ const Clothingcard = () => {
           </Row>
         </Col>
         <Col xs={24} md={8} className="right-column">
-          <Beatquote />
+          <Beatquote titles={titles} />
         </Col>
       </Row>
     </div>
