@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Helmet } from "react-helmet";
 import {
   Button,
@@ -61,6 +61,7 @@ function HangtagDetail() {
   const [description, setDescription] = useState([]);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [selectedCard, setSelectedCard] = useState(null); // Track selected card
+  const orderProcessRef = useRef(null);
   const date = new Date();
 
   const showTime =
@@ -103,6 +104,33 @@ function HangtagDetail() {
   const handleRowClick = (rowData) => {
     setSelectedRow(rowData); // Save the clicked row data
   };
+  const handleNext = (e) => {
+    e.preventDefault(); // Prevent default behavior
+
+    // Move to the next step
+    setCurrent((prev) => Math.min(prev + 1, steps.length - 1));
+
+    // Scroll to the "Order Process" section
+    if (orderProcessRef.current) {
+      orderProcessRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Align the section to the start of the viewport
+      });
+    }
+  };
+
+  const handlePrev = () => {
+    // Move to the previous step
+    setCurrent((prev) => Math.max(prev - 1, 0));
+
+    // Scroll to the "Order Process" section again
+    if (orderProcessRef.current) {
+      orderProcessRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Align the section to the start of the viewport
+      });
+    }
+  };
 
   useEffect(() => {
     const stickyDiv = document.querySelector(".sticky-div");
@@ -131,14 +159,14 @@ function HangtagDetail() {
   const handlePending = async (selectedData) => {
     const userdataString = localStorage.getItem("user");
     const userdata = JSON.parse(userdataString); // Convert string to object
-     // Check if the user is logged in
-  if (!userdata) {
-    notification.error({
-      message: "Login Required",
-      description: "Please log in or sign up to add items to the cart.",
-    });
-    return; // Stop further execution if the user is not logged in
-  }
+    // Check if the user is logged in
+    if (!userdata) {
+      notification.error({
+        message: "Login Required",
+        description: "Please log in or sign up to add items to the cart.",
+      });
+      return; // Stop further execution if the user is not logged in
+    }
     const data = {
       user: [
         {
@@ -185,17 +213,17 @@ function HangtagDetail() {
   };
   const handleAddToCart = (selectedData) => {
     console.log(selectedData, "data that is selected");
-         // Check if the user is logged in
-      const userdataString = localStorage.getItem("user");
-      const userdata = JSON.parse(userdataString); // Parse the stored user data
-    
-      if (!userdata) {
-        notification.error({
-          message: "Login Required",
-          description: "Please log in or sign up to add items to the cart.",
-        });
-        return; // Stop further execution if the user is not logged in
-      }
+    // Check if the user is logged in
+    const userdataString = localStorage.getItem("user");
+    const userdata = JSON.parse(userdataString); // Parse the stored user data
+
+    if (!userdata) {
+      notification.error({
+        message: "Login Required",
+        description: "Please log in or sign up to add items to the cart.",
+      });
+      return; // Stop further execution if the user is not logged in
+    }
     // Function to filter empty or undefined fields
     const filterEmptyFields = (data) => {
       const filteredData = {};
@@ -1100,54 +1128,12 @@ function HangtagDetail() {
             </div>
           </div>
 
-          <div className="txtmain">
+          <div className="txtmain" ref={orderProcessRef}>
             <p className="how">Order Process</p>
             <p className="at" style={{ width: "70%", margin: "0 auto" }}>
               We provide a free digital proof and photo sample for approval
               before production, ensuring 100% satisfaction.
             </p>
-
-            {/* <div className="image-row">
-              <div className="image-item">
-                <img
-                  src="../../images/upload.png"
-                  alt="Upload"
-                  className="step-image-express"
-                />
-                <p className="image-text">Upload Artwork</p>
-              </div>
-              <div className="image-item">
-                {" "}
-                <img
-                  src="../../images/arrow.svg"
-                  alt="Arrow"
-                  className="step-image1"
-                />{" "}
-              </div>
-              <div className="image-item">
-                <img
-                  src="../../images/approve.png"
-                  alt="Approve"
-                  className="step-image-express"
-                />
-                <p className="image-text">Approve Digital Proof</p>
-              </div>
-              <div className="image-item">
-                <img
-                  src="../../images/arrow.svg"
-                  alt="Approve"
-                  className="step-image1"
-                />
-              </div>
-              <div className="image-item">
-                <img
-                  src="../../images/receive.png"
-                  alt="Approve"
-                  className="step-image-express"
-                />
-                <p className="image-text">Receive Order</p>
-              </div>
-            </div> */}
           </div>
           <div style={{ marginTop: "2rem" }} className="stepss">
             <Steps
@@ -1166,7 +1152,7 @@ function HangtagDetail() {
               }}
             >
               {current > 0 && current < steps.length - 1 && (
-                <Button onClick={() => next()}>Next</Button>
+                <Button onClick={handleNext}>Next</Button>
               )}
               {current === steps.length - 1 && (
                 <Button onClick={() => message.success("Processing complete!")}>
@@ -1178,7 +1164,7 @@ function HangtagDetail() {
                   style={{
                     margin: "0 8px",
                   }}
-                  onClick={() => prev()}
+                  onClick={handlePrev}
                 >
                   Previous
                 </Button>
@@ -1337,7 +1323,7 @@ function HangtagDetail() {
           ))}
         </div>
       </div>
-      <RelatedProducthang/>
+      <RelatedProducthang />
       <Finalprocess />
       <Faq1 />
       <GoogleReviews />

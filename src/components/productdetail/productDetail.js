@@ -36,7 +36,7 @@ import RelatedProduct from "../relatedProduct/relatedproduct";
 // Card data
 
 const imagesData = [
-  { src: "../images/center1.png", text: "Fastest 3-Day Turnaround" }, 
+  { src: "../images/center1.png", text: "Fastest 3-Day Turnaround" },
   { src: "../images/center2.png", text: "Custom Woven Labels Made in USA" },
   { src: "../images/center3.png", text: "Straight Cut / Sew-on Only" },
   { src: "../images/center4.png", text: "Manufactured in New York" },
@@ -64,6 +64,7 @@ function ProductDetail() {
   const [selectedCard, setSelectedCard] = useState(null); // Track selected card
   const fileInputRef = useRef(null); // Reference to the hidden input
   const stepsRef = useRef(null); // Ref for scrolling to steps
+  const orderProcessRef = useRef(null);
   const date = new Date();
 
   const handleFileClick = () => {
@@ -110,6 +111,35 @@ function ProductDetail() {
   const handleRowClick = (rowData) => {
     setSelectedRow(rowData); // Save the clicked row data
   };
+  const handleNext = (e) => {
+    e.preventDefault(); // Prevent default behavior
+
+    // Move to the next step
+    setCurrent((prev) => Math.min(prev + 1, steps.length - 1));
+
+    // Scroll to the "Order Process" section
+    if (orderProcessRef.current) {
+      orderProcessRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Align the section to the start of the viewport
+      });
+    }
+  };
+  
+
+  const handlePrev = () => {
+    // Move to the previous step
+    setCurrent((prev) => Math.max(prev - 1, 0));
+  
+    // Scroll to the "Order Process" section again
+    if (orderProcessRef.current) {
+      orderProcessRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Align the section to the start of the viewport
+      });
+    }
+  };
+   
 
   useEffect(() => {
     const stickyDiv = document.querySelector(".sticky-div");
@@ -1095,7 +1125,6 @@ function ProductDetail() {
                 style={{
                   margin: "0 auto",
                   borderRadius: "1rem",
-
                   width: "100%",
                   maxWidth: "30rem",
                   height: "100vh",
@@ -1151,7 +1180,7 @@ function ProductDetail() {
             </div>
           </div>
 
-          <div className="txtmain">
+          <div className="txtmain" ref={orderProcessRef}>
             <p className="how">Order Process</p>
             <p className="at" style={{ width: "70%", margin: "0 auto" }}>
               We provide a free digital proof and photo sample for approval
@@ -1164,7 +1193,6 @@ function ProductDetail() {
               current={current}
               onChange={setCurrent}
               progressDot
-              ref={stepsRef}
               items={steps.map(({ title, icon }) => ({ title, icon }))} // Map steps to items
             />
             <div style={contentStyle}>{steps[current].content}</div>
@@ -1176,7 +1204,7 @@ function ProductDetail() {
               }}
             >
               {current > 0 && current < steps.length - 1 && (
-                <Button onClick={() => next()}>Next</Button>
+                <Button onClick={handleNext}>Next</Button>
               )}
               {current === steps.length - 1 && (
                 <Button onClick={() => message.success("Processing complete!")}>
@@ -1188,7 +1216,7 @@ function ProductDetail() {
                   style={{
                     margin: "0 8px",
                   }}
-                  onClick={() => prev()}
+                  onClick={handlePrev}
                 >
                   Previous
                 </Button>
