@@ -102,7 +102,7 @@ function Getaquote1() {
   return (
     <div className="customform-wrapper">
       <div className="customform-container">
-        <h2 className="customform-heading">Get a Quote</h2>
+        <h1 className="customform-heading">Get a Quote</h1>
         <p className="customform-quote-text">
           Receive the lowest pricing & work with a team of experts.
         </p>
@@ -139,7 +139,13 @@ function Getaquote1() {
           </Form.Item>
 
           <input type="file" onChange={handlesubmit} />
-          <img src={url} alt="image" style={{ width: "5rem", height: "5rem" }} />
+          {url && (
+            <img
+              src={url}
+              alt="Uploaded preview"
+              style={{ width: "5rem", height: "5rem" }}
+            />
+          )}
 
           <div className="customform-item-row">
             <Form.Item

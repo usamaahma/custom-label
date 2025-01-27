@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet";
 import {
   Button,
   Card,
@@ -988,6 +989,27 @@ function HangtagDetail() {
   }
   return (
     <div className="first-main-express">
+      <Helmet>
+        <title>Our Blogs - Stay Updated with the Latest Posts</title>
+        <meta
+          name="description"
+          content="Explore our blog to stay updated with the latest posts, trends, and insights on various topics."
+        />
+        <meta
+          name="keywords"
+          content="blogs, articles, latest posts, insights, news"
+        />
+        <script type="application/ld+json">
+          {`{
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Our Blogs",
+            "description": "Explore our blog to stay updated with the latest posts, trends, and insights on various topics.",
+            "url": "https://www.mywebsite.com/blogs",
+            "image": "https://www.mywebsite.com/images/blog-banner.jpg"
+          }`}
+        </script>
+      </Helmet>
       <div className="headingbread">
         <p className="express-clothing-heading"> {title}</p>
         <Breadcrumb
@@ -1056,7 +1078,7 @@ function HangtagDetail() {
 
             {/* Second Div */}
             <div className="express-second-div">
-              <h2>{descriptionTitle}</h2>
+              <h1>{descriptionTitle}</h1>
               <p style={{ width: "70%", margin: "0 auto" }}>
                 {isExpanded ? fullText : truncatedText}
                 <button onClick={toggleText} className="readmore-button">

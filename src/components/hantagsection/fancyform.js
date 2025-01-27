@@ -118,12 +118,13 @@ const FancyForm1 = () => {
         <Col xs={24} sm={12}>
           <p className="txt-fancy-bold">Upload Artwork</p>
           <input type="file" onChange={handlesubmit} />
-          <img
-            src={url}
-            alt="image"
-            style={{ width: "5rem", height: "5rem" }}
-          />
-
+        {url && (
+            <img
+              src={url}
+              alt="Uploaded preview"
+              style={{ width: "5rem", height: "5rem" }}
+            />
+          )}
           <p className="txt-fancy-bold">Size</p>
           <Row gutter={16} className="input-container-fancy">
             <Col>

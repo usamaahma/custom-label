@@ -254,7 +254,7 @@ function CheckoutBelow1() {
     <div className="checkout-container">
       <div className="check-below"></div>
       <div className="check-below">
-        <p className="check-txt">CHECKOUT</p>
+        <h1 className="check-txt">CHECKOUT</h1>
       </div>
       <Form
         form={form}
