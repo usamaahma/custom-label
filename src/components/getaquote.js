@@ -54,9 +54,9 @@ function Getaquote1() {
       .then((res) => {
         console.log("success", res);
         message.success("Thank you for considering us!");
-        
+
         // Redirect to the thank-you page after successful submission
-        navigate("/thank-you"); 
+        navigate("/thank-you");
       })
       .catch(() => {
         message.error("something went wrong, please try again!");
@@ -125,6 +125,7 @@ function Getaquote1() {
             rules={[{ required: true, message: "Please select a product!" }]}
           >
             <Select
+              style={{ marginBottom: "1rem" }}
               placeholder="Select a product"
               className="customform-select"
             >
@@ -139,7 +140,13 @@ function Getaquote1() {
           </Form.Item>
 
           <input type="file" onChange={handlesubmit} />
-          <img src={url} alt="image" style={{ width: "5rem", height: "5rem" }} />
+          {url && (
+            <img
+              src={url}
+              alt="Uploaded preview"
+              style={{ width: "5rem", height: "5rem" }}
+            />
+          )}
 
           <div className="customform-item-row">
             <Form.Item

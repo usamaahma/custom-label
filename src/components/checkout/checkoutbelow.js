@@ -206,6 +206,7 @@ function CheckoutBelow1() {
       artworkFile: item.artwork,
       size: item.size,
       style: item.style,
+      options:item.options,
       comments: item.comments,
       quantity: item.quantity,
       totalPrice: item.totalPrice,
