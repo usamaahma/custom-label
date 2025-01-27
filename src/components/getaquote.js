@@ -102,7 +102,7 @@ function Getaquote1() {
   return (
     <div className="customform-wrapper">
       <div className="customform-container">
-        <h2 className="customform-heading">Get a Quote</h2>
+        <h1 className="customform-heading">Get a Quote</h1>
         <p className="customform-quote-text">
           Receive the lowest pricing & work with a team of experts.
         </p>

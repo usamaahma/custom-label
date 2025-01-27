@@ -84,7 +84,7 @@ const Clothingcard = () => {
       <Row className="responsive-row">
         <Col xs={24} md={15}>
           <div className="headingnsearch">
-            <h2 className="main-heading">CUSTOM WOVEN LABELS</h2>
+            <h1 className="main-heading">CUSTOM WOVEN LABELS</h1>
             <div className="search-container">
               <input
                 type="text"

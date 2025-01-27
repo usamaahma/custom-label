@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./productdetail.css";
+import { Helmet } from "react-helmet";
 import {
   Button,
   Card,
@@ -35,7 +36,7 @@ import RelatedProduct from "../relatedProduct/relatedproduct";
 // Card data
 
 const imagesData = [
-  { src: "../images/center1.png", text: "Fastest 3-Day Turnaround" },
+  { src: "../images/center1.png", text: "Fastest 3-Day Turnaround" }, 
   { src: "../images/center2.png", text: "Custom Woven Labels Made in USA" },
   { src: "../images/center3.png", text: "Straight Cut / Sew-on Only" },
   { src: "../images/center4.png", text: "Manufactured in New York" },
@@ -1047,6 +1048,27 @@ function ProductDetail() {
 
   return (
     <div className="first-main-express">
+      <Helmet>
+        <title>Our Blogs - Stay Updated with the Latest Posts</title>
+        <meta
+          name="description"
+          content="Explore our blog to stay updated with the latest posts, trends, and insights on various topics."
+        />
+        <meta
+          name="keywords"
+          content="blogs, articles, latest posts, insights, news"
+        />
+        <script type="application/ld+json">
+          {`{
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Our Blogs",
+            "description": "Explore our blog to stay updated with the latest posts, trends, and insights on various topics.",
+            "url": "https://www.mywebsite.com/blogs",
+            "image": "https://www.mywebsite.com/images/blog-banner.jpg"
+          }`}
+        </script>
+      </Helmet>
       <div className="headingbread">
         <p className="express-clothing-heading"> {title}</p>
         <Breadcrumb
@@ -1107,7 +1129,7 @@ function ProductDetail() {
 
             {/* Second Div */}
             <div className="express-second-div">
-              <h2>{descriptionTitle}</h2>
+              <h1>{descriptionTitle}</h1>
               <p style={{ width: "70%", margin: "0 auto" }}>
                 {isExpanded ? fullText : truncatedText}
                 <button onClick={toggleText} className="readmore-button">

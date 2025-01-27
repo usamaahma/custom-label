@@ -19,7 +19,7 @@ const Herosec1 = () => {
         >
           <Slide cascade>
             <div className="herosec-content">
-              <p className="custom">Custom Woven Labels With Your Logo</p>
+              <h1 className="custom">Custom Woven Labels With Your Logo</h1>
               <p className="premium">
                 Premium quality, fast delivery & lowest pricing
               </p>
