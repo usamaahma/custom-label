@@ -206,6 +206,7 @@ function CheckoutBelow1() {
       artworkFile: item.artwork,
       size: item.size,
       style: item.style,
+      options:item.options,
       comments: item.comments,
       quantity: item.quantity,
       totalPrice: item.totalPrice,
@@ -254,7 +255,7 @@ function CheckoutBelow1() {
     <div className="checkout-container">
       <div className="check-below"></div>
       <div className="check-below">
-        <p className="check-txt">CHECKOUT</p>
+        <h1 className="check-txt">CHECKOUT</h1>
       </div>
       <Form
         form={form}

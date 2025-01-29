@@ -1,109 +1,101 @@
 import React, { useState, useEffect } from "react";
-import { Table, Spin, Empty } from "antd"; // Import Ant Design components
-import './orderhistory.css'; // Import custom CSS file for styling
+import { useNavigate } from "react-router-dom"; // To handle page navigation
+import { message } from "antd";
+import "./orderhistory.css"; // Import custom CSS file for styling
+import { orderhistory } from "../../utils/axios"; // Axios instance for API calls
+import CustomLoader from "../clothingsection/loader"; // Loader component
 
 function OrderHistory() {
-  // State to store checkout data (orders)
-  const [orderData, setOrderData] = useState(null);
-  const [loading, setLoading] = useState(true); // Track loading state
+  const navigate = useNavigate(); // Navigation hook for redirecting
+  const userData = JSON.parse(localStorage.getItem("user"));
+  const userid = userData?.id;
 
-  // Simulate fetching order history with demo data
+  // Log to see what userId is being fetched
+  console.log("User ID from localStorage: ", userid);
+
+  const [orders, setOrders] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  // If userId is not found, redirect to login page
   useEffect(() => {
-    setLoading(true);
+    if (!userid) {
+      message.error("User ID not found. Please log in again.");
+      console.log("user nhi aa rha");
+    }
+  }, [userid]);
 
-    // Simulated data (mock orders)
-    const demoData = [
-      { userId: "12345", productName: "custom woven labels", totalPrice: 25.0 },
-      { userId: "12345", productName: "t shirt label", totalPrice: 40.0 },
-      { userId: "67890", productName: "cotton tag", totalPrice: 30.0 },
-    ];
-
-    // Grouping orders by userId and calculating total price for each user
-    const groupedData = demoData.reduce((acc, order) => {
-      const { userId, productName, totalPrice } = order;
-      if (!acc[userId]) {
-        acc[userId] = {
-          userId,
-          products: [],
-          totalPrice: 0,
-        };
+  // Fetch user order history from API
+  useEffect(() => {
+    const fetchOrders = async () => {
+      try {
+        if (userid) {
+          setLoading(true); // Start loading
+          // Make the API call to get orders for the logged-in user
+          const response = await orderhistory.get(`?userId=${userid}`);
+          console.log(response, "res");
+          // Check if response has data
+          if (
+            response.data &&
+            response.data.orders &&
+            response.data.orders.length > 0
+          ) {
+            setOrders(response.data.orders); // Set the orders to state
+          } else {
+            setError("No orders found for the user");
+          }
+        } else {
+          setError("User ID not found");
+        }
+      } catch (err) {
+        setError("Error fetching data: " + err.message); // Handle errors
+      } finally {
+        setLoading(false); // Stop loading
       }
-      acc[userId].products.push(productName);
-      acc[userId].totalPrice += totalPrice;
-      return acc;
-    }, {});
+    };
 
-    // Convert grouped data to an array for use with Ant Design Table
-    const formattedData = Object.values(groupedData).map(user => ({
-      ...user,
-      products: user.products.map((product, index) => `${index + 1}. ${product}`), // Add numbering to products
-    }));
+    fetchOrders(); // Call the function to fetch orders
+  }, [userid]);
 
-    // Simulate some delay before setting the data (like an API call)
-    setTimeout(() => {
-      setOrderData(formattedData); // Set formatted data as order history
-      setLoading(false); // Stop loading after data is set
-    }, 1000); // Delay of 1 second to simulate fetching
-
-  }, []); // Empty dependency array means this effect runs once when the component mounts
-
-  // Columns for the Ant Design Table
-  const columns = [
-    {
-      title: 'User ID',
-      dataIndex: 'userId',
-      key: 'userId',
-      sorter: (a, b) => a.userId.localeCompare(b.userId), // Sorting by user ID
-    },
-    {
-      title: 'Products Ordered',
-      dataIndex: 'products',
-      key: 'products',
-      render: (products) => (
-        <ul>
-          {products.map((product, index) => (
-            <li key={index}>{product}</li> // Render each product as a list item
-          ))}
-        </ul>
-      ), // Render products as an unordered list
-    },
-    {
-      title: 'Total Price',
-      dataIndex: 'totalPrice',
-      key: 'totalPrice',
-      render: (text) => `$${text.toFixed(2)}`, // Format price as currency
-      sorter: (a, b) => a.totalPrice - b.totalPrice, // Sorting by total price
-    },
-  ];
-
-  // If loading, show a spinner
+  // Handling loading, error, and displaying orders
   if (loading) {
-    return (
-      <div className="orderhistory-loading">
-        <Spin size="large" />
-      </div>
-    );
+    return <CustomLoader />;
   }
 
-  // If no orders, show a message
-  if (!orderData || orderData.length === 0) {
-    return (
-      <div className="orderhistory-empty">
-        <Empty description="You have placed no orders." />
-      </div>
-    );
+  if (error) {
+    return <div className="error-message">{error}</div>;
   }
 
   return (
-    <div className="orderhistory-container">
-      <h2>Your Order History</h2>
-      <Table
-        columns={columns}
-        dataSource={orderData}
-        rowKey="userId"
-        pagination={false} // Optional: Disable pagination if you don't need it
-        className="orderhistory-table"
-      />
+    <div>
+      {" "}
+      <h1 className="order-heading">Orders History</h1>
+      <div className="orderhistory-container">
+        {orders.length > 0 ? (
+          <table className="orderhistory-table">
+            <thead>
+              <tr>
+                <th className="orderhistory-th">Product Id</th>
+                <th className="orderhistory-th">Item Name</th>
+                <th className="orderhistory-th">Price</th>
+              </tr>
+            </thead>
+            <tbody>
+              {orders.map((order, index) => (
+                <tr key={order._id}>
+                  {" "}
+                  {/* Using _id for the key */}
+                  <td className="orderhistory-td">{order.itemId}</td>
+                  <td className="orderhistory-td">{order.itemName}</td>
+                  <td className="orderhistory-td">${order.price}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        ) : (
+          <p>No orders found for this user.</p>
+        )}
+      </div>
     </div>
   );
 }

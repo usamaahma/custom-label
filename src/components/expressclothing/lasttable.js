@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Table, Button } from "antd";
 import "./lasttable.css";
 import { Link } from "react-router-dom";
@@ -23,6 +23,8 @@ const columns = [
 ];
 
 const LastTable1 = ({ allQuantityPrices, onRowClick }) => {
+  const [selectedRowKey, setSelectedRowKey] = useState(null);
+
   // Check if allQuantityPrices has data
   const hasData = Array.isArray(allQuantityPrices) && allQuantityPrices.length > 0;
 
@@ -58,8 +60,12 @@ const LastTable1 = ({ allQuantityPrices, onRowClick }) => {
   });
 
   const handleRowClick = (record) => {
+    setSelectedRowKey(record.key); // Update selected row key
     onRowClick(record); // Send the clicked row data to the parent
   };
+
+  const rowClassName = (record) =>
+    record.key === selectedRowKey ? "selected-row" : "";
 
   return (
     <div className="height-table">
@@ -69,6 +75,7 @@ const LastTable1 = ({ allQuantityPrices, onRowClick }) => {
         onRow={(record) => ({
           onClick: () => handleRowClick(record), // Attach row click handler
         })}
+        rowClassName={rowClassName} // Apply class to rows
       />
     </div>
   );

@@ -48,7 +48,6 @@ function Beatquote({ titles }) {
             .then((Url) => {
               setUrl(Url);
               setUploadedImageUrl(Url); // Set the uploaded image URL
-              console.log(Url);
             })
             .catch((error) => {
               console.log(error.message, "error getting the image url");
@@ -105,6 +104,7 @@ function Beatquote({ titles }) {
             rules={[{ required: true, message: "Please select a product!" }]}
           >
             <Select
+              style={{ marginBottom: "1rem" }}
               placeholder="Select a product"
               className="beatquote-customform-select"
             >
@@ -117,11 +117,13 @@ function Beatquote({ titles }) {
           </Form.Item>
 
           <input type="file" onChange={handlesubmit} />
-          <img
-            src={url}
-            alt="image"
-            style={{ width: "5rem", height: "5rem" }}
-          />
+          {url && (
+            <img
+              src={url}
+              alt="Uploaded preview"
+              style={{ width: "5rem", height: "5rem" }}
+            />
+          )}
 
           <div className="beatquote-customform-item-row">
             <Form.Item

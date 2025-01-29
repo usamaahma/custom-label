@@ -5,6 +5,7 @@ import Beatquote from "./beatquote"; // Import your Beatquote component
 import "./clothingcard.css"; // Import your CSS file
 import { SearchOutlined } from "@ant-design/icons";
 import CustomLoader from "./loader";
+import { Helmet } from "react-helmet"; // Import Helmet
 
 const Hangtags = () => {
   const [cardsData, setCardsData] = useState([]);
@@ -23,6 +24,7 @@ const Hangtags = () => {
       link: "/fancy-hangtags",
     },
   ];
+
   const StoreProductId = (id, title) => {
     localStorage.setItem("selectedHangtagId", id);
     localStorage.setItem("selectedHangtagTitle", title);
@@ -46,26 +48,23 @@ const Hangtags = () => {
     };
     fetchData();
   }, []);
+
   const handleSearchChange = (e) => {
     const query = e.target.value.trim().toLowerCase();
     setSearchQuery(query);
 
     const deepSearch = (obj, searchTerm) => {
-      // Recursive function to search within objects and arrays
       if (typeof obj === "string") {
-        return obj.toLowerCase().includes(searchTerm); // Check if the full phrase is included
+        return obj.toLowerCase().includes(searchTerm);
       } else if (typeof obj === "object" && obj !== null) {
-        return Object.values(obj).some((value) =>
-          deepSearch(value, searchTerm)
-        );
+        return Object.values(obj).some((value) => deepSearch(value, searchTerm));
       }
       return false;
     };
 
     if (query) {
-      const searchTerms = query.split(" "); // Split query into words by spaces
+      const searchTerms = query.split(" ");
       const filtered = cardsData.filter((card) => {
-        // Check for either exact phrase or all words in the query
         return (
           deepSearch(card, query) ||
           searchTerms.every((term) => deepSearch(card, term))
@@ -73,7 +72,7 @@ const Hangtags = () => {
       });
       setFilteredData(filtered.length > 0 ? filtered : []);
     } else {
-      setFilteredData(cardsData); // Show all products if no search query
+      setFilteredData(cardsData);
     }
   };
 
@@ -87,19 +86,41 @@ const Hangtags = () => {
 
   return (
     <div>
+      <Helmet>
+        <title>Custom Hangtags - Quality and Affordable</title>
+        <meta
+          name="description"
+          content="Discover our wide range of custom hangtags for your products. High quality, affordable, and designed to meet your branding needs."
+        />
+        <meta
+          name="keywords"
+          content="custom hangtags, product branding, hangtags, tags for clothing, custom tags"
+        />
+        <script type="application/ld+json">
+          {`{
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Custom Hangtags",
+            "description": "Discover our wide range of custom hangtags for your products. High quality, affordable, and designed to meet your branding needs.",
+            "url": "https://www.mywebsite.com/hangtags",
+            "image": "https://www.mywebsite.com/images/x-small.jpg"
+          }`}
+        </script>
+      </Helmet>
+
       <Row className="responsive-row">
         <Col xs={24} md={15}>
           <div className="headingnsearch">
-            <h2 className="main-heading">CUSTOM HANGTAGS</h2>
-            <div class="search-container">
+            <h1 className="main-heading">CUSTOM HANGTAGS</h1>
+            <div className="search-container">
               <input
                 type="text"
                 placeholder="Search for hangtags, categories, or articles..."
-                class="search-input"
-                value={searchQuery} // Bind the input value to the searchQuery state
-                onChange={handleSearchChange} // Handle input change
+                className="search-input"
+                value={searchQuery}
+                onChange={handleSearchChange}
               />
-              <button class="search-button">
+              <button className="search-button">
                 <SearchOutlined />
               </button>
             </div>

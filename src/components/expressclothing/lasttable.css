@@ -4,6 +4,11 @@
 .ant-table td {
   text-align: left; /* Centering text for better appearance */
 }
+.selected-row {
+  background-color: #e6f7ff !important; /* Light blue background */
+  color: #1890ff; /* Ant Design primary color */
+  font-weight: bold;
+}
 
 @media (min-width: 768px) {
   .ant-table th:nth-child(1),

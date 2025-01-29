@@ -1,31 +1,36 @@
-/* OrderHistory.css */
-
+/* orderhistory.css */
+.order-heading{
+text-align: center;
+font-weight: bold;
+font-size: 2rem;
+}
 .orderhistory-container {
     margin: 20px;
-    padding: 20px;
-    background-color: #f9f9f9;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  }
-  
-  .orderhistory-container h2 {
-    text-align: center;
-    font-size: 24px;
-    margin-bottom: 20px;
+    padding: 10px;
+    display: flex; /* Flexbox to center the table */
+    justify-content: center; /* Center align horizontally */
   }
   
   .orderhistory-table {
-    background-color: white;
-    border-radius: 8px;
+    width: 80%; /* Adjust the table width as per your requirement */
+    border-collapse: collapse;
+    table-layout: fixed; /* This ensures all columns are the same width */
   }
   
-  .orderhistory-loading {
-    text-align: center;
-    padding: 50px;
+  .orderhistory-th,
+  .orderhistory-td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #ddd;
+    word-wrap: break-word; /* Ensures long text wraps inside the cell */
   }
   
-  .orderhistory-empty {
-    text-align: center;
-    padding: 50px;
+  .orderhistory-th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .orderhistory-td {
+    background-color: #fff;
   }
   

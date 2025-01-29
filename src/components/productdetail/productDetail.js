@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import "./productdetail.css";
+import { Helmet } from "react-helmet";
 import {
   Button,
   Card,
@@ -18,7 +19,7 @@ import { SiStyleshare } from "react-icons/si";
 import { SiZedindustries } from "react-icons/si";
 import { IoOptionsSharp } from "react-icons/io5";
 import { MdProductionQuantityLimits } from "react-icons/md";
-import { pendingcheckout, products } from "../../utils/axios";
+import { pendingcheckout, products, Seo } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
 import { Storage } from "../../firebaseConfig";
 import {
@@ -61,13 +62,22 @@ function ProductDetail() {
   const [description, setDescription] = useState([]);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const [selectedCard, setSelectedCard] = useState(null); // Track selected card
+  const fileInputRef = useRef(null); // Reference to the hidden input
+  const stepsRef = useRef(null); // Ref for scrolling to steps
+  const orderProcessRef = useRef(null);
   const date = new Date();
+  const [seoData, setSeoData] = useState(null);
+
+  const handleFileClick = () => {
+    fileInputRef.current.click(); // Trigger the hidden file input click
+  };
 
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   const handlesubmit = (e) => {
     const uploadedFile = e.target.files[0]; // Get the uploaded file
     if (uploadedFile) {
+      const showTime = Date.now(); // Generate a timestamp to make the filename unique
       const imageDocument = ref(
         Storage,
         `images/${uploadedFile.name + showTime}`
@@ -85,8 +95,7 @@ function ProductDetail() {
         .then(() => {
           getDownloadURL(imageDocument)
             .then((Url) => {
-              setUrl(Url);
-              setUploadedImageUrl(Url); // Set the uploaded image URL
+              setUrl(Url); // Set the uploaded image URL
               console.log(Url);
             })
             .catch((error) => {
@@ -102,6 +111,33 @@ function ProductDetail() {
   // Define the onRowClick handler to handle the selected row data
   const handleRowClick = (rowData) => {
     setSelectedRow(rowData); // Save the clicked row data
+  };
+  const handleNext = (e) => {
+    e.preventDefault(); // Prevent default behavior
+
+    // Move to the next step
+    setCurrent((prev) => Math.min(prev + 1, steps.length - 1));
+
+    // Scroll to the "Order Process" section
+    if (orderProcessRef.current) {
+      orderProcessRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Align the section to the start of the viewport
+      });
+    }
+  };
+
+  const handlePrev = () => {
+    // Move to the previous step
+    setCurrent((prev) => Math.max(prev - 1, 0));
+
+    // Scroll to the "Order Process" section again
+    if (orderProcessRef.current) {
+      orderProcessRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Align the section to the start of the viewport
+      });
+    }
   };
 
   useEffect(() => {
@@ -132,22 +168,23 @@ function ProductDetail() {
     const userdataString = localStorage.getItem("user");
     const userdata = JSON.parse(userdataString); // Convert string to object
     // Check if the user is logged in
-  if (!userdata) {
-    notification.error({
-      message: "Login Required",
-      description: "Please log in or sign up to add items to the cart.",
-    });
-    return; // Stop further execution if the user is not logged in
-  }
-   // Check if the selectedData contains valid product information
-   if (!selectedData || !selectedData.id || !selectedData.name) {
-    notification.error({
-      message: "Product Selection Required",
-      description: "Please select a product or complete the order process before adding to cart.",
-    });
-    return; // Stop further execution if no product is selected
-  }
-    
+    if (!userdata) {
+      notification.error({
+        message: "Login Required",
+        description: "Please log in or sign up to add items to the cart.",
+      });
+      return; // Stop further execution if the user is not logged in
+    }
+    // Check if the selectedData contains valid product information
+    if (!selectedData || !selectedData.id || !selectedData.name) {
+      notification.error({
+        message: "Product Selection Required",
+        description:
+          "Please select a product or complete the order process before adding to cart.",
+      });
+      return; // Stop further execution if no product is selected
+    }
+
     const data = {
       user: [
         {
@@ -194,18 +231,17 @@ function ProductDetail() {
   };
   const handleAddToCart = (selectedData) => {
     console.log(selectedData, "data that is selected");
-     // Check if the user is logged in
-  const userdataString = localStorage.getItem("user");
-  const userdata = JSON.parse(userdataString); // Parse the stored user data
+    // Check if the user is logged in
+    const userdataString = localStorage.getItem("user");
+    const userdata = JSON.parse(userdataString); // Parse the stored user data
 
-  if (!userdata) {
-    notification.error({
-      message: "Login Required",
-      description: "Please log in or sign up to add items to the cart.",
-    });
-    return; // Stop further execution if the user is not logged in
-  }
- 
+    if (!userdata) {
+      notification.error({
+        message: "Login Required",
+        description: "Please log in or sign up to add items to the cart.",
+      });
+      return; // Stop further execution if the user is not logged in
+    }
 
     // Function to filter empty or undefined fields
     const filterEmptyFields = (data) => {
@@ -347,7 +383,7 @@ function ProductDetail() {
             {/* Content */}
             <Row gutter={16} justify="center" style={{ marginTop: "20px" }}>
               {/* First row: Uploaded image preview (Full width) */}
-              <Col xs={24} sm={24} md={24} lg={24}>
+              {/* <Col xs={24} sm={24} md={24} lg={24}>
                 {url ? (
                   <Card
                     hoverable
@@ -370,24 +406,35 @@ function ProductDetail() {
                 ) : (
                   <p>No image uploaded yet</p>
                 )}
-              </Col>
+              </Col> */}
 
               {/* Second row: File input (Centered) */}
               <Col xs={24} sm={24} md={24} lg={24}>
                 <input
                   type="file"
+                  ref={fileInputRef}
+                  style={{ display: "none" }}
                   onChange={handlesubmit}
-                  style={{
-                    width: "100%",
-                    padding: "10px",
-                    borderRadius: "5px",
-                    border: "1px solid #5F6F65",
-                    marginBottom: "20px",
-                    display: "block",
-                    marginLeft: "auto",
-                    marginRight: "auto", // Center the file input
-                  }}
                 />
+
+                {/* Clickable custom image */}
+                <img
+                  src={
+                    url || "../../images/uploadform.png" // Placeholder image
+                  }
+                  alt="Upload"
+                  style={{
+                    width: "auto",
+                    height: "auto",
+                    border: "2px dashed #ddd",
+                    borderRadius: "8px",
+                    cursor: "pointer",
+                    objectFit: "cover",
+                  }}
+                  onClick={handleFileClick} // Open file picker
+                />
+
+                <p>Upload Progress: {percent}%</p>
               </Col>
 
               {/* Third row: Text message (Centered) */}
@@ -929,11 +976,22 @@ function ProductDetail() {
 
   const { token } = theme.useToken();
   const [current, setCurrent] = useState(0);
+
   const next = () => {
     setCurrent(current + 1);
+    scrollToSteps();
   };
   const prev = () => {
+    scrollToSteps();
     setCurrent(current - 1);
+  };
+  const scrollToSteps = () => {
+    if (stepsRef.current) {
+      stepsRef.current.scrollIntoView({
+        behavior: "smooth",
+        block: "start", // Align to the top of the viewport
+      });
+    }
   };
   const items = steps.map((item) => ({
     title: <span className="responsive-title">{item.title}</span>,
@@ -962,7 +1020,7 @@ function ProductDetail() {
     quantity: " ",
     price: " ",
     totalPrice: " ",
-    comments: "",
+    comments: " ",
   });
   useEffect(() => {
     const fetchProductDescription = async () => {
@@ -1016,9 +1074,46 @@ function ProductDetail() {
     textArea.innerHTML = html;
     return textArea.value;
   }
+  useEffect(() => {
+    // Fetch the SEO data using Axios from your API
+    const fetchSeoData = async () => {
+      try {
+        const response = await Seo.get(`?productId=${selectedProductId}`);
+        console.log(response);
+        const seo = response.data.results[0]; // Assuming this is the structure
+        setSeoData(seo);
+      } catch (error) {
+        console.error("Error fetching SEO data:", error);
+      }
+    };
+
+    fetchSeoData();
+  }, []);
 
   return (
     <div className="first-main-express">
+      <div>
+        {/* Only render Helmet once seoData is available */}
+        {seoData && (
+          <Helmet>
+            <title>{seoData.title}</title>
+            <meta name="description" content={seoData.description} />
+            <meta name="keywords" content={seoData.keywords.join(", ")} />
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Blog", // Change to "Product" if it's a product page
+                name: seoData.title,
+                description: seoData.description,
+                url: `https://www.mywebsite.com/products/${seoData.productId}`, // Dynamically use the product ID in URL
+                image: "https://www.mywebsite.com/images/product-banner.jpg", // Use actual product image URL
+              })}
+            </script>
+          </Helmet>
+        )}
+
+        {/* The rest of your component */}
+      </div>
       <div className="headingbread">
         <p className="express-clothing-heading"> {title}</p>
         <Breadcrumb
@@ -1045,7 +1140,6 @@ function ProductDetail() {
                 style={{
                   margin: "0 auto",
                   borderRadius: "1rem",
-
                   width: "100%",
                   maxWidth: "30rem",
                   height: "100vh",
@@ -1079,7 +1173,7 @@ function ProductDetail() {
 
             {/* Second Div */}
             <div className="express-second-div">
-              <h2>{descriptionTitle}</h2>
+              <h1>{descriptionTitle}</h1>
               <p style={{ width: "70%", margin: "0 auto" }}>
                 {isExpanded ? fullText : truncatedText}
                 <button onClick={toggleText} className="readmore-button">
@@ -1101,7 +1195,7 @@ function ProductDetail() {
             </div>
           </div>
 
-          <div className="txtmain">
+          <div className="txtmain" ref={orderProcessRef}>
             <p className="how">Order Process</p>
             <p className="at" style={{ width: "70%", margin: "0 auto" }}>
               We provide a free digital proof and photo sample for approval
@@ -1125,7 +1219,7 @@ function ProductDetail() {
               }}
             >
               {current > 0 && current < steps.length - 1 && (
-                <Button onClick={() => next()}>Next</Button>
+                <Button onClick={handleNext}>Next</Button>
               )}
               {current === steps.length - 1 && (
                 <Button onClick={() => message.success("Processing complete!")}>
@@ -1137,7 +1231,7 @@ function ProductDetail() {
                   style={{
                     margin: "0 8px",
                   }}
-                  onClick={() => prev()}
+                  onClick={handlePrev}
                 >
                   Previous
                 </Button>
@@ -1296,10 +1390,10 @@ function ProductDetail() {
           ))}
         </div>
       </div>
-      <RelatedProduct/>
-      <Finalprocess/>
-      <Faq1/>
-      <GoogleReviews/>
+      <RelatedProduct />
+      <Finalprocess />
+      <Faq1 />
+      <GoogleReviews />
     </div>
   );
 }

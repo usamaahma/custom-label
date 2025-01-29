@@ -60,6 +60,12 @@ const resetpassword = axios.create({
 const forgetPassword = axios.create({
   baseURL: `${baseURL}/auth/forgot-password`, // Correct the baseURL to point to `/auth`
 });
+const orderhistory = axios.create({
+  baseURL: `${baseURL}/completedorder/usercompletedorder`, // Ensure this is the correct endpoint for order descriptions
+});
+const Seo = axios.create({
+  baseURL: `${baseURL}/seo`, // Ensure this is the correct endpoint for order descriptions
+});
 
 
 // Generic request interceptor for all instances
@@ -91,6 +97,8 @@ manageaddresses.interceptors.request.use(requestInterceptor, errorInterceptor);
 newsletteremail.interceptors.request.use(requestInterceptor, errorInterceptor);
 resetpassword.interceptors.request.use(requestInterceptor, errorInterceptor);
 forgetPassword.interceptors.request.use(requestInterceptor, errorInterceptor);
+orderhistory.interceptors.request.use(requestInterceptor, errorInterceptor);
+Seo.interceptors.request.use(requestInterceptor, errorInterceptor);
 
 export {
   register,
@@ -109,4 +117,6 @@ export {
   newsletteremail,
   resetpassword,
   forgetPassword,
+  orderhistory,
+  Seo,
 };

@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { blog } from "../../utils/axios";
 import "./blog.css";
 import CustomLoader from "../clothingsection/loader";
+import { Helmet } from "react-helmet"; // Import Helmet
 
 const { Meta } = Card;
 
@@ -36,6 +37,7 @@ function Blog() {
   if (error) {
     return <p>{error}</p>; // Display error message if an error occurred
   }
+
   const StoreBlogId = (id, title) => {
     localStorage.setItem("selectedBlogId", id);
     localStorage.setItem("selectedBlogTitle", title);
@@ -43,7 +45,28 @@ function Blog() {
 
   return (
     <div>
-      
+      <Helmet>
+        <title>Our Blogs - Stay Updated with the Latest Posts</title>
+        <meta
+          name="description"
+          content="Explore our blog to stay updated with the latest posts, trends, and insights on various topics."
+        />
+        <meta
+          name="keywords"
+          content="blogs, articles, latest posts, insights, news"
+        />
+        <script type="application/ld+json">
+          {`{
+            "@context": "https://schema.org",
+            "@type": "Blog",
+            "name": "Our Blogs",
+            "description": "Explore our blog to stay updated with the latest posts, trends, and insights on various topics.",
+            "url": "https://www.mywebsite.com/blogs",
+            "image": "https://www.mywebsite.com/images/blog-banner.jpg"
+          }`}
+        </script>
+      </Helmet>
+
       <div>
         <img
           className="img-cbdmain"
@@ -57,7 +80,7 @@ function Blog() {
           }}
         />
         <div className="blog-container">
-          <p className="blog-headi">Blogs</p>
+          <h1 className="blog-headi">Blogs</h1>
           <Row gutter={[16, 16]} justify="center">
             {blogData.map((blog, index) => (
               <Col key={index} xs={24} sm={12} md={12} lg={12}>

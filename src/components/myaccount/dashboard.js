@@ -267,9 +267,9 @@ function AccountDashboard() {
   return (
     <div className="dashboard-container">
       <div className="header">
-        <Title level={2} className="header-title">
+        <h1 level={2} className="header-title">
           Account Information
-        </Title>
+        </h1>
       </div>
 
       <Row gutter={[16, 24]} justify="space-between">
