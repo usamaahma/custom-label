@@ -13,7 +13,7 @@ import {
 } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
-import { pendingcheckout, hangtag } from "../../utils/axios";
+import { pendingcheckout, hangtag, Seo } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
 import { Storage } from "../../firebaseConfig";
 import { IoMdCloudUpload } from "react-icons/io";
@@ -63,6 +63,8 @@ function HangtagDetail() {
   const [selectedCard, setSelectedCard] = useState(null); // Track selected card
   const orderProcessRef = useRef(null);
   const date = new Date();
+  const [seoData, setSeoData] = useState(null);
+
 
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -1015,29 +1017,45 @@ function HangtagDetail() {
     textArea.innerHTML = html;
     return textArea.value;
   }
+  useEffect(() => {
+    // Fetch the SEO data using Axios from your API
+    const fetchSeoData = async () => {
+      try {
+        const response = await Seo.get(`?productId=${selectedHangtagId}`);
+        console.log(response);
+        const seo = response.data.results[0]; // Assuming this is the structure
+        setSeoData(seo);
+      } catch (error) {
+        console.error("Error fetching SEO data:", error);
+      }
+    };
+
+    fetchSeoData();
+  }, []);
   return (
     <div className="first-main-express">
-      <Helmet>
-        <title>Our Blogs - Stay Updated with the Latest Posts</title>
-        <meta
-          name="description"
-          content="Explore our blog to stay updated with the latest posts, trends, and insights on various topics."
-        />
-        <meta
-          name="keywords"
-          content="blogs, articles, latest posts, insights, news"
-        />
-        <script type="application/ld+json">
-          {`{
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            "name": "Our Blogs",
-            "description": "Explore our blog to stay updated with the latest posts, trends, and insights on various topics.",
-            "url": "https://www.mywebsite.com/blogs",
-            "image": "https://www.mywebsite.com/images/blog-banner.jpg"
-          }`}
-        </script>
-      </Helmet>
+      <div>
+              {/* Only render Helmet once seoData is available */}
+              {seoData && (
+                <Helmet>
+                  <title>{seoData.title}</title>
+                  <meta name="description" content={seoData.description} />
+                  <meta name="keywords" content={seoData.keywords.join(", ")} />
+                  <script type="application/ld+json">
+                    {JSON.stringify({
+                      "@context": "https://schema.org",
+                      "@type": "Blog", // Change to "Product" if it's a product page
+                      name: seoData.title,
+                      description: seoData.description,
+                      url: `https://www.mywebsite.com/products/${seoData.productId}`, // Dynamically use the product ID in URL
+                      image: "https://www.mywebsite.com/images/product-banner.jpg", // Use actual product image URL
+                    })}
+                  </script>
+                </Helmet>
+              )}
+      
+              {/* The rest of your component */}
+            </div>
       <div className="headingbread">
         <p className="express-clothing-heading"> {title}</p>
         <Breadcrumb
