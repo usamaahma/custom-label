@@ -48,7 +48,6 @@ function Beatquote({ titles }) {
             .then((Url) => {
               setUrl(Url);
               setUploadedImageUrl(Url); // Set the uploaded image URL
-              console.log(Url);
             })
             .catch((error) => {
               console.log(error.message, "error getting the image url");
