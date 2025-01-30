@@ -1094,7 +1094,7 @@ function HangtagDetail() {
                         cursor: "pointer",
                         margin: "5px",
                         borderRadius: "5px",
-                        width: "60px",
+                        width: "60px",      
                         height: "60px",
                         objectFit: "cover",
                       }}
