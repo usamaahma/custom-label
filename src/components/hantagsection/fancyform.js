@@ -17,6 +17,7 @@ const FancyForm1 = () => {
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [sendByEmail, setSendByEmail] = useState(false);
   const date = new Date();
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -61,7 +62,7 @@ const FancyForm1 = () => {
       email: values.email || "",
       phoneNumber: values.phonenumber || "",
       // product: values.product || "",
-      image:url|| "defaultImagePath",
+      image: url || "defaultImagePath",
       width: Math.max(Number(values.width) || 0, 1), // Minimum width of 1
       height: Math.max(Number(values.height) || 0, 1),
       quantity: Number(values.quantity) || 1,
@@ -89,7 +90,7 @@ const FancyForm1 = () => {
       .then((res) => {
         console.log("Success:", res);
         message.success("Thank you for considering us!");
-        navigate("/thank-you"); 
+        navigate("/thank-you");
       })
       .catch((error) => {
         console.error("Error during the request:", error);
@@ -118,12 +119,45 @@ const FancyForm1 = () => {
         <Col xs={24} sm={12}>
           <p className="txt-fancy-bold">Upload Artwork</p>
           <input type="file" onChange={handlesubmit} />
-        {url && (
+          {url && (
             <img
               src={url}
               alt="Uploaded preview"
               style={{ width: "5rem", height: "5rem" }}
             />
+          )}
+          <div style={{ marginTop: "10px" }}>
+            <input
+              type="checkbox"
+              id="sendByEmail"
+              checked={sendByEmail}
+              onChange={(e) => setSendByEmail(e.target.checked)}
+            />
+            <label
+              htmlFor="sendByEmail"
+              style={{
+                marginLeft: "8px",
+                fontSize: "16px",
+                color: "#333",
+              }}
+            >
+              I will send other artwork files through email
+            </label>
+          </div>
+
+          {sendByEmail && (
+            <p
+              style={{
+                marginTop: "5px",
+                fontSize: "14px",
+                color: "#5F6F65",
+              }}
+            >
+              Email additional files to:{" "}
+              <a href="mailto:sales@theclothinglabels.com">
+                <strong>sales@theclothinglabels.com</strong>
+              </a>{" "}
+            </p>
           )}
           <p className="txt-fancy-bold">Size</p>
           <Row gutter={16} className="input-container-fancy">
