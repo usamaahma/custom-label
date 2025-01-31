@@ -10,6 +10,7 @@ import {
 } from "firebase/storage";
 import { getquote } from "../../utils/axios";
 import "./beatquote.css";
+import { DeleteOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -130,16 +131,43 @@ function Beatquote({ titles }) {
               ))}
             </Select>
           </Form.Item>
+          <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
+            <input type="file" onChange={handlesubmit} />
 
-          <input type="file" onChange={handlesubmit} />
-          {url && (
-            <img
-              src={url}
-              alt="Uploaded preview"
-              style={{ width: "5rem", height: "5rem" }}
-            />
-          )}
-
+            {url && (
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "5px",
+                  padding: "5px",
+                  borderRadius: "4px",
+                }}
+              >
+                <img
+                  src={url}
+                  alt="Uploaded preview"
+                  style={{
+                    width: "5rem",
+                    height: "2rem",
+                    objectFit: "cover",
+                    borderRadius: "4px",
+                  }}
+                />
+                <button
+                  style={{ border: "none", background: "transparent" }}
+                  onClick={() => setUrl("")} // Clear the uploaded image
+                >
+                  <DeleteOutlined
+                    style={{
+                      color: "red",
+                      cursor: "pointer",
+                    }}
+                  />
+                </button>
+              </div>
+            )}
+          </div>
           <div className="beatquote-customform-item-row">
             <Form.Item
               label={<span className="customform-label">Size (inches)</span>}
