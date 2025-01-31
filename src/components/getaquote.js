@@ -1,14 +1,5 @@
 import React, { useState } from "react";
-import {
-  Form,
-  Input,
-  Button,
-  InputNumber,
-  Upload,
-  Select,
-  message,
-} from "antd";
-import { UploadOutlined } from "@ant-design/icons";
+import { Form, Input, Button, InputNumber, Select, message } from "antd";
 import { Zoom } from "react-awesome-reveal";
 import { getquote } from "../utils/axios";
 import { Storage } from "../firebaseConfig";
@@ -18,15 +9,14 @@ import {
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirecting
+import { useNavigate } from "react-router-dom";
 
 import "./getaquote.css";
 
-const { TextArea } = Input;
 const { Option } = Select;
 
 function Getaquote1() {
-  const navigate = useNavigate(); // Initialize navigate hook for redirection
+  const navigate = useNavigate();
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
@@ -40,11 +30,9 @@ function Getaquote1() {
       email: values.email,
       product: values.products,
       artwork: [url],
-      width: String(values.width), // Convert to string
-      height: String(values.height), // Convert to string
-      quantity: String(values.quantity), // Convert to string
+      size: values.size,
+      quantity: String(values.quantity),
       phonenumber: values.contactNumber,
-      comments: values.comments,
     };
 
     getquote({
@@ -52,10 +40,7 @@ function Getaquote1() {
       data: data1,
     })
       .then((res) => {
-        console.log("success", res);
         message.success("Thank you for considering us!");
-
-        // Redirect to the thank-you page after successful submission
         navigate("/thank-you");
       })
       .catch(() => {
@@ -73,21 +58,18 @@ function Getaquote1() {
         `images/${uploadedFile.name + showTime}`
       );
       const uploadTask = uploadBytesResumable(imageDocument, uploadedFile);
-
       uploadTask.on("state_changed", (snapshot) => {
         const percent = Math.round(
           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
         );
         setPercent(percent);
       });
-
       uploadBytes(imageDocument, uploadedFile)
         .then(() => {
           getDownloadURL(imageDocument)
             .then((Url) => {
               setUrl(Url);
-              setUploadedImageUrl(Url); // Set the uploaded image URL
-              console.log(Url);
+              setUploadedImageUrl(Url);
             })
             .catch((error) => {
               console.log(error.message, "error getting the image url");
@@ -98,7 +80,6 @@ function Getaquote1() {
         });
     }
   };
-
   return (
     <div className="customform-wrapper">
       <div className="customform-container">
@@ -106,7 +87,6 @@ function Getaquote1() {
         <p className="customform-quote-text">
           Receive the lowest pricing & work with a team of experts.
         </p>
-
         <Zoom cascade>
           <img
             src="../../images/uploadform.png"
@@ -150,26 +130,13 @@ function Getaquote1() {
 
           <div className="customform-item-row">
             <Form.Item
-              label={<span className="customform-label">Width (inches)</span>}
-              name="width"
-              rules={[{ required: true, message: "Please enter the width!" }]}
+              label={<span className="customform-label">Size (inches)</span>}
+              name="size"
+              rules={[{ required: true, message: "Please enter the size!" }]}
             >
-              <InputNumber
-                placeholder="Enter width"
-                className="customform-input-number"
-                min={1}
-              />
-            </Form.Item>
-
-            <Form.Item
-              label={<span className="customform-label">Height (inches)</span>}
-              name="height"
-              rules={[{ required: true, message: "Please enter the height!" }]}
-            >
-              <InputNumber
-                placeholder="Enter height"
-                className="customform-input-number"
-                min={1}
+              <Input
+                placeholder="Width x Height"
+                className="customform-input"
               />
             </Form.Item>
           </div>
@@ -209,7 +176,6 @@ function Getaquote1() {
               }}
             />
           </Form.Item>
-
           <Form.Item
             label={<span className="customform-label">Name</span>}
             name="name"
@@ -217,7 +183,6 @@ function Getaquote1() {
           >
             <Input placeholder="Enter your name" className="customform-input" />
           </Form.Item>
-
           <Form.Item
             label={<span className="customform-label">Email Address</span>}
             name="email"
@@ -231,19 +196,6 @@ function Getaquote1() {
               className="customform-input"
             />
           </Form.Item>
-
-          <Form.Item
-            label={<span className="customform-label">Comments</span>}
-            name="comments"
-            rules={[{ required: true, message: "Please add your comments!" }]}
-          >
-            <TextArea
-              placeholder="Your comments"
-              rows={4}
-              className="customform-textarea"
-            />
-          </Form.Item>
-
           <Form.Item>
             <Button
               htmlType="submit"
@@ -254,7 +206,6 @@ function Getaquote1() {
             </Button>
           </Form.Item>
         </Form>
-
         <h6 className="customform-h6-form">
           In a Hurry? Give us a call at{" "}
           <a href="tel:+1234567890" className="customform-call-link">
