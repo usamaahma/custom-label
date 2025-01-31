@@ -1,9 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button, InputNumber, Select, message } from "antd";
-import { UploadOutlined } from "@ant-design/icons";
 import { Storage } from "../../firebaseConfig";
 import { useNavigate } from "react-router-dom";
-
 import {
   uploadBytes,
   ref,
@@ -11,10 +9,8 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { getquote } from "../../utils/axios";
-
 import "./beatquote.css";
 
-const { TextArea } = Input;
 const { Option } = Select;
 
 function Beatquote({ titles }) {
@@ -22,7 +18,7 @@ function Beatquote({ titles }) {
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
-
+  const [isScrolled, setIsScrolled] = useState(false);
   const date = new Date();
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
@@ -66,11 +62,9 @@ function Beatquote({ titles }) {
       email: values.email,
       product: values.products,
       artwork: [url],
-      width: String(values.width),
-      height: String(values.height),
+      size: values.size,
       quantity: String(values.quantity),
       phonenumber: values.contactNumber,
-      comments: values.comments,
     };
     getquote({
       method: "post",
@@ -85,14 +79,35 @@ function Beatquote({ titles }) {
         message.error("Something went wrong, please try again!");
       });
   };
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 0) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
+
+    window.addEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="beatquote-customform-wrapper">
-      <h2 className="beatquote-customform-heading">Get a Quote</h2>
+    <div
+      className={`beatquote-customform-wrapper ${
+        isScrolled ? "beatquote-scrolled" : ""
+      }`}
+    >
+      {" "}
+      <div className="beatquote-customform-header">
+        <p className="beatquote-customform-heading">Get a Quote</p>
+      </div>{" "}
       <div className="beatquote-customform-container">
         <p className="beatquote-customform-quote-text">
           Receive the lowest pricing & work with a team of experts.
         </p>
-
         <Form layout="vertical" onFinish={onFinish}>
           <Form.Item
             label={
@@ -127,26 +142,13 @@ function Beatquote({ titles }) {
 
           <div className="beatquote-customform-item-row">
             <Form.Item
-              label={<span className="beatquote-customform-label">Width</span>}
-              name="width"
-              rules={[{ required: true, message: "Please enter the width!" }]}
+              label={<span className="customform-label">Size (inches)</span>}
+              name="size"
+              rules={[{ required: true, message: "Please enter the size!" }]}
             >
-              <InputNumber
-                placeholder="Enter width"
+              <Input
+                placeholder="Width x Height"
                 className="beatquote-customform-input-number"
-                min={1}
-              />
-            </Form.Item>
-
-            <Form.Item
-              label={<span className="beatquote-customform-label">Height</span>}
-              name="height"
-              rules={[{ required: true, message: "Please enter the height!" }]}
-            >
-              <InputNumber
-                placeholder="Enter height"
-                className="beatquote-customform-input-number"
-                min={1}
               />
             </Form.Item>
 
@@ -221,18 +223,6 @@ function Beatquote({ titles }) {
             />
           </Form.Item>
 
-          <Form.Item
-            label={<span className="beatquote-customform-label">Comments</span>}
-            name="comments"
-            rules={[{ required: true, message: "Please add your comments!" }]}
-          >
-            <TextArea
-              placeholder="Your comments"
-              rows={4}
-              className="beatquote-customform-textarea"
-            />
-          </Form.Item>
-
           <Form.Item>
             <Button
               htmlType="submit"
@@ -250,11 +240,8 @@ function Beatquote({ titles }) {
             +123-456-7890
           </a>
         </h6>
-
-        <hr />
       </div>
     </div>
   );
 }
-
 export default Beatquote;

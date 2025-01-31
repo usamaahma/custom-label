@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Breadcrumb, Row, Col } from "antd";
-import { blog } from "../../utils/axios";
+import { Helmet } from "react-helmet";
+import { blog, Seo } from "../../utils/axios";
 import "./blogdetail.css";
 
 function Blogdetail1() {
@@ -9,9 +10,26 @@ function Blogdetail1() {
 
   const [loading, setLoading] = useState(true); // State for loading indicator
   const [error, setError] = useState(null); // State to store any error that occurs during fetch
+  const [seoData, setSeoData] = useState(null);
 
   // Fetch data from the API on component mount
   const blogid = localStorage.getItem("selectedBlogId");
+
+  useEffect(() => {
+    // Fetch the SEO data using Axios from your API
+    const fetchSeoData = async () => {
+      try {
+        const response = await Seo.get(`?productId=${blogid}`);
+        console.log(response);
+        const seo = response.data.results[0]; // Assuming this is the structure
+        setSeoData(seo);
+      } catch (error) {
+        console.error("Error fetching SEO data:", error);
+      }
+    };
+
+    fetchSeoData();
+  }, []);
   useEffect(() => {
     const fetchBlogData = async () => {
       try {
@@ -44,8 +62,32 @@ function Blogdetail1() {
   }
   const title = localStorage.getItem("selectedBlogTitle");
 
+ 
+
   return (
     <div>
+      <div>
+        {/* Only render Helmet once seoData is available */}
+        {seoData && (
+          <Helmet>
+            <title>{seoData.title}</title>
+            <meta name="description" content={seoData.description} />
+            <meta name="keywords" content={seoData.keywords.join(", ")} />
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Blog", // Change to "Product" if it's a product page
+                name: seoData.title,
+                description: seoData.description,
+                url: `https://www.mywebsite.com/products/${seoData.productId}`, // Dynamically use the product ID in URL
+                image: "https://www.mywebsite.com/images/product-banner.jpg", // Use actual product image URL
+              })}
+            </script>
+          </Helmet>
+        )}
+
+        {/* The rest of your component */}
+      </div>
       <div className="headingbread" style={{ marginTop: "5rem" }}>
         <p className="express-clothing-heading"> {title}</p>
         <Breadcrumb

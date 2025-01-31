@@ -14,7 +14,7 @@ function App() {
   return (
     <AuthProvider>
       <CartProvider>
-        <Helmet>
+        {/* <Helmet>
           <title>My Website - Best Products & Services</title>
           <meta name="description" content="Welcome to My Website. Discover amazing products and services here!" />
           <meta name="keywords" content="ecommerce, products, services, shopping" />
@@ -24,7 +24,7 @@ function App() {
           <meta property="og:description" content="Explore the best products and services at My Website." />
           <meta property="og:image" content="https://example.com/logo.png" />
           <meta property="og:url" content="https://mywebsite.com" />
-        </Helmet>
+        </Helmet> */}
 
         <div className="App">
           {isVerified ? (

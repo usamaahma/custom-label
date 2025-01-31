@@ -19,7 +19,7 @@ import { SiStyleshare } from "react-icons/si";
 import { SiZedindustries } from "react-icons/si";
 import { IoOptionsSharp } from "react-icons/io5";
 import { MdProductionQuantityLimits } from "react-icons/md";
-import { pendingcheckout, products } from "../../utils/axios";
+import { pendingcheckout, products, Seo } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
 import { Storage } from "../../firebaseConfig";
 import {
@@ -60,12 +60,13 @@ function ProductDetail() {
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
   const [description, setDescription] = useState([]);
-  const [uploadedImageUrl, setUploadedImageUrl] = useState("");
+  const [sendByEmail, setSendByEmail] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null); // Track selected card
   const fileInputRef = useRef(null); // Reference to the hidden input
   const stepsRef = useRef(null); // Ref for scrolling to steps
   const orderProcessRef = useRef(null);
   const date = new Date();
+  const [seoData, setSeoData] = useState(null);
 
   const handleFileClick = () => {
     fileInputRef.current.click(); // Trigger the hidden file input click
@@ -125,12 +126,11 @@ function ProductDetail() {
       });
     }
   };
-  
 
   const handlePrev = () => {
     // Move to the previous step
     setCurrent((prev) => Math.max(prev - 1, 0));
-  
+
     // Scroll to the "Order Process" section again
     if (orderProcessRef.current) {
       orderProcessRef.current.scrollIntoView({
@@ -139,7 +139,6 @@ function ProductDetail() {
       });
     }
   };
-   
 
   useEffect(() => {
     const stickyDiv = document.querySelector(".sticky-div");
@@ -220,7 +219,7 @@ function ProductDetail() {
     };
 
     try {
-      const response = await pendingcheckout.post("/", data); // Replace with your actual API endpoint
+      const response = await pendingcheckout.post("/", data);
       console.log("goingdata", response.data);
       message.success("Go To Cart");
     } catch (error) {
@@ -234,7 +233,7 @@ function ProductDetail() {
     console.log(selectedData, "data that is selected");
     // Check if the user is logged in
     const userdataString = localStorage.getItem("user");
-    const userdata = JSON.parse(userdataString); // Parse the stored user data
+    const userdata = JSON.parse(userdataString);
 
     if (!userdata) {
       notification.error({
@@ -294,7 +293,7 @@ function ProductDetail() {
   };
 
   // Function to handle card clicks
-  const handleCardClick = (key, value, id, option_id) => {
+  const handleCardClick = (key, value, id) => {
     // Update the selected data
     setSelectedData((prevData) => ({
       ...prevData,
@@ -427,7 +426,7 @@ function ProductDetail() {
                   style={{
                     width: "auto",
                     height: "auto",
-                    border: "2px dashed #ddd",
+                    border: "2px  #ddd",
                     borderRadius: "8px",
                     cursor: "pointer",
                     objectFit: "cover",
@@ -440,17 +439,39 @@ function ProductDetail() {
 
               {/* Third row: Text message (Centered) */}
               <Col xs={24} sm={24} md={24} lg={24}>
-                <h3
-                  style={{
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    textAlign: "center",
-                    color: "#5F6F65", // Optional: Adjust color if needed
-                    marginTop: "10px",
-                  }}
-                >
-                  Please choose the file and upload your artwork
-                </h3>
+                <div style={{ marginTop: "10px" }}>
+                  <input
+                    type="checkbox"
+                    id="sendByEmail"
+                    checked={sendByEmail}
+                    onChange={(e) => setSendByEmail(e.target.checked)}
+                  />
+                  <label
+                    htmlFor="sendByEmail"
+                    style={{
+                      marginLeft: "8px",
+                      fontSize: "16px",
+                      color: "#333",
+                    }}
+                  >
+                    I will send other artwork files through email
+                  </label>
+                </div>
+
+                {sendByEmail && (
+                  <p
+                    style={{
+                      marginTop: "5px",
+                      fontSize: "14px",
+                      color: "#5F6F65",
+                    }}
+                  >
+                    Email additional files to:{" "}
+                    <a href="mailto:sales@theclothinglabels.com">
+                      <strong>sales@theclothinglabels.com</strong>
+                    </a>{" "}
+                  </p>
+                )}
               </Col>
             </Row>
           </div>
@@ -1075,30 +1096,46 @@ function ProductDetail() {
     textArea.innerHTML = html;
     return textArea.value;
   }
+  useEffect(() => {
+    // Fetch the SEO data using Axios from your API
+    const fetchSeoData = async () => {
+      try {
+        const response = await Seo.get(`?productId=${selectedProductId}`);
+        console.log(response);
+        const seo = response.data.results[0]; // Assuming this is the structure
+        setSeoData(seo);
+      } catch (error) {
+        console.error("Error fetching SEO data:", error);
+      }
+    };
+
+    fetchSeoData();
+  }, []);
 
   return (
     <div className="first-main-express">
-      <Helmet>
-        <title>Our Blogs - Stay Updated with the Latest Posts</title>
-        <meta
-          name="description"
-          content="Explore our blog to stay updated with the latest posts, trends, and insights on various topics."
-        />
-        <meta
-          name="keywords"
-          content="blogs, articles, latest posts, insights, news"
-        />
-        <script type="application/ld+json">
-          {`{
-            "@context": "https://schema.org",
-            "@type": "Blog",
-            "name": "Our Blogs",
-            "description": "Explore our blog to stay updated with the latest posts, trends, and insights on various topics.",
-            "url": "https://www.mywebsite.com/blogs",
-            "image": "https://www.mywebsite.com/images/blog-banner.jpg"
-          }`}
-        </script>
-      </Helmet>
+      <div>
+        {/* Only render Helmet once seoData is available */}
+        {seoData && (
+          <Helmet>
+            <title>{seoData.title}</title>
+            <meta name="description" content={seoData.description} />
+            <meta name="keywords" content={seoData.keywords.join(", ")} />
+            <script type="application/ld+json">
+              {JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "Blog", // Change to "Product" if it's a product page
+                name: seoData.title,
+                description: seoData.description,
+                url: `https://www.mywebsite.com/products/${seoData.productId}`, // Dynamically use the product ID in URL
+                image: "https://www.mywebsite.com/images/product-banner.jpg", // Use actual product image URL
+              })}
+            </script>
+          </Helmet>
+        )}
+
+        {/* The rest of your component */}
+      </div>
       <div className="headingbread">
         <p className="express-clothing-heading"> {title}</p>
         <Breadcrumb
