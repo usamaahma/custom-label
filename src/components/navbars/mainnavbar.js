@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Navbar, Nav, Container, Button, NavDropdown } from "react-bootstrap";
+import { Navbar, Nav, Container, Button } from "react-bootstrap";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import { CiMobile3 } from "react-icons/ci";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Cartmodal1 from "../checkout/cartmodal";
 import { Slide } from "react-awesome-reveal";
+import { useAuth } from "../../context/authcontext"; // Import the useAuth hook
+
 import "./mainnavbar.css";
 
 const Mainnavbar = () => {
@@ -14,6 +16,9 @@ const Mainnavbar = () => {
   const [scrolled, setScrolled] = useState(false);
   const [visible, setVisible] = useState(false);
   const [expanded, setExpanded] = useState(false); // State to track collapse
+
+  // Check if user is logged in (using localStorage for this example)
+  const { isLoggedIn } = useAuth(); // Access the user and isLoggedIn from AuthContext
 
   const handleClickOutside = (event) => {
     if (navbarRef.current && !navbarRef.current.contains(event.target)) {
@@ -25,6 +30,16 @@ const Mainnavbar = () => {
     navigate(path);
     window.scrollTo(0, 0);
     setExpanded(false); // Close the collapse after navigation
+  };
+
+  const handleUserIconClick = () => {
+    if (isLoggedIn) {
+      // Redirect to dashboard if logged in
+      navigate("/my-account");
+    } else {
+      // Redirect to signup if not logged in
+      navigate("/login");
+    }
   };
 
   useEffect(() => {
@@ -69,11 +84,15 @@ const Mainnavbar = () => {
         </Navbar.Brand>
 
         <div className="changenavbar-nav ml-auto">
-          <Link to="/login" className="changenavbar-link">
+          <div className="changenavbar-link">
             <div>
-              <FaUserCircle style={{ color: "black" }} />
+              <FaUserCircle
+                onClick={handleUserIconClick}
+                style={{ color: "black" }}
+              />
             </div>
-          </Link>
+          </div>
+
           <Link className="changenavbar-link">
             <button
               onClick={() => setVisible(true)}
@@ -99,6 +118,7 @@ const Mainnavbar = () => {
                 as={Link}
                 to="/all-clothing-labels"
                 className="mainnav-link"
+                onClick={() => handleNavClick("/all-clothing-labels")}
               >
                 CUSTOM WOVEN LABELS
               </Nav.Link>
@@ -106,6 +126,7 @@ const Mainnavbar = () => {
                 as={Link}
                 to="/custom-hangtags"
                 className="mainnav-link"
+                onClick={() => handleNavClick("/custom-hangtags")}
               >
                 CUSTOM HANGTAGS{" "}
               </Nav.Link>
