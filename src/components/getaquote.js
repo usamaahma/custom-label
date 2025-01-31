@@ -19,7 +19,7 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { useNavigate } from "react-router-dom"; // Import useNavigate for redirecting
-
+import { Helmet } from "react-helmet"; // Import Helmet
 import "./getaquote.css";
 
 const { TextArea } = Input;
@@ -101,6 +101,29 @@ function Getaquote1() {
 
   return (
     <div className="customform-wrapper">
+      <Helmet>
+        <title>
+          Woven Labels - High-Quality Custom Labels for Your Products
+        </title>
+        <meta
+          name="description"
+          content="Discover high-quality woven labels to personalize your products. Custom labels designed for durability and style."
+        />
+        <meta
+          name="keywords"
+          content="woven labels, custom labels, product labels, high-quality labels, personalized labels"
+        />
+        <script type="application/ld+json">
+          {`{
+            "@context": "https://schema.org",
+            "@type": "Product",
+            "name": "Custom Woven Labels",
+            "description": "Discover high-quality woven labels to personalize your products. Custom labels designed for durability and style.",
+            "url": "https://www.mywebsite.com/wovenlabels",
+            "image": "https://www.mywebsite.com/images/woven-label.jpg"
+          }`}
+        </script>
+      </Helmet>   
       <div className="customform-container">
         <h1 className="customform-heading">Get a Quote</h1>
         <p className="customform-quote-text">

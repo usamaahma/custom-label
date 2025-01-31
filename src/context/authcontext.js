@@ -1,5 +1,4 @@
 import React, { createContext, useReducer, useContext, useEffect } from "react";
-import { login } from "../utils/axios"; // Use named import for the login instance
 
 const AuthContext = createContext();
 
