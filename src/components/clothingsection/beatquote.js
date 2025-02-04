@@ -250,7 +250,6 @@ function Beatquote({ titles }) {
               className="beatquote-customform-input"
             />
           </Form.Item>
-
           <Form.Item>
             <Button
               htmlType="submit"
