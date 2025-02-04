@@ -95,6 +95,7 @@
 
 .card {
   width: 100%; /* Ensures the card uses full width of the column */
+  height: 100%;
   padding: 20px;
   border-radius: 1rem; /* Slightly rounded corners for a soft look */
   background-color: #faf4eb;

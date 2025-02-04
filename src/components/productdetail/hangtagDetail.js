@@ -412,6 +412,20 @@ function HangtagDetail() {
                   >
                     I will send other artwork files through email
                   </label>
+                  <button
+                    onClick={handleNext}
+                    style={{
+                      background: "none",
+                      border: "1px solid #5F6F65",
+                      borderRadius: "0.5rem",
+                      padding: "4px",
+                      display: "flex",
+                      float: "right",
+                      color: "blue",
+                    }}
+                  >
+                    ✓ Skip
+                  </button>
                 </div>
 
                 {sendByEmail && (
@@ -652,11 +666,11 @@ function HangtagDetail() {
                             transition: "all 0.3s ease", // Smooth transition
                             border:
                               selectedCard === size._id
-                                ? "2px solid rgba(0, 0, 0, 0.2)" // Light border for selected card
+                                ? "2px solid rgba(0, 0, 0, 0.2)"
                                 : "none",
                           }}
                           onClick={() => {
-                            handleSizeClick("size", size); // Pass only the sizes array
+                            handleSizeClick("size", size);
                             handleCardClick("size", size.name, size._id);
                           }}
                         >
@@ -806,7 +820,6 @@ function HangtagDetail() {
               </div>
             </div>
           ))}
-
           <div className="divs-tableexpress" style={{ display: "block" }}>
             <div
               style={{
@@ -845,7 +858,6 @@ function HangtagDetail() {
         </>
       ),
     },
-
     {
       title: (
         <div
@@ -909,7 +921,6 @@ function HangtagDetail() {
   const fullText = descriptionText
     ? descriptionText
     : "No description available";
-
   // The truncated version of the text (first 100 characters, you can adjust as needed)
   const truncatedText = `${fullText.substring(0, 100)}`;
 
@@ -962,7 +973,6 @@ function HangtagDetail() {
   const items = steps.map((item) => ({
     title: <span className="responsive-title">{item.title}</span>,
   }));
-
   const contentStyle = {
     textAlign: "center",
     color: token.colorTextTertiary,
@@ -1056,7 +1066,7 @@ function HangtagDetail() {
             <script type="application/ld+json">
               {JSON.stringify({
                 "@context": "https://schema.org",
-                "@type": "Blog", // Change to "Product" if it's a product page
+                "@type": "Blog",
                 name: seoData.title,
                 description: seoData.description,
                 url: `https://www.mywebsite.com/products/${seoData.productId}`, // Dynamically use the product ID in URL
@@ -1065,8 +1075,6 @@ function HangtagDetail() {
             </script>
           </Helmet>
         )}
-
-        {/* The rest of your component */}
       </div>
       <div className="headingbread">
         <p className="express-clothing-heading"> {title}</p>
@@ -1096,7 +1104,7 @@ function HangtagDetail() {
                   width: "100%",
                   maxWidth: "30rem",
                   height: "100vh",
-                  overflow: "hidden", // Ensure the image stays inside the container
+                  overflow: "hidden",
                 }}
               >
                 <img
@@ -1157,7 +1165,6 @@ function HangtagDetail() {
               </div>
             </div>
           </div>
-
           <div className="txtmain" ref={orderProcessRef}>
             <p className="how">Order Process</p>
             <p className="at" style={{ width: "70%", margin: "0 auto" }}>

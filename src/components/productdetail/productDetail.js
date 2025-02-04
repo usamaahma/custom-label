@@ -439,7 +439,11 @@ function ProductDetail() {
 
               {/* Third row: Text message (Centered) */}
               <Col xs={24} sm={24} md={24} lg={24}>
-                <div style={{ marginTop: "10px" }}>
+                <div
+                  style={{
+                    marginTop: "10px",
+                  }}
+                >
                   <input
                     type="checkbox"
                     id="sendByEmail"
@@ -456,6 +460,20 @@ function ProductDetail() {
                   >
                     I will send other artwork files through email
                   </label>
+                  <button
+                    onClick={handleNext}
+                    style={{
+                      background: "none",
+                      border: "1px solid #5F6F65",
+                      borderRadius: "0.5rem",
+                      padding: "4px",
+                      display: "flex",
+                      float: "right",
+                      color: "blue",
+                    }}
+                  >
+                    ✓ Skip
+                  </button>
                 </div>
 
                 {sendByEmail && (
