@@ -11,7 +11,9 @@ function Wovenlabelpage() {
   return (
     <div className="landingback">
       <Helmet>
-        <title>Woven Labels - High-Quality Custom Labels for Your Products</title>
+        <title>
+          Woven Labels - High-Quality Custom Labels for Your Products
+        </title>
         <meta
           name="description"
           content="Discover high-quality woven labels to personalize your products. Custom labels designed for durability and style."
@@ -30,8 +32,7 @@ function Wovenlabelpage() {
             "image": "https://www.mywebsite.com/images/woven-label.jpg"
           }`}
         </script>
-      </Helmet>
-      
+      </Helmet>   
       <Wovenlabeldesc />
       <Descriptionexpress />
       <Finalprocess />

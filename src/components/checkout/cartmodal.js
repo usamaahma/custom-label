@@ -29,6 +29,7 @@ function Cartmodal1({ visible, onClose }) {
   // Function to handle checkout
   const handleCheckout = () => {
     onClose(); // Close modal
+    console.log(" checkout clicked");
     navigate("/checkout"); // Navigate to checkout page
   };
 
