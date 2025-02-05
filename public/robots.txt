@@ -1,3 +1,16 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Disallow: /login
+Disallow: /create-account
+Disallow: /checkout
+Disallow: /view-and-edit-cart
+Disallow: /my-account
+Disallow: /order-history
+Disallow: /addresses
+Disallow: /payment-options
+Disallow: /account-details
+Disallow: /pending-approvals
+Disallow: /reset-password
+Disallow: /forgot-password
+
+# Sitemap: http://localhost:3000/sitemap.xml
