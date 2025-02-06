@@ -1191,11 +1191,11 @@ function HangtagDetail() {
               {current > 0 && current < steps.length - 1 && (
                 <Button onClick={handleNext}>Next</Button>
               )}
-              {current === steps.length - 1 && (
+              {/* {current === steps.length - 1 && (
                 <Button onClick={() => message.success("Processing complete!")}>
                   Done
                 </Button>
-              )}
+              )} */}
               {current > 0 && (
                 <Button
                   style={{

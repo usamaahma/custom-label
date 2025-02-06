@@ -49,7 +49,7 @@
 
 .mainnav-collapse {
   display: flex;
-  justify-content:end; /* Ensure space between items */
+  justify-content: end; /* Ensure space between items */
   align-items: center;
   gap: 2rem;
 }
@@ -63,7 +63,7 @@
 .mainnav-link {
   font-size: 0.9rem;
   margin-left: 1rem; /* Gap between tabs */
-   color: #231f20;
+  color: #231f20;
   font-weight: bold !important;
 }
 .mainnav-quote-button1 {
@@ -112,6 +112,15 @@
   display: flex;
   align-items: center; /* Vertically centers the icon and text */
   gap: 5px; /* Space between the icon and text */
+}
+
+@media (min-width: 1400px) {
+  .mainnav-collapse {
+    display: flex;
+    justify-content: center; /* Ensure space between items */
+    align-items: center;
+    gap: 7rem;
+  }
 }
 
 @media (max-width: 768px) {
