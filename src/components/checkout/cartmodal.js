@@ -110,6 +110,7 @@ function Cartmodal1({ visible, onClose }) {
             block
             className="btn-cart"
             onClick={handleCheckout}
+            onTouchEnd={handleCheckout} // Add this for mobile touch support
             style={{ marginBottom: "1rem" }}
           >
             Checkout
@@ -124,6 +125,7 @@ function Cartmodal1({ visible, onClose }) {
           block
           className="btn-cart"
           onClick={handleViewAndEditCart}
+          onTouchEnd={handleViewAndEditCart} // Add touch support
           style={{ marginBottom: "0" }}
         >
           View and Edit Cart
