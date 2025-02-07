@@ -56,12 +56,30 @@ const card1 = [
 ];
 
 const imagesData = [
-  { src: "../images/center1.png", text: "Fastest 3-Day Turnaround" },
-  { src: "../images/center2.png", text: "Custom Woven Labels Made in USA" },
-  { src: "../images/center3.png", text: "Straight Cut / Sew-on Only" },
-  { src: "../images/center4.png", text: "Manufactured in New York" },
-  { src: "../images/center5.png", text: "Custom Size & Style" },
-  { src: "../images/center6.png", text: "Free Artwork Assistance" },
+  {
+    src: "../images/second-div-2.png",
+    heading: "FAST Turnaround Time",
+    text: "Standard turnaround time is 12 business days & Expedited order to 8 business days. (Includes Production + FREE Doorsteps Delivery)",
+    className: "group-1", // 2nd & 4th ke liye alag class
+  },
+  {
+    src: "../images/second-div-4.png",
+    heading: "MINIMUM Order Quantity",
+    text: "You can start your order with 50 quantity and the price breaks down as the quantity increases. Contact Support for wholesale pricing.",
+    className: "group-1", // 2nd & 4th ke liye alag class
+  },
+  {
+    src: "../images/second-div-1.png",
+    heading: "TALK with Expert To Find Solution",
+    text: "If you are unsure of choosing the right size, style or stock, feel free to contact us to get our expert advice and bring your idea into reality.",
+    className: "group-2", // 1st & 3rd ke liye alag class
+  },
+  {
+    src: "../images/second-div-3.png",
+    heading: "FREE Designing",
+    text: "We are offering FREE Design Support, You may upload your artwork or email us to get your design proof for approval.",
+    className: "group-2", // 1st & 3rd ke liye alag class
+  },
 ];
 
 const { Option } = Select;
@@ -104,7 +122,7 @@ function Wovenlabeldesc() {
   const defaultText1 = "Your Company"; // Default text for the first input
   const [selectedBorder, setSelectedBorder] = useState("None"); // Default border type is "None"
   const [selectedCard, setSelectedCard] = useState("None"); // Default border type is "None"
-  const [image, setImage] = useState("");
+  const [sku, setSku] = useState("SKU-8743");
   // Handle image click to change border style
   const handleImageClick = (borderType) => {
     setSelectedBorder(borderType); // Change border based on the clicked image
@@ -374,30 +392,33 @@ function Wovenlabeldesc() {
             </div>
             {/* Second Div */}
             <div className="express-second-div">
-              {" "}
-              <h1>Woven Text Labels</h1>
-              <p
-                style={{ width: "70%", textAlign: "center", margin: "0 auto" }}
-              >
-                {/* If isExpanded is true, show the full text, else show the truncated version */}
-                {isExpanded ? fullText : truncatedText}{" "}
+              <div className="title-sku">
+                {" "}
+                <h1>Woven Text Labels</h1>
+                <p>{sku}</p>
+              </div>
+              <p className="descriptitle">
+                {isExpanded ? fullText : truncatedText}
                 <button onClick={toggleText} className="readmore-button">
                   {isExpanded ? "Read Less" : "Read More.."}
                 </button>
               </p>
-              <div>
-                <div className="image-container-express">
-                  {imagesData.map((image, index) => (
-                    <div className="image-wrapper-express" key={index}>
-                      <img
-                        src={image.src}
-                        alt={image.text}
-                        className="responsive-image1"
-                      />
-                      <p className="center-text-images">{image.text}</p>
+              <div className="second-div-image-container-express">
+                {imagesData.map((image, index) => (
+                  <div className="product-image-text" key={index}>
+                    <img
+                      src={image.src}
+                      alt={image.text}
+                      className={`second-div-responsive-image1 ${
+                        index % 2 === 0 ? "image-group-1" : "image-group-2"
+                      }`}
+                    />
+                    <div className="second-div-heading-text">
+                      <p className="second-div-heading">{image.heading}</p>
+                      <p className="second-div-text">{image.text}</p>
                     </div>
-                  ))}
-                </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
@@ -500,7 +521,7 @@ function Wovenlabeldesc() {
                     }}
                     bordered={false}
                     style={{
-                      marginLeft:"1rem",
+                      marginLeft: "1rem",
                       backgroundColor:
                         selectedCard === card.id ? "#FFD700" : "#FAF4EB", // Highlight selected card
                       textAlign: "center",

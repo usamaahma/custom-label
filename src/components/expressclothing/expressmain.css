@@ -78,7 +78,7 @@
 }
 .first-div-width {
   width: 45%; /* Assigns a relative width */
- }
+}
 .txtmain {
   margin-top: 5rem;
   border-top: solid 1px #5f6f65;
@@ -92,6 +92,7 @@
 }
 .express-second-div {
   width: 45%; /* Assigns a relative width */
+  height: max-content;
   text-align: center;
   padding: 20px;
   border-radius: 15px;
@@ -124,13 +125,13 @@
 .responsive-title {
   font-size: 1rem; /* Default font size */
   font-weight: bold;
- }
+}
 /* Step number hide karne ke liye */
 
 /* Steps ke beech mein gap increase karne ke liye */
 .ant-steps-item {
   width: 15% !important;
- }
+}
 
 @media (max-width: 1100px) {
   .simpletable-heading {

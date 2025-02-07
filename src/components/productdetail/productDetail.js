@@ -34,19 +34,37 @@ import Finalprocess from "../expressclothing/finalprocess";
 import RelatedProduct from "../relatedProduct/relatedproduct";
 
 // Card data
-
 const imagesData = [
-  { src: "../images/center1.png", text: "Fastest 3-Day Turnaround" },
-  { src: "../images/center2.png", text: "Custom Woven Labels Made in USA" },
-  { src: "../images/center3.png", text: "Straight Cut / Sew-on Only" },
-  { src: "../images/center4.png", text: "Manufactured in New York" },
-  { src: "../images/center5.png", text: "Custom Size & Style" },
-  { src: "../images/center6.png", text: "Free Artwork Assistance" },
+  {
+    src: "../images/second-div-2.png",
+    heading: "FAST Turnaround Time",
+    text: "Standard turnaround time is 12 business days & Expedited order to 8 business days. (Includes Production + FREE Doorsteps Delivery)",
+    className: "group-1", // 2nd & 4th ke liye alag class
+  },
+  {
+    src: "../images/second-div-4.png",
+    heading: "MINIMUM Order Quantity",
+    text: "You can start your order with 50 quantity and the price breaks down as the quantity increases. Contact Support for wholesale pricing.",
+    className: "group-1", // 2nd & 4th ke liye alag class
+  },
+  {
+    src: "../images/second-div-1.png",
+    heading: "TALK with Expert To Find Solution",
+    text: "If you are unsure of choosing the right size, style or stock, feel free to contact us to get our expert advice and bring your idea into reality.",
+    className: "group-2", // 1st & 3rd ke liye alag class
+  },
+  {
+    src: "../images/second-div-3.png",
+    heading: "FREE Designing",
+    text: "We are offering FREE Design Support, You may upload your artwork or email us to get your design proof for approval.",
+    className: "group-2", // 1st & 3rd ke liye alag class
+  },
 ];
 
 function ProductDetail() {
   const { addToCart } = useCart(); // Cart functions aur state access karein
   const [productDescription, setProductDescription] = useState(null);
+  const [sku, setSku] = useState("sku");
   const [descriptionTitle, setDescriptionTitle] = useState(null);
   const [descriptionText, setDescriptionText] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(null);
@@ -1076,6 +1094,7 @@ function ProductDetail() {
           setDescriptionTitle(
             response.data._doc.descriptions[0].descriptionTitle
           );
+          setSku(response.data._doc.sku);
           setStyles(response.data._doc.descriptions[0].styles);
           const collectedQuantityPrices =
             response.data._doc.descriptions[0].styles.flatMap((style) =>
@@ -1213,28 +1232,36 @@ function ProductDetail() {
 
             {/* Second Div */}
             <div className="express-second-div">
-              <h1>{descriptionTitle}</h1>
-              <p style={{ width: "70%", margin: "0 auto" }}>
+              <div className="title-sku">
+                {" "}
+                <h1 className="descriptitle">{descriptionTitle}</h1>
+                <p>{sku}</p>
+              </div>
+              <p className="descriptitle">
                 {isExpanded ? fullText : truncatedText}
                 <button onClick={toggleText} className="readmore-button">
                   {isExpanded ? "Read Less" : "Read More.."}
                 </button>
               </p>
-              <div className="image-container-express">
+              <div className="second-div-image-container-express">
                 {imagesData.map((image, index) => (
-                  <div className="image-wrapper-express" key={index}>
+                  <div className="product-image-text" key={index}>
                     <img
                       src={image.src}
                       alt={image.text}
-                      className="responsive-image1"
+                      className={`second-div-responsive-image1 ${
+                        index % 2 === 0 ? "image-group-1" : "image-group-2"
+                      }`}
                     />
-                    <p className="center-text-images">{image.text}</p>
+                    <div className="second-div-heading-text">
+                      <p className="second-div-heading">{image.heading}</p>
+                      <p className="second-div-text">{image.text}</p>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
           </div>
-
           <div className="txtmain" ref={orderProcessRef}>
             <p className="how">Order Process</p>
             <p className="at" style={{ width: "70%", margin: "0 auto" }}>
@@ -1432,7 +1459,6 @@ function ProductDetail() {
       </div>
       <RelatedProduct />
       <Finalprocess />
-      <Faq1 />
       <GoogleReviews />
     </div>
   );
