@@ -36,7 +36,6 @@ function Fancyhangtagspage() {
       <FancyForm1 />
       <Descriptionexpress />
       <Finalprocess />
-      <Faqexpress1 />
       <GoogleReviews />
     </div>
   );
