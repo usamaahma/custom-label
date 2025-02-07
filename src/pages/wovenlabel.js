@@ -32,11 +32,10 @@ function Wovenlabelpage() {
             "image": "https://www.mywebsite.com/images/woven-label.jpg"
           }`}
         </script>
-      </Helmet>   
+      </Helmet>
       <Wovenlabeldesc />
       <Descriptionexpress />
       <Finalprocess />
-      <Faqexpress1 />
       <GoogleReviews />
     </div>
   );

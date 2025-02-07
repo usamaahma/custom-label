@@ -1,8 +1,60 @@
-
-:where(.css-dev-only-do-not-override-14qglws).ant-steps .ant-steps-item-finish > .ant-steps-item-container > .ant-steps-item-tail::after {
-  background-color: #5F6F65 !important;
+:where(.css-dev-only-do-not-override-14qglws).ant-steps
+  .ant-steps-item-finish
+  > .ant-steps-item-container
+  > .ant-steps-item-tail::after {
+  background-color: #5f6f65 !important;
+}
+.descriptitle {
+  text-align: left;
+}
+.title-sku {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.image-group-1 {
+  width: 5rem; /* Makes the image responsive to the wrapper */
+  height: 3rem;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  margin: 1rem 0;
 }
 
+.image-group-2 {
+  width: 5rem; /* Makes the image responsive to the wrapper */
+  height: 5rem;
+  border-radius: 8px;
+  transition: transform 0.3s;
+  margin: 1rem 0;
+}
+
+.second-div-image-container-express {
+  display: block;
+  justify-content: left;
+}
+.second-div-heading-text {
+  width: 20rem;
+  margin-top: 1rem;
+  border-radius: 1rem;
+  background-color: #5f6f65;
+  padding: 0.7rem;
+  color: #dcdcdc;
+}
+.second-div-heading {
+  font-size: medium;
+  font-weight: 900;
+}
+.second-div-text {
+  font-size: x-small;
+  font-weight: 700;
+  width: 100% !important;
+}
+.product-image-text {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  text-align: left;
+}
 .ant-steps-item-title {
   display: none; /* Hide the step numbers or titles */
 }
@@ -39,82 +91,80 @@
   border-color: #dcdcdc !important; /* Grey color for inactive lines */
 }
 .description-all-content {
-    align-items: center;
-    gap: 2rem;
-    padding: 2rem;
-    flex-wrap: wrap; /* Allows content to wrap on smaller screens */
-  }
-  .desc-express-main {
-    text-align: center;
-    text-shadow: 2px 2px 4px rgba(95, 111, 101, 0.5);
-    margin: 3rem;
-  }
-  .text-desc-express {
-    width: 100%;
-    max-width: 70%;
-    margin: 0 auto;
-  }
-  .row-desc-express {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-    background-color: rgba(95, 111, 101, 0.9);
-    border-radius: 1rem;
-    color: #faf4eb;
-    padding: 2rem;
-    text-align: left;
+  align-items: center;
+  gap: 2rem;
+  padding: 2rem;
+  flex-wrap: wrap; /* Allows content to wrap on smaller screens */
+}
+.desc-express-main {
+  text-align: center;
+  text-shadow: 2px 2px 4px rgba(95, 111, 101, 0.5);
+  margin: 3rem;
+}
+.text-desc-express {
+  width: 100%;
+  max-width: 70%;
+  margin: 0 auto;
+}
+.row-desc-express {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  background-color: rgba(95, 111, 101, 0.9);
+  border-radius: 1rem;
+  color: #faf4eb;
+  padding: 2rem;
+  text-align: left;
+}
+.image-desc-express {
+  border-radius: 1rem;
+  max-width: 10rem;
+  height: auto;
+}
+
+/* Style for the card container */
+.description-card-container {
+  background-color: rgba(111, 124, 114, 0.3); /* Card background color */
+  padding: 16px; /* Padding for spacing */
+  border-radius: 8px; /* Rounded corners */
+  margin-bottom: 24px; /* Space between each card */
+}
+
+/* Style for the title text color */
+.description-title,
+.description-description {
+  color: black; /* Text color white */
+  text-align: left;
+}
+
+/* Optional: Style for the image to make it responsive */
+.description-image {
+  width: 80%;
+  height: auto;
+  border-radius: 8px; /* Optional: rounded corners */
+}
+.ant-steps .ant-steps-item-container {
+  width: fit-content;
+  outline: none;
+}
+
+@media (max-width: 1024px) {
+  .description-all-content {
+    flex-wrap: wrap;
   }
   .image-desc-express {
-    border-radius: 1rem;
-    max-width: 10rem;
-    height: auto;
+    width: 100%;
+    max-width: 25rem;
   }
-
-
- /* Style for the card container */
-.description-card-container {
-    background-color: rgba(111, 124, 114, 0.3); /* Card background color */
-    padding: 16px; /* Padding for spacing */
-    border-radius: 8px; /* Rounded corners */
-    margin-bottom: 24px; /* Space between each card */
-  }
-  
-  /* Style for the title text color */
-  .description-title,
-  .description-description {
-    color: black; /* Text color white */
-    text-align: left;
-  }
-  
-  /* Optional: Style for the image to make it responsive */
-  .description-image {
-    width: 80%; 
-    height: auto;
-    border-radius: 8px; /* Optional: rounded corners */
-    
-  }
- .ant-steps .ant-steps-item-container {
-    width: fit-content;
-    outline: none;
 }
-  
-  @media (max-width: 1024px) {
-    .description-all-content {
-      flex-wrap: wrap;
-    }
-    .image-desc-express {
-      width: 100%;
-      max-width: 25rem;
-    }
+@media (max-width: 768px) {
+  .description-all-content {
+    flex-direction: column;
   }
-  @media (max-width: 768px) {
-    .description-all-content {
-      flex-direction: column;
-    }
+}
+@media (max-width: 425px) {
+  .ant-steps.ant-steps-vertical {
+    display: none;
   }
-  @media (max-width: 425px) {
-    .ant-steps.ant-steps-vertical{
-        display: none;
-    }
-  }
+}

@@ -1,14 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap");
+
 * {
   margin: 0%;
   padding: 0%;
- }
+}
 body {
   font-family: "Space Grotesk", sans-serif;
   background-color: #faf4eb;
-}
-h{
-  font-family: "Space Grotesk", sans-serif;
 }
 p {
   font-family: "Space Grotesk", sans-serif;
@@ -22,4 +20,20 @@ p {
 }
 .ant-card {
   background: #faf4eb !important;
+}
+@font-face {
+  font-family: "CustomFont";
+  src: url("../public/fonts/AtkinsCd-Bold.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+/* Apply font to heading tags */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "CustomFont", sans-serif;
 }
