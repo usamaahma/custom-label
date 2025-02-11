@@ -61,7 +61,7 @@
 }
 
 .mainnav-link {
-  font-size: 0.9rem;
+  font-size: 1.1rem;
   margin-left: 1rem; /* Gap between tabs */
   color: #231f20;
   font-weight: bold !important;
@@ -72,7 +72,7 @@
   color: white; /* Text color */
   border: none; /* Remove border */
   transition: background-color 0.3s; /* Smooth transition */
-  font-weight: bold;
+  font-size: large;
 }
 
 .mainnav-quote-button1:hover {
