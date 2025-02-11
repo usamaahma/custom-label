@@ -28,7 +28,6 @@ import {
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
-import Faq1 from "../faq";
 import GoogleReviews from "../expressclothing/googlereviews";
 import Finalprocess from "../expressclothing/finalprocess";
 import RelatedProduct from "../relatedProduct/relatedproduct";
@@ -1368,7 +1367,7 @@ function ProductDetail() {
                     handlePending(selectedData); // Second function
                     window.location.reload();
                   }}
-                  className="button-tablecart"
+                  // className="button-tablecart"
                 >
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}
                   ADD TO CART
@@ -1386,6 +1385,13 @@ function ProductDetail() {
                 </a>
                 <a href="mailto:demo@example.com">
                   <i className="fa fa-envelope size-i" aria-hidden="true"></i>
+                </a>
+                <a
+                  href="https://wa.me/+19304440014"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-whatsapp size-i" aria-hidden="true"></i>
                 </a>
               </div>
             </div>

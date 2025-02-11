@@ -24,7 +24,7 @@ const Herosec1 = () => {
                 Premium quality, fast delivery & lowest pricing
               </p>
               <p className="premium woven-text-100">
-                100 Woven LabelsStarting At $0.98ea
+                100 Woven Labels Starting At $0.98ea
               </p>
               <Link to="/all-clothing-labels">
                 <button className="herosec-button">Shop Woven Labels</button>

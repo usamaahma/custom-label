@@ -231,12 +231,12 @@ function Getaquote1() {
             </Button>
           </Form.Item>
         </Form>
-        <h6 className="customform-h6-form">
+        <p className="customform-h6-form">
           In a Hurry? Give us a call at{" "}
           <a href="tel:+1234567890" className="customform-call-link">
             +123-456-7890
           </a>
-        </h6>
+        </p>
         <hr />
       </div>
     </div>
