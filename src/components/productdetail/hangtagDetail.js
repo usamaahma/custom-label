@@ -1299,7 +1299,7 @@ function HangtagDetail() {
                     handlePending(selectedData); // Second function
                     window.location.reload();
                   }}
-                  className="button-tablecart"
+                  // className="button-tablecart"
                 >
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}
                   ADD TO CART
@@ -1317,6 +1317,13 @@ function HangtagDetail() {
                 </a>
                 <a href="mailto:demo@example.com">
                   <i className="fa fa-envelope size-i" aria-hidden="true"></i>
+                </a>
+                <a
+                  href="https://wa.me/+19304440014"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-whatsapp size-i" aria-hidden="true"></i>
                 </a>
               </div>
             </div>

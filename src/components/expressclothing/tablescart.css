@@ -29,6 +29,7 @@
   position: sticky;
   display: block;
   justify-content: flex-end;
+  width: 45%;
   top: 20px;
   line-height: 1;
   border-radius: 5px;
@@ -225,7 +226,7 @@ p {
   width: 20rem;
   height: 5rem;
   border: solid 0.1px #102051;
-  margin-top: 2rem;
+  margin-top: 1rem;
   font-size: larger;
   color: white;
 }

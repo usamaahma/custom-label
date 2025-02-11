@@ -28,9 +28,14 @@
 
 /* Reduce the size of the submit button */
 .beatquote-customform-submit-button {
+  margin-top: 0.3rem;
   font-size: 0.9rem;
   padding: 6px 10px;
   height: 32px;
+}
+.beatquote-customform-h6-form {
+  margin-top: 0.3rem;
+  text-align: center;
 }
 
 /* Reduce spacing between form items */
@@ -47,6 +52,7 @@ input[type="file"] {
   padding: 5px;
   border-radius: 8px; /* Rounded corners */
   transition: all 0.3s ease-in-out;
+  height: auto;
 }
 .beatquote-customform-container {
   border: 1px solid #5f6f65;

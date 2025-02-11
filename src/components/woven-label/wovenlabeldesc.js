@@ -1122,6 +1122,13 @@ function Wovenlabeldesc() {
                 <a href="mailto:demo@example.com">
                   <i className="fa fa-envelope size-i" aria-hidden="true"></i>
                 </a>
+                <a
+                  href="https://wa.me/+19304440014"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="fab fa-whatsapp size-i" aria-hidden="true"></i>
+                </a>
               </div>
             </div>
           </div>

@@ -121,9 +121,15 @@ const Firstnavbar = () => {
           <Slide direction="right">
             <Nav className="firstnavbar-nav ml-auto">
               {user ? (
-                <Nav.Link as={Link} to="/my-account" className="firstnavbar-link">
+                <Nav.Link
+                  as={Link}
+                  to="/my-account"
+                  className="firstnavbar-link"
+                >
                   <span className="cart-strong">{user.name}</span>
-                  <FaUserCircle style={{ color: "#FAF4EB" }} />
+                  <FaUserCircle
+                    style={{ color: "#FAF4EB", fontSize: "24px" }}
+                  />
                 </Nav.Link>
               ) : (
                 <Nav.Link as={Link} to="/login" className="firstnavbar-link">
@@ -143,14 +149,22 @@ const Firstnavbar = () => {
                     cursor: "pointer",
                   }}
                 >
-                  <Badge count={cartCount} offset={[10, 0]} showZero size="small">
+                  <Badge
+                    count={cartCount}
+                    offset={[10, 0]}
+                    showZero
+                    size="small"
+                  >
                     <strong className="cart-strong">Cart</strong>
                     <FaShoppingCart
                       style={{ color: "#FAF4EB", fontSize: "24px" }}
                     />
                   </Badge>
                 </button>
-                <Cartmodal1 visible={visible} onClose={() => setVisible(false)} />
+                <Cartmodal1
+                  visible={visible}
+                  onClose={() => setVisible(false)}
+                />
               </Nav.Link>
 
               {/* Logout Button */}

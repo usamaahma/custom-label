@@ -1,6 +1,6 @@
 .main-express {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   padding: 2rem;
   color: #5f6f65 !important;
 }

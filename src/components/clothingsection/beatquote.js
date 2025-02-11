@@ -111,11 +111,11 @@ function Beatquote({ titles }) {
         </p>
         <Form layout="vertical" onFinish={onFinish}>
           <Form.Item
-            label={
-              <span className="beatquote-customform-label">
-                Select Products
-              </span>
-            }
+            // label={
+            //   <span className="beatquote-customform-label">
+            //     Select Products
+            //   </span>
+            // }
             name="products"
             rules={[{ required: true, message: "Please select a product!" }]}
           >
@@ -261,12 +261,12 @@ function Beatquote({ titles }) {
           </Form.Item>
         </Form>
 
-        <h6 className="beatquote-customform-h6-form">
+        <p className="beatquote-customform-h6-form">
           In a Hurry? Give us a call at{" "}
           <a href="tel:+1234567890" className="beatquote-customform-call-link">
             +123-456-7890
           </a>
-        </h6>
+        </p>
       </div>
     </div>
   );

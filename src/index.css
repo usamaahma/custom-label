@@ -1,39 +1,48 @@
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap");
-
 * {
-  margin: 0%;
-  padding: 0%;
+  margin: 0;
+  padding: 0;
 }
-body {
-  font-family: "Space Grotesk", sans-serif;
-  background-color: #faf4eb;
-}
-p {
-  font-family: "Space Grotesk", sans-serif;
-}
-.ant-btn {
-  font-family: "Space Grotesk", sans-serif;
-}
-.ant-card .ant-card-body {
-  background: #faf4eb !important;
-  text-align: center;
-}
-.ant-card {
-  background: #faf4eb !important;
-}
+
+/* Define Regular Font */
 @font-face {
-  font-family: "CustomFont";
-  src: url("../public/fonts/AtkinsCd-Bold.ttf") format("truetype");
+  font-family: "CustomFont-Regular";
+  src: url("../public/fonts/AtkinsCd-Regular.ttf") format("truetype");
   font-weight: normal;
   font-style: normal;
 }
 
-/* Apply font to heading tags */
+/* Define Bold Font */
+@font-face {
+  font-family: "CustomFont-Bold";
+  src: url("../public/fonts/AtkinsCd-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+}
+
+/* Apply bold font to headings */
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-family: "CustomFont", sans-serif;
+  font-family: "CustomFont-Bold", sans-serif;
+  font-weight: bold;
+}
+
+/* Apply regular font to everything else */
+body,
+strong,
+p,
+span,
+div,
+.ant-btn,
+.ant-card,
+.ant-card .ant-card-body {
+  font-family: "CustomFont-Regular", sans-serif;
+  font-weight: normal;
+}
+
+body {
+  background-color: #faf4eb;
 }

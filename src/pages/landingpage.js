@@ -19,8 +19,14 @@ function Landingpage() {
     <div className="landingback">
       <Helmet>
         <title>My Website - Best Products & Services</title>
-        <meta name="description" content="Welcome to My Website. Discover amazing products and services here!" />
-        <meta name="keywords" content="ecommerce, products, services, shopping" />
+        <meta
+          name="description"
+          content="Welcome to My Website. Discover amazing products and services here!"
+        />
+        <meta
+          name="keywords"
+          content="ecommerce, products, services, shopping"
+        />
         <script type="application/ld+json">
           {`{
             "@context": "https://schema.org",
@@ -30,7 +36,6 @@ function Landingpage() {
           }`}
         </script>
       </Helmet>
-      
       <Herosec1 />
       <Alice />
       <Featureproduct />
