@@ -44,8 +44,11 @@
   font-size: medium;
   font-weight: 900;
 }
+.sticky-blue-inside p {
+  font-size: 1.1rem;
+}
 .second-div-text {
-  font-size: x-small;
+  font-size: 0.73rem;
   width: 100% !important;
 }
 .product-image-text {
