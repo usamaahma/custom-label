@@ -415,7 +415,7 @@ function Caretable() {
                 <a href="tel:+1234567890">
                   <i class="fa fa-phone-square size-i" aria-hidden="true"></i>
                 </a>
-                <a href="mailto:demo@example.com">
+                <a href="mailto:sales@theclothinglabels.com">
                   <i class="fa fa-envelope size-i" aria-hidden="true"></i>
                 </a>
               </div>

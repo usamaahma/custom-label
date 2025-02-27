@@ -34,6 +34,7 @@ const imagesData = [
 
 function Fancyhanghero1() {
   const [sku, setSku] = useState("SKU-8742");
+  const [availability, setAvailability] = useState("in stock");
 
   const { addToCart } = useCart();
   useEffect(() => {
@@ -197,7 +198,10 @@ function Fancyhanghero1() {
               <div className="title-sku">
                 {" "}
                 <h1>Fancy Hangtag</h1>
-                <p>{sku}</p>
+                <div>
+                  <p>{sku}</p>
+                  <p>{availability}</p>
+                </div>
               </div>
               <p className="descriptitle">
                 {isExpanded ? fullText : truncatedText}

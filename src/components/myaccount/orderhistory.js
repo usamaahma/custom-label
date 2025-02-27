@@ -4,10 +4,12 @@ import { message } from "antd";
 import "./orderhistory.css"; // Import custom CSS file for styling
 import { orderhistory } from "../../utils/axios"; // Axios instance for API calls
 import CustomLoader from "../clothingsection/loader"; // Loader component
+import { useAuth } from "../../context/authcontext";
 
 function OrderHistory() {
   const navigate = useNavigate(); // Navigation hook for redirecting
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const { user } = useAuth();
+  const userData = user;
   const userid = userData?.id;
 
   // Log to see what userId is being fetched

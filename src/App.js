@@ -25,14 +25,14 @@ function App() {
           <meta property="og:image" content="https://example.com/logo.png" />
           <meta property="og:url" content="https://mywebsite.com" />
         </Helmet> */}
-
         <div className="App">
           {isVerified ? (
             <AppRoutes /> // Show the main app routes if the user is verified
-          ) : (   
+          ) : (
             <Login onVerified={setIsVerified} /> // Show login if not verified
           )}
         </div>
+        {/* <AppRoutes /> // Show the main app routes if the user is verified */}
       </CartProvider>
     </AuthProvider>
   );

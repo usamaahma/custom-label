@@ -109,9 +109,9 @@ function Contactus() {
           <p>
             <strong className="address">Address:</strong>
             <br />
-            1760 Glasco Turnpike
+            14943 E 9 Mile Rd Unit #191
             <br />
-            Woodstock, NY 12498
+            Eastpointe, MI 48021
           </p>
           <p>
             <strong className="address">Phone:</strong>

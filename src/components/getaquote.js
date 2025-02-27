@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Form, Input, Button, InputNumber, Select, message } from "antd";
 import { Zoom } from "react-awesome-reveal";
-import { getquote } from "../utils/axios";
+import { getquote, products } from "../utils/axios";
 import { Storage } from "../firebaseConfig";
 import {
   uploadBytes,
@@ -9,9 +9,8 @@ import {
   getDownloadURL,
   uploadBytesResumable,
 } from "firebase/storage";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for redirecting
-import { Helmet } from "react-helmet"; // Import Helmet
- 
+import { useNavigate } from "react-router-dom"; 
+import { Helmet } from "react-helmet"; 
 
 import "./getaquote.css";
 
@@ -21,8 +20,26 @@ function Getaquote1() {
   const navigate = useNavigate();
   const [percent, setPercent] = useState("");
   const [url, setUrl] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState("");
+  const [allProducts, setAllProducts] = useState([]);
   const [uploadedImageUrl, setUploadedImageUrl] = useState("");
   const date = new Date();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await products.get("/");
+        const data = response.data.results || response.data;
+        setAllProducts(data.map((item) => item.title));
+      } catch (error) {
+        setError(error.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   const onFinish = (values) => {
     console.log("Success:", values);
@@ -53,7 +70,7 @@ function Getaquote1() {
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   const handlesubmit = (e) => {
-    const uploadedFile = e.target.files[0]; // Get the uploaded file
+    const uploadedFile = e.target.files[0];
     if (uploadedFile) {
       const imageDocument = ref(
         Storage,
@@ -94,7 +111,7 @@ function Getaquote1() {
         />
         <meta
           name="keywords"
-          content="woven labels, custom labels, product labels, high-quality labels, personalized labels"
+          content="woven labels, custom labels,product labels, high-quality labels, personalized labels"
         />
         <script type="application/ld+json">
           {`{
@@ -106,7 +123,7 @@ function Getaquote1() {
             "image": "https://www.mywebsite.com/images/woven-label.jpg"
           }`}
         </script>
-      </Helmet>   
+      </Helmet>
       <div className="customform-container">
         <h1 className="customform-heading">Get a Quote</h1>
         <p className="customform-quote-text">
@@ -134,13 +151,11 @@ function Getaquote1() {
               placeholder="Select a product"
               className="customform-select"
             >
-              <Option value="Express Clothing Labels">
-                Express Clothing Labels
-              </Option>
-              <Option value="Custom Heat Transfer Labels">
-                Custom Heat Transfer Labels
-              </Option>
-              <Option value="Custom Cotton Labels">Custom Cotton Labels</Option>
+              {allProducts.map((product, index) => (
+                <Option key={index} value={product}>
+                  {product}
+                </Option>
+              ))}
             </Select>
           </Form.Item>
 
@@ -152,7 +167,6 @@ function Getaquote1() {
               style={{ width: "5rem", height: "5rem" }}
             />
           )}
-
           <div className="customform-item-row">
             <Form.Item
               label={<span className="customform-label">Size (inches)</span>}
@@ -186,17 +200,17 @@ function Getaquote1() {
               {
                 pattern: /^[0-9]+$/,
                 message: "Contact number must be numeric!",
-              }, // Ensures only digits are allowed
+              },
             ]}
           >
             <Input
               placeholder="Enter Your Contact Number"
               className="customform-input-number"
-              type="tel" // Use 'tel' to open numeric keypad
-              maxLength={11} // Limit input to 11 characters
+              type="tel"
+              maxLength={11}
               onKeyPress={(event) => {
                 if (!/[0-9]/.test(event.key)) {
-                  event.preventDefault(); // Prevent non-numeric input
+                  event.preventDefault();
                 }
               }}
             />

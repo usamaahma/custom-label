@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./productdetail.css";
 import { Helmet } from "react-helmet";
+import { useAuth } from "../../context/authcontext";
 import {
   Button,
   Card,
@@ -19,7 +20,7 @@ import { SiStyleshare } from "react-icons/si";
 import { SiZedindustries } from "react-icons/si";
 import { IoOptionsSharp } from "react-icons/io5";
 import { MdProductionQuantityLimits } from "react-icons/md";
-import { pendingcheckout, products, Seo } from "../../utils/axios";
+import { pendingcheckout, products, productseo } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
 import { Storage } from "../../firebaseConfig";
 import {
@@ -31,6 +32,7 @@ import {
 import GoogleReviews from "../expressclothing/googlereviews";
 import Finalprocess from "../expressclothing/finalprocess";
 import RelatedProduct from "../relatedProduct/relatedproduct";
+import ProductFaq from "../productfaqs";
 
 // Card data
 const imagesData = [
@@ -62,8 +64,10 @@ const imagesData = [
 
 function ProductDetail() {
   const { addToCart } = useCart(); // Cart functions aur state access karein
+  const { user } = useAuth();
   const [productDescription, setProductDescription] = useState(null);
   const [sku, setSku] = useState("sku");
+  const [faq, setFaq] = useState([]);
   const [descriptionTitle, setDescriptionTitle] = useState(null);
   const [descriptionText, setDescriptionText] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(null);
@@ -182,8 +186,7 @@ function ProductDetail() {
 
   // State for selected data
   const handlePending = async (selectedData) => {
-    const userdataString = localStorage.getItem("user");
-    const userdata = JSON.parse(userdataString); // Convert string to object
+    const userdata = user;
     // Check if the user is logged in
     if (!userdata) {
       notification.error({
@@ -249,9 +252,8 @@ function ProductDetail() {
   const handleAddToCart = (selectedData) => {
     console.log(selectedData, "data that is selected");
     // Check if the user is logged in
-    const userdataString = localStorage.getItem("user");
-    const userdata = JSON.parse(userdataString);
-
+    const userdata = user;
+    console.log(userdata);
     if (!userdata) {
       notification.error({
         message: "Login Required",
@@ -1136,10 +1138,13 @@ function ProductDetail() {
     // Fetch the SEO data using Axios from your API
     const fetchSeoData = async () => {
       try {
-        const response = await Seo.get(`?productId=${selectedProductId}`);
+        const response = await productseo.get(
+          `?productId=${selectedProductId}`
+        );
         console.log(response);
         const seo = response.data.results[0]; // Assuming this is the structure
         setSeoData(seo);
+        setFaq(response.data.results[0].faqs);
       } catch (error) {
         console.error("Error fetching SEO data:", error);
       }
@@ -1156,7 +1161,6 @@ function ProductDetail() {
           <Helmet>
             <title>{seoData.title}</title>
             <meta name="description" content={seoData.description} />
-            <meta name="keywords" content={seoData.keywords.join(", ")} />
             <script type="application/ld+json">
               {JSON.stringify({
                 "@context": "https://schema.org",
@@ -1201,7 +1205,7 @@ function ProductDetail() {
                   width: "100%",
                   maxWidth: "30rem",
                   height: "100vh",
-                  overflow: "hidden", // Prevents image from overflowing outside div
+                  overflow: "hidden",
                 }}
               >
                 <img
@@ -1213,7 +1217,7 @@ function ProductDetail() {
                   style={{
                     borderRadius: "1rem",
                     transition: "transform 0.3s ease",
-                  }} // Add transition for smooth zoom effect
+                  }}
                 />
                 <div className="thumbnail-carousel">
                   {productImages.map((image, index) => (
@@ -1234,7 +1238,10 @@ function ProductDetail() {
               <div className="title-sku">
                 {" "}
                 <h1 className="descriptitle">{descriptionTitle}</h1>
-                <p>{sku}</p>
+                <div>
+                  <p>{sku}</p>
+                  <p>{seoData?.googleShopping?.availability}</p>
+                </div>
               </div>
               <p className="descriptitle">
                 {isExpanded ? fullText : truncatedText}
@@ -1365,9 +1372,8 @@ function ProductDetail() {
                   onClick={() => {
                     handleAddToCart(selectedData); // First function
                     handlePending(selectedData); // Second function
-                    window.location.reload();
+                    // window.location.reload();
                   }}
-                  // className="button-tablecart"
                 >
                   <i className="fa fa-cart-arrow-down" aria-hidden="true"></i>{" "}
                   ADD TO CART
@@ -1383,7 +1389,7 @@ function ProductDetail() {
                     aria-hidden="true"
                   ></i>
                 </a>
-                <a href="mailto:demo@example.com">
+                <a href="mailto:sales@theclothinglabels.com">
                   <i className="fa fa-envelope size-i" aria-hidden="true"></i>
                 </a>
                 <a
@@ -1430,10 +1436,7 @@ function ProductDetail() {
                         }}
                         className="description-description"
                       />{" "}
-                      {/* Applied the description-description class */}
                     </Col>
-
-                    {/* Image Column (30%) */}
                     <Col
                       xs={24}
                       sm={24}
@@ -1466,6 +1469,7 @@ function ProductDetail() {
       <RelatedProduct />
       <Finalprocess />
       <GoogleReviews />
+      <ProductFaq Faq={faq} />
     </div>
   );
 }

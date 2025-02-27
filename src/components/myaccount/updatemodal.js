@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import { Form, Input, Button, message, Row, Col } from "antd";
 import { manageaddresses } from "../../utils/axios"; // Make sure you have a correct API call in this utility
 import "./updatemodal.css";
+import { useAuth } from "../../context/authcontext";
 
 function Updatemodal1({ setModalVisible }) {
+  const { user } = useAuth();
   const [form] = Form.useForm();
   const [countryCode, setCountryCode] = useState("1");
-   
 
   const onFinish = async (values) => {
     console.log("Form Values:", values);
 
-    const userData = JSON.parse(localStorage.getItem("user"));
+    const userData = user;
     const token = localStorage.getItem("token");
     const addressId = localStorage.getItem("addressid");
 
@@ -72,28 +73,26 @@ function Updatemodal1({ setModalVisible }) {
         data1, // The data to update the address with
         { headers } // Send the headers as part of the request
       );
-    
+
       console.log("API Response:", response);
       message.success("Thank you for updating your address!");
-    
+
       // Store the updated addresses in localStorage
       localStorage.setItem("userAddresses", JSON.stringify(updatedAddresses));
-    
+
       // Set a flag that the user has submitted their address
       localStorage.setItem(`addressSubmitted_${userData.id}`, true);
-    
+
       // Reset the form
       form.resetFields();
-    
-      // Close the modal after successful update
-      setModalVisible(false);  // Close the modal here
-      window.location.reload();  // This will reload the page
 
+      // Close the modal after successful update
+      setModalVisible(false); // Close the modal here
+      window.location.reload(); // This will reload the page
     } catch (error) {
       console.error("Error updating address:", error);
       message.error("Something went wrong, please try again!");
     }
-    
   };
 
   useEffect(() => {
@@ -123,8 +122,8 @@ function Updatemodal1({ setModalVisible }) {
             padding: "10px",
             marginTop: "25px",
             marginBottom: "10px",
-            borderRadius:"0.5rem",
-            border:"dotted 0.1rem white"
+            borderRadius: "0.5rem",
+            border: "dotted 0.1rem white",
           }}
         >
           <p style={{ fontSize: "24px", color: "white" }}>

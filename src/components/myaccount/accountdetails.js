@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import "./accountdetails.css";
 import { resetpassword } from "../../utils/axios";
+import { useAuth } from "../../context/authcontext";
 
 const AccountDetails = () => {
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [message, setMessage] = useState("");
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const { user } = useAuth();
+  const userData = user;
   const userId = userData?.id;
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -40,11 +42,11 @@ const AccountDetails = () => {
           <label htmlFor="currentPassword">Current Password</label>
           <input
             type="password"
-            id="currentPassword"  
+            id="currentPassword"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
             required
-            className="input-field" 
+            className="input-field"
           />
         </div>
 

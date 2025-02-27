@@ -1,5 +1,6 @@
 import React from "react";
 import { Col, Row, Button, Form, Input, Select } from "antd";
+import { useAuth } from "../../context/authcontext";
 
 const onFinish = (values) => {
   console.log("Success:", values);
@@ -20,7 +21,8 @@ const country = [
 ];
 
 function PaymentOptions() {
-  const user = JSON.parse(localStorage.getItem("user")); // Parse the user object
+  const { user } = useAuth();
+  const userdata = user;
 
   return (
     <div style={{ width: "80%", margin: "0 auto" }}>
@@ -38,7 +40,7 @@ function PaymentOptions() {
             labelCol={{ span: 24 }}
             wrapperCol={{ span: 24 }}
             initialValues={{
-              email: user?.email, // Optionally set initial value for email
+              email: userdata?.email, // Optionally set initial value for email
             }}
             onFinish={onFinish}
             onFinishFailed={onFinishFailed}

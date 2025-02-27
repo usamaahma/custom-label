@@ -583,7 +583,7 @@ function Tpuhero1() {
                     aria-hidden="true"
                   ></i>
                 </a>
-                <a href="mailto:demo@example.com">
+                <a href="mailto:sales@theclothinglabels.com">
                   <i className="fa fa-envelope size-i" aria-hidden="true"></i>
                 </a>
               </div>

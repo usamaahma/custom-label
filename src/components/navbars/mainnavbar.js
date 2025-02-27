@@ -147,6 +147,14 @@ const Mainnavbar = () => {
               >
                 DESIGN NOW
               </Nav.Link>
+              <Nav.Link
+                as={Link}
+                to="/instagram-posts"
+                className="mainnav-link"
+                onClick={() => handleNavClick("/instagram-posts")}
+              >
+                GALLERY
+              </Nav.Link>
             </Nav>
           </Slide>
           <div className="quote-and-contact">
@@ -163,7 +171,7 @@ const Mainnavbar = () => {
               <a href="tel:+1234567890" className="phone-number-div">
                 <CiMobile3 className="mobile-icon" />
                 <div className="text-phone">
-                  <p>+1 (630) 995-9797</p>
+                  <p>+1 (616) 888-7184</p>
                   <p>Speak With an Expert</p>
                 </div>
               </a>

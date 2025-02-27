@@ -42,7 +42,6 @@ import Addresses from "../components/myaccount/addresses.js";
 import NewsletterSubscriptions from "../components/myaccount/newslettersub.js";
 import AccountDetails from "../components/myaccount/accountdetails.js";
 import PaymentOptions from "../components/myaccount/paymentoption.js";
-import "./routes.css"; // Import the CSS file for margin styles
 import ProductDetail from "../components/productdetail/productDetail.js";
 import ThankYouPage from "../components/thankyou/thankyou.js";
 import Blog from "../components/blog/blog.js";
@@ -55,6 +54,8 @@ import Thankyou1 from "../components/thankyou.js";
 import MainSearch from "../components/mainsearch/mainsearch.js";
 import ForgotPassword1 from "../components/login/forgetpassword.js";
 import ResetPassword from "../components/login/resetpassword.js";
+import Gallery from "../components/navbars/gallery.js";
+import "./routes.css";
 
 const AppRoutes = () => {
   return (
@@ -65,7 +66,6 @@ const AppRoutes = () => {
         <ScrollToTop />
         <div className="routes-margin">
           {" "}
-          {/* Add margin top here */}
           <Routes>
             <Route
               path="/my-account"
@@ -75,7 +75,6 @@ const AppRoutes = () => {
                 </PrivateRoute>
               }
             >
-              {/* Nested Routes for Account Dashboard */}
               <Route
                 path="account-dashboard"
                 element={
@@ -133,7 +132,6 @@ const AppRoutes = () => {
                 }
               />
             </Route>
-            {/* Public Routes: Accessible to everyone */}
             <Route path="/" element={<Landingpage />} />
             <Route path="/login" element={<Login />} />
             <Route path="/forgot-password" element={<ForgotPassword1 />} />
@@ -187,9 +185,7 @@ const AppRoutes = () => {
             <Route path="/drawer-view-edit" element={<Drawerviewedit />} />
             <Route path="/hangtag/:productName" element={<HangtagDetail />} />
             <Route path="/blog/:blogname" element={<Blogdetail1 />} />
-
-            {/* This will display the product detail based on the ID */}
-            {/* Catch all route for 404 - redirect to home */}
+            <Route path="/instagram-posts" element={<Gallery />} />
             <Route path="*" element={<Navigate to="/" />} />
           </Routes>
         </div>
