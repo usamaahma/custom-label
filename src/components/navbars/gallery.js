@@ -24,7 +24,7 @@ function Gallery() {
     >
       <div
         style={{
-          width: "100%",
+          width: "95%",
           height: "700px",
           marginTop: "3rem",
           overflow: "hidden",
