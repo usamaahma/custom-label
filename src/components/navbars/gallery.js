@@ -1,118 +1,51 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
+import CustomLoader from "../clothingsection/loader";
 
 function Gallery() {
-  const [posts, setPosts] = useState([]);
-  const [selectedPost, setSelectedPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const fetchInstagramPosts = async () => {
-      const accessToken = process.env.REACT_APP_INSTAGRAM_ACCESS_TOKEN;
-      const url = `https://graph.instagram.com/me/media?fields=id,caption,media_url,media_type,permalink,comments_count,like_count&access_token=${accessToken}`;
+    // Simulate loading time for iframe content (optional)
+    const timer = setTimeout(() => {
+      setIsLoading(false);
+    }, 3000);
 
-      try {
-        const response = await fetch(url);
-        const data = await response.json();
-        setPosts(data.data);
-      } catch (error) {
-        console.error("Error fetching Instagram posts:", error);
-      }
-    };
-
-    fetchInstagramPosts();
+    return () => clearTimeout(timer);
   }, []);
 
-  const handlePostClick = (post) => {
-    setSelectedPost(post);
-  };
-
   return (
-    <div style={{ display: "flex", padding: "20px" }}>
-      {/* Left Side: Gallery Grid */}
-      <div style={{ flex: 2, display: "flex", flexWrap: "wrap", gap: "10px" }}>
-        {posts.map((post) => (
-          <div
-            key={post.id}
-            onClick={() => handlePostClick(post)}
-            style={{
-              cursor: "pointer",
-              width: "200px",
-              height: "200px",
-              overflow: "hidden",
-            }}
-          >
-            {post.media_type === "IMAGE" ? (
-              <img
-                src={post.media_url}
-                alt={post.caption}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-              />
-            ) : (
-              <video
-                src={post.media_url}
-                style={{ width: "100%", height: "100%", objectFit: "cover" }}
-                controls
-              />
-            )}
-          </div>
-        ))}
-      </div>
-
-      {/* Right Side: Selected Post Details */}
-      <div style={{ flex: 1, padding: "20px", borderLeft: "1px solid #ccc" }}>
-        {selectedPost ? (
-          <div>
-            {selectedPost.media_type === "IMAGE" ? (
-              <img
-                src={selectedPost.media_url}
-                alt={selectedPost.caption}
-                style={{ width: "100%", borderRadius: "8px" }}
-              />
-            ) : (
-              <video
-                src={selectedPost.media_url}
-                style={{ width: "100%", borderRadius: "8px" }}
-                controls
-              />
-            )}
-            <h3>Description</h3>
-            <p>{selectedPost.caption || "No caption available"}</p>
-            <div style={{ marginTop: "20px" }}>
-              <p>Likes: {selectedPost.like_count}</p>
-              <p>Comments: {selectedPost.comments_count}</p>
-            </div>
-            <a
-              href={selectedPost.permalink}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-block",
-                marginTop: "10px",
-                color: "#007bff",
-              }}
-            >
-              View on Instagram
-            </a>
-            {/* Follow on Instagram Button */}
-            <a
-              href="https://www.instagram.com/your_username/" // Apna Instagram username yahan dalen
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                display: "inline-block",
-                marginTop: "10px",
-                padding: "10px 20px",
-                backgroundColor: "#E1306C",
-                color: "#fff",
-                borderRadius: "5px",
-                textDecoration: "none",
-                textAlign: "center",
-              }}
-            >
-              Follow on Instagram
-            </a>
-          </div>
+    <div
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        padding: "20px",
+        backgroundColor: "#f9f9f9",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          height: "700px",
+          marginTop: "3rem",
+          overflow: "hidden",
+          borderRadius: "12px",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.1)",
+        }}
+      >
+        {isLoading ? (
+          <CustomLoader /> // Show loader while fetching posts
         ) : (
-          <p>Select a post to view details</p>
+          <iframe
+            src="https://4cbf57b5bb8742a0bebd8c468940509b.elf.site/"
+            style={{
+              width: "100%",
+              height: "100%",
+              border: "none",
+              borderRadius: "12px",
+            }}
+            title="Instagram Feed"
+            onLoad={() => setIsLoading(false)} // Stop loading when iframe loads
+          ></iframe>
         )}
       </div>
     </div>

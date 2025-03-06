@@ -24,7 +24,7 @@ function Beatquote({ titles }) {
   const showTime =
     date.getHours() + ":" + date.getMinutes() + ":" + date.getSeconds();
   const handlesubmit = (e) => {
-    const uploadedFile = e.target.files[0]; // Get the uploaded file
+    const uploadedFile = e.target.files[0];
     if (uploadedFile) {
       const imageDocument = ref(
         Storage,
@@ -133,7 +133,6 @@ function Beatquote({ titles }) {
           </Form.Item>
           <div style={{ display: "flex", alignItems: "center", gap: "10px" }}>
             <input type="file" onChange={handlesubmit} />
-
             {url && (
               <div
                 style={{
@@ -223,7 +222,6 @@ function Beatquote({ titles }) {
               }}
             />
           </Form.Item>
-
           <Form.Item
             label={<span className="beatquote-customform-label">Name</span>}
             name="name"
@@ -234,10 +232,11 @@ function Beatquote({ titles }) {
               className="beatquote-customform-input"
             />
           </Form.Item>
-
           <Form.Item
             label={
-              <span className="beatquote-customform-label">Email Address</span>
+              <span className="beatquote-customform-label">
+              Email Address
+              </span>
             }
             name="email"
             rules={[
@@ -260,7 +259,6 @@ function Beatquote({ titles }) {
             </Button>
           </Form.Item>
         </Form>
-
         <p className="beatquote-customform-h6-form">
           In a Hurry? Give us a call at{" "}
           <a href="tel:+1234567890" className="beatquote-customform-call-link">
