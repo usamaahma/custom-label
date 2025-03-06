@@ -11,7 +11,7 @@ import {
   Input,
   message,
 } from "antd";
-
+import { useAuth } from "../../context/authcontext";
 import { FaEnvelope, FaUserAlt, FaBox, FaEye } from "react-icons/fa"; // Add the FaEye icon for View
 import { manageaddresses } from "../../utils/axios";
 
@@ -21,7 +21,7 @@ import Updatemodal1 from "./updatemodal";
 const { Title, Paragraph } = Typography;
 
 function AccountDashboard() {
-  const user = JSON.parse(localStorage.getItem("user")); // Parse the user object
+  const { user } = useAuth();
   const [isManageModalVisible, setIsManageModalVisible] = useState(false); // State to control manage modal visibility
   const [isViewModalVisible, setIsViewModalVisible] = useState(false); // State to control view modal visibility
   const [viewAddressData, setViewAddressData] = useState(null); // State for storing the address data for view modal
@@ -107,15 +107,12 @@ function AccountDashboard() {
   //     console.error("Error submitting address:", error);
   //   }
   // };
-  const userData = JSON.parse(localStorage.getItem("user"));
-  const userid = userData?.id;
+  const userid = user?.id;
 
   const onFinish = (values) => {
     console.log("Form Values:", values);
-
     // Retrieve the user data from localStorage
-    const userData = JSON.parse(localStorage.getItem("user"));
-
+    const userData = user;
     // Check if the user has already submitted an address
     const addressSubmitted = localStorage.getItem(
       `addressSubmitted_${userData.id}`
@@ -159,7 +156,6 @@ function AccountDashboard() {
     // Check if the address already exists for this user in localStorage
     const existingData =
       JSON.parse(localStorage.getItem("userAddresses")) || [];
-
     const isAddressExist = existingData.some((address) => {
       return (
         address.userId === data1.userId &&
@@ -362,8 +358,8 @@ function AccountDashboard() {
               padding: "10px",
               marginTop: "25px",
               marginBottom: "10px",
-              borderRadius:"0.5rem",
-              border:"dotted 0.1rem white",
+              borderRadius: "0.5rem",
+              border: "dotted 0.1rem white",
             }}
           >
             <p style={{ fontSize: "24px", color: "white" }}>
@@ -622,8 +618,8 @@ function AccountDashboard() {
                 padding: "10px",
                 marginTop: "25px",
                 marginBottom: "10px",
-                borderRadius:"0.5rem",
-                border:"dotted 0.1rem white"
+                borderRadius: "0.5rem",
+                border: "dotted 0.1rem white",
               }}
             >
               <p style={{ fontSize: "24px", color: "white" }}>View Address</p>

@@ -13,7 +13,7 @@ import {
 } from "antd";
 import LastTable1 from "../expressclothing/lasttable";
 import { useCart } from "../../context/cartcontext";
-import { pendingcheckout, hangtag, Seo } from "../../utils/axios";
+import { pendingcheckout, hangtag, productseo } from "../../utils/axios";
 import "../expressclothing/expressmain.css";
 import { Storage } from "../../firebaseConfig";
 import { IoMdCloudUpload } from "react-icons/io";
@@ -28,9 +28,10 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import Finalprocess from "../expressclothing/finalprocess";
-import Faq1 from "../faq";
 import GoogleReviews from "../expressclothing/googlereviews";
 import RelatedProducthang from "../relatedProduct/relatedproducthangtag";
+import ProductFaq from "../productfaqs";
+import { useAuth } from "../../context/authcontext";
 
 // Card data
 
@@ -62,8 +63,10 @@ const imagesData = [
 ];
 function HangtagDetail() {
   const { addToCart } = useCart(); // Cart functions aur state access karein
+  const { user } = useAuth(); // Cart functions aur state access karein
   const [productDescription, setProductDescription] = useState(null);
   const [sku, setSku] = useState("sku");
+  const [faq, setFaq] = useState([]);
   const [descriptionTitle, setDescriptionTitle] = useState(null);
   const [descriptionText, setDescriptionText] = useState(null);
   const [selectedStyle, setSelectedStyle] = useState(null);
@@ -182,8 +185,7 @@ function HangtagDetail() {
 
   // State for selected data
   const handlePending = async (selectedData) => {
-    const userdataString = localStorage.getItem("user");
-    const userdata = JSON.parse(userdataString); // Convert string to object
+    const userdata = user; // Convert string to object
     // Check if the user is logged in
     if (!userdata) {
       notification.error({
@@ -239,9 +241,7 @@ function HangtagDetail() {
   const handleAddToCart = (selectedData) => {
     console.log(selectedData, "data that is selected");
     // Check if the user is logged in
-    const userdataString = localStorage.getItem("user");
-    const userdata = JSON.parse(userdataString); // Parse the stored user data
-
+    const userdata = user; // Parse the stored user data
     if (!userdata) {
       notification.error({
         message: "Login Required",
@@ -1062,10 +1062,13 @@ function HangtagDetail() {
     // Fetch the SEO data using Axios from your API
     const fetchSeoData = async () => {
       try {
-        const response = await Seo.get(`?productId=${selectedHangtagId}`);
+        const response = await productseo.get(
+          `?productId=${selectedHangtagId}`
+        );
         console.log(response);
         const seo = response.data.results[0]; // Assuming this is the structure
         setSeoData(seo);
+        setFaq(response.data.results[0].faqs);
       } catch (error) {
         console.error("Error fetching SEO data:", error);
       }
@@ -1081,7 +1084,6 @@ function HangtagDetail() {
           <Helmet>
             <title>{seoData.title}</title>
             <meta name="description" content={seoData.description} />
-            <meta name="keywords" content={seoData.keywords.join(", ")} />
             <script type="application/ld+json">
               {JSON.stringify({
                 "@context": "https://schema.org",
@@ -1315,7 +1317,7 @@ function HangtagDetail() {
                     aria-hidden="true"
                   ></i>
                 </a>
-                <a href="mailto:demo@example.com">
+                <a href="mailto:sales@theclothinglabels.com">
                   <i className="fa fa-envelope size-i" aria-hidden="true"></i>
                 </a>
                 <a
@@ -1398,6 +1400,7 @@ function HangtagDetail() {
       <RelatedProducthang />
       <Finalprocess />
       <GoogleReviews />
+      <ProductFaq Faq={faq} />
     </div>
   );
 }

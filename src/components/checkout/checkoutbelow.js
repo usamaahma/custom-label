@@ -17,11 +17,14 @@ import { useNavigate } from "react-router-dom";
 import { checkout } from "../../utils/axios";
 import { manageaddresses } from "../../utils/axios";
 import PayPalCheckoutButton from "./paypalcheckoutbutton";
+import { useAuth } from "../../context/authcontext";
 
 const { Option } = Select;
 
 function CheckoutBelow1() {
   const navigate = useNavigate();
+    const { user } = useAuth();
+  
   const [dropdownVisible, setDropdownVisible] = useState(false);
   const [dropdownVisible1, setDropdownVisible1] = useState(false);
   const [form] = Form.useForm(); // Use Ant Design's form instance
@@ -36,7 +39,7 @@ function CheckoutBelow1() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const { cart, removeFromCart } = useCart(); // Get cart data from context
-  const userData = JSON.parse(localStorage.getItem("user"));
+  const userData = user;
   const userid = userData?.id;
 
   const totalPrice = cart.reduce((acc, item) => acc + item.totalPrice, 0);
@@ -156,7 +159,7 @@ function CheckoutBelow1() {
     fetchCountryCode();
   }, []);
   const onFinish = async (values) => {
-    const userData = JSON.parse(localStorage.getItem("user"));
+    const userData = user;
     // Check if the user is logged in
     if (!userData) {
       notification.error({

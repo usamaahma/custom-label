@@ -4,12 +4,12 @@ import { Button } from "react-bootstrap";
 import { FaFire } from "react-icons/fa";
 import { products } from "../utils/axios"; // Alias the imported products to avoid naming conflicts
 import "./custompatches.css";
+import CustomLoader from "./clothingsection/loader";
 
 function Customclothing() {
   const [cardsData, setCardsData] = useState([]); // Store fetched product data
   const [loading, setLoading] = useState(true); // Loading state
   const [error, setError] = useState(null); // Error state
-
   const [slidesToShow, setSlidesToShow] = useState(3);
 
   useEffect(() => {
@@ -26,6 +26,7 @@ function Customclothing() {
       }
     };
     fetchData();
+
     const updateMedia = () => {
       if (window.innerWidth < 576) {
         setSlidesToShow(1);
@@ -43,10 +44,16 @@ function Customclothing() {
 
     return () => window.removeEventListener("resize", updateMedia);
   }, []);
+
   const StoreProductId = (id, title) => {
     localStorage.setItem("selectedProductId", id);
     localStorage.setItem("selectedProductTitle", title);
   };
+
+  // ✅ Show loader when loading is true
+  if (loading) {
+    return <CustomLoader />;
+  }
 
   return (
     <div className="carousel-main">
@@ -56,7 +63,6 @@ function Customclothing() {
       <Carousel dots={false} slidesToShow={slidesToShow} arrows={true}>
         {cardsData.map((card, index) => (
           <div key={index} className="carousel-slide">
-           
             <div
               className="image-container"
               onClick={() => {

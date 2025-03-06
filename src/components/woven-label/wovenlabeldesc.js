@@ -85,9 +85,8 @@ const imagesData = [
 const { Option } = Select;
 
 function Wovenlabeldesc() {
-  const { isLoggedIn } = useAuth(); // Access the login state and user info
-  const navigate = useNavigate(); // Initialize the navigation hook
-  const { addToCart } = useCart();
+  const { user } = useAuth();
+  const navigate = useNavigate();
   const [form] = Form.useForm();
   useEffect(() => {
     const stickyDiv = document.querySelector(".sticky-div");
@@ -123,6 +122,8 @@ function Wovenlabeldesc() {
   const [selectedBorder, setSelectedBorder] = useState("None"); // Default border type is "None"
   const [selectedCard, setSelectedCard] = useState("None"); // Default border type is "None"
   const [sku, setSku] = useState("SKU-8743");
+  const [availability, setAvailability] = useState("in stock");
+
   // Handle image click to change border style
   const handleImageClick = (borderType) => {
     setSelectedBorder(borderType); // Change border based on the clicked image
@@ -272,23 +273,21 @@ function Wovenlabeldesc() {
   };
 
   const onFinish = async (values) => {
-    if (!isLoggedIn) {
+    if (!user) {
       message.error("Please log in or register to proceed.");
       setTimeout(() => {
-        navigate("/login"); // Redirect to the login page
-      }, 1000); // Add a slight delay to allow the message to display
-      return; // Stop further execution of this function
+        navigate("/login");
+      }, 1000);
+      return;
     }
 
-    const loggeduser = JSON.parse(localStorage.getItem("user") || "{}");
+    const loggeduser = user || "{}";
+
     try {
-      // Wait for the image URL to be ready (if needed)
       const image = await handleAddToCart({
         id: 1,
         name: values.wovenLabel,
       });
-
-      console.log("Image ready:", values.wovenLabel);
 
       const data1 = {
         user: [
@@ -299,23 +298,41 @@ function Wovenlabeldesc() {
             phonenumber: loggeduser.phonenumber,
           },
         ],
-        productName: values.wovenLabel, // Ensure this value is dynamic, not a static string
-        image: image, // Use the resolved image URL
+        productName: values.wovenLabel,
+        image: image,
         size: selectedData.size,
         turnaround: selectedData.turnaroundOptions,
       };
+      console.log(loggeduser, "loggeduser");
+      // console.log("Payload being sent:", JSON.stringify(loggeduser, 2));
+      try {
+        const res = await designquote.post("/", data1);
+        console.log("API success response:", res.data);
+        if (res.status === 200 || res.status === 201) {
+          message.success("Thank you for considering us!");
+          navigate("/thank-you");
+        } else {
+          message.error("Unexpected response from server.");
+        }
+      } catch (error) {
+        console.error("Error:", error?.response?.data || error.message);
 
-      // Call the API with the data
-      const res = await designquote({
-        method: "post",
-        data: data1,
-      });
-
-      console.log("API success response:", res);
-      message.success("Thank you for considering us!");
-    } catch (error) {
-      console.error("Error:", error);
-      message.error("Something went wrong, please try again!");
+        if (error.response) {
+          console.error("Full response error:", error.response);
+          message.error(
+            error.response.data?.message || "Server error, please try again!"
+          );
+        } else if (error.request) {
+          console.error("No response received:", error.request);
+          message.error("No response from server. Check your connection.");
+        } else {
+          console.error("Request setup error:", error.message);
+          message.error("Something went wrong, please try again!");
+        }
+      }
+    } catch (cartError) {
+      console.error("Error while adding to cart:", cartError);
+      message.error("Failed to add item to cart.");
     }
   };
 
@@ -395,7 +412,10 @@ function Wovenlabeldesc() {
               <div className="title-sku">
                 {" "}
                 <h1>Woven Text Labels</h1>
-                <p>{sku}</p>
+                <div>
+                  <p>{sku}</p>
+                  <p>{availability}</p>
+                </div>
               </div>
               <p className="descriptitle">
                 {isExpanded ? fullText : truncatedText}
@@ -1098,7 +1118,7 @@ function Wovenlabeldesc() {
                           price: 10.1,
                         })
                       }
-                      className="button-tablecart"
+                      // className="button-tablecart"
                     >
                       <i
                         className="fa fa-cart-arrow-down"
@@ -1119,7 +1139,7 @@ function Wovenlabeldesc() {
                     aria-hidden="true"
                   ></i>
                 </a>
-                <a href="mailto:demo@example.com">
+                <a href="mailto:sales@theclothinglabels.com">
                   <i className="fa fa-envelope size-i" aria-hidden="true"></i>
                 </a>
                 <a

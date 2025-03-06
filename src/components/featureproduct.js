@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./featureproduct.css";
 import { products } from "../utils/axios"; // Alias the imported products to avoid naming conflicts
-import { Spin } from "antd";
+import CustomLoader from "./clothingsection/loader";
 
 function Featureproduct() {
   const [cardsData, setCardsData] = useState([]); // Store fetched product data
@@ -31,7 +31,7 @@ function Featureproduct() {
   };
 
   if (loading) {
-    return <Spin tip="Loading..." style={{ display: "block", margin: "auto" }} />;
+    return <CustomLoader />;
   }
 
   if (error) {

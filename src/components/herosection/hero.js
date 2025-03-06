@@ -23,7 +23,7 @@ const Herosec1 = () => {
               <p className="premium">
                 Premium quality, fast delivery & lowest pricing
               </p>
-              <p className="premium woven-text-100">
+              <p style={{ fontSize: "1.3rem" }}>
                 100 Woven Labels Starting At $0.98ea
               </p>
               <Link to="/all-clothing-labels">
@@ -50,8 +50,8 @@ const Herosec1 = () => {
               <p className="premium">
                 Premium quality, fast delivery & lowest pricing
               </p>
-              <p className="premium woven-text-100">
-                100 Woven LabelsStarting At $0.98ea
+              <p style={{ fontSize: "1.3rem" }}>
+                100 Woven Labels Starting At $0.98ea
               </p>
               <Link to="/contact-us">
                 <button className="herosec-button">Shop Woven Labels</button>

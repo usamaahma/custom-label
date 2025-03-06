@@ -23,6 +23,10 @@ const Clothingcard = () => {
         setFilteredData(data);
         setTitles(data.map((item) => item.title));
         form.resetFields();
+        localStorage.setItem(
+          "allproducts",
+          JSON.stringify(data.map((item) => item.title))
+        );
       } catch (error) {
         setError(error.message);
       } finally {
@@ -40,7 +44,6 @@ const Clothingcard = () => {
 
   // Handle changes in the search input
   const handleSearchChange = (e) => {
-    console.log(titles);
     const query = e.target.value.trim().toLowerCase();
     setSearchQuery(query);
 

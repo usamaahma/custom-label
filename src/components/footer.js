@@ -1,20 +1,41 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, Input, Button, message } from "antd";
-import { newsletteremail } from "../utils/axios";
+import { newsletteremail, products, hangtag } from "../utils/axios";
 import { Link } from "react-router-dom";
 import "./footer.css";
 
 function Footer1() {
   const [email, setEmail] = useState("");
+  const [productsList, setProductsList] = useState([]);
+  const [hangtagsList, setHangtagsList] = useState([]);
   const [form] = Form.useForm(); // Initialize the form instance here
+
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await products.get("/");
+        setProductsList(response.data.results);
+      } catch (error) {
+        console.error("Error fetching products:", error);
+      }
+    };
+    const fetchHangtags = async () => {
+      try {
+        const response = await hangtag.get("/");
+        setHangtagsList(response.data.results);
+      } catch (error) {
+        console.error("Error fetching hangtags:", error);
+      }
+    };
+    fetchProducts();
+    fetchHangtags();
+  }, []);
 
   const onFinish = (values) => {
     console.log("Form Submitted with values:", values); // Log form values
-
     const data1 = {
       email: values.email,
     };
-
     newsletteremail({
       method: "post",
       data: data1,
@@ -33,8 +54,7 @@ function Footer1() {
         }
       })
       .catch((error) => {
-        console.log("API Error:", error); // Log the API error to the console
-
+        console.log("API Error:", error);
         if (error.response) {
           // Handle error based on server response status
           if (error.response.status === 400) {
@@ -58,65 +78,28 @@ function Footer1() {
         }
       });
   };
+
   return (
     <footer className="footer">
       <div className="footer-container">
         <div className="footer-column">
-          <h3>Clothing Labels</h3>
+          <h3>All Clothing Labels</h3>
           <ul className="clothing-labels-main">
-            <li className="cl-label">
-              <Link to="/all-clothing-labels">All Clothing Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/express-clothing">Express Clothing Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/customwoven">Custom Woven Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/woven-text-label">Woven Text Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/custom-care-label">Custom Care Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/custom-heat-labels">Custom Heat Transfer Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/custom-cotton-label">Custom Cotton Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/satin-woven">Custom Satin Woven Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/tpu-labels">Custom TPU Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/custom-tyvek-label">Custom Tyvek Labels</Link>
-            </li>
-            <li>
-              <Link to="/screen-printed-label">Screen Printed Labels</Link>
-            </li>
-            <li className="cl-label">
-              <Link to="/custom-sublimation-label">
-                Custom Sublimation Labels
-              </Link>
-            </li>
+            {productsList.map((product) => (
+              <li className="cl-label" key={product._id}>
+                <Link to={`/product/${product.title}`}>{product.title}</Link>
+              </li>
+            ))}
           </ul>
         </div>
-
         <div className="footer-column">
-          <h3>Hang Tags</h3>
+          <h3>All HangTags</h3>
           <ul className="hangtag-main">
-            <li className="hang">
-              <Link to="/custom-hangtags">All Hang Tags</Link>
-            </li>
-            <li className="hang">
-              <Link to="/simple-hangtags">Simple Hang Tags</Link>
-            </li>
-            <li className="hang">
-              <Link to="/fancy-hangtags">Fancy Hang Tags</Link>
-            </li>
+            {hangtagsList.map((hangtag) => (
+              <li className="hang" key={hangtag._id}>
+                <Link to={`/hangtag/${hangtag.title}`}>{hangtag.title}</Link>
+              </li>
+            ))}
           </ul>
           <h3>Resources</h3>
           <ul className="hangtag-main">
@@ -131,12 +114,11 @@ function Footer1() {
             </li>
           </ul>
         </div>
-
         <div className="footer-column">
           <h3>My Account</h3>
           <p>Dashboard</p>
-          <a href="tel:+1 (630) 995-9797" className="contact-link">
-            +1 (630) 995-9797
+          <a href="tel:+1 (616) 888-7184" className="contact-link">
+            +1 (616) 888-7184
           </a>{" "}
           <p>
             <Link
@@ -149,8 +131,8 @@ function Footer1() {
           <h3>Contact Us</h3>
           <p>Monday-Friday</p>
           <p>9AM-5:30PM EST</p>
-          <a href="tel:+1 (630) 995-9797" className="contact-link">
-            +1 (630) 995-9797
+          <a href="tel:+1 (616) 888-7184" className="contact-link">
+            +1 (616) 888-7184
           </a>
           <p>
             For inquiries, email us at:{" "}
@@ -161,18 +143,15 @@ function Footer1() {
               sales@theclothinglabels.com
             </a>
           </p>
-          <p>1760 Glasco Turnpike</p>
-          <p>Woodstock NY 12498</p>
+          <p>14943 E 9 Mile Rd Unit #191</p>
+          <p>Eastpointe, MI 48021</p>
         </div>
-
         <div className="footer-column">
           <h3>Be The First To Know</h3>
           <p>
             Get all the latest information on events, sales, and offers. Sign up
             for our newsletter today.
           </p>
-
-          {/* Ant Design Form */}
           <Form form={form} layout="vertical" onFinish={onFinish}>
             <Form.Item
               name="email"
@@ -192,19 +171,17 @@ function Footer1() {
                 className="footer-input"
               />
             </Form.Item>
-
             <Form.Item>
               <Button
                 type="primary"
                 htmlType="submit"
                 className="btn-signup"
-                style={{ width: "100%" }} // Full width for button
+                style={{ width: "100%" }}
               >
                 Subscribe
               </Button>
             </Form.Item>
           </Form>
-
           <h3>We Accept</h3>
           <div className="footer-image">
             <img
@@ -220,14 +197,11 @@ function Footer1() {
           />
         </div>
       </div>
-
-      {/* Bottom Text and Line */}
       <div className="footer-bottom">
         <hr className="footer-line" />
-        <p>© 2024 Custom Woven Labels, All Rights Reserved</p>
+        <p> © 2024 Custom Woven Labels, All Rights Reserved</p>
       </div>
     </footer>
   );
 }
-
 export default Footer1;

@@ -13,17 +13,22 @@ import { CiMobile3 } from "react-icons/ci";
 import { FaSearch } from "react-icons/fa";
 import { Slide } from "react-awesome-reveal";
 import { useAuth } from "../../context/authcontext";
+import { useCart } from "../../context/cartcontext"; // Import useCart
 
 const Firstnavbar = () => {
-  const [cartCount, setCartCount] = useState(0); // For badge count
   const [visible, setVisible] = useState(false);
   const { user, logout } = useAuth();
+  const { cart, clearCart } = useCart(); // Use cart from context
   const navigate = useNavigate();
-  const [isSmallScreen, setIsSmallScreen] = useState(false); // Track screen size
+  const [isSmallScreen, setIsSmallScreen] = useState(false);
 
-  // Function to handle logout
+  // Calculate total items in cart
+  const cartCount = cart.reduce((total, item) => total + item.quantity, 0);
+
+  // Handle logout
   const handleLogout = async () => {
     try {
+      await clearCart();
       await logout();
       navigate("/");
     } catch (error) {
@@ -31,28 +36,10 @@ const Firstnavbar = () => {
     }
   };
 
-  // Fetch cart count from sessionStorage
-  useEffect(() => {
-    const updateCartCount = () => {
-      const cart = JSON.parse(sessionStorage.getItem("cart")) || []; // Get cart data from sessionStorage
-      setCartCount(cart.length); // Set total number of items in the cart
-    };
-
-    updateCartCount(); // Initial fetch
-
-    // Listen for changes in sessionStorage
-    window.addEventListener("storage", updateCartCount);
-
-    // Cleanup event listener
-    return () => {
-      window.removeEventListener("storage", updateCartCount);
-    };
-  }, []);
-
   // Handle screen resize
   useEffect(() => {
     const handleResize = () => {
-      setIsSmallScreen(window.innerWidth <= 991); // Set state based on screen width
+      setIsSmallScreen(window.innerWidth <= 991);
     };
 
     window.addEventListener("resize", handleResize);
@@ -66,7 +53,7 @@ const Firstnavbar = () => {
   return (
     <Navbar className="firstnavbar-navbar" expand="lg">
       <Container className="firstnavbar-container">
-        {/* Slide component is conditionally rendered based on screen size */}
+        {/* Social Icons */}
         {!isSmallScreen && (
           <Slide direction="left">
             <div className="logos-firstnav">
@@ -90,7 +77,7 @@ const Firstnavbar = () => {
           </Slide>
         )}
 
-        {/* Centered text */}
+        {/* Centered Text */}
         {!isSmallScreen && (
           <Slide direction="down">
             <Nav className="firstnavbar-nav mx-auto">
@@ -105,7 +92,7 @@ const Firstnavbar = () => {
                     <a href="tel:+1234567890" className="phone-number-div-show">
                       <CiMobile3 className="mobile-icon-show" />
                       <div className="text-phone-show">
-                        <p>+1 (630) 995-9797</p>
+                        <p>+1 (616) 888-7184</p>
                         <p>Speak With an Expert</p>
                       </div>
                     </a>
@@ -116,7 +103,7 @@ const Firstnavbar = () => {
           </Slide>
         )}
 
-        {/* Right side: User info, Cart, and Logout button */}
+        {/* Right Side: User, Cart, Logout, Search */}
         {!isSmallScreen && (
           <Slide direction="right">
             <Nav className="firstnavbar-nav ml-auto">
@@ -138,7 +125,7 @@ const Firstnavbar = () => {
                 </Nav.Link>
               )}
 
-              {/* Cart with badge */}
+              {/* Cart with Badge */}
               <Nav.Link className="firstnavbar-link">
                 <button
                   onClick={() => setVisible(true)}
@@ -183,6 +170,8 @@ const Firstnavbar = () => {
                   </button>
                 </Nav.Link>
               )}
+
+              {/* Search Button */}
               <Nav.Link as={Link} to="/mainsearch" className="firstnavbar-link">
                 <button
                   style={{

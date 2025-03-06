@@ -127,8 +127,8 @@ function Privacypolicy1() {
         parties unless we are required by law to do so. You may request details
         of personal information which we hold about you under the Data
         Protection Act 1998. A small fee will be payable. If you would like a
-        copy of the information held on you please write to 1760 Glasco Turnpike
-        Woodstock, NY 12498.
+        copy of the information held on you please write to 14943 E 9 Mile Rd
+        Unit #191 Eastpointe, MI 48021
         <div className="privacy-p">
           If you believe that any information we are holding on you is incorrect
           or incomplete, please write to or email us as soon as possible, at the

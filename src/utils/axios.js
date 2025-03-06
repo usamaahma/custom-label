@@ -13,18 +13,15 @@ const login = axios.create({
 const google = axios.create({
   baseURL: `${baseURL}/auth`, // Ensure this is the correct endpoint for login
 });
-
 const products = axios.create({
   baseURL: `${baseURL}/products`, // Ensure this is the correct endpoint for products
 });
 const hangtag = axios.create({
   baseURL: `${baseURL}/hangtag`, // Ensure this is the correct endpoint for products
 });
-
 const getquote = axios.create({
   baseURL: `${baseURL}/getquote`, // Ensure this is the correct endpoint for getting quotes
 });
-
 const orderdescription = axios.create({
   baseURL: `${baseURL}/orderdescription`, // Ensure this is the correct endpoint for order descriptions
 });
@@ -66,7 +63,9 @@ const orderhistory = axios.create({
 const Seo = axios.create({
   baseURL: `${baseURL}/seo`, // Ensure this is the correct endpoint for order descriptions
 });
-
+const productseo = axios.create({
+  baseURL: `${baseURL}/productseo`, // Ensure this is the correct endpoint for order descriptions
+});
 
 // Generic request interceptor for all instances
 const requestInterceptor = (req) => {
@@ -99,6 +98,7 @@ resetpassword.interceptors.request.use(requestInterceptor, errorInterceptor);
 forgetPassword.interceptors.request.use(requestInterceptor, errorInterceptor);
 orderhistory.interceptors.request.use(requestInterceptor, errorInterceptor);
 Seo.interceptors.request.use(requestInterceptor, errorInterceptor);
+productseo.interceptors.request.use(requestInterceptor, errorInterceptor);
 
 export {
   register,
@@ -119,4 +119,5 @@ export {
   forgetPassword,
   orderhistory,
   Seo,
+  productseo,
 };
